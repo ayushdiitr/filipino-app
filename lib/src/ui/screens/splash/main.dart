@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           // Define what happens when the button is pressed
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const PhoneLogin())
+                              MaterialPageRoute(builder: (context) => PhoneLogin())
                           );
                         },
                         style: ElevatedButton.styleFrom(

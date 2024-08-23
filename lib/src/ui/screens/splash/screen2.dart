@@ -4,7 +4,9 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:testapp/src/ui/screens/splash/otpscreen.dart';
 
 class PhoneLogin extends StatelessWidget {
-  const PhoneLogin({super.key});
+  final TextEditingController phoneController = TextEditingController();
+
+  PhoneLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +76,8 @@ class PhoneLogin extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: IntlPhoneField(
                       cursorColor: Colors.black,
+                      controller: phoneController, // Added controller to capture input
+
                       decoration: const InputDecoration(
                         labelText: 'Enter your phone number',
                         labelStyle: TextStyle(
@@ -108,6 +112,8 @@ class PhoneLogin extends StatelessWidget {
                 widthFactor: 0.9,
                 child: ElevatedButton(
                   onPressed: () {
+                    // Print the phone number when the button is pressed
+                    print("Phone Number Entered: ${phoneController.text}");
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Otpscreen()), // Notice Otpscreen() without const
