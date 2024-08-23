@@ -13,6 +13,7 @@ class Otpscreen extends StatefulWidget {
 
 class _OtpscreenState extends State<Otpscreen> {
   bool _isHidden = true;
+  String _otpCode = ""; // Variable to store OTP code
 
   @override
   void initState() {
@@ -145,8 +146,14 @@ class _OtpscreenState extends State<Otpscreen> {
                               16, // Adjust the spacing between dashes
                         ),
                       ),
-                      onChanged: (phone) {
-                        print(phone);
+                      onChanged: (otp) {
+                        setState(() {
+                          _otpCode = otp; // Update OTP code
+                        });
+                        print("OTP Code: $_otpCode"); // Print OTP code to the terminal
+
+
+
                       },
                     ),
                   ),
@@ -189,6 +196,9 @@ class _OtpscreenState extends State<Otpscreen> {
                 widthFactor: 0.9,
                 child: ElevatedButton(
                   onPressed: () {
+                    // Print OTP code to the terminal before navigating
+                    print("OTP Code before navigating: $_otpCode");
+
                     // Define what happens when the button is pressed
                     Navigator.push(
                       context,

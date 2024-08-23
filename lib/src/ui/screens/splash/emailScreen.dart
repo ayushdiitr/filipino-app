@@ -11,6 +11,9 @@ class Emailscreen extends StatefulWidget {
 }
 
 class _EmailInfoState extends State<Emailscreen> {
+  // Add a TextEditingController to capture the email input
+  final TextEditingController emailController = TextEditingController();
+
 
 
 
@@ -80,6 +83,7 @@ class _EmailInfoState extends State<Emailscreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: TextField(
                         cursorColor: Colors.black,
+                      controller: emailController,  // Use the controller
                         keyboardType: TextInputType.emailAddress,
                         style: const TextStyle(color: Colors.black), // Text color when focused
                         decoration: const InputDecoration(
@@ -115,6 +119,9 @@ class _EmailInfoState extends State<Emailscreen> {
                 widthFactor: 0.9,
                 child: ElevatedButton(
                   onPressed: () {
+                    String email = emailController.text.trim();
+                    print("Email: $email");
+
                     // Define what happens when the button is pressed
                     Navigator.push(
                       context,

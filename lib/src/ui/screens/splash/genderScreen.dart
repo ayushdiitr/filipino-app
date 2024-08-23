@@ -21,6 +21,7 @@ class _GenderInfoState extends State<Genderscreen> {
   void _toggleSelection(String key) {
     setState(() {
       _selectedOptions[key] = !_selectedOptions[key]!;
+      print("Toggled $key: ${_selectedOptions[key]}");
     });
   }
 
@@ -132,6 +133,14 @@ class _GenderInfoState extends State<Genderscreen> {
                 widthFactor: 0.9,
                 child: ElevatedButton(
                   onPressed: () {
+                    // Determine which gender is selected
+                    String selectedGender = _selectedOptions.keys.firstWhere(
+                          (key) => _selectedOptions[key]!,
+                      orElse: () => 'No Gender Selected',
+                    );
+
+                    // Print the selected gender to the terminal
+                    print("Selected Gender: $selectedGender");
                     // Define what happens when the button is pressed
                     Navigator.push(
                       context,

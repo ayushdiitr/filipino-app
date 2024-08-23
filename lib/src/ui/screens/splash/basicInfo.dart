@@ -11,6 +11,11 @@ class BasicInfo extends StatefulWidget {
 List<String> list = List.generate(83, (index) => (index + 18).toString());
 
 class _BasicInfoState extends State<BasicInfo> {
+  // Added TextEditingControllers to capture user input
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController occupationController = TextEditingController();
+
   String ageValue = list.first;
 
 
@@ -82,9 +87,11 @@ class _BasicInfoState extends State<BasicInfo> {
                       children: [
                         TextField(
                           cursorColor: Colors.black,
+                          controller: firstNameController, // Added controller
+
                           style: const TextStyle(color: Colors.black), // Text color when focused
                           decoration: const InputDecoration(
-                            labelText: 'Full Name',
+                            labelText: 'First Name',
                             labelStyle:  TextStyle(color: Colors.black), // Label color when not focused
                             border:  OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.grey),
@@ -105,6 +112,7 @@ class _BasicInfoState extends State<BasicInfo> {
                             height: 16.0), // Add space between the text fields
                         TextField(
                           cursorColor: Colors.black,
+                          controller: lastNameController, // Added controller
                           style: const TextStyle(color: Colors.black), // Text color when focused
                           decoration: const InputDecoration(
                             labelText: 'Last Name (Optional)',
@@ -127,6 +135,7 @@ class _BasicInfoState extends State<BasicInfo> {
                             height: 16.0), // Add space between the text fields
                         TextField(
                           cursorColor: Colors.black,
+                          controller: occupationController, // Added controller
                           style: const TextStyle(color: Colors.black), // Text color when focused
                           decoration: const InputDecoration(
                             labelText: 'Occupation (Optional)',
@@ -184,6 +193,22 @@ class _BasicInfoState extends State<BasicInfo> {
                 widthFactor: 0.9,
                 child: ElevatedButton(
                   onPressed: () {
+                    String firstName = firstNameController.text.trim();
+                    String lastName = lastNameController.text.trim();
+                    String occupation = occupationController.text.trim();
+
+                    // Provide default values if the fields are empty
+                    if (lastName.isEmpty) {
+                      lastName = "No Last Name Provided";
+                    }
+                    if (occupation.isEmpty) {
+                      occupation = "No Occupation Provided";
+                    }
+                    // Print the user's basic information in the terminal
+                    print("Full Name: ${firstNameController.text}");
+                    print("Last Name: ${lastNameController.text}");
+                    print("Occupation: ${occupationController.text}");
+                    print("Age: $ageValue");
                     // Define what happens when the button is pressed
                     Navigator.push(
                       context,

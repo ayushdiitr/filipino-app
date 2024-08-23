@@ -133,6 +133,13 @@ class _MeetInfoState extends State<Meetscreen> {
                 widthFactor: 0.9,
                 child: ElevatedButton(
                   onPressed: () {
+
+                    print("Selected Options:");
+                    _selectedOptions.forEach((key, isSelected) {
+                      if (isSelected) {
+                        print(" - $key");
+                      }
+                    });
                     // Define what happens when the button is pressed
                     Navigator.push(
                       context,

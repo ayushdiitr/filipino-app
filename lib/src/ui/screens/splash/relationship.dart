@@ -155,12 +155,20 @@ class _RelationshipState extends State<Relationship> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
                 widthFactor: 0.9,
                 child: ElevatedButton(
                   onPressed: () {
+                    // Print debug statement
+                    print("Button pressed. Selected Relationship:");
+                    // Print selected options to the terminal
+                    print("Selected Relationship:");
+                    _selectedOptions.forEach((key, value) {
+                      if (value) {
+                        print(key);
+                      }
+                    });
                     // Define what happens when the button is pressed
                     // Navigator.push(
                     //   context,
