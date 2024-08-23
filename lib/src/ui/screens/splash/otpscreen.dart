@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
+import 'package:testapp/src/ui/screens/splash/basicInfo.dart';
+
 
 class Otpscreen extends StatefulWidget {
   Otpscreen({super.key});
@@ -188,11 +190,11 @@ class _OtpscreenState extends State<Otpscreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     // Define what happens when the button is pressed
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => const PhoneLogin()),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BasicInfo()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
