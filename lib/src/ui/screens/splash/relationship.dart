@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Relationship extends StatefulWidget {
   const Relationship({super.key});
@@ -19,6 +20,50 @@ class _RelationshipState extends State<Relationship> {
     setState(() {
       _selectedOptions[key] = !_selectedOptions[key]!;
     });
+  }
+
+  Future<void> saveRelationShip() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    List <String>? choices = [];
+
+    bool anySelected = false;
+
+    // Iterate over the selected options and add the selected keys to the email list
+    _selectedOptions.forEach((key, isSelected) {
+      if (isSelected) {
+        if (!choices.contains(key)) {
+          choices.add(key); // Add the selected key (email) to the list
+        }
+        anySelected = true;
+      }
+    });
+
+    if (!anySelected) {
+      // If no options were selected, show a warning SnackBar
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select at least one options!')),
+      );
+      return; // Stop further execution if no options were selected
+    }
+
+    // Save data to SharedPreferences
+    await prefs.setStringList('relationChoices', choices);
+    final firstName = prefs.get('firstName');
+    final lastName = prefs.get('lastName');
+    final occ = prefs.get('occupation');
+    final age = prefs.get('age');
+    final userId = prefs.get('userId');
+    final gender = prefs.get('gender');
+    final email = prefs.get('email');
+    final meetChoices = prefs.get('choices');
+    final relationChoices = prefs.get('relationChoices');
+
+    print("firstname $firstName, $lastName, $occ, $age, $userId, $gender, $email, $meetChoices, $relationChoices}");
+    // Navigate to the next screen after saving data
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => const Relationship()),
+    // );
   }
 
   @override
@@ -161,20 +206,8 @@ class _RelationshipState extends State<Relationship> {
                 child: ElevatedButton(
                   onPressed: () {
                     // Print debug statement
-                    print("Button pressed. Selected Relationship:");
-                    // Print selected options to the terminal
-                    print("Selected Relationship:");
-                    _selectedOptions.forEach((key, value) {
-                      if (value) {
-                        print(key);
-                      }
-                    });
-                    // Define what happens when the button is pressed
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => const PhoneLogin()),
-                    // );
+                      saveRelationShip();
+
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,

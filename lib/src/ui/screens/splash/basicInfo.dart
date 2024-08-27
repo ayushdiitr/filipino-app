@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BasicInfo extends StatefulWidget {
-  const BasicInfo({super.key});
+  final int userId;
+  const BasicInfo({super.key, required this.userId});
 
   @override
   _BasicInfoState createState() => _BasicInfoState();
@@ -17,6 +19,31 @@ class _BasicInfoState extends State<BasicInfo> {
   final TextEditingController occupationController = TextEditingController();
 
   String ageValue = list.first;
+
+  Future<void> saveBasicInfo() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String firstName = firstNameController.text.trim();
+
+    // Validate first name
+    if (firstName.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter your first name')),
+      );
+      return; // Stop further execution if validation fails
+    }
+
+    // Save data to SharedPreferences
+    await prefs.setString('firstName', firstName);
+    await prefs.setString('lastName', lastNameController.text.trim());
+    await prefs.setString('occupation', occupationController.text.trim());
+    await prefs.setString('age', ageValue);
+    await prefs.setInt('userId', widget.userId);
+    // Navigate to the next screen after saving data
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Genderscreen()),
+    );
+  }
 
 
   @override
@@ -192,29 +219,8 @@ class _BasicInfoState extends State<BasicInfo> {
               child: FractionallySizedBox(
                 widthFactor: 0.9,
                 child: ElevatedButton(
-                  onPressed: () {
-                    String firstName = firstNameController.text.trim();
-                    String lastName = lastNameController.text.trim();
-                    String occupation = occupationController.text.trim();
-
-                    // Provide default values if the fields are empty
-                    if (lastName.isEmpty) {
-                      lastName = "No Last Name Provided";
-                    }
-                    if (occupation.isEmpty) {
-                      occupation = "No Occupation Provided";
-                    }
-                    // Print the user's basic information in the terminal
-                    print("Full Name: ${firstNameController.text}");
-                    print("Last Name: ${lastNameController.text}");
-                    print("Occupation: ${occupationController.text}");
-                    print("Age: $ageValue");
-                    // Define what happens when the button is pressed
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Genderscreen()),
-                    );
+                  onPressed: () async{
+                    await saveBasicInfo();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testapp/src/ui/screens/splash/meetScreen.dart';
 
 
@@ -13,6 +14,38 @@ class Emailscreen extends StatefulWidget {
 class _EmailInfoState extends State<Emailscreen> {
   // Add a TextEditingController to capture the email input
   final TextEditingController emailController = TextEditingController();
+
+  Future<void> saveEmail() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String email = emailController.text.trim();
+
+    // Regular expression for email validation
+    final RegExp emailRegExp = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+
+    // Validate email
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter your email!')),
+      );
+      return; // Stop further execution if validation fails
+    } else if (!emailRegExp.hasMatch(email)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter a valid email address!')),
+      );
+      return; // Stop further execution if validation fails
+    }
+
+    // Save data to SharedPreferences
+    await prefs.setString('email', email);
+
+    // Navigate to the next screen after saving data
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Meetscreen()),
+    );
+  }
 
 
 
@@ -119,15 +152,7 @@ class _EmailInfoState extends State<Emailscreen> {
                 widthFactor: 0.9,
                 child: ElevatedButton(
                   onPressed: () {
-                    String email = emailController.text.trim();
-                    print("Email: $email");
-
-                    // Define what happens when the button is pressed
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Meetscreen()),
-                    );
+                    saveEmail();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
