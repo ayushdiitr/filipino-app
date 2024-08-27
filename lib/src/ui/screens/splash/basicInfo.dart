@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_picker/flutter_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
 class BasicInfo extends StatefulWidget {
   final int userId;
@@ -10,7 +12,7 @@ class BasicInfo extends StatefulWidget {
   @override
   _BasicInfoState createState() => _BasicInfoState();
 }
-List<String> list = List.generate(83, (index) => (index + 18).toString());
+
 
 class _BasicInfoState extends State<BasicInfo> {
   // Added TextEditingControllers to capture user input
@@ -18,7 +20,7 @@ class _BasicInfoState extends State<BasicInfo> {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController occupationController = TextEditingController();
 
-  String ageValue = list.first;
+  String? selectedDate;
 
   Future<void> saveBasicInfo() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -32,17 +34,43 @@ class _BasicInfoState extends State<BasicInfo> {
       return; // Stop further execution if validation fails
     }
 
+    if (selectedDate == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select your date of birth')),
+      );
+      return;
+    }
+
     // Save data to SharedPreferences
     await prefs.setString('firstName', firstName);
     await prefs.setString('lastName', lastNameController.text.trim());
     await prefs.setString('occupation', occupationController.text.trim());
-    await prefs.setString('age', ageValue);
+    await prefs.setString('age', selectedDate!);
     await prefs.setInt('userId', widget.userId);
     // Navigate to the next screen after saving data
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const Genderscreen()),
     );
+  }
+
+  void showDatePicker(BuildContext context){
+    Picker(
+      hideHeader: true,
+      adapter: DateTimePickerAdapter(
+        type: PickerDateTimeType.kDMY,
+        isNumberMonth: true,
+        yearBegin: 1990,
+        yearEnd: DateTime.now().year,
+      ),
+      title: const Text("Select Date of Birth"),
+      onConfirm: (Picker picker, List value){
+        DateTime selected = (picker.adapter as DateTimePickerAdapter).value!;
+        setState(() {
+          selectedDate = DateFormat('dd-MM-yyyy').format(selected);
+        });
+      },
+    ).showDialog(context);
   }
 
 
@@ -183,24 +211,35 @@ class _BasicInfoState extends State<BasicInfo> {
                         ),
                         const SizedBox(
                             height: 16.0), // Add space between the text fields
-                        SizedBox(
-                          width: double.infinity,
-
-                          child: DropdownMenu<String>(
-                          initialSelection: list.first,
-                          width: double.infinity,
-                          onSelected: (value) {
-                            setState(() {
-                              ageValue = value!;
-                            });
-                          },
-                          dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((value) {
-                            return DropdownMenuEntry<String>(
-                              value: value,
-                              label: value,
-                            );
-                          }).toList(),
-                        ),
+                        GestureDetector(
+                          onTap: () => showDatePicker(context),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: selectedDate != null ? Colors.black: Colors.grey,
+                                width: 1.0,
+                              ),
+                              // borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  selectedDate != null ?
+                                      "Date of Birth: $selectedDate"
+                                      : "Select Date of Birth",
+                                  style: TextStyle(
+                                    color: selectedDate != null
+                                        ? Colors.black
+                                        : Colors.grey,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                const Icon(Icons.calendar_today, color: Colors.black,),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
