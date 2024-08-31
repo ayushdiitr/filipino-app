@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:testapp/src/ui/screens/splash/otpscreen.dart';
+//import 'package:testapp/src/ui/screens/splash/otpscreen.dart';
+import 'package:testapp/src/ui/screens/splash/location.dart';
 
 class PhoneLogin extends StatelessWidget {
   final TextEditingController phoneController = TextEditingController();
@@ -116,7 +117,7 @@ class PhoneLogin extends StatelessWidget {
                     print("Phone Number Entered: ${phoneController.text}");
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Otpscreen()), // Notice Otpscreen() without const
+                      MaterialPageRoute(builder: (context) => EnableLocationScreen()), // Notice Otpscreen() without const
                     );
                   },
                   style: ElevatedButton.styleFrom(
