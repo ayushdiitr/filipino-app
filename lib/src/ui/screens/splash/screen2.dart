@@ -14,8 +14,8 @@ class PhoneLogin extends StatelessWidget {
   Future<void> _savePhoneNo(BuildContext context) async {
     final String phoneNo = phoneController.text.trim();
 
-    if(phoneNo.isNotEmpty){
-      try{
+    if (phoneNo.isNotEmpty) {
+      try {
         // final response = await http.post(
         //   Uri.parse('http://10.0.2.2:8000/api/v1/register/'),
         //   headers: <String, String>{
@@ -27,32 +27,36 @@ class PhoneLogin extends StatelessWidget {
         // );
         final Map<String, Object> response = {
           "body": jsonEncode({
-            "user_id": 12345, // Replace this with any user ID you want to simulate
+            "user_id":
+                12345, // Replace this with any user ID you want to simulate
             "phone_number": "1234567890", // Example phone number
           }),
           "statusCode": 201, // Simulating a successful creation status
         };
         // print(jsonDecode(response.body));
         if (response["statusCode"] == 201) {
-          final Map<String, dynamic> responseData = jsonDecode(response["body"] as String);
-        // if(response.statusCode != 201 || response.statusCode == 200){
-        //   final Map<String, dynamic> responseData = jsonDecode(response.body);
+          final Map<String, dynamic> responseData =
+              jsonDecode(response["body"] as String);
+          // if(response.statusCode != 201 || response.statusCode == 200){
+          //   final Map<String, dynamic> responseData = jsonDecode(response.body);
           final int userId = responseData['user_id'];
           //Navigate
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Otpscreen(
-                phoneNumber: phoneNo,
-                userId: userId,
-            )),
+            MaterialPageRoute(
+                builder: (context) => Otpscreen(
+                      phoneNumber: phoneNo,
+                      userId: userId,
+                    )),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Failed to send data')),
-          );          }
-      } catch (e){
+          );
+        }
+      } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-           SnackBar(content: Text('Error: $e')),
+          SnackBar(content: Text('Error: $e')),
         );
       }
     } else {
@@ -166,7 +170,7 @@ class PhoneLogin extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     // Print the phone number when the button is pressed
-                   _savePhoneNo(context);
+                    _savePhoneNo(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
