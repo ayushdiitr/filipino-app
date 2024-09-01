@@ -1,13 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-//import 'package:testapp/src/ui/screens/splash/otpscreen.dart';
-import 'package:testapp/src/ui/screens/splash/location.dart';
+import 'package:testapp/src/ui/screens/splash/otpscreen.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class PhoneLogin extends StatelessWidget {
   final TextEditingController phoneController = TextEditingController();
 
   PhoneLogin({super.key});
+
+  //function to send data to backend
+  Future<void> _savePhoneNo(BuildContext context) async {
+    final String phoneNo = phoneController.text.trim();
+
+    if (phoneNo.isNotEmpty) {
+      try {
+        // final response = await http.post(
+        //   Uri.parse('http://10.0.2.2:8000/api/v1/register/'),
+        //   headers: <String, String>{
+        //     'Content-Type':'application/json; charset=UTF-8',
+        //   },
+        //   body: jsonEncode(<String, dynamic>{
+        //     'phone_number':int.parse(phoneNo),
+        //   }),
+        // );
+        final Map<String, Object> response = {
+          "body": jsonEncode({
+            "user_id":
+                12345, // Replace this with any user ID you want to simulate
+            "phone_number": "1234567890", // Example phone number
+          }),
+          "statusCode": 201, // Simulating a successful creation status
+        };
+        // print(jsonDecode(response.body));
+        if (response["statusCode"] == 201) {
+          final Map<String, dynamic> responseData =
+              jsonDecode(response["body"] as String);
+          // if(response.statusCode != 201 || response.statusCode == 200){
+          //   final Map<String, dynamic> responseData = jsonDecode(response.body);
+          final int userId = responseData['user_id'];
+          //Navigate
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Otpscreen(
+                      phoneNumber: phoneNo,
+                      userId: userId,
+                    )),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Failed to send data')),
+          );
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e')),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Enter your phone number')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,13 +134,12 @@ class PhoneLogin extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: IntlPhoneField(
                       cursorColor: Colors.black,
-                      controller: phoneController, // Added controller to capture input
+                      controller:
+                          phoneController, // Added controller to capture input
 
                       decoration: const InputDecoration(
                         labelText: 'Enter your phone number',
-                        labelStyle: TextStyle(
-                          color: Colors.black
-                        ),
+                        labelStyle: TextStyle(color: Colors.black),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black),
                         ),
@@ -114,11 +170,7 @@ class PhoneLogin extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     // Print the phone number when the button is pressed
-                    print("Phone Number Entered: ${phoneController.text}");
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => EnableLocationScreen()), // Notice Otpscreen() without const
-                    );
+                    _savePhoneNo(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,

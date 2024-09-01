@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testapp/src/ui/screens/splash/relationship.dart';
 
 
@@ -24,6 +27,40 @@ class _MeetInfoState extends State<Meetscreen> {
       _selectedOptions[key] = !_selectedOptions[key]!;
     });
   }
+
+  Future<void> saveMeetChoices() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    List <String>? choices = [];
+
+    bool anySelected = false;
+
+    // Iterate over the selected options and add the selected keys to the email list
+    _selectedOptions.forEach((key, isSelected) {
+      if (isSelected) {
+        if (!choices.contains(key)) {
+          choices.add(key); // Add the selected key (email) to the list
+        }
+        anySelected = true;
+      }
+    });
+
+    if (!anySelected) {
+      // If no options were selected, show a warning SnackBar
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select at least one options!')),
+      );
+      return; // Stop further execution if no options were selected
+    }
+
+    // Save data to SharedPreferences
+    await prefs.setStringList('choices', choices);
+    // Navigate to the next screen after saving data
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Relationship()),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -133,19 +170,7 @@ class _MeetInfoState extends State<Meetscreen> {
                 widthFactor: 0.9,
                 child: ElevatedButton(
                   onPressed: () {
-
-                    print("Selected Options:");
-                    _selectedOptions.forEach((key, isSelected) {
-                      if (isSelected) {
-                        print(" - $key");
-                      }
-                    });
-                    // Define what happens when the button is pressed
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Relationship()),
-                    );
+                    saveMeetChoices();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,

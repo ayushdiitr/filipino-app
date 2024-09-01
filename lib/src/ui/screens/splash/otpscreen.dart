@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
 import 'package:testapp/src/ui/screens/splash/basicInfo.dart';
-
+import 'package:testapp/src/ui/screens/splash/screen2.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
 
 class Otpscreen extends StatefulWidget {
-  Otpscreen({super.key});
+  final String phoneNumber;
+  final int userId;
+
+  Otpscreen({super.key, required this.phoneNumber, required this.userId});
 
   @override
   _OtpscreenState createState() => _OtpscreenState();
@@ -14,17 +20,171 @@ class Otpscreen extends StatefulWidget {
 class _OtpscreenState extends State<Otpscreen> {
   bool _isHidden = true;
   String _otpCode = ""; // Variable to store OTP code
+  int _remainingTime = 30;
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
     _isHidden = true;
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel(); // Cancel the timer when the widget is disposed
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (_remainingTime == 0) {
+        if (mounted) {
+          _showTimeUpDialog();
+        }
+        _timer?.cancel();
+      } else {
+        setState(() {
+          _remainingTime--;
+        });
+      }
+    });
   }
 
   void _toggleOtpView() {
     setState(() {
       _isHidden = !_isHidden;
     });
+  }
+
+  void _showTimeUpDialog() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                "Didn't received the code ?",
+                style: TextStyle(
+                    fontFamily: 'NoirPro',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF808080)),
+              ),
+              ListTile(
+                title: const Text(
+                  'Send again',
+                  style: TextStyle(
+                    fontFamily: 'NoirPro',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
+                ),
+                onTap: () {
+                  _resendOtp();
+                },
+              ),
+              ListTile(
+                title: const Text(
+                  'Edit number',
+                  style: TextStyle(
+                    fontFamily: 'NoirPro',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pop(context); // Close the bottom sheet
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _verifyOtp() async {
+    final url = Uri.parse(
+        'http://10.0.2.2:8000/api/v1/register/${widget.userId}/verify_otp/'); // Replace with your backend URL
+
+    try {
+      final response = await http.patch(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'phone_number': widget.phoneNumber,
+          'otp': _otpCode,
+        }),
+      );
+
+      if (!mounted) return; // Ensure the widget is still mounted
+
+      if (response.statusCode != 200) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => BasicInfo(
+                    userId: widget.userId,
+                  )),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Invalid OTP. Please try again.')),
+        );
+      }
+    } catch (e) {
+      if (!mounted) return; // Ensure the widget is still mounted
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('An error occurred. Please try again later.')),
+      );
+    }
+  }
+
+  Future<void> _resendOtp() async {
+    final url = Uri.parse(
+        'http://10.0.2.2:8000/api/v1/register/${'user_id'}/regenaret_otp/');
+
+    try {
+      final response = await http.patch(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'phone_number': widget.phoneNumber,
+        }),
+      );
+      if (!mounted) return; // Ensure the widget is still mounted
+
+      if (response.statusCode != 200) {
+        Navigator.pop(context);
+        _remainingTime = 45;
+        _startTimer();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content:
+                  Text('Maximum OTP attempts reached, try again after 1 hour')),
+        );
+      }
+    } catch (e) {
+      if (!mounted) return; // Ensure the widget is still mounted
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
+    }
   }
 
   @override
@@ -76,14 +236,14 @@ class _OtpscreenState extends State<Otpscreen> {
                       ),
                     ),
                   ),
-                  const Row(
+                  Row(
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 8.0),
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               "Sent to ",
                               style: TextStyle(
                                   fontFamily: 'NoirPro',
@@ -92,22 +252,30 @@ class _OtpscreenState extends State<Otpscreen> {
                                   color: Color(0xFF808080)),
                             ),
                             Text(
-                              "+91778798898",
-                              style: TextStyle(
+                              widget.phoneNumber,
+                              style: const TextStyle(
                                   fontFamily: 'NoirPro',
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                   decoration: TextDecoration.underline,
                                   color: Color(0xFF808080)),
                             ),
-                            SizedBox(width: 8), // Space between text and icon
-                            Icon(
+                            const SizedBox(
+                                width: 8), // Space between text and icon
+                            const Icon(
                               Icons.circle_rounded,
                               size: 10, // Adjust size as needed
                             ),
                             TextButton(
-                              onPressed: null,
-                              child: Text('Edit'),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BasicInfo(userId: 2),
+                                  ),
+                                );
+                              },
+                              child: const Text('Edit'),
                             ),
                           ],
                         ),
@@ -149,20 +317,16 @@ class _OtpscreenState extends State<Otpscreen> {
                       onChanged: (otp) {
                         setState(() {
                           _otpCode = otp; // Update OTP code
-                        });
-                        print("OTP Code: $_otpCode"); // Print OTP code to the terminal
-
-
-
+                        }); // Print OTP code to the terminal
                       },
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16.0, vertical: 16.0),
                     child: Row(
                       children: [
-                        Text(
+                        const Text(
                           "The code should arrive within ",
                           style: TextStyle(
                               fontFamily: 'NoirPro',
@@ -171,12 +335,12 @@ class _OtpscreenState extends State<Otpscreen> {
                               color: Color(0xFF808080)),
                         ),
                         Text(
-                          "00:30s",
-                          style: TextStyle(
-                              fontFamily: 'NoirPro',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              ),
+                          "00:${_remainingTime.toString().padLeft(2, '0')}s", // Display the remaining time
+                          style: const TextStyle(
+                            fontFamily: 'NoirPro',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ],
                     ),
@@ -196,15 +360,7 @@ class _OtpscreenState extends State<Otpscreen> {
                 widthFactor: 0.9,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Print OTP code to the terminal before navigating
-                    print("OTP Code before navigating: $_otpCode");
-
-                    // Define what happens when the button is pressed
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => BasicInfo()),
-                    );
+                    _verifyOtp();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,

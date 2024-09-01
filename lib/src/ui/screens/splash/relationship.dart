@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testapp/src/ui/screens/splash/height_selector.dart';
 
 class Relationship extends StatefulWidget {
   const Relationship({super.key});
@@ -19,6 +21,40 @@ class _RelationshipState extends State<Relationship> {
     setState(() {
       _selectedOptions[key] = !_selectedOptions[key]!;
     });
+  }
+
+  Future<void> saveRelationShip() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? choices = [];
+
+    bool anySelected = false;
+
+    // Iterate over the selected options and add the selected keys to the email list
+    _selectedOptions.forEach((key, isSelected) {
+      if (isSelected) {
+        if (!choices.contains(key)) {
+          choices.add(key); // Add the selected key (email) to the list
+        }
+        anySelected = true;
+      }
+    });
+
+    if (!anySelected) {
+      // If no options were selected, show a warning SnackBar
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select at least one options!')),
+      );
+      return; // Stop further execution if no options were selected
+    }
+
+    // Save data to SharedPreferences
+    await prefs.setStringList('relationChoices', choices);
+
+    // Navigate to the next screen after saving data
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const HeightSelector()),
+    );
   }
 
   @override
@@ -100,8 +136,10 @@ class _RelationshipState extends State<Relationship> {
                           onTap: () => _toggleSelection(key),
                           child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 8.0),
-                            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-                            width: double.infinity, // Make each container take full width
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 16.0),
+                            width: double
+                                .infinity, // Make each container take full width
                             decoration: BoxDecoration(
                               color: isSelected ? Colors.black : Colors.white,
                               borderRadius: BorderRadius.circular(8.0),
@@ -116,7 +154,9 @@ class _RelationshipState extends State<Relationship> {
                                 Text(
                                   key,
                                   style: TextStyle(
-                                    color: isSelected ? Colors.white : Colors.black,
+                                    color: isSelected
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontSize: 16.0,
                                   ),
                                 ),
@@ -126,17 +166,21 @@ class _RelationshipState extends State<Relationship> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: isSelected ? Colors.white : Colors.grey,
+                                      color: isSelected
+                                          ? Colors.white
+                                          : Colors.grey,
                                       width: 2.0,
                                     ),
-                                    color: isSelected ? Colors.white : Colors.transparent,
+                                    color: isSelected
+                                        ? Colors.white
+                                        : Colors.transparent,
                                   ),
                                   child: isSelected
                                       ? const Icon(
-                                    Icons.check,
-                                    color: Colors.black,
-                                    size: 16.0,
-                                  )
+                                          Icons.check,
+                                          color: Colors.black,
+                                          size: 16.0,
+                                        )
                                       : null,
                                 ),
                               ],
@@ -155,26 +199,14 @@ class _RelationshipState extends State<Relationship> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
                 widthFactor: 0.9,
                 child: ElevatedButton(
                   onPressed: () {
                     // Print debug statement
-                    print("Button pressed. Selected Relationship:");
-                    // Print selected options to the terminal
-                    print("Selected Relationship:");
-                    _selectedOptions.forEach((key, value) {
-                      if (value) {
-                        print(key);
-                      }
-                    });
-                    // Define what happens when the button is pressed
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => const PhoneLogin()),
-                    // );
+                    saveRelationShip();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
@@ -194,7 +226,7 @@ class _RelationshipState extends State<Relationship> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('Submit'),
+                      Text('Next'),
                     ],
                   ),
                 ),

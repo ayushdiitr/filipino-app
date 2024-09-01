@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/src/ui/screens/splash/emailScreen.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Genderscreen extends StatefulWidget {
   const Genderscreen({super.key});
@@ -11,18 +11,34 @@ class Genderscreen extends StatefulWidget {
 }
 
 class _GenderInfoState extends State<Genderscreen> {
+  String? _selectedGender;
 
-  final Map<String, bool> _selectedOptions = {
-    'Male': false,
-    'Female': false,
-    'Non Binary': false,
-  };
-
-  void _toggleSelection(String key) {
+  // This method is used to handle the gender selection.
+  void _selectGender(String gender) {
     setState(() {
-      _selectedOptions[key] = !_selectedOptions[key]!;
-      print("Toggled $key: ${_selectedOptions[key]}");
+      _selectedGender = gender;
     });
+  }
+
+  // This method saves the selected gender to SharedPreferences.
+  Future<void> saveGender() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Validate that a gender is selected
+    if (_selectedGender == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select your gender')),
+      );
+      return; // Stop further execution if validation fails
+    }
+
+    // Save the selected gender to SharedPreferences
+    await prefs.setString('gender', _selectedGender!);
+    // Navigate to the next screen after saving data
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Emailscreen()),
+    );
   }
 
   @override
@@ -91,10 +107,10 @@ class _GenderInfoState extends State<Genderscreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _selectedOptions.keys.map((String key) {
-                        bool isSelected = _selectedOptions[key]!;
+                      children: ['Male', 'Female', 'Non Binary'].map((String gender) {
+                        bool isSelected = _selectedGender == gender;
                         return GestureDetector(
-                          onTap: () => _toggleSelection(key),
+                          onTap: () => _selectGender(gender),
                           child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 8.0),
                             padding: const EdgeInsets.all(16.0),
@@ -105,9 +121,10 @@ class _GenderInfoState extends State<Genderscreen> {
                                 color: isSelected ? Colors.black : Colors.grey,
                                 width: 2.0,
                               ),
+                              color: isSelected ? Colors.black12 : Colors.white,
                             ),
                             child: Text(
-                              key,
+                              gender,
                               style: TextStyle(
                                 color: isSelected ? Colors.black : Colors.grey,
                                 fontSize: 16.0,
@@ -127,27 +144,11 @@ class _GenderInfoState extends State<Genderscreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
                 widthFactor: 0.9,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Determine which gender is selected
-                    String selectedGender = _selectedOptions.keys.firstWhere(
-                          (key) => _selectedOptions[key]!,
-                      orElse: () => 'No Gender Selected',
-                    );
-
-                    // Print the selected gender to the terminal
-                    print("Selected Gender: $selectedGender");
-                    // Define what happens when the button is pressed
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Emailscreen()),
-                    );
-                  },
+                  onPressed: saveGender,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
@@ -164,7 +165,7 @@ class _GenderInfoState extends State<Genderscreen> {
                   ),
                   child: const Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Next'),
                     ],
