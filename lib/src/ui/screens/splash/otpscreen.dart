@@ -39,7 +39,7 @@ class _OtpscreenState extends State<Otpscreen> {
   void _startTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (_remainingTime == 0) {
-        if(mounted) {
+        if (mounted) {
           _showTimeUpDialog();
         }
         _timer?.cancel();
@@ -56,8 +56,6 @@ class _OtpscreenState extends State<Otpscreen> {
       _isHidden = !_isHidden;
     });
   }
-
-
 
   void _showTimeUpDialog() {
     showModalBottomSheet(
@@ -77,12 +75,13 @@ class _OtpscreenState extends State<Otpscreen> {
                     color: Color(0xFF808080)),
               ),
               ListTile(
-                title: const Text('Send again',
+                title: const Text(
+                  'Send again',
                   style: TextStyle(
-                      fontFamily: 'NoirPro',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
+                    fontFamily: 'NoirPro',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
                   ),
                 ),
                 onTap: () {
@@ -90,7 +89,8 @@ class _OtpscreenState extends State<Otpscreen> {
                 },
               ),
               ListTile(
-                title: const Text('Edit number',
+                title: const Text(
+                  'Edit number',
                   style: TextStyle(
                     fontFamily: 'NoirPro',
                     fontSize: 14,
@@ -111,7 +111,8 @@ class _OtpscreenState extends State<Otpscreen> {
   }
 
   Future<void> _verifyOtp() async {
-    final url = Uri.parse('http://10.0.2.2:8000/api/v1/register/${widget.userId}/verify_otp/'); // Replace with your backend URL
+    final url = Uri.parse(
+        'http://10.0.2.2:8000/api/v1/register/${widget.userId}/verify_otp/'); // Replace with your backend URL
 
     try {
       final response = await http.patch(
@@ -130,9 +131,10 @@ class _OtpscreenState extends State<Otpscreen> {
       if (response.statusCode != 200) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => BasicInfo(
-            userId: widget.userId,
-          )),
+          MaterialPageRoute(
+              builder: (context) => BasicInfo(
+                    userId: widget.userId,
+                  )),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -143,15 +145,17 @@ class _OtpscreenState extends State<Otpscreen> {
       if (!mounted) return; // Ensure the widget is still mounted
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('An error occurred. Please try again later.')),
+        const SnackBar(
+            content: Text('An error occurred. Please try again later.')),
       );
     }
   }
 
   Future<void> _resendOtp() async {
-    final url = Uri.parse('http://10.0.2.2:8000/api/v1/register/${'user_id'}/regenaret_otp/');
+    final url = Uri.parse(
+        'http://10.0.2.2:8000/api/v1/register/${'user_id'}/regenaret_otp/');
 
-    try{
+    try {
       final response = await http.patch(
         url,
         headers: {
@@ -163,16 +167,18 @@ class _OtpscreenState extends State<Otpscreen> {
       );
       if (!mounted) return; // Ensure the widget is still mounted
 
-      if(response.statusCode != 200){
+      if (response.statusCode != 200) {
         Navigator.pop(context);
         _remainingTime = 45;
         _startTimer();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Maximum OTP attempts reached, try again after 1 hour')),
+          const SnackBar(
+              content:
+                  Text('Maximum OTP attempts reached, try again after 1 hour')),
         );
       }
-    } catch(e){
+    } catch (e) {
       if (!mounted) return; // Ensure the widget is still mounted
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -180,8 +186,6 @@ class _OtpscreenState extends State<Otpscreen> {
       );
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -232,7 +236,7 @@ class _OtpscreenState extends State<Otpscreen> {
                       ),
                     ),
                   ),
-                   Row(
+                  Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -256,16 +260,19 @@ class _OtpscreenState extends State<Otpscreen> {
                                   decoration: TextDecoration.underline,
                                   color: Color(0xFF808080)),
                             ),
-                            const SizedBox(width: 8), // Space between text and icon
+                            const SizedBox(
+                                width: 8), // Space between text and icon
                             const Icon(
                               Icons.circle_rounded,
                               size: 10, // Adjust size as needed
                             ),
-                             TextButton(
-                              onPressed: (){
+                            TextButton(
+                              onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => PhoneLogin())
+                                  MaterialPageRoute(
+                                    builder: (context) => BasicInfo(userId: 2),
+                                  ),
                                 );
                               },
                               child: const Text('Edit'),
@@ -310,11 +317,11 @@ class _OtpscreenState extends State<Otpscreen> {
                       onChanged: (otp) {
                         setState(() {
                           _otpCode = otp; // Update OTP code
-                        });// Print OTP code to the terminal
+                        }); // Print OTP code to the terminal
                       },
                     ),
                   ),
-                   Padding(
+                  Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16.0, vertical: 16.0),
                     child: Row(
@@ -330,10 +337,10 @@ class _OtpscreenState extends State<Otpscreen> {
                         Text(
                           "00:${_remainingTime.toString().padLeft(2, '0')}s", // Display the remaining time
                           style: const TextStyle(
-                              fontFamily: 'NoirPro',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              ),
+                            fontFamily: 'NoirPro',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ],
                     ),

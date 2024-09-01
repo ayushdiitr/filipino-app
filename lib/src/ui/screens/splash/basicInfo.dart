@@ -1,9 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_picker/flutter_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
 
 class BasicInfo extends StatefulWidget {
   final int userId;
@@ -13,9 +13,7 @@ class BasicInfo extends StatefulWidget {
   _BasicInfoState createState() => _BasicInfoState();
 }
 
-
 class _BasicInfoState extends State<BasicInfo> {
-  // Added TextEditingControllers to capture user input
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController occupationController = TextEditingController();
@@ -25,13 +23,13 @@ class _BasicInfoState extends State<BasicInfo> {
   Future<void> saveBasicInfo() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String firstName = firstNameController.text.trim();
+    print("$selectedDate");
 
-    // Validate first name
     if (firstName.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter your first name')),
       );
-      return; // Stop further execution if validation fails
+      return;
     }
 
     if (selectedDate == null) {
@@ -41,61 +39,76 @@ class _BasicInfoState extends State<BasicInfo> {
       return;
     }
 
-    // Save data to SharedPreferences
     await prefs.setString('firstName', firstName);
     await prefs.setString('lastName', lastNameController.text.trim());
     await prefs.setString('occupation', occupationController.text.trim());
     await prefs.setString('age', selectedDate!);
     await prefs.setInt('userId', widget.userId);
-    // Navigate to the next screen after saving data
+
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const Genderscreen()),
     );
   }
-
-  void showDatePicker(BuildContext context){
-    Picker(
-      hideHeader: true,
-      adapter: DateTimePickerAdapter(
-        type: PickerDateTimeType.kDMY,
-        isNumberMonth: true,
-        yearBegin: 1990,
-        yearEnd: DateTime.now().year,
-      ),
-      title: const Text("Select Date of Birth"),
-      onConfirm: (Picker picker, List value){
-        DateTime selected = (picker.adapter as DateTimePickerAdapter).value!;
-        setState(() {
-          selectedDate = DateFormat('dd-MM-yyyy').format(selected);
-        });
+  void showCupertinoDatePicker(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext builder) {
+        return Container(
+          height: MediaQuery.of(context).copyWith().size.height * 0.35,
+          child: Column(
+            children: [
+              Container(
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Done'),
+                ),
+              ),
+              SizedBox(
+                height: 200,
+                child: CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.date,
+                  initialDateTime: DateTime(2000, 1, 1),
+                  minimumYear: 1990,
+                  maximumYear: DateTime.now().year,
+                  onDateTimeChanged: (DateTime newDateTime) {
+                    setState(() {
+                      selectedDate = DateFormat('dd-MM-yyyy').format(newDateTime);
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
       },
-    ).showDialog(context);
+    );
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 100.0), // Extra space to avoid overlapping
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 40),
-                  const Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-                    child: Center(
-                      child: LinearProgressIndicator(
-                        value: 0.5,
-                        color: Colors.black,
-                        backgroundColor: Color(0xFFEEEEEE),
+          children: [
+      SingleChildScrollView(
+      child: Padding(
+      padding: const EdgeInsets.only(bottom: 100.0),
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          const SizedBox(height: 40),
+      const Padding(
+        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+        child: Center(
+          child: LinearProgressIndicator(
+              value: 0.5,
+              color: Colors.black,
+              backgroundColor: Color(0xFFEEEEEE),
                       ),
                     ),
                   ),
@@ -212,7 +225,7 @@ class _BasicInfoState extends State<BasicInfo> {
                         const SizedBox(
                             height: 16.0), // Add space between the text fields
                         GestureDetector(
-                          onTap: () => showDatePicker(context),
+                          onTap: () => showCupertinoDatePicker(context),
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
                             decoration: BoxDecoration(
@@ -225,18 +238,23 @@ class _BasicInfoState extends State<BasicInfo> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  selectedDate != null ?
-                                      "Date of Birth: $selectedDate"
-                                      : "Select Date of Birth",
-                                  style: TextStyle(
-                                    color: selectedDate != null
-                                        ? Colors.black
-                                        : Colors.grey,
-                                    fontSize: 16.0,
-                                  ),
+                                Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8.0),
+                                    child: Text(
+                                      selectedDate != null ?
+                                      "$selectedDate"
+                                          : "Select Date of Birth",
+                                      style: TextStyle(
+                                        color: selectedDate != null
+                                            ? Colors.black
+                                            : Colors.grey,
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
                                 ),
-                                const Icon(Icons.calendar_today, color: Colors.black,),
+                                const Padding(padding: EdgeInsets.only(right:4.0),
+                                  child: Icon(Icons.calendar_today, color: Colors.black),
+                                ),
                               ],
                             ),
                           ),

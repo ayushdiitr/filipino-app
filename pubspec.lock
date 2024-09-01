@@ -77,10 +77,10 @@ packages:
     dependency: transitive
     description:
       name: crypto
-      sha256: "1dceb0cf05cb63a7852c11560060e53ec2f182079a16ced6f4395c5b0875baf8"
+      sha256: ec30d999af904f33454ba22ed9a86162b35e52b44ac4807d1d93c288041d7d27
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.4"
+    version: "3.0.5"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -134,15 +134,19 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
-  flutter_picker:
+  flutter_localizations:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  flutter_rounded_date_picker:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "676e577f252d1afe2f10313feaf262a6169598f5"
-      url: "https://github.com/herowws/flutter_picker.git"
-    source: git
-    version: "2.1.1"
+      name: flutter_rounded_date_picker
+      sha256: e6aa2dc5d3b44e8bbe85ef901be69eac59ba4136427f11f4c8b2a303e1e774e7
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.4"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -205,10 +209,10 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_ios
-      sha256: a058c9880be456f21e2e8571c1126eaacd570bdc5b6c6d9d15aea4bdf22ca9fe
+      sha256: "4898410f55440049e1ba8f15411612d9f89299d89c61cd9baf7e02d56ff81ac7"
       url: "https://pub.dev"
     source: hosted
-    version: "5.7.6"
+    version: "5.7.7"
   google_sign_in_platform_interface:
     dependency: transitive
     description:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testapp/src/ui/screens/splash/height_selector.dart';
 
 class Relationship extends StatefulWidget {
   const Relationship({super.key});
@@ -24,7 +25,7 @@ class _RelationshipState extends State<Relationship> {
 
   Future<void> saveRelationShip() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    List <String>? choices = [];
+    List<String>? choices = [];
 
     bool anySelected = false;
 
@@ -48,22 +49,12 @@ class _RelationshipState extends State<Relationship> {
 
     // Save data to SharedPreferences
     await prefs.setStringList('relationChoices', choices);
-    final firstName = prefs.get('firstName');
-    final lastName = prefs.get('lastName');
-    final occ = prefs.get('occupation');
-    final age = prefs.get('age');
-    final userId = prefs.get('userId');
-    final gender = prefs.get('gender');
-    final email = prefs.get('email');
-    final meetChoices = prefs.get('choices');
-    final relationChoices = prefs.get('relationChoices');
 
-    print("firstname $firstName, $lastName, $occ, $age, $userId, $gender, $email, $meetChoices, $relationChoices}");
     // Navigate to the next screen after saving data
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => const Relationship()),
-    // );
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const HeightSelector()),
+    );
   }
 
   @override
@@ -145,8 +136,10 @@ class _RelationshipState extends State<Relationship> {
                           onTap: () => _toggleSelection(key),
                           child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 8.0),
-                            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-                            width: double.infinity, // Make each container take full width
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 16.0),
+                            width: double
+                                .infinity, // Make each container take full width
                             decoration: BoxDecoration(
                               color: isSelected ? Colors.black : Colors.white,
                               borderRadius: BorderRadius.circular(8.0),
@@ -161,7 +154,9 @@ class _RelationshipState extends State<Relationship> {
                                 Text(
                                   key,
                                   style: TextStyle(
-                                    color: isSelected ? Colors.white : Colors.black,
+                                    color: isSelected
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontSize: 16.0,
                                   ),
                                 ),
@@ -171,17 +166,21 @@ class _RelationshipState extends State<Relationship> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: isSelected ? Colors.white : Colors.grey,
+                                      color: isSelected
+                                          ? Colors.white
+                                          : Colors.grey,
                                       width: 2.0,
                                     ),
-                                    color: isSelected ? Colors.white : Colors.transparent,
+                                    color: isSelected
+                                        ? Colors.white
+                                        : Colors.transparent,
                                   ),
                                   child: isSelected
                                       ? const Icon(
-                                    Icons.check,
-                                    color: Colors.black,
-                                    size: 16.0,
-                                  )
+                                          Icons.check,
+                                          color: Colors.black,
+                                          size: 16.0,
+                                        )
                                       : null,
                                 ),
                               ],
@@ -200,14 +199,14 @@ class _RelationshipState extends State<Relationship> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
                 widthFactor: 0.9,
                 child: ElevatedButton(
                   onPressed: () {
                     // Print debug statement
-                      saveRelationShip();
-
+                    saveRelationShip();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
@@ -227,7 +226,7 @@ class _RelationshipState extends State<Relationship> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('Submit'),
+                      Text('Next'),
                     ],
                   ),
                 ),

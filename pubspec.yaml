@@ -41,10 +41,11 @@ dependencies:
   sign_in_button:
   intl_phone_field: ^3.2.0
   shared_preferences: ^2.3.2
-  flutter_picker:
-    git:
-      url: https://github.com/herowws/flutter_picker.git
+  flutter_rounded_date_picker:
   intl: ^0.19.0
+  flutter_localizations:
+    sdk: flutter
+
 
 dev_dependencies:
   flutter_launcher_icons:
