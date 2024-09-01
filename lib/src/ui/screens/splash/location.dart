@@ -65,13 +65,31 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 40),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-                    child: Center(
-                      child: LinearProgressIndicator(
-                        value: 0.2,
-                        color: Colors.black,
-                        backgroundColor: Color(0xFFEEEEEE),
+                  // const Padding(
+                  //   padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+                  //   child: Center(
+                  //     child: LinearProgressIndicator(
+                  //       value: 0.2,
+                  //       color: Colors.black,
+                  //       backgroundColor: Color(0xFFEEEEEE),
+                  //     ),
+                  //   ),
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    child: Container(
+                      width: 64,
+                      height: 64,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF5F5F5), 
+                        border: Border.all(
+                          color: Color(0xFFE1E1E1), 
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                        ),
+                      ),
+                      child: Image.asset("images/location.png",
                       ),
                     ),
                   ),
@@ -99,6 +117,7 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                       ),
                     ),
                   ),
+                 
 
                   Padding(
                     padding: const EdgeInsets.only(left: 16.0, top: 0),
