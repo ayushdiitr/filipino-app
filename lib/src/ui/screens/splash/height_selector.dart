@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testapp/src/ui/screens/splash/location.dart';
 
 class HeightSelector extends StatefulWidget {
   const HeightSelector({super.key});
@@ -65,10 +66,10 @@ class _HeightState extends State<HeightSelector> {
           "firstname $firstName, $lastName, $occ, $age, $userId, $gender, $email, $meetChoices, $relationChoices, $height}");
 
       // Navigate to the next screen after saving data
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => const Relationship()),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => EnableLocationScreen()),
+      );
     }
   }
 

@@ -192,7 +192,9 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                         );
                       },
                       style: TextButton.styleFrom(
-                        backgroundColor: Colors.white,
+                        foregroundColor: const Color(0xFF1F1F1F),
+                        //backgroundColor: const Color(0xFF1F1F1F),
+                        //backgroundColor: Colors.white,
                         //primary: Colors.black,
                         textStyle: const TextStyle(
                           fontFamily: 'NoirPro',
