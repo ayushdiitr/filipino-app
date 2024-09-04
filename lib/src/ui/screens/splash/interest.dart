@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/src/ui/screens/splash/main.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InterestSelectionScreen extends StatefulWidget {
   @override
@@ -34,20 +35,26 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Interest Selection"),
-        backgroundColor: Colors.black,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+              child: Center(
+                child: LinearProgressIndicator(
+                  value: 0.7,
+                  color: Colors.black,
+                  backgroundColor: Color(0xFFEEEEEE),
+                ),
+              ),
+            ),
             // "Select your Interests" Text
             Text.rich(
               TextSpan(
                 text: 'Select your ',
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'NoirPro',
                   fontWeight: FontWeight.w500,
                   fontSize: 28,
@@ -55,13 +62,11 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: 'Interests',
-                    style: TextStyle(
-                      fontFamily: 'Baskerville BT',
+                    text: 'Interests ',
+                    style: GoogleFonts.libreBaskerville(
                       fontSize: 28,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w600,
                       fontStyle: FontStyle.italic,
-                      letterSpacing: 0.02,
                       color: Colors.black,
                     ),
                   ),
@@ -72,7 +77,7 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
             const SizedBox(height: 16),
 
             // "Choose your height..." Text
-            Text(
+            const Text(
               "Choose your height to help us find matches that meet your preferences.",
               style: TextStyle(
                 fontFamily: 'NoirPro',
