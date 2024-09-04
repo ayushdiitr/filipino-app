@@ -1,14 +1,14 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:testapp/src/ui/screens/splash/notification.dart';
+import 'package:testapp/src/ui/screens/splash/screen2.dart';
 
-class EnableLocationScreen extends StatefulWidget {
+class NotificationScreen extends StatefulWidget {
   @override
-  _EnableLocationScreenState createState() => _EnableLocationScreenState();
+  _NotificationState createState() => _NotificationState();
 }
 
-class _EnableLocationScreenState extends State<EnableLocationScreen> {
+class _NotificationState extends State<NotificationScreen> {
   bool _isLocationEnabled = false;
 
   // @override
@@ -45,13 +45,7 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
     }
   }
 
-  void _navigateToNextScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => NextScreen()), // Replace with your next screen
-    );
-  }
+  void _navigateToNextScreen() {}
 
   @override
   Widget build(BuildContext context) {
@@ -83,31 +77,32 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                       width: 64,
                       height: 64,
                       decoration: BoxDecoration(
-                        color: Color(0xFFF5F5F5),
+                        color: const Color(0xFFF5F5F5),
                         border: Border.all(
-                          color: Color(0xFFE1E1E1),
+                          color: const Color(0xFFE1E1E1),
                         ),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(8.0)),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(8),
+                        ),
                       ),
                       child: Image.asset(
-                        "images/location.png",
+                        "images/notification.png",
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 32.0),
+                    padding: const EdgeInsets.only(left: 16.0, top: 16.0),
                     child: Text.rich(
                       TextSpan(
-                        text: 'Enable ', // Changed text
-                        style: TextStyle(
+                        text: 'Allow ', // Changed text
+                        style: const TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w500,
                           fontSize: 28,
                         ),
                         children: <TextSpan>[
                           TextSpan(
-                            text: 'location',
+                            text: 'notifications ',
                             style: GoogleFonts.libreBaskerville(
                               fontSize: 28,
                               fontWeight: FontWeight.w600,
@@ -120,12 +115,13 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                     ),
                   ),
 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16.0, top: 0),
                     child: Text.rich(
                       TextSpan(
-                        text: 'services to fully personalize your experience',
-                        style: const TextStyle(
+                        text:
+                            "and we'll keep you updated throughout your journey.",
+                        style: TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w500,
                           fontSize: 28,
@@ -133,11 +129,12 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                       ),
                     ),
                   ),
+
                   const Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
                     child: Text(
-                      "Allowing location access helps us tailor matches and recommendations just for you.",
+                      "Enable notifications to get the latest updates on matches, messages, and app features. Never miss out on exciting opportunities!",
                       style: TextStyle(
                         fontFamily: 'NoirPro',
                         fontSize: 14,
@@ -177,21 +174,14 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                      child: const Text('Allow Location'),
+                      child: const Text('Allow Notifications'),
                     ),
                   ),
                   //const SizedBox(height: 10),
                   FractionallySizedBox(
                     widthFactor: 0.9,
                     child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => NotificationScreen(),
-                          ),
-                        );
-                      },
+                      onPressed: () {},
                       style: TextButton.styleFrom(
                         foregroundColor: const Color(0xFF1F1F1F),
                         //backgroundColor: const Color(0xFF1F1F1F),
@@ -217,18 +207,6 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-// Dummy NextScreen class, replace with your actual screen
-class NextScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('Next Screen'),
       ),
     );
   }
