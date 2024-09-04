@@ -50,7 +50,7 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
                 ),
               ),
             ),
-            // "Select your Interests" Text
+            // "Select your Interests" Texdt
             Text.rich(
               TextSpan(
                 text: 'Select your ',
