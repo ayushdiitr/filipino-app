@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 //import 'package:testapp/src/ui/screens/splash/screen2.dart';
 import 'package:testapp/src/ui/screens/splash/interest.dart';
+import 'package:testapp/src/ui/screens/splash/screen2.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -123,8 +124,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           // Define what happens when the button is pressed
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => InterestSelectionScreen())
-                          );
+                              MaterialPageRoute(
+                                  builder: (context) => PhoneLogin()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
