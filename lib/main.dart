@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/src/ui/screens/splash/basicInfo.dart';
 import 'package:testapp/src/ui/screens/splash/drink.dart';
 import 'package:testapp/src/ui/screens/splash/interest.dart';
 import 'package:testapp/src/ui/screens/splash/main.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: BasicInfo(userId: 12),
     );
   }
 }
