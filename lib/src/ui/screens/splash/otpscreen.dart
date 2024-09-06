@@ -11,7 +11,7 @@ class Otpscreen extends StatefulWidget {
   final String phoneNumber;
   final int userId;
 
-  Otpscreen({super.key, required this.phoneNumber, required this.userId});
+  const Otpscreen({super.key, required this.phoneNumber, required this.userId});
 
   @override
   _OtpscreenState createState() => _OtpscreenState();
@@ -37,7 +37,7 @@ class _OtpscreenState extends State<Otpscreen> {
   }
 
   void _startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_remainingTime == 0) {
         if (mounted) {
           _showTimeUpDialog();
@@ -271,7 +271,8 @@ class _OtpscreenState extends State<Otpscreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => BasicInfo(userId: 2),
+                                    builder: (context) =>
+                                        const BasicInfo(userId: 2),
                                   ),
                                 );
                               },

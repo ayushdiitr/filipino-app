@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Image.asset("images/googleicon.png",
                             width: 20.0, height: 20.0),
-                        Text('Continue with Google'),
+                        const Text('Continue with Google'),
                       ],
                     ),
                   ),
