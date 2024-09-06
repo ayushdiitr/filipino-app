@@ -46,7 +46,7 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
               children: [
                 const Padding(
                   padding:
-                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 0.0),
                   child: Center(
                     child: LinearProgressIndicator(
                       value: 0.7,
@@ -60,13 +60,15 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
                   label: Text(
                     'INTEREST',
                     style: TextStyle(
-                      // fontFamily: 'NoirPro',
-                      // fontWeight: FontWeight.w400,
+                      fontFamily: 'NoirPro',
+                      fontWeight: FontWeight.w400,
                       fontSize: 10,
-                      letterSpacing: 0.04,
+                      letterSpacing: 0.8,
                       color: Color.fromRGBO(0, 0, 0, 1),
                     ),
                   ),
+                  visualDensity:
+                      VisualDensity(horizontal: -4.0, vertical: -4.0),
                   backgroundColor: Colors.white, // White background color
                   labelStyle: TextStyle(
                     color: Color.fromRGBO(0, 0, 0, 1),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
 import 'package:testapp/src/ui/screens/splash/main.dart';
 
 class DrinkAndSmokeScreen extends StatefulWidget {
@@ -22,42 +23,33 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Slider at the top
-                Padding(
-                  padding: const EdgeInsets.only(top: 64),
-                  child: Center(
-                    child: Container(
-                      width: 350,
-                      height: 3,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEEEEEE), // Neutral-200 color
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          width: 70,
-                          height: 3,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              top: BorderSide(
-                                width: 3.0,
-                                color: Color(0xFF1F1F1F), // Primary-700 color
-                              ),
-                            ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 0.0),
+                        child: Center(
+                          child: LinearProgressIndicator(
+                            value: 0.7,
+                            color: Colors.black,
+                            backgroundColor: Color(0xFFEEEEEE),
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
 
-                const SizedBox(height: 16),
+                const SizedBox(height: 32),
 
                 // Text "Let's talk about your"
                 Text(
                   "Let's talk about your",
                   style: TextStyle(
-                    fontFamily: 'Noir Pro',
+                    fontFamily: 'NoirPro',
                     fontSize: 28,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 0.02,
@@ -68,11 +60,10 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                 // Text "Lifestyle and habits"
                 Text(
                   "Lifestyle and habits",
-                  style: TextStyle(
-                    fontFamily: 'Baskerville BT',
-                    fontSize: 24,
+                  style: GoogleFonts.libreBaskerville(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w600,
                     fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w700,
                     color: Colors.black,
                   ),
                 ),
@@ -83,7 +74,7 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                 Text(
                   "Choose your preferences to help us find matches that meet your lifestyle.",
                   style: TextStyle(
-                    fontFamily: 'Noir Pro',
+                    fontFamily: 'NoirPro',
                     fontSize: 14,
                     fontWeight: FontWeight.w300,
                     letterSpacing: 0.04,
@@ -96,42 +87,46 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                 // Drinking options
                 Text(
                   "Drinking",
-                  style: TextStyle(
-                    fontFamily: 'Baskerville BT',
+                  style: GoogleFonts.libreBaskerville(
                     fontSize: 24,
+                    fontWeight: FontWeight.w600,
                     fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w700,
                     color: Colors.black,
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 16),
 
                 // Drinking options as selectable boxes
                 Wrap(
-                  spacing: 8.0, // Horizontal gap between options
-                  runSpacing: 8.0, // Vertical gap between options
+                  spacing: 12.0, // Horizontal gap between options
+                  runSpacing: 12.0, // Vertical gap between options
                   children: [
-                    _buildSelectableOption("Yes, I drink", selectedDrinkingOption, (val) {
+                    _buildSelectableOption("Always", selectedDrinkingOption,
+                        (val) {
                       setState(() {
                         selectedDrinkingOption = val;
                       });
                     }),
-                    _buildSelectableOption("I Drink Sometimes", selectedDrinkingOption, (val) {
+                    _buildSelectableOption("Sometimes", selectedDrinkingOption,
+                        (val) {
                       setState(() {
                         selectedDrinkingOption = val;
                       });
                     }),
-                    _buildSelectableOption("I Rarely Drink", selectedDrinkingOption, (val) {
+                    _buildSelectableOption("Rarely", selectedDrinkingOption,
+                        (val) {
                       setState(() {
                         selectedDrinkingOption = val;
                       });
                     }),
-                    _buildSelectableOption("No, I don’t drink", selectedDrinkingOption, (val) {
+                    _buildSelectableOption("Never", selectedDrinkingOption,
+                        (val) {
                       setState(() {
                         selectedDrinkingOption = val;
                       });
                     }),
-                    _buildSelectableOption("I am sober", selectedDrinkingOption, (val) {
+                    _buildSelectableOption("I am sober", selectedDrinkingOption,
+                        (val) {
                       setState(() {
                         selectedDrinkingOption = val;
                       });
@@ -139,42 +134,45 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                   ],
                 ),
 
-                const SizedBox(height: 16),
+                const SizedBox(height: 32),
 
                 // Smoking options
                 Text(
-                  "Smoking",
-                  style: TextStyle(
-                    fontFamily: 'Baskerville BT',
+                  "Smoke",
+                  style: GoogleFonts.libreBaskerville(
                     fontSize: 24,
+                    fontWeight: FontWeight.w600,
                     fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w700,
                     color: Colors.black,
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 16),
 
                 // Smoking options as selectable boxes
                 Wrap(
-                  spacing: 8.0, // Horizontal gap between options
-                  runSpacing: 8.0, // Vertical gap between options
+                  spacing: 12.0, // Horizontal gap between options
+                  runSpacing: 12.0, // Vertical gap between options
                   children: [
-                    _buildSelectableOption("I Smoke Sometimes", selectedSmokingOption, (val) {
+                    _buildSelectableOption("Sometimes ", selectedSmokingOption,
+                        (val) {
                       setState(() {
                         selectedSmokingOption = val;
                       });
                     }),
-                    _buildSelectableOption("Yes, I Smoke", selectedSmokingOption, (val) {
+                    _buildSelectableOption("Always", selectedSmokingOption,
+                        (val) {
                       setState(() {
                         selectedSmokingOption = val;
                       });
                     }),
-                    _buildSelectableOption("No, I don’t smoke", selectedSmokingOption, (val) {
+                    _buildSelectableOption("Never", selectedSmokingOption,
+                        (val) {
                       setState(() {
                         selectedSmokingOption = val;
                       });
                     }),
-                    _buildSelectableOption("I am trying to quit", selectedSmokingOption, (val) {
+                    _buildSelectableOption(
+                        "Trying to quit", selectedSmokingOption, (val) {
                       setState(() {
                         selectedSmokingOption = val;
                       });
@@ -187,7 +185,8 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -199,16 +198,17 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => NextScreen(),
+                            builder: (context) => Genderscreen(),
                           ),
                         );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF1F1F1F), // Primary-700 color
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
                         textStyle: const TextStyle(
-                          fontFamily: 'Noir Pro',
+                          fontFamily: 'NoirPro',
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           height: 22 / 14,
@@ -230,14 +230,15 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => NextScreen(),
+                            builder: (context) => Genderscreen(),
                           ),
                         );
                       },
                       style: TextButton.styleFrom(
-                        foregroundColor: const Color(0xFF1F1F1F), // Primary-700 color
+                        foregroundColor:
+                            const Color(0xFF1F1F1F), // Primary-700 color
                         textStyle: const TextStyle(
-                          fontFamily: 'Noir Pro',
+                          fontFamily: 'NoirPro',
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           height: 22 / 14,
@@ -259,15 +260,17 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
     );
   }
 
-  Widget _buildSelectableOption(String option, String selectedOption, Function(String) onSelect) {
+  Widget _buildSelectableOption(
+      String option, String selectedOption, Function(String) onSelect) {
     return GestureDetector(
       onTap: () => onSelect(option),
       child: Container(
         width: 160, // Adjust width based on screen size if needed
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
         decoration: BoxDecoration(
-          border: Border.all(color: selectedOption == option ? Colors.black : Colors.grey),
-          borderRadius: BorderRadius.circular(8.0),
+          border: Border.all(
+              color: selectedOption == option ? Colors.black : Colors.grey),
+          // borderRadius: BorderRadius.circular(8.0),
           color: selectedOption == option ? Colors.black : Colors.white,
         ),
         child: Center(
@@ -276,24 +279,12 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: selectedOption == option ? Colors.white : Colors.black,
-              fontFamily: 'Noir Pro',
+              fontFamily: 'NoirPro',
               fontSize: 14,
               fontWeight: FontWeight.w400,
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-// Dummy NextScreen class, replace with your actual screen
-class NextScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('Next Screen'),
       ),
     );
   }
