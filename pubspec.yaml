@@ -50,3 +50,10 @@ flutter:
           weight: 700
         - asset: fonts/NoirPro/NoirPro-Italic.otf
           style: italic
+
+
+fonts:
+  - family: Baskerville
+    fonts:
+      - asset: fonts/Baskerville.ttf
+
