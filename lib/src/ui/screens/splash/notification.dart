@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/src/ui/screens/splash/screen2.dart';
 
 class NotificationScreen extends StatefulWidget {
+  const NotificationScreen({super.key});
+
   @override
   _NotificationState createState() => _NotificationState();
 }

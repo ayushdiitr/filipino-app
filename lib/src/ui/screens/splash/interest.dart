@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/src/ui/screens/splash/main.dart';
 
 class InterestSelectionScreen extends StatefulWidget {
+  const InterestSelectionScreen({super.key});
+
   @override
   _InterestSelectionScreenState createState() =>
       _InterestSelectionScreenState();
@@ -54,6 +56,22 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
                   ),
                 ),
                 // "Select your Interests" Text
+                const InputChip(
+                  label: Text(
+                    'INTEREST',
+                    style: TextStyle(
+                      // fontFamily: 'NoirPro',
+                      // fontWeight: FontWeight.w400,
+                      fontSize: 10,
+                      letterSpacing: 0.04,
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                    ),
+                  ),
+                  backgroundColor: Colors.white, // White background color
+                  labelStyle: TextStyle(
+                    color: Color.fromRGBO(0, 0, 0, 1),
+                  ),
+                ),
                 Text.rich(
                   TextSpan(
                     text: 'Select your ',
@@ -167,6 +185,7 @@ class InterestCategory extends StatelessWidget {
   final Function(String) onInterestToggle;
 
   const InterestCategory({
+    super.key,
     required this.title,
     required this.interests,
     required this.selectedInterests,

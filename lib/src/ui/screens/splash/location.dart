@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/src/ui/screens/splash/notification.dart';
 
 class EnableLocationScreen extends StatefulWidget {
+  const EnableLocationScreen({super.key});
+
   @override
   _EnableLocationScreenState createState() => _EnableLocationScreenState();
 }
@@ -83,9 +85,9 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                       width: 64,
                       height: 64,
                       decoration: BoxDecoration(
-                        color: Color(0xFFF5F5F5),
+                        color: const Color(0xFFF5F5F5),
                         border: Border.all(
-                          color: Color(0xFFE1E1E1),
+                          color: const Color(0xFFE1E1E1),
                         ),
                         borderRadius:
                             const BorderRadius.all(Radius.circular(8.0)),
@@ -100,7 +102,7 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                     child: Text.rich(
                       TextSpan(
                         text: 'Enable ', // Changed text
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w500,
                           fontSize: 28,
@@ -120,12 +122,12 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                     ),
                   ),
 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16.0, top: 0),
                     child: Text.rich(
                       TextSpan(
                         text: 'services to fully personalize your experience',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w500,
                           fontSize: 28,
@@ -224,9 +226,11 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
 
 // Dummy NextScreen class, replace with your actual screen
 class NextScreen extends StatelessWidget {
+  const NextScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Text('Next Screen'),
       ),
