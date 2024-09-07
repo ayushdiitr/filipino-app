@@ -46,7 +46,7 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                 const SizedBox(height: 32),
 
                 // Text "Let's talk about your"
-                Text(
+                const Text(
                   "Let's talk about your",
                   style: TextStyle(
                     fontFamily: 'NoirPro',
