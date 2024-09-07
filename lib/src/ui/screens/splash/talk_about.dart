@@ -140,6 +140,8 @@ class _TalkAboutScreenState extends State<TalkAboutScreen> {
   // Function to build the Prompt Box with text and select button
   Widget _buildPromptBox(String promptText) {
     return Container(
+      margin: const EdgeInsets.only(left: 20),
+      
       width: 358, // Fixed width
       height: 56, // Fixed height
       //margin: const EdgeInsets.symmetric(vertical: 20),
