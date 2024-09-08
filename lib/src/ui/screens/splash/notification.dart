@@ -2,7 +2,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/src/ui/screens/splash/interest.dart';
-import 'package:testapp/src/ui/screens/splash/screen2.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -14,27 +14,29 @@ class NotificationScreen extends StatefulWidget {
 class _NotificationState extends State<NotificationScreen> {
   bool _isLocationEnabled = false;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _checkLocationStatus();
-  // }
-  //
-  // Future<void> _checkLocationStatus() async {
-  //   try {
-  //     bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
-  //     setState(() {
-  //       _isLocationEnabled = isLocationEnabled;
-  //     });
-  //   } catch (e) {
-  //     print('Error checking location status: $e');
-  //   }
-  // }
-
   @override
   void initState() {
     super.initState();
     _checkLocationStatus();
+    _requestNotificationPermission();
+  }
+
+  // Request notification permission
+  Future<void> _requestNotificationPermission() async {
+    var status = await Permission.notification.status;
+
+    if (status.isDenied) {
+      // Request permission if it hasn't been granted
+      status = await Permission.notification.request();
+    }
+
+    if (status.isPermanentlyDenied) {
+      // Handle if permission is permanently denied
+      print('Notification permissions are permanently denied.');
+    } else if (status.isGranted) {
+      // Navigate to next screen when permission is granted
+      _navigateToNextScreen();
+    }
   }
 
   Future<void> _checkLocationStatus() async {
@@ -48,7 +50,14 @@ class _NotificationState extends State<NotificationScreen> {
     }
   }
 
-  void _navigateToNextScreen() {}
+  void _navigateToNextScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const InterestSelectionScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,22 +67,11 @@ class _NotificationState extends State<NotificationScreen> {
         children: [
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 100.0), // Extra space to avoid overlapping
+              padding: const EdgeInsets.only(bottom: 100.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 40),
-                  // const Padding(
-                  //   padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-                  //   child: Center(
-                  //     child: LinearProgressIndicator(
-                  //       value: 0.2,
-                  //       color: Colors.black,
-                  //       backgroundColor: Color(0xFFEEEEEE),
-                  //     ),
-                  //   ),
-                  // ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                     child: Container(
@@ -97,7 +95,7 @@ class _NotificationState extends State<NotificationScreen> {
                     padding: const EdgeInsets.only(left: 16.0, top: 16.0),
                     child: Text.rich(
                       TextSpan(
-                        text: 'Allow ', // Changed text
+                        text: 'Allow ',
                         style: const TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w500,
@@ -117,7 +115,6 @@ class _NotificationState extends State<NotificationScreen> {
                       ),
                     ),
                   ),
-
                   const Padding(
                     padding: EdgeInsets.only(left: 16.0, top: 0),
                     child: Text.rich(
@@ -132,7 +129,6 @@ class _NotificationState extends State<NotificationScreen> {
                       ),
                     ),
                   ),
-
                   const Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
@@ -188,23 +184,20 @@ class _NotificationState extends State<NotificationScreen> {
                       child: const Text('Allow Notifications'),
                     ),
                   ),
-                  //const SizedBox(height: 10),
                   FractionallySizedBox(
                     widthFactor: 0.9,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                       
+                      },
                       style: TextButton.styleFrom(
                         foregroundColor: const Color(0xFF1F1F1F),
-                        //backgroundColor: const Color(0xFF1F1F1F),
-                        //backgroundColor: Colors.white,
-                        //primary: Colors.black,
                         textStyle: const TextStyle(
                           fontFamily: 'NoirPro',
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           height: 22 / 14,
                           letterSpacing: 0.04,
-                          //textAlign: TextAlign.left,
                         ),
                       ),
                       child: const Align(
