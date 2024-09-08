@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/src/ui/screens/splash/screen2.dart';
 //import 'package:sign_in_button/sign_in_button.dart';
@@ -60,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               const Padding(
-                padding: EdgeInsets.only(left: 16.0),
+                padding: EdgeInsets.only(left: 16.0, top: 12.0),
                 child: Text.rich(
                   TextSpan(
                     text:
@@ -79,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 // padding: const EdgeInsets.symmetric(horizontal: ),
                 child: FractionallySizedBox(
                   widthFactor: 0.9,
-                  child: ElevatedButton(
+                  child: OutlinedButton(
                     onPressed: () {
                       // Define what happens when the button is pressed
                       print('Button Pressed');
@@ -121,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     FractionallySizedBox(
                       widthFactor: 0.9,
-                      child: ElevatedButton(
+                      child: OutlinedButton(
                         onPressed: () {
                           // Define what happens when the button is pressed
                           Navigator.push(

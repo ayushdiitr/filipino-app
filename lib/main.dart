@@ -38,11 +38,12 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         primaryColor: const Color(0xffCCCCCC),
+        scaffoldBackgroundColor: Colors.white,
 
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: TalkAboutScreen(),
+      home: LoginScreen(),
     );
   }
 }
