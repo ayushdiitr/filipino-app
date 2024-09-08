@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 500,
+                height: 400,
                 width: double.infinity,
                 child: Image.asset(
                   "images/SignupImage.png",
@@ -137,7 +137,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 20),
-                          side: const BorderSide(width: 1, color: Colors.white),
+                          side: const BorderSide(
+                              width: 1, color: Color(0xFFD9D9D9)),
                           // elevation: 4,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
