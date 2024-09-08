@@ -5,7 +5,8 @@ import 'package:testapp/src/ui/screens/splash/faceTime.dart';
 import 'package:testapp/src/ui/screens/splash/interest.dart';
 import 'package:testapp/src/ui/screens/splash/main.dart';
 import 'package:testapp/src/ui/screens/splash/lifestyle.dart';
-import 'package:testapp/src/ui/screens/splash/talk_about.dart';
+//import 'package:testapp/src/ui/screens/splash/talk_about.dart';
+import 'package:testapp/src/ui/screens/splash/location.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: EnableLocationScreen(),
     );
   }
 }

@@ -2,6 +2,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/src/ui/screens/splash/notification.dart';
+import 'package:testapp/src/ui/screens/splash/main.dart';
+
 
 class EnableLocationScreen extends StatefulWidget {
   const EnableLocationScreen({super.key});
@@ -12,23 +14,6 @@ class EnableLocationScreen extends StatefulWidget {
 
 class _EnableLocationScreenState extends State<EnableLocationScreen> {
   bool _isLocationEnabled = false;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _checkLocationStatus();
-  // }
-  //
-  // Future<void> _checkLocationStatus() async {
-  //   try {
-  //     bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
-  //     setState(() {
-  //       _isLocationEnabled = isLocationEnabled;
-  //     });
-  //   } catch (e) {
-  //     print('Error checking location status: $e');
-  //   }
-  // }
 
   @override
   void initState() {
@@ -44,6 +29,34 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
       });
     } catch (e) {
       print('Error checking location status: $e');
+    }
+  }
+
+  // Function to request permission
+  Future<void> _requestLocationPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, show a message or handle it accordingly
+        print('Location permissions are denied.');
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle accordingly
+      print('Location permissions are permanently denied.');
+      return;
+    }
+
+    // When permissions are granted, check if location service is enabled
+    if (await Geolocator.isLocationServiceEnabled()) {
+      _navigateToNextScreen();
+    } else {
+      // Handle the case when location services are not enabled
+      print('Location services are not enabled.');
     }
   }
 
@@ -70,16 +83,6 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 40),
-                  // const Padding(
-                  //   padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-                  //   child: Center(
-                  //     child: LinearProgressIndicator(
-                  //       value: 0.2,
-                  //       color: Colors.black,
-                  //       backgroundColor: Color(0xFFEEEEEE),
-                  //     ),
-                  //   ),
-                  // ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                     child: Container(
@@ -163,7 +166,9 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                   FractionallySizedBox(
                     widthFactor: 0.9,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        await _requestLocationPermission();
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.white,
