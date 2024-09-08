@@ -3,7 +3,9 @@ import 'package:testapp/src/ui/screens/splash/basicInfo.dart';
 import 'package:testapp/src/ui/screens/splash/interest.dart';
 import 'package:testapp/src/ui/screens/splash/main.dart';
 import 'package:testapp/src/ui/screens/splash/lifestyle.dart';
-import 'package:testapp/src/ui/screens/splash/talk_about.dart';
+//import 'package:testapp/src/ui/screens/splash/talk_about.dart';
+import 'package:testapp/src/ui/screens/splash/location.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
 
-      home: TalkAboutScreen(),
+      home: EnableLocationScreen(),
     );
   }
 }
