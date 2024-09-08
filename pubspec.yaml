@@ -53,6 +53,4 @@ flutter:
         - asset: fonts/NoirPro/NoirPro-Italic.otf
           style: italic
 
-    - family: Baskerville
-      fonts:
-        - asset: fonts/Baskerville.ttf
+

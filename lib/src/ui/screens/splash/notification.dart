@@ -156,14 +156,8 @@ class _NotificationState extends State<NotificationScreen> {
                   FractionallySizedBox(
                     widthFactor: 0.9,
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const InterestSelectionScreen(),
-                          ),
-                        );
+                      onPressed: () async {
+                        await _requestNotificationPermission();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
@@ -187,9 +181,7 @@ class _NotificationState extends State<NotificationScreen> {
                   FractionallySizedBox(
                     widthFactor: 0.9,
                     child: TextButton(
-                      onPressed: () {
-                       
-                      },
+                      onPressed: () {},
                       style: TextButton.styleFrom(
                         foregroundColor: const Color(0xFF1F1F1F),
                         textStyle: const TextStyle(
