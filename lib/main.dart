@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/src/ui/screens/splash/basicInfo.dart';
+import 'package:testapp/src/ui/screens/splash/beliefsAndOpinions.dart';
+import 'package:testapp/src/ui/screens/splash/faceTime.dart';
 import 'package:testapp/src/ui/screens/splash/interest.dart';
 import 'package:testapp/src/ui/screens/splash/main.dart';
 import 'package:testapp/src/ui/screens/splash/lifestyle.dart';

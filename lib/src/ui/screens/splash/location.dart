@@ -64,7 +64,8 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => NextScreen()), // Replace with your next screen
+          builder: (context) =>
+              NotificationScreen()), // Replace with your next screen
     );
   }
 
@@ -195,7 +196,7 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => NotificationScreen(),
+                            builder: (context) => const NotificationScreen(),
                           ),
                         );
                       },
@@ -224,20 +225,6 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-// Dummy NextScreen class, replace with your actual screen
-class NextScreen extends StatelessWidget {
-  const NextScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Next Screen'),
       ),
     );
   }
