@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:testapp/src/ui/screens/splash/beliefsAndOpinions.dart';
+import 'package:testapp/src/ui/screens/splash/faceTime.dart';
 import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
 import 'package:testapp/src/ui/screens/splash/main.dart';
 
-class DrinkAndSmokeScreen extends StatefulWidget {
+class Beliefsandopinions extends StatefulWidget {
   @override
-  _DrinkAndSmokeScreenState createState() => _DrinkAndSmokeScreenState();
+  _BeliefsandopinionsState createState() => _BeliefsandopinionsState();
 }
 
-class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
+class _BeliefsandopinionsState extends State<Beliefsandopinions> {
   String selectedDrinkingOption = '';
   String selectedSmokingOption = '';
 
@@ -47,8 +47,8 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                 const SizedBox(height: 32),
 
                 // Text "Let's talk about your"
-                Text(
-                  "Let's talk about your",
+                const Text(
+                  "Let them know your",
                   style: TextStyle(
                     fontFamily: 'NoirPro',
                     fontSize: 28,
@@ -60,7 +60,7 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
 
                 // Text "Lifestyle and habits"
                 Text(
-                  "Lifestyle and habits",
+                  "Beliefs and Opinions",
                   style: GoogleFonts.libreBaskerville(
                     fontSize: 28,
                     fontWeight: FontWeight.w600,
@@ -72,7 +72,7 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                 const SizedBox(height: 16),
 
                 // Description Text
-                Text(
+                const Text(
                   "Choose your preferences to help us find matches that meet your lifestyle.",
                   style: TextStyle(
                     fontFamily: 'NoirPro',
@@ -87,7 +87,7 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
 
                 // Drinking options
                 Text(
-                  "Drinking",
+                  "Religion",
                   style: GoogleFonts.libreBaskerville(
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
@@ -102,31 +102,31 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                   spacing: 12.0, // Horizontal gap between options
                   runSpacing: 12.0, // Vertical gap between options
                   children: [
-                    _buildSelectableOption("Always", selectedDrinkingOption,
+                    _buildSelectableOption("Agnostic", selectedDrinkingOption,
                         (val) {
                       setState(() {
                         selectedDrinkingOption = val;
                       });
                     }),
-                    _buildSelectableOption("Sometimes", selectedDrinkingOption,
+                    _buildSelectableOption("Atheist", selectedDrinkingOption,
                         (val) {
                       setState(() {
                         selectedDrinkingOption = val;
                       });
                     }),
-                    _buildSelectableOption("Rarely", selectedDrinkingOption,
+                    _buildSelectableOption("Buddhist", selectedDrinkingOption,
                         (val) {
                       setState(() {
                         selectedDrinkingOption = val;
                       });
                     }),
-                    _buildSelectableOption("Never", selectedDrinkingOption,
+                    _buildSelectableOption("Hindu", selectedDrinkingOption,
                         (val) {
                       setState(() {
                         selectedDrinkingOption = val;
                       });
                     }),
-                    _buildSelectableOption("I am sober", selectedDrinkingOption,
+                    _buildSelectableOption("Other", selectedDrinkingOption,
                         (val) {
                       setState(() {
                         selectedDrinkingOption = val;
@@ -139,7 +139,7 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
 
                 // Smoking options
                 Text(
-                  "Smoke",
+                  "Political Views",
                   style: GoogleFonts.libreBaskerville(
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
@@ -154,26 +154,32 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                   spacing: 12.0, // Horizontal gap between options
                   runSpacing: 12.0, // Vertical gap between options
                   children: [
-                    _buildSelectableOption("Sometimes ", selectedSmokingOption,
+                    _buildSelectableOption("Apolitical ", selectedSmokingOption,
                         (val) {
                       setState(() {
                         selectedSmokingOption = val;
                       });
                     }),
-                    _buildSelectableOption("Always", selectedSmokingOption,
+                    _buildSelectableOption("Liberal", selectedSmokingOption,
                         (val) {
                       setState(() {
                         selectedSmokingOption = val;
                       });
                     }),
-                    _buildSelectableOption("Never", selectedSmokingOption,
+                    _buildSelectableOption("Moderate", selectedSmokingOption,
                         (val) {
                       setState(() {
                         selectedSmokingOption = val;
                       });
                     }),
-                    _buildSelectableOption(
-                        "Trying to quit", selectedSmokingOption, (val) {
+                    _buildSelectableOption("Leftist", selectedSmokingOption,
+                        (val) {
+                      setState(() {
+                        selectedSmokingOption = val;
+                      });
+                    }),
+                    _buildSelectableOption("Rightist", selectedSmokingOption,
+                        (val) {
                       setState(() {
                         selectedSmokingOption = val;
                       });
@@ -199,7 +205,7 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Beliefsandopinions(),
+                            builder: (context) => PhotoScreen(),
                           ),
                         );
                       },
@@ -231,7 +237,7 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Genderscreen(),
+                            builder: (context) => PhotoScreen(),
                           ),
                         );
                       },

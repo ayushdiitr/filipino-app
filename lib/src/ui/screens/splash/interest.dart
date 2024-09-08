@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:testapp/src/ui/screens/splash/lifestyle.dart';
 import 'package:testapp/src/ui/screens/splash/main.dart';
 
 class InterestSelectionScreen extends StatefulWidget {
@@ -133,6 +134,11 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
                 ElevatedButton(
                   onPressed: () {
                     // Navigate to the next screen
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => DrinkAndSmokeScreen(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,

@@ -1,6 +1,7 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:testapp/src/ui/screens/splash/interest.dart';
 import 'package:testapp/src/ui/screens/splash/screen2.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -159,7 +160,15 @@ class _NotificationState extends State<NotificationScreen> {
                   FractionallySizedBox(
                     widthFactor: 0.9,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const InterestSelectionScreen(),
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.white,
