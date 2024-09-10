@@ -71,10 +71,22 @@ class PhoneLogin extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 40.0,
+              left: 16.0,
+              right: 16.0,
+            ),
+            child: IconButton(
+              icon: Icon(Icons.arrow_back),
+              color: Colors.black,
+              onPressed: () {},
+            ),
+          ),
+
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 100.0), // Extra space to avoid overlapping
+              padding: const EdgeInsets.only(bottom: 100.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

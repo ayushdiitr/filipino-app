@@ -8,6 +8,7 @@ import 'package:testapp/src/ui/screens/splash/lifestyle.dart';
 //import 'package:testapp/src/ui/screens/splash/talk_about.dart';
 import 'package:testapp/src/ui/screens/splash/location.dart';
 import 'package:testapp/src/ui/screens/splash/notification.dart';
+import 'package:testapp/src/ui/screens/splash/screen2.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: NotificationScreen(),
+      home: PhoneLogin(),
     );
   }
 }
