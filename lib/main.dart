@@ -13,8 +13,6 @@ import 'package:testapp/src/ui/screens/splash/screen2.dart';
 import 'package:testapp/src/ui/screens/splash/height_selector.dart';
 import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
 
-
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
@@ -51,7 +49,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: PhoneLogin(),
+      home: HeightSelector(),
     );
   }
 }

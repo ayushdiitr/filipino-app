@@ -36,7 +36,8 @@ class _PhoneLoginState extends State<PhoneLogin> {
         // Simulate backend call
         final Map<String, Object> response = {
           "body": jsonEncode({
-            "user_id": 12345, // Replace this with any user ID you want to simulate
+            "user_id":
+                12345, // Replace this with any user ID you want to simulate
             "phone_number": phoneNo, // Example phone number
           }),
           "statusCode": 201, // Simulating a successful creation status
@@ -78,18 +79,6 @@ class _PhoneLoginState extends State<PhoneLogin> {
       resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 40.0,
-              left: 16.0,
-              right: 16.0,
-            ),
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              color: Colors.black,
-              onPressed: () {},
-            ),
-          ),
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 100.0),
@@ -99,7 +88,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
                   const SizedBox(height: 40),
                   const Padding(
                     padding:
-                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
                     child: Center(
                       child: LinearProgressIndicator(
                         value: 0.2,
@@ -109,7 +98,23 @@ class _PhoneLoginState extends State<PhoneLogin> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 32.0),
+                    padding: const EdgeInsets.only(
+                      top: 24.0,
+                      left: 16.0,
+                      right: 16.0,
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 32,
+                        child: Image.asset("images/backicon.png"),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0, top: 24.0),
                     child: Text.rich(
                       TextSpan(
                         text: 'Enter your ', // Default text style
@@ -181,11 +186,14 @@ class _PhoneLoginState extends State<PhoneLogin> {
               child: FractionallySizedBox(
                 widthFactor: 0.9,
                 child: ElevatedButton(
-                  onPressed: isPhoneNumberValid ? () {
-                    _savePhoneNo(context);
-                  } : null,
+                  onPressed: isPhoneNumberValid
+                      ? () {
+                          _savePhoneNo(context);
+                        }
+                      : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isPhoneNumberValid ? Colors.black : Colors.grey,
+                    backgroundColor:
+                        isPhoneNumberValid ? Colors.black : Colors.grey,
                     foregroundColor: Colors.white,
                     textStyle: GoogleFonts.inter(
                       fontSize: 14,
@@ -202,10 +210,11 @@ class _PhoneLoginState extends State<PhoneLogin> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('Next',
-                      style: TextStyle(
-                        color: Colors.white, 
-                      ),
+                      Text(
+                        'Next',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),

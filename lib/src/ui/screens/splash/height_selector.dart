@@ -191,35 +191,30 @@ class _HeightState extends State<HeightSelector> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      ToggleButtons(
-                        isSelected: [
-                          _selectedUnit == 'cm',
-                          _selectedUnit == 'in'
-                        ],
-                        selectedColor: Colors.white,
-                        fillColor: Colors.black,
-                        color: const Color(0xFF8E8E8E),
-                        onPressed: (int index) {
-                          setState(() {
-                            _selectedUnit = index == 0 ? 'cm' : 'in';
-                          });
-                        },
-                        children: const [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 8.0),
-                            child: Text(
+                      Padding(
+                        padding: const EdgeInsets.only(right: 16.0),
+                        child: ToggleButtons(
+                          isSelected: [
+                            _selectedUnit == 'cm',
+                            _selectedUnit == 'in'
+                          ],
+                          selectedColor: Colors.white,
+                          fillColor: Colors.black,
+                          color: const Color(0xFF8E8E8E),
+                          onPressed: (int index) {
+                            setState(() {
+                              _selectedUnit = index == 0 ? 'cm' : 'in';
+                            });
+                          },
+                          children: const [
+                            Text(
                               'cm',
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 8.0),
-                            child: Text(
+                            Text(
                               'in',
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
