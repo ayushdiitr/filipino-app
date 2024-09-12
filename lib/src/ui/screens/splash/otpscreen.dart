@@ -28,12 +28,27 @@ class _OtpscreenState extends State<Otpscreen> {
   void initState() {
     super.initState();
     _isHidden = true;
+    _startTimer();
   }
 
   @override
   void dispose() {
     _timer?.cancel(); // Cancel the timer when the widget is disposed
     super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_remainingTime == 0) {
+        // if (mounted) {
+        // }
+        _timer?.cancel();
+      } else {
+        setState(() {
+          _remainingTime--;
+        });
+      }
+    });
   }
 
   void _toggleOtpView() {
@@ -155,6 +170,7 @@ class _OtpscreenState extends State<Otpscreen> {
       if (response.statusCode != 200) {
         Navigator.pop(context);
         _remainingTime = 45;
+        _startTimer();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -256,7 +272,7 @@ class _OtpscreenState extends State<Otpscreen> {
                               size: 4,
                               color: Color(0xFF808080), // Adjust size as needed
                             ),
-                            // const SizedBox(width: 4),
+                            const SizedBox(width: 6),
                             Padding(
                               padding: const EdgeInsets.only(right: 4.0),
                               child: TextButton(
@@ -269,6 +285,11 @@ class _OtpscreenState extends State<Otpscreen> {
                                     ),
                                   );
                                 },
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.zero,
+                                  backgroundColor: Colors.transparent,
+                                  minimumSize: Size.zero,
+                                ),
                                 child: const Text(
                                   'Edit',
                                   style: TextStyle(
@@ -328,15 +349,28 @@ class _OtpscreenState extends State<Otpscreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Resend code in: ${_remainingTime}s',
-                          style: const TextStyle(
-                            fontFamily: 'NoirPro',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xFF808080),
-                          ),
-                        ),
+                        _remainingTime == 0
+                            ? TextButton(
+                                onPressed: _showTimeUpDialog,
+                                child: const Text(
+                                  'Resend code',
+                                  style: TextStyle(
+                                    fontFamily: 'NoirPro',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              )
+                            : Text(
+                                'Resend code in: ${_remainingTime}s',
+                                style: const TextStyle(
+                                  fontFamily: 'NoirPro',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xFF808080),
+                                ),
+                              ),
                       ],
                     ),
                   ),
@@ -350,7 +384,7 @@ class _OtpscreenState extends State<Otpscreen> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
-                widthFactor: 0.9,
+                widthFactor: 1,
                 child: ElevatedButton(
                   onPressed: isButtonEnabled
                       ? () => _verifyOtp()
