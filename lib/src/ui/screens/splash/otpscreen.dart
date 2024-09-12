@@ -287,7 +287,7 @@ class _OtpscreenState extends State<Otpscreen> {
                               size: 4,
                               color: Color(0xFF808080), // Adjust size as needed
                             ),
-                            const SizedBox(width: 4),
+                            const SizedBox(width: 6),
                             TextButton(
                               onPressed: () {
                                 Navigator.push(
@@ -298,6 +298,11 @@ class _OtpscreenState extends State<Otpscreen> {
                                   ),
                                 );
                               },
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                backgroundColor: Colors.transparent,
+                                minimumSize: Size.zero,
+                              ), 
                               child: const Text
                               ('Edit',
                               style: TextStyle(
