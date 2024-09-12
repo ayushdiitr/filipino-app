@@ -137,7 +137,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 18),
+                  const SizedBox(height: 12),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text.rich(

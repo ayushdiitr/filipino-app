@@ -206,6 +206,11 @@ class _HeightState extends State<HeightSelector> {
                               _selectedUnit = index == 0 ? 'cm' : 'in';
                             });
                           },
+                          borderRadius: BorderRadius.circular(4.0),
+                          constraints: const BoxConstraints(
+                            minHeight: 32.0,
+                            minWidth: 48.0,
+                          ),
                           children: const [
                             Text(
                               'cm',
