@@ -31,7 +31,8 @@ class _BasicInfoState extends State<BasicInfo> {
   // Function to check if mandatory fields are filled
   void _checkMandatoryFields() {
     setState(() {
-      isNextButtonEnabled = firstNameController.text.trim().isNotEmpty && selectedDate != null;
+      isNextButtonEnabled =
+          firstNameController.text.trim().isNotEmpty && selectedDate != null;
     });
   }
 
@@ -99,7 +100,7 @@ class _BasicInfoState extends State<BasicInfo> {
                   const SizedBox(height: 40),
                   const Padding(
                     padding:
-                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
                     child: Center(
                       child: LinearProgressIndicator(
                         value: 0.5,
@@ -261,7 +262,7 @@ class _BasicInfoState extends State<BasicInfo> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
-                widthFactor: 0.9,
+                widthFactor: 1,
                 child: ElevatedButton(
                   onPressed: isNextButtonEnabled ? saveBasicInfo : null,
                   style: ElevatedButton.styleFrom(

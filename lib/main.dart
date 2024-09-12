@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/src/ui/screens/splash/basicInfo.dart';
 import 'package:testapp/src/ui/screens/splash/beliefsAndOpinions.dart';
+import 'package:testapp/src/ui/screens/splash/emailScreen.dart';
 import 'package:testapp/src/ui/screens/splash/faceTime.dart';
 import 'package:testapp/src/ui/screens/splash/interest.dart';
 import 'package:testapp/src/ui/screens/splash/main.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: BasicInfo(userId: 2),
+      home: Emailscreen(),
     );
   }
 }
