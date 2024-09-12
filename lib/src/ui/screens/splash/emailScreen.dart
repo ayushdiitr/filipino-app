@@ -14,6 +14,8 @@ class _EmailInfoState extends State<Emailscreen> {
   // Add a TextEditingController to capture the email input
   final TextEditingController emailController = TextEditingController();
 
+  bool isChecked = false;
+
   Future<void> saveEmail() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String email = emailController.text.trim();
@@ -59,6 +61,7 @@ class _EmailInfoState extends State<Emailscreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 40),
                   const Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
@@ -93,10 +96,10 @@ class _EmailInfoState extends State<Emailscreen> {
                               Colors.white, // White background color
                         ),
                         const SizedBox(height: 12),
-                        Text.rich(
+                        const Text.rich(
                           TextSpan(
                             text: 'Enter your ', // Default text style
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontFamily: 'NoirPro',
                               fontWeight: FontWeight.w500,
                               fontSize: 28,
@@ -104,9 +107,10 @@ class _EmailInfoState extends State<Emailscreen> {
                             children: <TextSpan>[
                               TextSpan(
                                 text: 'Email Address',
-                                style: GoogleFonts.libreBaskerville(
+                                style: TextStyle(
                                   fontSize: 28,
-                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Baskerville',
+                                  fontWeight: FontWeight.w700,
                                   fontStyle: FontStyle.italic,
                                   color: Colors.black,
                                 ),
@@ -136,7 +140,9 @@ class _EmailInfoState extends State<Emailscreen> {
                           controller: emailController, // Use the controller
                           keyboardType: TextInputType.emailAddress,
                           style: const TextStyle(
-                              color: Colors.black), // Text color when focused
+                            color: Colors.black,
+                            fontFamily: 'NoirPro',
+                          ), // Text color when focused
                           decoration: const InputDecoration(
                             labelText: 'Enter email address',
                             labelStyle: TextStyle(
@@ -167,42 +173,69 @@ class _EmailInfoState extends State<Emailscreen> {
               ),
             ),
           ),
-          // The button is placed at the bottom of the screen.
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-              child: FractionallySizedBox(
-                widthFactor: 1,
-                child: ElevatedButton(
-                  onPressed: () {
-                    saveEmail();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    foregroundColor: Colors.white,
-                    textStyle: GoogleFonts.inter(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+          Column(
+            mainAxisAlignment:
+                MainAxisAlignment.end, // Aligns elements to the bottom
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  children: [
+                    Checkbox(
+                      value: isChecked, // You need to define this boolean
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isChecked = value!;
+                        });
+                      },
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    side: const BorderSide(width: 1, color: Colors.white),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                    const Text("Yes i would like to receive offers via email",
+                        style: TextStyle(
+                          fontFamily: 'NoirPro',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          color: Colors.grey,
+                        )),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 8.0),
+                  child: FractionallySizedBox(
+                    widthFactor: 1,
+                    child: ElevatedButton(
+                      onPressed: isChecked
+                          ? () => saveEmail()
+                          : null, // Button only enabled if checked
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
+                        textStyle: GoogleFonts.inter(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
+                        side: const BorderSide(width: 1, color: Colors.white),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text('Next'),
+                        ],
+                      ),
                     ),
-                  ),
-                  child: const Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text('Next'),
-                    ],
                   ),
                 ),
               ),
-            ),
+            ],
           ),
         ],
       ),

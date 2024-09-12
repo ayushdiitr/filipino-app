@@ -1,10 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testapp/src/ui/screens/splash/relationship.dart';
-
 
 class Meetscreen extends StatefulWidget {
   const Meetscreen({super.key});
@@ -14,7 +11,6 @@ class Meetscreen extends StatefulWidget {
 }
 
 class _MeetInfoState extends State<Meetscreen> {
-
   final Map<String, bool> _selectedOptions = {
     'Male': false,
     'Female': false,
@@ -30,7 +26,7 @@ class _MeetInfoState extends State<Meetscreen> {
 
   Future<void> saveMeetChoices() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    List <String>? choices = [];
+    List<String>? choices = [];
 
     bool anySelected = false;
 
@@ -61,7 +57,6 @@ class _MeetInfoState extends State<Meetscreen> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +73,7 @@ class _MeetInfoState extends State<Meetscreen> {
                   const SizedBox(height: 40),
                   const Padding(
                     padding:
-                    EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
                     child: Center(
                       child: LinearProgressIndicator(
                         value: 0.9,
@@ -87,43 +82,69 @@ class _MeetInfoState extends State<Meetscreen> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 32.0),
-                    child: Text.rich(
-                      TextSpan(
-                        text: "You'd like to ", // Default text style
-                        style: const TextStyle(
-                          fontFamily: 'NoirPro',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 28,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: 'Meet',
-                            style: GoogleFonts.libreBaskerville(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.italic,
-                              color: Colors.black,
+                  const Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InputChip(
+                          label: Text(
+                            'BASIC INFO',
+                            style: TextStyle(
+                              fontFamily: 'NoirPro',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 10,
+                              letterSpacing: 0.8,
+                              color: Color.fromRGBO(0, 0, 0, 1),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16.0),
-                    child: Text.rich(
-                      TextSpan(
-                        text: "Let us know who you’re interested in connecting with. This helps us match you with people who meet your preferences and make your experience more enjoyable",
-                        style: TextStyle(
-                          fontFamily: 'NoirPro',
-                          fontWeight: FontWeight.w300,
+                          visualDensity:
+                              VisualDensity(horizontal: -4.0, vertical: -4.0),
+                          backgroundColor:
+                              Colors.white, // White background color
                         ),
-                      ),
+                        SizedBox(height: 12),
+                        Text.rich(
+                          TextSpan(
+                            text: "You'd like to ", // Default text style
+                            style: TextStyle(
+                              fontFamily: 'NoirPro',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 28,
+                            ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'Meet',
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontFamily: 'Baskerville',
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 12),
+                        Padding(
+                          padding: EdgeInsets.only(right: 16.0),
+                          child: Text.rich(
+                            TextSpan(
+                              text:
+                                  "Let us know who you’re interested in connecting with. This helps us match you with people who meet your preferences and make your experience more enjoyable",
+                              style: TextStyle(
+                                fontFamily: 'NoirPro',
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 8),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
@@ -135,18 +156,20 @@ class _MeetInfoState extends State<Meetscreen> {
                           child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 8.0),
                             padding: const EdgeInsets.all(16.0),
-                            width: double.infinity, // Make each container take full width
+                            width: double
+                                .infinity, // Make each container take full width
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color:Colors.grey,
+                                color: isSelected ? Colors.black : Colors.grey,
                                 width: 2.0,
                               ),
-                               color: isSelected ? Colors.black : Colors.white, 
+                              color: isSelected ? Colors.black : Colors.white,
                             ),
                             child: Text(
                               key,
                               style: TextStyle(
+                                fontFamily: 'NoirPro',
                                 color: isSelected ? Colors.white : Colors.grey,
                                 fontSize: 16.0,
                               ),
@@ -166,9 +189,9 @@ class _MeetInfoState extends State<Meetscreen> {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
-                widthFactor: 0.9,
+                widthFactor: 1,
                 child: ElevatedButton(
                   onPressed: () {
                     saveMeetChoices();

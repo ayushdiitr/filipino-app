@@ -53,6 +53,14 @@ flutter:
         - asset: fonts/NoirPro/NoirPro-Italic.otf
           style: italic
 
+    - family: Baskerville
+      fonts:
+        - asset: fonts/BaskerVille/BaskervilleBT.ttf
+        - asset: fonts/Baskerville/BaskervilleBoldBT.ttf
+          weight: 700
+        - asset: fonts/Baskerville/BaskervilleBoldItalicBT.ttf
+          style: italic
+
 
 flutter_launcher_icons:
     android: "back_icon"

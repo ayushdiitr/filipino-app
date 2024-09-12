@@ -41,13 +41,14 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 24),
                 const Padding(
                   padding:
-                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 0.0),
+                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
                   child: Center(
                     child: LinearProgressIndicator(
                       value: 0.7,
@@ -75,29 +76,33 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
                     color: Color.fromRGBO(0, 0, 0, 1),
                   ),
                 ),
-                Text.rich(
-                  TextSpan(
-                    text: 'Select your ',
-                    style: const TextStyle(
-                      fontFamily: 'NoirPro',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 28,
-                      letterSpacing: 0.02,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Interests ',
-                        style: GoogleFonts.libreBaskerville(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.italic,
-                          color: Colors.black,
-                        ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 16.0),
+                  child: Text.rich(
+                    TextSpan(
+                      text: 'Select your ',
+                      style: TextStyle(
+                        fontFamily: 'NoirPro',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 28,
+                        letterSpacing: 0.02,
                       ),
-                    ],
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Interests ',
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontFamily: 'Baskerville',
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.italic,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 // Description Text
                 const Text(
                   "Choose your height to help us find matches that meet your preferences.",
@@ -109,7 +114,7 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
                     color: Color(0xFF3F4A61),
                   ),
                 ),
-                const SizedBox(height: 16),
+                // const SizedBox(height: 16),
                 // Interest categories
                 Expanded(
                   child: ListView(

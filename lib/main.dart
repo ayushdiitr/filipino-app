@@ -8,6 +8,7 @@ import 'package:testapp/src/ui/screens/splash/main.dart';
 import 'package:testapp/src/ui/screens/splash/lifestyle.dart';
 //import 'package:testapp/src/ui/screens/splash/talk_about.dart';
 import 'package:testapp/src/ui/screens/splash/location.dart';
+import 'package:testapp/src/ui/screens/splash/meetScreen.dart';
 import 'package:testapp/src/ui/screens/splash/notification.dart';
 import 'package:testapp/src/ui/screens/splash/screen2.dart';
 import 'package:testapp/src/ui/screens/splash/otpscreen.dart';

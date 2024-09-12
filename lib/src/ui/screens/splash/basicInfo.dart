@@ -109,12 +109,12 @@ class _BasicInfoState extends State<BasicInfo> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16.0, top: 16.0),
                     child: Text.rich(
                       TextSpan(
                         text: 'Enter your ',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w500,
                           fontSize: 28,
@@ -122,9 +122,10 @@ class _BasicInfoState extends State<BasicInfo> {
                         children: <TextSpan>[
                           TextSpan(
                             text: 'Basic Info',
-                            style: GoogleFonts.libreBaskerville(
+                            style: TextStyle(
                               fontSize: 28,
-                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Baskerville',
+                              fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.italic,
                               color: Colors.black,
                             ),

@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/src/ui/screens/splash/notification.dart';
 import 'package:testapp/src/ui/screens/splash/main.dart';
 
-
 class EnableLocationScreen extends StatefulWidget {
   const EnableLocationScreen({super.key});
 
@@ -101,12 +100,12 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 32.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16.0, top: 32.0),
                     child: Text.rich(
                       TextSpan(
                         text: 'Enable ', // Changed text
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w500,
                           fontSize: 28,
@@ -114,9 +113,10 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                         children: <TextSpan>[
                           TextSpan(
                             text: 'location',
-                            style: GoogleFonts.libreBaskerville(
+                            style: TextStyle(
                               fontSize: 28,
-                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Baskerville',
+                              fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.italic,
                               color: Colors.black,
                             ),
@@ -125,7 +125,6 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                       ),
                     ),
                   ),
-
                   const Padding(
                     padding: EdgeInsets.only(left: 16.0, top: 0),
                     child: Text.rich(
@@ -164,7 +163,7 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   FractionallySizedBox(
-                    widthFactor: 0.9,
+                    widthFactor: 1,
                     child: ElevatedButton(
                       onPressed: () async {
                         await _requestLocationPermission();
@@ -190,7 +189,7 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                   ),
                   //const SizedBox(height: 10),
                   FractionallySizedBox(
-                    widthFactor: 0.9,
+                    widthFactor: 1,
                     child: TextButton(
                       onPressed: () {
                         Navigator.push(

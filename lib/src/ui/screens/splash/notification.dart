@@ -17,7 +17,6 @@ class _NotificationState extends State<NotificationScreen> {
   @override
   void initState() {
     super.initState();
-    _checkLocationStatus();
     _requestNotificationPermission();
   }
 
@@ -36,17 +35,6 @@ class _NotificationState extends State<NotificationScreen> {
     } else if (status.isGranted) {
       // Navigate to next screen when permission is granted
       _navigateToNextScreen();
-    }
-  }
-
-  Future<void> _checkLocationStatus() async {
-    try {
-      bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
-      setState(() {
-        _isLocationEnabled = isLocationEnabled;
-      });
-    } catch (e) {
-      print('Error checking location status: $e');
     }
   }
 
@@ -91,12 +79,12 @@ class _NotificationState extends State<NotificationScreen> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16.0, top: 16.0),
                     child: Text.rich(
                       TextSpan(
                         text: 'Allow ',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w500,
                           fontSize: 28,
@@ -104,9 +92,10 @@ class _NotificationState extends State<NotificationScreen> {
                         children: <TextSpan>[
                           TextSpan(
                             text: 'notifications ',
-                            style: GoogleFonts.libreBaskerville(
+                            style: TextStyle(
                               fontSize: 28,
-                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Baskerville',
+                              fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.italic,
                               color: Colors.black,
                             ),
@@ -154,7 +143,7 @@ class _NotificationState extends State<NotificationScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   FractionallySizedBox(
-                    widthFactor: 0.9,
+                    widthFactor: 1,
                     child: ElevatedButton(
                       onPressed: () async {
                         await _requestNotificationPermission();

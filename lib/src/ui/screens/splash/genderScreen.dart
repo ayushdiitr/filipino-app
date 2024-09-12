@@ -94,12 +94,12 @@ class _GenderInfoState extends State<Genderscreen> {
                           ),
                         ),
                         const SizedBox(height: 12),
-                        Padding(
+                        const Padding(
                           padding: const EdgeInsets.only(top: 16.0),
                           child: Text.rich(
                             TextSpan(
                               text: 'Select your ', // Default text style
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontFamily: 'NoirPro',
                                 fontWeight: FontWeight.w500,
                                 fontSize: 28,
@@ -107,9 +107,10 @@ class _GenderInfoState extends State<Genderscreen> {
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'Gender',
-                                  style: GoogleFonts.libreBaskerville(
+                                  style: TextStyle(
                                     fontSize: 28,
-                                    fontWeight: FontWeight.w600,
+                                    fontFamily: 'Baskerville',
+                                    fontWeight: FontWeight.w700,
                                     fontStyle: FontStyle.italic,
                                     color: Colors.black,
                                   ),
@@ -155,6 +156,7 @@ class _GenderInfoState extends State<Genderscreen> {
                                 child: Text(
                                   gender,
                                   style: TextStyle(
+                                    fontFamily: 'NoirPro',
                                     color:
                                         isSelected ? Colors.white : Colors.grey,
                                     fontSize: 16.0,

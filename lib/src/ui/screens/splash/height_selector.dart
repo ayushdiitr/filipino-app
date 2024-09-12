@@ -89,7 +89,7 @@ class _HeightState extends State<HeightSelector> {
                   const SizedBox(height: 40),
                   const Padding(
                     padding:
-                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
                     child: Center(
                       child: LinearProgressIndicator(
                         value: 1.0,
@@ -98,44 +98,69 @@ class _HeightState extends State<HeightSelector> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 32.0),
-                    child: Text.rich(
-                      TextSpan(
-                        text: 'Select your ', // Default text style
-                        style: const TextStyle(
-                          fontFamily: 'NoirPro',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 28,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: 'height ',
-                            style: GoogleFonts.libreBaskerville(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.italic,
-                              color: Colors.black,
+                  const Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InputChip(
+                          label: Text(
+                            'BASIC INFO',
+                            style: TextStyle(
+                              fontFamily: 'NoirPro',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 10,
+                              letterSpacing: 0.8,
+                              color: Color.fromRGBO(0, 0, 0, 1),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16.0),
-                    child: Text.rich(
-                      TextSpan(
-                        text:
-                            "Choose your height to help us find matches that meet your preferences.",
-                        style: TextStyle(
-                          fontFamily: 'NoirPro',
-                          fontWeight: FontWeight.w300,
+                          visualDensity:
+                              VisualDensity(horizontal: -4.0, vertical: -4.0),
+                          backgroundColor:
+                              Colors.white, // White background color
                         ),
-                      ),
+                        SizedBox(height: 12),
+                        Text.rich(
+                          TextSpan(
+                            text: 'Select your ', // Default text style
+                            style: TextStyle(
+                              fontFamily: 'NoirPro',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 28,
+                            ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'height ',
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontFamily: 'Baskerville',
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 12),
+                        Padding(
+                          padding: EdgeInsets.only(right: 16.0),
+                          child: Text.rich(
+                            TextSpan(
+                              text:
+                                  "Choose your height to help us find matches that meet your preferences.",
+                              style: TextStyle(
+                                fontFamily: 'NoirPro',
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 8),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: SizedBox(
@@ -158,6 +183,7 @@ class _HeightState extends State<HeightSelector> {
                                     _currentHeights[index],
                                     style: TextStyle(
                                       fontSize: 24,
+                                      fontFamily: 'NoirPro',
                                       color: _selectedIndex == index
                                           ? Colors.black
                                           : Colors.grey,
@@ -235,7 +261,7 @@ class _HeightState extends State<HeightSelector> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
-                widthFactor: 0.9,
+                widthFactor: 1,
                 child: ElevatedButton(
                   onPressed: () {
                     submitDetails();

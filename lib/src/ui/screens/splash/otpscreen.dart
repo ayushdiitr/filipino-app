@@ -28,28 +28,12 @@ class _OtpscreenState extends State<Otpscreen> {
   void initState() {
     super.initState();
     _isHidden = true;
-    _startTimer();
   }
 
   @override
   void dispose() {
     _timer?.cancel(); // Cancel the timer when the widget is disposed
     super.dispose();
-  }
-
-  void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (_remainingTime == 0) {
-        if (mounted) {
-          _showTimeUpDialog();
-        }
-        _timer?.cancel();
-      } else {
-        setState(() {
-          _remainingTime--;
-        });
-      }
-    });
   }
 
   void _toggleOtpView() {
@@ -171,7 +155,6 @@ class _OtpscreenState extends State<Otpscreen> {
       if (response.statusCode != 200) {
         Navigator.pop(context);
         _remainingTime = 45;
-        _startTimer();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -190,7 +173,8 @@ class _OtpscreenState extends State<Otpscreen> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isButtonEnabled = _otpCode.length == 6; // Check if OTP code length is 6
+    final bool isButtonEnabled =
+        _otpCode.length == 6; // Check if OTP code length is 6
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -215,12 +199,12 @@ class _OtpscreenState extends State<Otpscreen> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16.0, top: 16.0),
                     child: Text.rich(
                       TextSpan(
                         text: 'Enter your ', // Default text style
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w500,
                           fontSize: 28,
@@ -228,9 +212,10 @@ class _OtpscreenState extends State<Otpscreen> {
                         children: <TextSpan>[
                           TextSpan(
                             text: 'Verification Code',
-                            style: GoogleFonts.libreBaskerville(
+                            style: TextStyle(
                               fontSize: 28,
-                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Baskerville',
+                              fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.italic,
                               color: Colors.black,
                             ),
@@ -271,24 +256,27 @@ class _OtpscreenState extends State<Otpscreen> {
                               size: 4,
                               color: Color(0xFF808080), // Adjust size as needed
                             ),
-                            const SizedBox(width: 4),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const BasicInfo(userId: 2),
+                            // const SizedBox(width: 4),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 4.0),
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const BasicInfo(userId: 2),
+                                    ),
+                                  );
+                                },
+                                child: const Text(
+                                  'Edit',
+                                  style: TextStyle(
+                                    fontFamily: 'NoirPro',
+                                    color: Color(0xFF000000),
                                   ),
-                                );
-                              },
-                              child: const Text
-                              ('Edit',
-                              style: TextStyle(
-                                fontFamily: 'NoirPro',
-                                color: Color(0xFF000000),
+                                ),
                               ),
-                            ),
                             ),
                           ],
                         ),
@@ -359,19 +347,25 @@ class _OtpscreenState extends State<Otpscreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
                 widthFactor: 0.9,
                 child: ElevatedButton(
-                  onPressed: isButtonEnabled ? () => _verifyOtp() : null, // Disable button if OTP is not fully entered
+                  onPressed: isButtonEnabled
+                      ? () => _verifyOtp()
+                      : _showTimeUpDialog, // Disable button if OTP is not fully entered
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isButtonEnabled ? Colors.black : Colors.grey, // Change color based on OTP state
+                    backgroundColor: isButtonEnabled
+                        ? Colors.black
+                        : Colors.grey, // Change color based on OTP state
                     foregroundColor: Colors.white,
                     textStyle: GoogleFonts.inter(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
                     side: const BorderSide(width: 1, color: Colors.white),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
@@ -381,10 +375,11 @@ class _OtpscreenState extends State<Otpscreen> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('Verify',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
+                      Text(
+                        'Verify',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),

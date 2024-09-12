@@ -73,7 +73,7 @@ class _RelationshipState extends State<Relationship> {
                   const SizedBox(height: 40),
                   const Padding(
                     padding:
-                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
                     child: Center(
                       child: LinearProgressIndicator(
                         value: 1.0,
@@ -82,51 +82,78 @@ class _RelationshipState extends State<Relationship> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 32.0),
-                    child: Text.rich(
-                      TextSpan(
-                        text: 'What ', // Default text style
-                        style: const TextStyle(
-                          fontFamily: 'NoirPro',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 28,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: 'type of relationship ',
-                            style: GoogleFonts.libreBaskerville(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.italic,
-                              color: Colors.black,
+                  const Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InputChip(
+                          label: Text(
+                            'BASIC INFO',
+                            style: TextStyle(
+                              fontFamily: 'NoirPro',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 10,
+                              letterSpacing: 0.8,
+                              color: Color.fromRGBO(0, 0, 0, 1),
                             ),
                           ),
-                          const TextSpan(
-                            text: 'are you looking for?', // Default text style
+                          visualDensity:
+                              VisualDensity(horizontal: -4.0, vertical: -4.0),
+                          backgroundColor:
+                              Colors.white, // White background color
+                        ),
+                        SizedBox(height: 12),
+                        Text.rich(
+                          TextSpan(
+                            text: 'What ', // Default text style
                             style: TextStyle(
                               fontFamily: 'NoirPro',
                               fontWeight: FontWeight.w500,
                               fontSize: 28,
                             ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'type of relationship ',
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontFamily: 'Baskerville',
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              TextSpan(
+                                text:
+                                    'are you looking for?', // Default text style
+                                style: TextStyle(
+                                  fontFamily: 'NoirPro',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 28,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16.0),
-                    child: Text.rich(
-                      TextSpan(
-                        text: "We match daters using 3 broad gender groups.",
-                        style: TextStyle(
-                          fontFamily: 'NoirPro',
-                          fontWeight: FontWeight.w300,
                         ),
-                      ),
+                        SizedBox(height: 12),
+                        Padding(
+                          padding: EdgeInsets.only(right: 16.0),
+                          child: Text.rich(
+                            TextSpan(
+                              text:
+                                  "We match daters using 3 broad gender groups.",
+                              style: TextStyle(
+                                fontFamily: 'NoirPro',
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 8),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
@@ -154,10 +181,10 @@ class _RelationshipState extends State<Relationship> {
                                 Text(
                                   key,
                                   style: TextStyle(
-                                    color: isSelected
-                                        ? Colors.white
-                                        : Colors.grey,
+                                    color:
+                                        isSelected ? Colors.white : Colors.grey,
                                     fontSize: 16.0,
+                                    fontFamily: 'NoirPro',
                                   ),
                                 ),
                                 // Container(
@@ -168,7 +195,7 @@ class _RelationshipState extends State<Relationship> {
                                 //     border: Border.all(
                                 //       color:Colors.grey,
                                 //       width: 2.0,
-                                
+
                                 //     color: isSelected
                                 //         ? Colors.white
                                 //         : Colors.transparent,
@@ -200,7 +227,7 @@ class _RelationshipState extends State<Relationship> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
-                widthFactor: 0.9,
+                widthFactor: 1,
                 child: ElevatedButton(
                   onPressed: () {
                     // Print debug statement

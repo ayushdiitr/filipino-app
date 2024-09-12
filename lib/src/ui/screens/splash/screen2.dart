@@ -113,12 +113,12 @@ class _PhoneLoginState extends State<PhoneLogin> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 24.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16.0, top: 24.0, right: 16),
                     child: Text.rich(
                       TextSpan(
                         text: 'Enter your ', // Default text style
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w500,
                           fontSize: 28,
@@ -126,9 +126,10 @@ class _PhoneLoginState extends State<PhoneLogin> {
                         children: <TextSpan>[
                           TextSpan(
                             text: 'Phone Number',
-                            style: GoogleFonts.libreBaskerville(
+                            style: TextStyle(
                               fontSize: 28,
-                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Baskerville',
+                              fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.italic,
                               color: Colors.black,
                             ),
@@ -152,7 +153,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 24),
                   // Updated IntlPhoneField with flag removed
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -161,7 +162,10 @@ class _PhoneLoginState extends State<PhoneLogin> {
                       controller: phoneController,
                       decoration: const InputDecoration(
                           labelText: 'Enter your phone number',
-                          labelStyle: TextStyle(color: Colors.grey),
+                          labelStyle: TextStyle(
+                            color: Colors.grey,
+                            fontFamily: 'NoirPro',
+                          ),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
                           ),
