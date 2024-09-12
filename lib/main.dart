@@ -9,6 +9,11 @@ import 'package:testapp/src/ui/screens/splash/lifestyle.dart';
 import 'package:testapp/src/ui/screens/splash/location.dart';
 import 'package:testapp/src/ui/screens/splash/notification.dart';
 import 'package:testapp/src/ui/screens/splash/screen2.dart';
+//import 'package:testapp/src/ui/screens/splash/otpscreen.dart';
+import 'package:testapp/src/ui/screens/splash/height_selector.dart';
+import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
+
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

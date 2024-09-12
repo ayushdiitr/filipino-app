@@ -4,42 +4,49 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:testapp/src/ui/screens/splash/otpscreen.dart';
 import 'dart:convert';
 
-class PhoneLogin extends StatelessWidget {
+class PhoneLogin extends StatefulWidget {
+  const PhoneLogin({super.key});
+
+  @override
+  _PhoneLoginState createState() => _PhoneLoginState();
+}
+
+class _PhoneLoginState extends State<PhoneLogin> {
   final TextEditingController phoneController = TextEditingController();
 
-  PhoneLogin({super.key});
+  @override
+  void initState() {
+    super.initState();
+    phoneController.addListener(() {
+      setState(() {}); // Refresh UI when phone number changes
+    });
+  }
 
-  //function to send data to backend
+  bool get isPhoneNumberValid {
+    final phoneNo = phoneController.text.trim();
+    // Checking if the phone number length is exactly 10 digits
+    return phoneNo.length == 10;
+  }
+
   Future<void> _savePhoneNo(BuildContext context) async {
     final String phoneNo = phoneController.text.trim();
 
     if (phoneNo.isNotEmpty) {
       try {
-        // final response = await http.post(
-        //   Uri.parse('http://10.0.2.2:8000/api/v1/register/'),
-        //   headers: <String, String>{
-        //     'Content-Type':'application/json; charset=UTF-8',
-        //   },
-        //   body: jsonEncode(<String, dynamic>{
-        //     'phone_number':int.parse(phoneNo),
-        //   }),
-        // );
+        // Simulate backend call
         final Map<String, Object> response = {
           "body": jsonEncode({
-            "user_id":
-                12345, // Replace this with any user ID you want to simulate
-            "phone_number": "1234567890", // Example phone number
+            "user_id": 12345, // Replace this with any user ID you want to simulate
+            "phone_number": phoneNo, // Example phone number
           }),
           "statusCode": 201, // Simulating a successful creation status
         };
-        // print(jsonDecode(response.body));
+
         if (response["statusCode"] == 201) {
           final Map<String, dynamic> responseData =
               jsonDecode(response["body"] as String);
-          // if(response.statusCode != 201 || response.statusCode == 200){
-          //   final Map<String, dynamic> responseData = jsonDecode(response.body);
           final int userId = responseData['user_id'];
-          //Navigate
+          // Navigate
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -78,12 +85,11 @@ class PhoneLogin extends StatelessWidget {
               right: 16.0,
             ),
             child: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               color: Colors.black,
               onPressed: () {},
             ),
           ),
-
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 100.0),
@@ -126,6 +132,7 @@ class PhoneLogin extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 18),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text.rich(
@@ -145,18 +152,15 @@ class PhoneLogin extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: IntlPhoneField(
                       cursorColor: Colors.black,
-                      controller:
-                          phoneController, // Added controller to capture input
-
+                      controller: phoneController,
                       decoration: const InputDecoration(
                         labelText: 'Enter your phone number',
-                        labelStyle: TextStyle(color: Colors.black),
+                        labelStyle: TextStyle(color: Colors.grey),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black),
                         ),
-                        focusColor: Colors.black,
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
+                          borderSide: BorderSide(color: Colors.grey),
                         ),
                       ),
                       initialCountryCode: 'IN',
@@ -169,8 +173,6 @@ class PhoneLogin extends StatelessWidget {
               ),
             ),
           ),
-
-          // The button is placed at the bottom of the screen.
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -179,15 +181,14 @@ class PhoneLogin extends StatelessWidget {
               child: FractionallySizedBox(
                 widthFactor: 0.9,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Print the phone number when the button is pressed
+                  onPressed: isPhoneNumberValid ? () {
                     _savePhoneNo(context);
-                  },
+                  } : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: Colors.black,
+                    backgroundColor: isPhoneNumberValid ? Colors.black : Colors.grey,
+                    foregroundColor: Colors.white,
                     textStyle: GoogleFonts.inter(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
                     padding: const EdgeInsets.symmetric(
@@ -201,7 +202,11 @@ class PhoneLogin extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('Next'),
+                      Text('Next',
+                      style: TextStyle(
+                        color: Colors.white, 
+                      ),
+                      ),
                     ],
                   ),
                 ),

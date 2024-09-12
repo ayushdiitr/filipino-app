@@ -6,6 +6,7 @@ import 'package:testapp/src/ui/screens/splash/screen2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
+import 'package:testapp/src/ui/screens/splash/main.dart';
 
 class Otpscreen extends StatefulWidget {
   final String phoneNumber;
@@ -153,7 +154,7 @@ class _OtpscreenState extends State<Otpscreen> {
 
   Future<void> _resendOtp() async {
     final url = Uri.parse(
-        'http://10.0.2.2:8000/api/v1/register/${'user_id'}/regenaret_otp/');
+        'http://10.0.2.2:8000/api/v1/register/${widget.userId}/regenaret_otp/');
 
     try {
       final response = await http.patch(
@@ -189,6 +190,8 @@ class _OtpscreenState extends State<Otpscreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isButtonEnabled = _otpCode.length == 6; // Check if OTP code length is 6
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Stack(
@@ -213,7 +216,7 @@ class _OtpscreenState extends State<Otpscreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 32.0),
+                    padding: const EdgeInsets.only(left: 16.0, top: 16.0),
                     child: Text.rich(
                       TextSpan(
                         text: 'Enter your ', // Default text style
@@ -238,6 +241,7 @@ class _OtpscreenState extends State<Otpscreen> {
                   ),
                   Row(
                     children: [
+                      const SizedBox(height: 16),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 8.0),
@@ -261,11 +265,13 @@ class _OtpscreenState extends State<Otpscreen> {
                                   color: Color(0xFF808080)),
                             ),
                             const SizedBox(
-                                width: 8), // Space between text and icon
+                                width: 6), // Space between text and icon
                             const Icon(
                               Icons.circle_rounded,
-                              size: 10, // Adjust size as needed
+                              size: 4,
+                              color: Color(0xFF808080), // Adjust size as needed
                             ),
+                            const SizedBox(width: 4),
                             TextButton(
                               onPressed: () {
                                 Navigator.push(
@@ -276,14 +282,20 @@ class _OtpscreenState extends State<Otpscreen> {
                                   ),
                                 );
                               },
-                              child: const Text('Edit'),
+                              child: const Text
+                              ('Edit',
+                              style: TextStyle(
+                                fontFamily: 'NoirPro',
+                                color: Color(0xFF000000),
+                              ),
+                            ),
                             ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 16),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: TextField(
@@ -296,7 +308,7 @@ class _OtpscreenState extends State<Otpscreen> {
                       ],
                       decoration: InputDecoration(
                         labelText: 'Enter your code',
-                        labelStyle: const TextStyle(color: Colors.black),
+                        labelStyle: const TextStyle(color: Colors.grey),
                         border: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black),
                         ),
@@ -312,35 +324,29 @@ class _OtpscreenState extends State<Otpscreen> {
                         hintText: "------",
                         hintStyle: const TextStyle(
                           letterSpacing:
-                              16, // Adjust the spacing between dashes
+                              16, // Adjust the spacing to match the number of digits
                         ),
                       ),
-                      onChanged: (otp) {
+                      onChanged: (value) {
                         setState(() {
-                          _otpCode = otp; // Update OTP code
-                        }); // Print OTP code to the terminal
+                          _otpCode = value;
+                        });
                       },
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 16.0),
+                        vertical: 20.0, horizontal: 16.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "The code should arrive within ",
-                          style: TextStyle(
-                              fontFamily: 'NoirPro',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xFF808080)),
-                        ),
                         Text(
-                          "00:${_remainingTime.toString().padLeft(2, '0')}s", // Display the remaining time
+                          'Resend code in: ${_remainingTime}s',
                           style: const TextStyle(
                             fontFamily: 'NoirPro',
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
+                            color: Color(0xFF808080),
                           ),
                         ),
                       ],
@@ -350,28 +356,22 @@ class _OtpscreenState extends State<Otpscreen> {
               ),
             ),
           ),
-
-          // The button is placed at the bottom of the screen.
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
                 widthFactor: 0.9,
                 child: ElevatedButton(
-                  onPressed: () {
-                    _verifyOtp();
-                  },
+                  onPressed: isButtonEnabled ? () => _verifyOtp() : null, // Disable button if OTP is not fully entered
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
+                    backgroundColor: isButtonEnabled ? Colors.black : Colors.grey, // Change color based on OTP state
                     foregroundColor: Colors.white,
                     textStyle: GoogleFonts.inter(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                     side: const BorderSide(width: 1, color: Colors.white),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
@@ -381,7 +381,11 @@ class _OtpscreenState extends State<Otpscreen> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('Verify'),
+                      Text('Verify',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      ),
                     ],
                   ),
                 ),

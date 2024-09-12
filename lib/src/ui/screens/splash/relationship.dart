@@ -156,33 +156,31 @@ class _RelationshipState extends State<Relationship> {
                                   style: TextStyle(
                                     color: isSelected
                                         ? Colors.white
-                                        : Colors.black,
+                                        : Colors.grey,
                                     fontSize: 16.0,
                                   ),
                                 ),
-                                Container(
-                                  width: 24.0,
-                                  height: 24.0,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: isSelected
-                                          ? Colors.white
-                                          : Colors.grey,
-                                      width: 2.0,
-                                    ),
-                                    color: isSelected
-                                        ? Colors.white
-                                        : Colors.transparent,
-                                  ),
-                                  child: isSelected
-                                      ? const Icon(
-                                          Icons.check,
-                                          color: Colors.black,
-                                          size: 16.0,
-                                        )
-                                      : null,
-                                ),
+                                // Container(
+                                //   width: 24.0,
+                                //   height: 24.0,
+                                //   decoration: BoxDecoration(
+                                //     shape: BoxShape.circle,
+                                //     border: Border.all(
+                                //       color:Colors.grey,
+                                //       width: 2.0,
+                                
+                                //     color: isSelected
+                                //         ? Colors.white
+                                //         : Colors.transparent,
+                                //   ),
+                                //   child: isSelected
+                                //       ? const Icon(
+                                //           Icons.check,
+                                //           color: Colors.black,
+                                //           size: 16.0,
+                                //         )
+                                //       : null,
+                                // ),
                               ],
                             ),
                           ),

@@ -227,7 +227,7 @@ class InterestCategory extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                 decoration: BoxDecoration(
                   color: isSelected ? Colors.black : Colors.white,
-                  border: Border.all(color: Colors.black),
+                  border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Text(

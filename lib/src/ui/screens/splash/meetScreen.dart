@@ -115,7 +115,7 @@ class _MeetInfoState extends State<Meetscreen> {
                     padding: EdgeInsets.only(left: 16.0),
                     child: Text.rich(
                       TextSpan(
-                        text: "We match daters using 3 broad gender groups.",
+                        text: "Let us know who you’re interested in connecting with. This helps us match you with people who meet your preferences and make your experience more enjoyable",
                         style: TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w300,
@@ -139,14 +139,15 @@ class _MeetInfoState extends State<Meetscreen> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color: isSelected ? Colors.black : Colors.grey,
+                                color:Colors.grey,
                                 width: 2.0,
                               ),
+                               color: isSelected ? Colors.black : Colors.white, 
                             ),
                             child: Text(
                               key,
                               style: TextStyle(
-                                color: isSelected ? Colors.black : Colors.grey,
+                                color: isSelected ? Colors.white : Colors.grey,
                                 fontSize: 16.0,
                               ),
                             ),

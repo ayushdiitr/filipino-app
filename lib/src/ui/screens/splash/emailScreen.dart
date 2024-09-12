@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testapp/src/ui/screens/splash/meetScreen.dart';
 
-
 class Emailscreen extends StatefulWidget {
   const Emailscreen({super.key});
 
@@ -47,9 +46,6 @@ class _EmailInfoState extends State<Emailscreen> {
     );
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,15 +54,13 @@ class _EmailInfoState extends State<Emailscreen> {
         children: [
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 100.0), // Extra space to avoid overlapping
+              padding: const EdgeInsets.only(bottom: 100.0), // Extra space to avoid overlapping
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 40),
                   const Padding(
-                    padding:
-                    EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+                    padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
                     child: Center(
                       child: LinearProgressIndicator(
                         value: 0.8,
@@ -99,55 +93,78 @@ class _EmailInfoState extends State<Emailscreen> {
                       ),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16.0),
-                    child: Text.rich(
-                      TextSpan(
-                        text: "Share your basic info to tailor your SkyBuddy experience and connect with like-minded travelers on your upcoming journey",
-                        style: TextStyle(
-                          fontFamily: 'NoirPro',
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 30),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: TextField(
-                        cursorColor: Colors.black,
-                      controller: emailController,  // Use the controller
-                        keyboardType: TextInputType.emailAddress,
-                        style: const TextStyle(color: Colors.black), // Text color when focused
-                        decoration: const InputDecoration(
-                          labelText: 'Enter email address',
-                          labelStyle:  TextStyle(color: Colors.black), // Label color when not focused
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
+                    padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const InputChip(
+                          label: Text(
+                            'BASIC INFO',
+                            style: TextStyle(
+                              fontFamily: 'NoirPro',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 10,
+                              letterSpacing: 0.8,
+                              color: Color.fromRGBO(0, 0, 0, 1),
+                            ),
                           ),
-                          enabledBorder:  OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFFCCCCCC)), // Border color when not focused
-                          ),
-                          focusedBorder:  OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black), // Border color when focused
+                          visualDensity: VisualDensity(horizontal: -4.0, vertical: -4.0),
+                          backgroundColor: Colors.white, // White background color
+                        ),
+                        const SizedBox(height: 8),
+                        const Padding(
+                          padding: EdgeInsets.only(right:16.0, left: 16.0, top: 16.0),
+                          child: Text.rich(
+                            TextSpan(
+                              text:
+                                  "Share your basic info to tailor your SkyBuddy experience and connect with like-minded travelers on your upcoming journey",
+                              style: TextStyle(
+                                fontFamily: 'NoirPro',
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
                           ),
                         ),
-                        onChanged: (value) {
-                          print(value);
-                        },
-                      ),
+                        const SizedBox(height: 30),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: TextField(
+                            cursorColor: Colors.black,
+                            controller: emailController, // Use the controller
+                            keyboardType: TextInputType.emailAddress,
+                            style: const TextStyle(color: Colors.black), // Text color when focused
+                            decoration: const InputDecoration(
+                              labelText: 'Enter email address',
+                              labelStyle: TextStyle(color: Colors.grey), // Label color when not focused
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFFCCCCCC)), // Border color when not focused
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black), // Border color when focused
+                              ),
+                            ),
+                            onChanged: (value) {
+                              print(value);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
           ),
-
           // The button is placed at the bottom of the screen.
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
                 widthFactor: 0.9,
                 child: ElevatedButton(
@@ -161,8 +178,7 @@ class _EmailInfoState extends State<Emailscreen> {
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                     side: const BorderSide(width: 1, color: Colors.white),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),

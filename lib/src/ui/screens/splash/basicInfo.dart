@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
+import 'package:testapp/src/ui/screens/splash/main.dart';
 
 class BasicInfo extends StatefulWidget {
   final int userId;
@@ -17,8 +18,22 @@ class _BasicInfoState extends State<BasicInfo> {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController occupationController = TextEditingController();
-
   String? selectedDate;
+  bool isNextButtonEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Add listeners for the mandatory fields
+    firstNameController.addListener(_checkMandatoryFields);
+  }
+
+  // Function to check if mandatory fields are filled
+  void _checkMandatoryFields() {
+    setState(() {
+      isNextButtonEnabled = firstNameController.text.trim().isNotEmpty && selectedDate != null;
+    });
+  }
 
   Future<void> saveBasicInfo() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -64,6 +79,7 @@ class _BasicInfoState extends State<BasicInfo> {
     if (datePicked != null) {
       setState(() {
         selectedDate = DateFormat('dd-MM-yyyy').format(datePicked);
+        _checkMandatoryFields(); // Check if date is selected
       });
     }
   }
@@ -93,7 +109,7 @@ class _BasicInfoState extends State<BasicInfo> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 32.0),
+                    padding: const EdgeInsets.only(left: 16.0, top: 16.0),
                     child: Text.rich(
                       TextSpan(
                         text: 'Enter your ',
@@ -116,6 +132,7 @@ class _BasicInfoState extends State<BasicInfo> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20),
                   const Padding(
                     padding: EdgeInsets.only(left: 16.0),
                     child: Text.rich(
@@ -140,7 +157,7 @@ class _BasicInfoState extends State<BasicInfo> {
                           style: const TextStyle(color: Colors.black),
                           decoration: const InputDecoration(
                             labelText: 'First Name',
-                            labelStyle: TextStyle(color: Colors.black),
+                            labelStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.grey),
                             ),
@@ -152,14 +169,14 @@ class _BasicInfoState extends State<BasicInfo> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 12.0),
                         TextField(
                           cursorColor: Colors.black,
                           controller: lastNameController,
                           style: const TextStyle(color: Colors.black),
                           decoration: const InputDecoration(
                             labelText: 'Last Name (Optional)',
-                            labelStyle: TextStyle(color: Colors.black),
+                            labelStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.grey),
                             ),
@@ -171,14 +188,14 @@ class _BasicInfoState extends State<BasicInfo> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 12.0),
                         TextField(
                           cursorColor: Colors.black,
                           controller: occupationController,
                           style: const TextStyle(color: Colors.black),
                           decoration: const InputDecoration(
                             labelText: 'Occupation (Optional)',
-                            labelStyle: TextStyle(color: Colors.black),
+                            labelStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.grey),
                             ),
@@ -190,7 +207,7 @@ class _BasicInfoState extends State<BasicInfo> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 16.0),
+                        const SizedBox(height: 12.0),
                         GestureDetector(
                           onTap: () => showHoloDatePicker(context),
                           child: Container(
@@ -202,6 +219,7 @@ class _BasicInfoState extends State<BasicInfo> {
                                     : Colors.grey,
                                 width: 1.0,
                               ),
+                              borderRadius: BorderRadius.circular(4.0),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -245,9 +263,7 @@ class _BasicInfoState extends State<BasicInfo> {
               child: FractionallySizedBox(
                 widthFactor: 0.9,
                 child: ElevatedButton(
-                  onPressed: () async {
-                    await saveBasicInfo();
-                  },
+                  onPressed: isNextButtonEnabled ? saveBasicInfo : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
