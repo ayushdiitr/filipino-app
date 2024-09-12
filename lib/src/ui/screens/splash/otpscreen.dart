@@ -216,6 +216,22 @@ class _OtpscreenState extends State<Otpscreen> {
                     ),
                   ),
                   Padding(
+                    padding: const EdgeInsets.only(
+                      top: 24.0,
+                      left: 16.0,
+                      right: 16.0,
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 32,
+                        child: Image.asset("images/backicon.png"),
+                      ),
+                    ),
+                  ),
+                  Padding(
                     padding: const EdgeInsets.only(left: 16.0, top: 16.0),
                     child: Text.rich(
                       TextSpan(
