@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:testapp/src/ui/screens/splash/otpscreen.dart';
 
 class PhoneLogin extends StatefulWidget {
   const PhoneLogin({super.key});
@@ -26,6 +28,51 @@ class _PhoneLoginState extends State<PhoneLogin> {
     return phoneNo.length == 10;
   }
 
+  Future<void> _savePhoneNo(BuildContext context) async {
+    final String phoneNo = phoneController.text.trim();
+
+    if (phoneNo.isNotEmpty) {
+      try {
+        // Simulate backend call
+        final Map<String, Object> response = {
+          "body": jsonEncode({
+            "user_id":
+                12345, // Replace this with any user ID you want to simulate
+            "phone_number": phoneNo, // Example phone number
+          }),
+          "statusCode": 201, // Simulating a successful creation status
+        };
+
+        if (response["statusCode"] == 201) {
+          final Map<String, dynamic> responseData =
+              jsonDecode(response["body"] as String);
+          final int userId = responseData['user_id'];
+          // Navigate
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Otpscreen(
+                      phoneNumber: phoneNo,
+                      userId: userId,
+                    )),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Failed to send data')),
+          );
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e')),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Enter your phone number')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +87,8 @@ class _PhoneLoginState extends State<PhoneLogin> {
                 children: [
                   const SizedBox(height: 40),
                   const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
                     child: Center(
                       child: LinearProgressIndicator(
                         value: 0.2,
@@ -112,24 +160,23 @@ class _PhoneLoginState extends State<PhoneLogin> {
                       cursorColor: Colors.black,
                       controller: phoneController,
                       decoration: const InputDecoration(
-                        labelText: 'Enter your phone number',
-                        labelStyle: TextStyle(color: Colors.grey),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 12.0),
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.only(left: 12.0),
-                          
-
-                        )
-                      ),
+                          labelText: 'Enter your phone number',
+                          labelStyle: TextStyle(color: Colors.grey),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 12.0),
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                          )),
                       initialCountryCode: 'IN',
-                      showCountryFlag: false,  // Removes the flag
-                      dropdownIconPosition: IconPosition.trailing,  // Places the arrow after the field
+                      showCountryFlag: false, // Removes the flag
+                      dropdownIconPosition: IconPosition
+                          .trailing, // Places the arrow after the field
                       onCountryChanged: (country) {
                         print('Country changed to: ' + country.name);
                       },
@@ -148,13 +195,10 @@ class _PhoneLoginState extends State<PhoneLogin> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
-                widthFactor: 0.9,
+                widthFactor: 1,
                 child: ElevatedButton(
-                  onPressed: isPhoneNumberValid
-                      ? () {
-                          // Trigger action on phone number validation
-                        }
-                      : null,
+                  onPressed:
+                      isPhoneNumberValid ? () => _savePhoneNo(context) : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
                         isPhoneNumberValid ? Colors.black : Colors.grey,
