@@ -38,7 +38,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
                   const SizedBox(height: 40),
                   const Padding(
                     padding:
-                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
                     child: Center(
                       child: LinearProgressIndicator(
                         value: 0.7,
@@ -71,7 +71,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
                             color: Color.fromRGBO(0, 0, 0, 1),
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 12),
                         Text.rich(
                           TextSpan(
                             text: 'Show your ', // Default text style
@@ -96,8 +96,9 @@ class _PhotoScreenState extends State<PhotoScreen> {
                       ],
                     ),
                   ),
+                  SizedBox(height: 12),
                   const Padding(
-                    padding: EdgeInsets.only(left: 16.0, top: 8.0),
+                    padding: EdgeInsets.only(right: 0.0),
                     child: Text.rich(
                       TextSpan(
                         text: "We match daters using 3 broad gender groups.",
@@ -108,7 +109,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 28),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
