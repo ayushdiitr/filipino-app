@@ -1,27 +1,33 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:testapp/src/ui/screens/splash/emailScreen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:testapp/src/ui/screens/splash/talk_about.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PhotoScreen extends StatefulWidget {
-  const PhotoScreen({super.key});
+class PhotoScreenBody extends StatefulWidget {
+  const PhotoScreenBody({Key? key}) : super(key: key);
 
   @override
-  _PhotoScreenState createState() => _PhotoScreenState();
+  _PhotoScreenBodyState createState() => _PhotoScreenBodyState();
 }
 
-class _PhotoScreenState extends State<PhotoScreen> {
-  String? _selectedGender;
+class _PhotoScreenBodyState extends State<PhotoScreenBody> {
+  List<File?> images = List.generate(6, (index) => null);
 
-  // This method is used to handle the gender selection.
-  void _selectGender(String gender) {
-    setState(() {
-      _selectedGender = gender;
-    });
+  final ImagePicker _picker = ImagePicker();
+
+  // Function to pick an image
+  Future<void> _pickImage(int index) async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        images[index] = File(pickedFile.path);
+      });
+    }
   }
-
-  // This method selects the photo.
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +37,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
         children: [
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 100.0), // Extra space to avoid overlapping
+              padding: const EdgeInsets.only(bottom: 100.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -66,8 +71,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
                           ),
                           visualDensity:
                               VisualDensity(horizontal: -4.0, vertical: -4.0),
-                          backgroundColor:
-                              Colors.white, // White background color
+                          backgroundColor: Colors.white,
                           labelStyle: TextStyle(
                             color: Color.fromRGBO(0, 0, 0, 1),
                           ),
@@ -75,7 +79,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
                         const SizedBox(height: 12),
                         Text.rich(
                           TextSpan(
-                            text: 'Its always boys ways ', // Default text style
+                            text: 'Its always boys ways ',
                             style: const TextStyle(
                               fontFamily: 'NoirPro',
                               fontWeight: FontWeight.w500,
@@ -97,12 +101,13 @@ class _PhotoScreenState extends State<PhotoScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text.rich(
                       TextSpan(
-                        text: "Choose your height to help us find matches that meet your preferences.",
+                        text:
+                            "Choose your height to help us find matches that meet your preferences.",
                         style: TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w300,
@@ -111,7 +116,47 @@ class _PhotoScreenState extends State<PhotoScreen> {
                     ),
                   ),
                   const SizedBox(height: 28),
-                  
+                  // Fixed Height Grid Section
+                  SizedBox(
+                    height: 250, // Set a fixed height for the grid
+                    child: GridView.builder(
+                      itemCount: 6, // Total 6 tiles
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3, // 3 columns
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            _pickImage(index);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: images[index] != null
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.file(
+                                      images[index]!,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                : const Center(
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 40,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -132,19 +177,15 @@ class _PhotoScreenState extends State<PhotoScreen> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Camera Icon
                         const Icon(
                           Icons.camera_alt,
                           size: 40.0,
                           color: Colors.black,
                         ),
-                        const SizedBox(
-                            width: 8), // Spacing between icon and text
-                        // Text Column for "Face for Face" and "Checkout photo guidelines"
+                        const SizedBox(width: 8),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Main Title: Face for Face
                             Text(
                               'Face for Face',
                               style: GoogleFonts.inter(
@@ -153,7 +194,6 @@ class _PhotoScreenState extends State<PhotoScreen> {
                                 color: Colors.black,
                               ),
                             ),
-                            // Subtext: Checkout photo guidelines
                             GestureDetector(
                               onTap: () {
                                 // Add action for clicking the guidelines text
@@ -172,8 +212,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                        height: 16), // Add spacing between the components
+                    const SizedBox(height: 16),
 
                     // Next button
                     ElevatedButton(

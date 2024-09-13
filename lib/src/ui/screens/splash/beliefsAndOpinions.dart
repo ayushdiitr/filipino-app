@@ -153,7 +153,7 @@ class _BeliefsandopinionsState extends State<Beliefsandopinions> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const PhotoScreen(),
+                            builder: (context) => const PhotoScreenBody(),
                           ),
                         );
                       },
