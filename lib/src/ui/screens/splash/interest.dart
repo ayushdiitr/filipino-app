@@ -114,7 +114,7 @@ class _InterestSelectionScreenState extends State<InterestSelectionScreen> {
                     color: Color(0xFF3F4A61),
                   ),
                 ),
-                // const SizedBox(height: 16),
+                const SizedBox(height: 16),
                 // Interest categories
                 Expanded(
                   child: ListView(

@@ -156,8 +156,7 @@ class _MeetInfoState extends State<Meetscreen> {
                           child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 6.0),
                             padding: const EdgeInsets.all(16.0),
-                            width: double
-                                .infinity, // Make each container take full width
+                            width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
@@ -166,19 +165,49 @@ class _MeetInfoState extends State<Meetscreen> {
                               ),
                               color: isSelected ? Colors.black : Colors.white,
                             ),
-                            child: Text(
-                              key,
-                              style: TextStyle(
-                                fontFamily: 'NoirPro',
-                                color: isSelected ? Colors.white : Colors.grey,
-                                fontSize: 16.0,
-                              ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  key,
+                                  style: TextStyle(
+                                    fontFamily: 'NoirPro',
+                                    color:
+                                        isSelected ? Colors.white : Colors.grey,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                if (isSelected)
+                                  Transform.scale(
+                                    scale:
+                                        0.6, // Reduce the scale of the checkbox to make it smaller
+                                    child: Container(
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape
+                                            .circle, // Ensure it's circular
+                                        color: Colors
+                                            .white, // White background for the circle
+                                      ),
+                                      child: Checkbox(
+                                        value: isSelected,
+                                        onChanged: (value) =>
+                                            _toggleSelection(key),
+                                        activeColor: Colors
+                                            .transparent, // Remove default color
+                                        checkColor: Colors
+                                            .black, // Black checkmark color
+                                        shape:
+                                            const CircleBorder(), // Circular shape for the checkbox
+                                      ),
+                                    ),
+                                  ),
+                              ],
                             ),
                           ),
                         );
                       }).toList(),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

@@ -13,66 +13,95 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
   String selectedDrinkingOption = '';
   String selectedSmokingOption = '';
 
+  List<String> interests = [
+    'Always',
+    'Sometimes',
+    'Rarely',
+    'Never',
+    'I am sober',
+  ];
+  List<String> selectedInterests = [];
+
+  void toggleInterest(String interest) {
+    setState(() {
+      if (selectedInterests.contains(interest)) {
+        selectedInterests.remove(interest);
+      } else if (selectedInterests.isEmpty) {
+        selectedInterests.add(interest);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Slider at the top
+                const SizedBox(height: 24),
                 const Padding(
-                  padding: EdgeInsets.only(top: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 10),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 0.0),
-                        child: Center(
-                          child: LinearProgressIndicator(
-                            value: 0.7,
+                  padding:
+                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
+                  child: Center(
+                    child: LinearProgressIndicator(
+                      value: 0.7,
+                      color: Colors.black,
+                      backgroundColor: Color(0xFFEEEEEE),
+                    ),
+                  ),
+                ),
+                const InputChip(
+                  label: Text(
+                    'LIFESTYLE',
+                    style: TextStyle(
+                      fontFamily: 'NoirPro',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 10,
+                      letterSpacing: 0.8,
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                    ),
+                  ),
+                  visualDensity:
+                      VisualDensity(horizontal: -4.0, vertical: -4.0),
+                  backgroundColor: Colors.white, // White background color
+                  labelStyle: TextStyle(
+                    color: Color.fromRGBO(0, 0, 0, 1),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 16.0),
+                  child: Text.rich(
+                    TextSpan(
+                      text: "Let's talk about your ",
+                      style: TextStyle(
+                        fontFamily: 'NoirPro',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 28,
+                        letterSpacing: 0.02,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Lifestyle and habits',
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontFamily: 'Baskerville',
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.italic,
                             color: Colors.black,
-                            backgroundColor: Color(0xFFEEEEEE),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-
-                const SizedBox(height: 32),
-
-                // Text "Let's talk about your"
-                const Text(
-                  "Let's talk about your",
-                  style: TextStyle(
-                    fontFamily: 'NoirPro',
-                    fontSize: 28,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 0.02,
-                    color: Colors.black,
-                  ),
-                ),
-
-                // Text "Lifestyle and habits"
-                Text(
-                  "Lifestyle and habits",
-                  style: GoogleFonts.libreBaskerville(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w600,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.black,
-                  ),
-                ),
-
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
 
                 // Description Text
-                Text(
+                const Text(
                   "Choose your preferences to help us find matches that meet your lifestyle.",
                   style: TextStyle(
                     fontFamily: 'NoirPro',
@@ -83,102 +112,26 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 16),
+                const SizedBox(height: 24),
 
                 // Drinking options
-                Text(
-                  "Drinking",
-                  style: GoogleFonts.libreBaskerville(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.black,
+                Expanded(
+                  child: ListView(
+                    children: [
+                      InterestCategory(
+                        title: 'Drinking',
+                        interests: interests,
+                        selectedInterests: selectedInterests,
+                        onInterestToggle: toggleInterest,
+                      ),
+                      InterestCategory(
+                        title: 'Smoking',
+                        interests: interests,
+                        selectedInterests: selectedInterests,
+                        onInterestToggle: toggleInterest,
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 16),
-
-                // Drinking options as selectable boxes
-                Wrap(
-                  spacing: 12.0, // Horizontal gap between options
-                  runSpacing: 12.0, // Vertical gap between options
-                  children: [
-                    _buildSelectableOption("Always", selectedDrinkingOption,
-                        (val) {
-                      setState(() {
-                        selectedDrinkingOption = val;
-                      });
-                    }),
-                    _buildSelectableOption("Sometimes", selectedDrinkingOption,
-                        (val) {
-                      setState(() {
-                        selectedDrinkingOption = val;
-                      });
-                    }),
-                    _buildSelectableOption("Rarely", selectedDrinkingOption,
-                        (val) {
-                      setState(() {
-                        selectedDrinkingOption = val;
-                      });
-                    }),
-                    _buildSelectableOption("Never", selectedDrinkingOption,
-                        (val) {
-                      setState(() {
-                        selectedDrinkingOption = val;
-                      });
-                    }),
-                    _buildSelectableOption("I am sober", selectedDrinkingOption,
-                        (val) {
-                      setState(() {
-                        selectedDrinkingOption = val;
-                      });
-                    }),
-                  ],
-                ),
-
-                const SizedBox(height: 32),
-
-                // Smoking options
-                Text(
-                  "Smoke",
-                  style: GoogleFonts.libreBaskerville(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.black,
-                  ),
-                ),
-                const SizedBox(height: 16),
-
-                // Smoking options as selectable boxes
-                Wrap(
-                  spacing: 12.0, // Horizontal gap between options
-                  runSpacing: 12.0, // Vertical gap between options
-                  children: [
-                    _buildSelectableOption("Sometimes ", selectedSmokingOption,
-                        (val) {
-                      setState(() {
-                        selectedSmokingOption = val;
-                      });
-                    }),
-                    _buildSelectableOption("Always", selectedSmokingOption,
-                        (val) {
-                      setState(() {
-                        selectedSmokingOption = val;
-                      });
-                    }),
-                    _buildSelectableOption("Never", selectedSmokingOption,
-                        (val) {
-                      setState(() {
-                        selectedSmokingOption = val;
-                      });
-                    }),
-                    _buildSelectableOption(
-                        "Trying to quit", selectedSmokingOption, (val) {
-                      setState(() {
-                        selectedSmokingOption = val;
-                      });
-                    }),
-                  ],
                 ),
               ],
             ),
@@ -192,7 +145,7 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   FractionallySizedBox(
-                    widthFactor: 0.9,
+                    widthFactor: 1,
                     child: ElevatedButton(
                       onPressed: () {
                         // Navigate to the next screen
@@ -204,7 +157,8 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF1F1F1F), // Primary-700 color
+                        backgroundColor:
+                            const Color(0xFF1F1F1F), // Primary-700 color
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 20),
@@ -224,7 +178,7 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
                   ),
                   // const SizedBox(height: 10),
                   FractionallySizedBox(
-                    widthFactor: 0.9,
+                    widthFactor: 1,
                     child: TextButton(
                       onPressed: () {
                         // Skip to the next screen
@@ -260,35 +214,67 @@ class _DrinkAndSmokeScreenState extends State<DrinkAndSmokeScreen> {
       ),
     );
   }
+}
 
-  Widget _buildSelectableOption(
-      String option, String selectedOption, Function(String) onSelect) {
-    return GestureDetector(
-      onTap: () => onSelect(option),
-      child: IntrinsicWidth(
-        // This will adjust the width automatically based on the content
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: selectedOption == option ? Colors.black : Colors.grey,
-            ),
-            color: selectedOption == option ? Colors.black : Colors.white,
-          ),
-          child: Center(
-            child: Text(
-              option,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: selectedOption == option ? Colors.white : Colors.black,
-                fontFamily: 'NoirPro',
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+class InterestCategory extends StatelessWidget {
+  final String title;
+  final List<String> interests;
+  final List<String> selectedInterests;
+  final Function(String) onInterestToggle;
+
+  const InterestCategory({
+    super.key,
+    required this.title,
+    required this.interests,
+    required this.selectedInterests,
+    required this.onInterestToggle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 24,
+            fontFamily: 'Baskerville',
+            fontWeight: FontWeight.w700,
+            fontStyle: FontStyle.italic,
+            color: Colors.black,
           ),
         ),
-      ),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: interests.map((interest) {
+            final isSelected = selectedInterests.contains(interest);
+            return GestureDetector(
+              onTap: () => onInterestToggle(interest),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                decoration: BoxDecoration(
+                  color: isSelected ? Colors.black : Colors.white,
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: Text(
+                  interest,
+                  style: TextStyle(
+                    color: isSelected ? Colors.white : Colors.black,
+                    fontFamily: 'NoirPro',
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+        const SizedBox(height: 16),
+      ],
     );
   }
 }

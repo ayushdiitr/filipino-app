@@ -179,6 +179,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
                           )),
                       initialCountryCode: 'IN',
                       showCountryFlag: false, // Removes the flag
+                      flagsButtonPadding: const EdgeInsets.only(left: 12.0),
                       dropdownIconPosition: IconPosition
                           .trailing, // Places the arrow after the field
                       onCountryChanged: (country) {
