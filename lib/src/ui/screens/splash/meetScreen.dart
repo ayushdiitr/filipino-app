@@ -129,7 +129,7 @@ class _MeetInfoState extends State<Meetscreen> {
                         ),
                         SizedBox(height: 12),
                         Padding(
-                          padding: EdgeInsets.only(right: 16.0),
+                          padding: EdgeInsets.only(right: 0.0),
                           child: Text.rich(
                             TextSpan(
                               text:
@@ -154,7 +154,7 @@ class _MeetInfoState extends State<Meetscreen> {
                         return GestureDetector(
                           onTap: () => _toggleSelection(key),
                           child: Container(
-                            margin: const EdgeInsets.symmetric(vertical: 8.0),
+                            margin: const EdgeInsets.symmetric(vertical: 6.0),
                             padding: const EdgeInsets.all(16.0),
                             width: double
                                 .infinity, // Make each container take full width

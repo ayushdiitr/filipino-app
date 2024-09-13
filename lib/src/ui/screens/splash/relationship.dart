@@ -138,7 +138,7 @@ class _RelationshipState extends State<Relationship> {
                         ),
                         SizedBox(height: 12),
                         Padding(
-                          padding: EdgeInsets.only(right: 16.0),
+                          padding: EdgeInsets.only(right: 0.0),
                           child: Text.rich(
                             TextSpan(
                               text:
@@ -162,7 +162,7 @@ class _RelationshipState extends State<Relationship> {
                         return GestureDetector(
                           onTap: () => _toggleSelection(key),
                           child: Container(
-                            margin: const EdgeInsets.symmetric(vertical: 8.0),
+                            margin: const EdgeInsets.symmetric(vertical: 6.0),
                             padding: const EdgeInsets.symmetric(
                                 vertical: 16.0, horizontal: 16.0),
                             width: double

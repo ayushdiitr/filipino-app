@@ -93,9 +93,8 @@ class _GenderInfoState extends State<Genderscreen> {
                             color: Color.fromRGBO(0, 0, 0, 1),
                           ),
                         ),
-                        const SizedBox(height: 12),
                         const Padding(
-                          padding: const EdgeInsets.only(top: 16.0),
+                          padding: EdgeInsets.only(top: 16.0),
                           child: Text.rich(
                             TextSpan(
                               text: 'Select your ', // Default text style
@@ -130,7 +129,7 @@ class _GenderInfoState extends State<Genderscreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 24),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: ['Male', 'Female', 'Non Binary']
@@ -140,7 +139,7 @@ class _GenderInfoState extends State<Genderscreen> {
                               onTap: () => _selectGender(gender),
                               child: Container(
                                 margin:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                    const EdgeInsets.symmetric(vertical: 6.0),
                                 padding: const EdgeInsets.all(16.0),
                                 width: double
                                     .infinity, // Make each container take full width

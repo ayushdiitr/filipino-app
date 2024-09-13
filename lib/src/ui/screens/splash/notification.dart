@@ -32,6 +32,7 @@ class _NotificationState extends State<NotificationScreen> {
     if (status.isPermanentlyDenied) {
       // Handle if permission is permanently denied
       print('Notification permissions are permanently denied.');
+      _navigateToNextScreen();
     } else if (status.isGranted) {
       // Navigate to next screen when permission is granted
       _navigateToNextScreen();
@@ -59,9 +60,9 @@ class _NotificationState extends State<NotificationScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 60),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(16, 16, 0, 0),
                     child: Container(
                       width: 64,
                       height: 64,
@@ -80,10 +81,11 @@ class _NotificationState extends State<NotificationScreen> {
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(left: 16.0, top: 16.0),
+                    padding:
+                        EdgeInsets.only(left: 16.0, top: 20.0, right: 16.0),
                     child: Text.rich(
                       TextSpan(
-                        text: 'Allow ',
+                        text: 'Allow ', // Default text style
                         style: TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w500,
@@ -100,27 +102,22 @@ class _NotificationState extends State<NotificationScreen> {
                               color: Colors.black,
                             ),
                           ),
+                          TextSpan(
+                            text:
+                                "and we'll keep you updated throughout your journey.", // Default text style
+                            style: TextStyle(
+                              fontFamily: 'NoirPro',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 28,
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(left: 16.0, top: 0),
-                    child: Text.rich(
-                      TextSpan(
-                        text:
-                            "and we'll keep you updated throughout your journey.",
-                        style: TextStyle(
-                          fontFamily: 'NoirPro',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 28,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
                     child: Text(
                       "Enable notifications to get the latest updates on matches, messages, and app features. Never miss out on exciting opportunities!",
                       style: TextStyle(

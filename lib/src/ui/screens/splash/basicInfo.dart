@@ -110,7 +110,7 @@ class _BasicInfoState extends State<BasicInfo> {
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(left: 16.0, top: 16.0),
+                    padding: EdgeInsets.only(left: 16.0, top: 32.0),
                     child: Text.rich(
                       TextSpan(
                         text: 'Enter your ',
@@ -134,9 +134,9 @@ class _BasicInfoState extends State<BasicInfo> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 16),
                   const Padding(
-                    padding: EdgeInsets.only(left: 16.0),
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text.rich(
                       TextSpan(
                         text:
@@ -148,7 +148,7 @@ class _BasicInfoState extends State<BasicInfo> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 24),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
@@ -156,10 +156,16 @@ class _BasicInfoState extends State<BasicInfo> {
                         TextField(
                           cursorColor: Colors.black,
                           controller: firstNameController,
-                          style: const TextStyle(color: Colors.black),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NoirPro',
+                          ),
                           decoration: const InputDecoration(
                             labelText: 'First Name',
-                            labelStyle: TextStyle(color: Colors.grey),
+                            labelStyle: TextStyle(
+                              color: Colors.grey,
+                              fontFamily: 'NoirPro',
+                            ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.grey),
                             ),
@@ -175,10 +181,16 @@ class _BasicInfoState extends State<BasicInfo> {
                         TextField(
                           cursorColor: Colors.black,
                           controller: lastNameController,
-                          style: const TextStyle(color: Colors.black),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NoirPro',
+                          ),
                           decoration: const InputDecoration(
                             labelText: 'Last Name (Optional)',
-                            labelStyle: TextStyle(color: Colors.grey),
+                            labelStyle: TextStyle(
+                              color: Colors.grey,
+                              fontFamily: 'NoirPro',
+                            ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.grey),
                             ),
@@ -194,10 +206,16 @@ class _BasicInfoState extends State<BasicInfo> {
                         TextField(
                           cursorColor: Colors.black,
                           controller: occupationController,
-                          style: const TextStyle(color: Colors.black),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NoirPro',
+                          ),
                           decoration: const InputDecoration(
                             labelText: 'Occupation (Optional)',
-                            labelStyle: TextStyle(color: Colors.grey),
+                            labelStyle: TextStyle(
+                              color: Colors.grey,
+                              fontFamily: 'NoirPro',
+                            ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.grey),
                             ),
@@ -237,6 +255,7 @@ class _BasicInfoState extends State<BasicInfo> {
                                       color: selectedDate != null
                                           ? Colors.black
                                           : Colors.grey,
+                                      fontFamily: 'NoirPro',
                                       fontSize: 16.0,
                                     ),
                                   ),

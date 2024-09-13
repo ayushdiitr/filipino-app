@@ -95,7 +95,7 @@ class _EmailInfoState extends State<Emailscreen> {
                           backgroundColor:
                               Colors.white, // White background color
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 16),
                         const Text.rich(
                           TextSpan(
                             text: 'Enter your ', // Default text style
@@ -146,8 +146,9 @@ class _EmailInfoState extends State<Emailscreen> {
                           decoration: const InputDecoration(
                             labelText: 'Enter email address',
                             labelStyle: TextStyle(
-                                color: Colors
-                                    .grey), // Label color when not focused
+                              color: Colors.grey,
+                              fontFamily: 'NoirPro',
+                            ),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.grey),
                             ),

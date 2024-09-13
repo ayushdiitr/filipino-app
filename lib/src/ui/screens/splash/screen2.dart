@@ -99,7 +99,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 24.0,
+                      top: 32.0,
                       left: 16.0,
                       right: 16.0,
                     ),
@@ -107,7 +107,7 @@ class _PhoneLoginState extends State<PhoneLogin> {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Container(
+                      child: SizedBox(
                         height: 32,
                         child: Image.asset("images/backicon.png"),
                       ),

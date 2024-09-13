@@ -206,7 +206,7 @@ class _OtpscreenState extends State<Otpscreen> {
                   const SizedBox(height: 40),
                   const Padding(
                     padding:
-                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
                     child: Center(
                       child: LinearProgressIndicator(
                         value: 0.4,
@@ -215,8 +215,21 @@ class _OtpscreenState extends State<Otpscreen> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 32.0, left: 16.0, right: 16.0),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: SizedBox(
+                        height: 32,
+                        child: Image.asset("images/backicon.png"),
+                      ),
+                    ),
+                  ),
                   const Padding(
-                    padding: EdgeInsets.only(left: 16.0, top: 16.0),
+                    padding: EdgeInsets.only(left: 16.0, top: 24.0, right: 16),
                     child: Text.rich(
                       TextSpan(
                         text: 'Enter your ', // Default text style
@@ -242,10 +255,9 @@ class _OtpscreenState extends State<Otpscreen> {
                   ),
                   Row(
                     children: [
-                      const SizedBox(height: 16),
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8.0),
+                            horizontal: 16.0, vertical: 16.0),
                         child: Row(
                           children: [
                             const Text(
@@ -352,6 +364,11 @@ class _OtpscreenState extends State<Otpscreen> {
                         _remainingTime == 0
                             ? TextButton(
                                 onPressed: _showTimeUpDialog,
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.zero,
+                                  backgroundColor: Colors.transparent,
+                                  minimumSize: Size.zero,
+                                ),
                                 child: const Text(
                                   'Resend code',
                                   style: TextStyle(

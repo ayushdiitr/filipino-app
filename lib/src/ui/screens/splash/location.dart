@@ -81,9 +81,9 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 60),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(16, 16, 0, 0),
                     child: Container(
                       width: 64,
                       height: 64,
@@ -101,10 +101,10 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(left: 16.0, top: 32.0),
+                    padding: EdgeInsets.only(left: 16.0, top: 20.0, right: 16),
                     child: Text.rich(
                       TextSpan(
-                        text: 'Enable ', // Changed text
+                        text: 'Enable ', // Default text style
                         style: TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w500,
@@ -121,26 +121,22 @@ class _EnableLocationScreenState extends State<EnableLocationScreen> {
                               color: Colors.black,
                             ),
                           ),
+                          TextSpan(
+                            text:
+                                ' services to fully personalize your experience', // Default text style
+                            style: TextStyle(
+                              fontFamily: 'NoirPro',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 28,
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(left: 16.0, top: 0),
-                    child: Text.rich(
-                      TextSpan(
-                        text: 'services to fully personalize your experience',
-                        style: TextStyle(
-                          fontFamily: 'NoirPro',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 28,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
                     child: Text(
                       "Allowing location access helps us tailor matches and recommendations just for you.",
                       style: TextStyle(
