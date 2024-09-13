@@ -74,7 +74,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
                         const SizedBox(height: 12),
                         Text.rich(
                           TextSpan(
-                            text: 'Show your ', // Default text style
+                            text: 'Its always boys ways ', // Default text style
                             style: const TextStyle(
                               fontFamily: 'NoirPro',
                               fontWeight: FontWeight.w500,
@@ -82,7 +82,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
                             ),
                             children: <TextSpan>[
                               TextSpan(
-                                text: 'face',
+                                text: 'show Face to see Face',
                                 style: GoogleFonts.libreBaskerville(
                                   fontSize: 28,
                                   fontWeight: FontWeight.w600,
@@ -98,10 +98,10 @@ class _PhotoScreenState extends State<PhotoScreen> {
                   ),
                   SizedBox(height: 12),
                   const Padding(
-                    padding: EdgeInsets.only(right: 0.0),
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text.rich(
                       TextSpan(
-                        text: "We match daters using 3 broad gender groups.",
+                        text: "Choose your height to help us find matches that meet your preferences.",
                         style: TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w300,
@@ -110,40 +110,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
                     ),
                   ),
                   const SizedBox(height: 28),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:
-                          ['Male', 'Female', 'Non Binary'].map((String gender) {
-                        bool isSelected = _selectedGender == gender;
-                        return GestureDetector(
-                          onTap: () => _selectGender(gender),
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(vertical: 8.0),
-                            padding: const EdgeInsets.all(16.0),
-                            width: double
-                                .infinity, // Make each container take full width
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              border: Border.all(
-                                color: isSelected ? Colors.black : Colors.grey,
-                                width: 2.0,
-                              ),
-                              color: isSelected ? Colors.black12 : Colors.white,
-                            ),
-                            child: Text(
-                              gender,
-                              style: TextStyle(
-                                color: isSelected ? Colors.black : Colors.grey,
-                                fontSize: 16.0,
-                              ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
+                  
                 ],
               ),
             ),
@@ -156,7 +123,7 @@ class _PhotoScreenState extends State<PhotoScreen> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: FractionallySizedBox(
-                widthFactor: 0.9,
+                widthFactor: 1.0,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
