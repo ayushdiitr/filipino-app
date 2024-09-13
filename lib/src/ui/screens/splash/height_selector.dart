@@ -284,7 +284,15 @@ class _HeightState extends State<HeightSelector> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('Submit'),
+                      Text(
+                        'Submit',
+                        style: TextStyle(
+                          fontFamily: 'NoirPro',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0.04,
+                        ),
+                      ),
                     ],
                   ),
                 ),

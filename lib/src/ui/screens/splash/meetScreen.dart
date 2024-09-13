@@ -243,7 +243,15 @@ class _MeetInfoState extends State<Meetscreen> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('Next'),
+                      Text(
+                        'Next',
+                        style: TextStyle(
+                          fontFamily: 'NoirPro',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0.04,
+                        ),
+                      ),
                     ],
                   ),
                 ),

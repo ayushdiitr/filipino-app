@@ -17,13 +17,15 @@ class _TalkAboutScreenState extends State<TalkAboutScreen> {
         children: [
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 120.0), // Adjusted bottom padding
+              padding: const EdgeInsets.only(
+                  bottom: 100.0), // Adjusted bottom padding
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 40),
                   const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
                     child: Center(
                       child: LinearProgressIndicator(
                         value: 1.0,
@@ -33,31 +35,55 @@ class _TalkAboutScreenState extends State<TalkAboutScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 32.0),
-                    child: Text.rich(
-                      TextSpan(
-                        text: 'Give them Something to your ',
-                        style: const TextStyle(
-                          fontFamily: 'NoirPro',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 28,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: 'Talk about ',
-                            style: GoogleFonts.libreBaskerville(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.italic,
-                              color: Colors.black,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const InputChip(
+                          label: Text(
+                            'INITIATE TALK',
+                            style: TextStyle(
+                              fontFamily: 'NoirPro',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 10,
+                              letterSpacing: 0.8,
+                              color: Color.fromRGBO(0, 0, 0, 1),
                             ),
                           ),
-                        ],
-                      ),
+                          visualDensity:
+                              VisualDensity(horizontal: -4.0, vertical: -4.0),
+                          backgroundColor:
+                              Colors.white, // White background color
+                        ),
+                        const SizedBox(height: 12),
+                        Text.rich(
+                          TextSpan(
+                            text: 'Give them Something to your ',
+                            style: const TextStyle(
+                              fontFamily: 'NoirPro',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 28,
+                            ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'Talk about ',
+                                style: GoogleFonts.libreBaskerville(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  const SizedBox(height: 12),
                   const Padding(
-                    padding: EdgeInsets.only(left: 16.0, top: 16.0),
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(
                       "Choose your height to help us find matches that meet your preferences.",
                       style: TextStyle(
@@ -66,12 +92,12 @@ class _TalkAboutScreenState extends State<TalkAboutScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 28),
                   // Prompt boxes
                   _buildPromptBox('First Prompt'),
-                  const SizedBox(height: 10), // Space between boxes
+                  const SizedBox(height: 12), // Space between boxes
                   _buildPromptBox('Second Prompt'),
-                  const SizedBox(height: 10), // Space between boxes
+                  const SizedBox(height: 12), // Space between boxes
                   _buildPromptBox('Third Prompt'),
                 ],
               ),
@@ -80,20 +106,23 @@ class _TalkAboutScreenState extends State<TalkAboutScreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   FractionallySizedBox(
-                    widthFactor: 0.9,
+                    widthFactor: 1,
                     child: ElevatedButton(
                       onPressed: () {
                         // Handle next action
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF1F1F1F), // Primary-700 color
+                        backgroundColor:
+                            const Color(0xFF1F1F1F), // Primary-700 color
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
                         textStyle: const TextStyle(
                           fontFamily: 'NoirPro',
                           fontSize: 14,
@@ -110,13 +139,14 @@ class _TalkAboutScreenState extends State<TalkAboutScreen> {
                   ),
                   const SizedBox(height: 10), // Space between buttons
                   FractionallySizedBox(
-                    widthFactor: 0.9,
+                    widthFactor: 1,
                     child: TextButton(
                       onPressed: () {
                         // Handle skip action
                       },
                       style: TextButton.styleFrom(
-                        foregroundColor: const Color(0xFF1F1F1F), // Primary-700 color
+                        foregroundColor:
+                            const Color(0xFF1F1F1F), // Primary-700 color
                         textStyle: const TextStyle(
                           fontFamily: 'NoirPro',
                           fontSize: 14,
@@ -140,9 +170,9 @@ class _TalkAboutScreenState extends State<TalkAboutScreen> {
   // Function to build the Prompt Box with text and select button
   Widget _buildPromptBox(String promptText) {
     return Container(
-      margin: const EdgeInsets.only(left: 20),
-      
-      width: 358, // Fixed width
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+
+      // width: 358, // Fixed width
       height: 56, // Fixed height
       //margin: const EdgeInsets.symmetric(vertical: 20),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

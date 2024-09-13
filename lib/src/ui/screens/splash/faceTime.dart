@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/src/ui/screens/splash/emailScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testapp/src/ui/screens/splash/talk_about.dart';
 
 class PhotoScreen extends StatefulWidget {
   const PhotoScreen({super.key});
@@ -208,7 +209,15 @@ class _PhotoScreenState extends State<PhotoScreen> {
 
                     // Next button
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Handle next action
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TalkAboutScreen(),
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.white,
@@ -227,7 +236,15 @@ class _PhotoScreenState extends State<PhotoScreen> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Next'),
+                          Text(
+                            'Next',
+                            style: TextStyle(
+                              fontFamily: 'NoirPro',
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: 0.04,
+                            ),
+                          ),
                         ],
                       ),
                     ),
