@@ -29,14 +29,37 @@ class SquareImageWithButton extends StatelessWidget {
           Positioned(
             bottom: 8,
             right: 8,
-            child: IconButton(
-              onPressed: () {
-                // TODO :
-              },
-              icon: Icon(Icons.favorite, color: Colors.white),
-              color: Colors.red, // You can adjust the icon's color here
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                  vertical: 5, horizontal: 10), // Padding around the IconButton
+              decoration: BoxDecoration(
+                color: Colors.white, // Background color for the button
+                border: Border.symmetric(
+                  vertical: BorderSide(
+                    color: Colors.white, // Border color
+                    width: 1, // Border width
+                  ),
+                  horizontal: BorderSide(
+                    color: Colors.white, // Border color
+                    width: 1, // Border width
+                  ),
+                ),
+                borderRadius: BorderRadius.circular(21), // Rounded corners
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: SizedBox(
+                    height: 16,
+                    child: Image.asset("images/chat_bubble.png"),
+                  ),
+                ),
+              ),
             ),
-          ),
+          )
         ],
       ),
     );

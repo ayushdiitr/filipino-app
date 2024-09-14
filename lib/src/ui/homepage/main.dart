@@ -26,13 +26,28 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Profile'),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            
-           HomeScreen(),
-          ],
+      body: SingleChildScrollView(
+        child: const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              HomeScreen(),
+              SquareImageWithButton(
+                  imgUrl:
+                      "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+              PromptTextScreen(
+                promptTitle: 'LANGUAGES I KNOW',
+                hasButton: true,
+                // promptDesc:
+                //     'Lorem ipsum dolor sit amet consectetur. Vulputate molestie eget eget tellus ipsum adipiscing et congue vulputate.',
+              ),
+              PromptTextScreen(
+                promptTitle: 'Prompt 1',
+                promptDesc:
+                    'Lorem ipsum dolor sit amet consectetur. Vulputate molestie eget eget tellus ipsum adipiscing et congue vulputate.',
+              ),
+            ],
+          ),
         ),
       ),
     );
