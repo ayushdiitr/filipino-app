@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/src/ui/screens/splash/basicInfo.dart';
-import 'package:testapp/src/ui/screens/splash/beliefsAndOpinions.dart';
-import 'package:testapp/src/ui/screens/splash/emailScreen.dart';
-import 'package:testapp/src/ui/screens/splash/faceTime.dart';
-import 'package:testapp/src/ui/screens/splash/interest.dart';
-import 'package:testapp/src/ui/screens/splash/main.dart';
-import 'package:testapp/src/ui/screens/splash/lifestyle.dart';
+import 'package:testapp/src/ui/homepage/main.dart';
+import 'package:testapp/src/ui/splash/basicInfo.dart';
+import 'package:testapp/src/ui/splash/beliefsAndOpinions.dart';
+import 'package:testapp/src/ui/splash/emailScreen.dart';
+import 'package:testapp/src/ui/splash/faceTime.dart';
+import 'package:testapp/src/ui/splash/interest.dart';
+import 'package:testapp/src/ui/splash/main.dart';
+import 'package:testapp/src/ui/splash/lifestyle.dart';
 //import 'package:testapp/src/ui/screens/splash/talk_about.dart';
-import 'package:testapp/src/ui/screens/splash/location.dart';
-import 'package:testapp/src/ui/screens/splash/meetScreen.dart';
-import 'package:testapp/src/ui/screens/splash/notification.dart';
-import 'package:testapp/src/ui/screens/splash/screen2.dart';
-import 'package:testapp/src/ui/screens/splash/otpscreen.dart';
-import 'package:testapp/src/ui/screens/splash/height_selector.dart';
-//import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
+import 'package:testapp/src/ui/splash/location.dart';
+import 'package:testapp/src/ui/splash/meetScreen.dart';
+import 'package:testapp/src/ui/splash/notification.dart';
+import 'package:testapp/src/ui/splash/screen2.dart';
+import 'package:testapp/src/ui/splash/otpscreen.dart';
+import 'package:testapp/src/ui/splash/height_selector.dart';
+import 'package:testapp/src/ui/splash/genderScreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: PhoneLogin(),
+      home: PhotoScreenBody(),
     );
   }
 }
@@ -91,22 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(

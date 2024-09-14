@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:testapp/src/ui/screens/splash/meetScreen.dart';
+import 'package:testapp/src/ui/splash/meetScreen.dart';
 
 class Emailscreen extends StatefulWidget {
   const Emailscreen({super.key});

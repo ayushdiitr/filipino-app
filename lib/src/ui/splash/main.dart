@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:testapp/src/ui/screens/splash/screen2.dart';
+import 'package:testapp/src/ui/splash/screen2.dart';
 //import 'package:sign_in_button/sign_in_button.dart';
 //import 'package:testapp/src/ui/screens/splash/screen2.dart';
 //import 'package:testapp/src/ui/screens/splash/interest.dart';

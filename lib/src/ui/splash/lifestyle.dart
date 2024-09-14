@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:testapp/src/ui/screens/splash/beliefsAndOpinions.dart';
-import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
-import 'package:testapp/src/ui/screens/splash/main.dart';
+import 'package:testapp/src/ui/splash/beliefsAndOpinions.dart';
+import 'package:testapp/src/ui/splash/genderScreen.dart';
+import 'package:testapp/src/ui/splash/main.dart';
 
 class DrinkAndSmokeScreen extends StatefulWidget {
   @override

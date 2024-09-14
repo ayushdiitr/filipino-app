@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:testapp/src/ui/screens/splash/otpscreen.dart';
-import 'package:testapp/src/ui/screens/splash/main.dart';
+import 'package:testapp/src/ui/splash/otpscreen.dart';
 
 class PhoneLogin extends StatefulWidget {
   const PhoneLogin({super.key});

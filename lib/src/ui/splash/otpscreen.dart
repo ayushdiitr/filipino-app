@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
-import 'package:testapp/src/ui/screens/splash/basicInfo.dart';
-import 'package:testapp/src/ui/screens/splash/screen2.dart';
+import 'package:testapp/src/ui/splash/basicInfo.dart';
+import 'package:testapp/src/ui/splash/screen2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
-import 'package:testapp/src/ui/screens/splash/main.dart';
+import 'package:testapp/src/ui/splash/main.dart';
 
 class Otpscreen extends StatefulWidget {
   final String phoneNumber;
