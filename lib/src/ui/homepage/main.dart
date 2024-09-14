@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:testapp/components/post_list.dart';
 import 'package:testapp/components/profile_header.dart';
 import 'package:testapp/src/ui/splash/screen2.dart';
+import 'package:testapp/components/about_me.dart';
 //import 'package:sign_in_button/sign_in_button.dart';
 //import 'package:testapp/src/ui/screens/splash/screen2.dart';
 //import 'package:testapp/src/ui/screens/splash/interest.dart';
@@ -27,11 +28,12 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
-            ProfileHeader(
-              imageUrl: 'url_to_profile_picture',
-              name: 'John Doe',
-              bio: 'Coffee enthusiast, Traveler, Photographer',
-            ),
+            HomeScreen()
+            // ProfileHeader(
+            //   imageUrl: 'url_to_profile_picture',
+            //   name: 'John Doe',
+            //   bio: 'Coffee enthusiast, Traveler, Photographer',
+            // ),
             // Expanded(
             //   child: PostList(posts: userPosts),
             // ),

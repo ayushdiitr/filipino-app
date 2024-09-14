@@ -1,42 +1,51 @@
 import 'package:flutter/material.dart';
 
-
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0), // Add padding around the frames
-        child: Column(
+      appBar: AppBar(
+        title: const Text("Info Row"),
+      ),
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            frame3639(), // Frame 1
-            SizedBox(height: 10), // Space between frames
-            frame3639(), // Frame 2
-            SizedBox(height: 10), // Space between frames
-            frame3639(), // Frame 3
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,  // This makes the column take only the necessary space
+                children: [
+                  Icon(Icons.person),
+                  SizedBox(height: 8),  // Adds space between the icon and text
+                  Text("Gender", style: TextStyle(fontSize: 16)),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,  // This makes the column take only the necessary space
+                children: [
+                  Icon(Icons.location_on),
+                  SizedBox(height: 8),  // Adds space between the icon and text
+                  Text("Location", style: TextStyle(fontSize: 16)),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,  // This makes the column take only the necessary space
+                children: [
+                  Icon(Icons.calendar_today),
+                  SizedBox(height: 8),  // Adds space between the icon and text
+                  Text("Age", style: TextStyle(fontSize: 16)),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-
-  Widget frame3639() {
-    return Container(
-      width: double.infinity, // Fill width (similar to 366px)
-      height: 52, // Fixed height
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Color(0xFFEEEEEE), // Neutral-200 color
-            width: 1, // 1px border bottom
-          ),
-        ),
-      ),
-      child: Row(
-        children: [
-          // Add your inner elements here
-        ],
-      ),
-    );
-  }
 }
+
