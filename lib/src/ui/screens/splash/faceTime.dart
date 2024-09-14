@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:testapp/src/ui/screens/splash/talk_about.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 class PhotoScreenBody extends StatefulWidget {
   const PhotoScreenBody({Key? key}) : super(key: key);
@@ -22,10 +22,35 @@ class _PhotoScreenBodyState extends State<PhotoScreenBody> {
   Future<void> _pickImage(int index) async {
     final XFile? pickedFile =
         await _picker.pickImage(source: ImageSource.gallery);
+
     if (pickedFile != null) {
-      setState(() {
-        images[index] = File(pickedFile.path);
-      });
+      File? croppedFile = await ImageCropper().cropImage(
+        sourcePath: pickedFile.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9,
+        ],
+        androidUiSettings: AndroidUiSettings(
+          toolbarTitle: 'Crop Image',
+          toolbarColor: Colors.blue,
+          toolbarWidgetColor: Colors.white,
+          hideBottomControls: true,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: true, // Lock to given aspect ratio
+        ),
+        iosUiSettings: IOSUiSettings(
+          title: 'Crop Image',
+        ),
+      );
+
+      if (croppedFile != null) {
+        setState(() {
+          images[index] = croppedFile;
+        });
+      }
     }
   }
 
@@ -117,44 +142,47 @@ class _PhotoScreenBodyState extends State<PhotoScreenBody> {
                   ),
                   const SizedBox(height: 28),
                   // Fixed Height Grid Section
-                  SizedBox(
-                    height: 250, // Set a fixed height for the grid
-                    child: GridView.builder(
-                      itemCount: 6, // Total 6 tiles
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3, // 3 columns
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                      ),
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            _pickImage(index);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(8.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: SizedBox(
+                      height: 250, // Set a fixed height for the grid
+                      child: GridView.builder(
+                        itemCount: 6, // Total 6 tiles
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3, // 3 columns
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                        ),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              _pickImage(index);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: images[index] != null
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.file(
+                                        images[index]!,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : const Center(
+                                      child: Icon(
+                                        Icons.add,
+                                        size: 40,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
                             ),
-                            child: images[index] != null
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.file(
-                                      images[index]!,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : const Center(
-                                    child: Icon(
-                                      Icons.add,
-                                      size: 40,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
