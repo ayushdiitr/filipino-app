@@ -34,7 +34,7 @@ class _PhotoScreenBodyState extends State<PhotoScreenBody> {
           toolbarColor: Colors.blue,
           toolbarWidgetColor: Colors.white,
           hideBottomControls: true,
-          initAspectRatio: CropAspectRatioPreset.original,
+          initAspectRatio: CropAspectRatioPreset.square,
           lockAspectRatio: true, // Lock to given aspect ratio
         ),
         iosUiSettings: IOSUiSettings(
