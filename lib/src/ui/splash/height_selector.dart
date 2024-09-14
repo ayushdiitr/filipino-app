@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:testapp/src/ui/screens/splash/location.dart';
+import 'package:testapp/src/ui/splash/location.dart';
 
 class HeightSelector extends StatefulWidget {
   const HeightSelector({super.key});

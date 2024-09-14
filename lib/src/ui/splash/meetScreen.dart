@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:testapp/src/ui/screens/splash/relationship.dart';
+import 'package:testapp/src/ui/splash/relationship.dart';
 
 class Meetscreen extends StatefulWidget {
   const Meetscreen({super.key});

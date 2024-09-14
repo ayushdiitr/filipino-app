@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:testapp/src/ui/screens/splash/talk_about.dart';
+import 'package:testapp/src/ui/splash/talk_about.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class PhotoScreenBody extends StatefulWidget {
@@ -29,15 +29,15 @@ class _PhotoScreenBodyState extends State<PhotoScreenBody> {
         aspectRatioPresets: [
           CropAspectRatioPreset.square,
         ],
-        androidUiSettings: AndroidUiSettings(
+        androidUiSettings: const AndroidUiSettings(
           toolbarTitle: 'Crop Image',
           toolbarColor: Colors.blue,
           toolbarWidgetColor: Colors.white,
-          hideBottomControls: true,
+          hideBottomControls: false,
           initAspectRatio: CropAspectRatioPreset.square,
           lockAspectRatio: true, // Lock to given aspect ratio
         ),
-        iosUiSettings: IOSUiSettings(
+        iosUiSettings: const IOSUiSettings(
           title: 'Crop Image',
         ),
       );

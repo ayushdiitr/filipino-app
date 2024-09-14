@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
+import 'package:testapp/src/ui/splash/genderScreen.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
-import 'package:testapp/src/ui/screens/splash/main.dart';
+import 'package:testapp/src/ui/splash/main.dart';
 
 class BasicInfo extends StatefulWidget {
   final int userId;

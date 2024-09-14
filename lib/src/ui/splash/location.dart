@@ -1,41 +1,61 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:testapp/src/ui/screens/splash/interest.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:testapp/src/ui/splash/notification.dart';
+import 'package:testapp/src/ui/splash/main.dart';
 
-class NotificationScreen extends StatefulWidget {
-  const NotificationScreen({super.key});
+class EnableLocationScreen extends StatefulWidget {
+  const EnableLocationScreen({super.key});
 
   @override
-  _NotificationState createState() => _NotificationState();
+  _EnableLocationScreenState createState() => _EnableLocationScreenState();
 }
 
-class _NotificationState extends State<NotificationScreen> {
+class _EnableLocationScreenState extends State<EnableLocationScreen> {
   bool _isLocationEnabled = false;
 
   @override
   void initState() {
     super.initState();
-    _requestNotificationPermission();
+    _checkLocationStatus();
   }
 
-  // Request notification permission
-  Future<void> _requestNotificationPermission() async {
-    var status = await Permission.notification.status;
+  Future<void> _checkLocationStatus() async {
+    try {
+      bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
+      setState(() {
+        _isLocationEnabled = isLocationEnabled;
+      });
+    } catch (e) {
+      print('Error checking location status: $e');
+    }
+  }
 
-    if (status.isDenied) {
-      // Request permission if it hasn't been granted
-      status = await Permission.notification.request();
+  // Function to request permission
+  Future<void> _requestLocationPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, show a message or handle it accordingly
+        print('Location permissions are denied.');
+        return;
+      }
     }
 
-    if (status.isPermanentlyDenied) {
-      // Handle if permission is permanently denied
-      print('Notification permissions are permanently denied.');
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle accordingly
+      print('Location permissions are permanently denied.');
+      return;
+    }
+
+    // When permissions are granted, check if location service is enabled
+    if (await Geolocator.isLocationServiceEnabled()) {
       _navigateToNextScreen();
-    } else if (status.isGranted) {
-      // Navigate to next screen when permission is granted
-      _navigateToNextScreen();
+    } else {
+      // Handle the case when location services are not enabled
+      print('Location services are not enabled.');
     }
   }
 
@@ -43,8 +63,8 @@ class _NotificationState extends State<NotificationScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const InterestSelectionScreen(),
-      ),
+          builder: (context) =>
+              NotificationScreen()), // Replace with your next screen
     );
   }
 
@@ -56,7 +76,8 @@ class _NotificationState extends State<NotificationScreen> {
         children: [
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 100.0),
+              padding: const EdgeInsets.only(
+                  bottom: 100.0), // Extra space to avoid overlapping
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -71,21 +92,19 @@ class _NotificationState extends State<NotificationScreen> {
                         border: Border.all(
                           color: const Color(0xFFE1E1E1),
                         ),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(8),
-                        ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8.0)),
                       ),
                       child: Image.asset(
-                        "images/notification.png",
+                        "images/location.png",
                       ),
                     ),
                   ),
                   const Padding(
-                    padding:
-                        EdgeInsets.only(left: 16.0, top: 20.0, right: 16.0),
+                    padding: EdgeInsets.only(left: 16.0, top: 20.0, right: 16),
                     child: Text.rich(
                       TextSpan(
-                        text: 'Allow ', // Default text style
+                        text: 'Enable ', // Default text style
                         style: TextStyle(
                           fontFamily: 'NoirPro',
                           fontWeight: FontWeight.w500,
@@ -93,7 +112,7 @@ class _NotificationState extends State<NotificationScreen> {
                         ),
                         children: <TextSpan>[
                           TextSpan(
-                            text: 'notifications ',
+                            text: 'location',
                             style: TextStyle(
                               fontSize: 28,
                               fontFamily: 'Baskerville',
@@ -104,7 +123,7 @@ class _NotificationState extends State<NotificationScreen> {
                           ),
                           TextSpan(
                             text:
-                                "and we'll keep you updated throughout your journey.", // Default text style
+                                ' services to fully personalize your experience', // Default text style
                             style: TextStyle(
                               fontFamily: 'NoirPro',
                               fontWeight: FontWeight.w500,
@@ -119,7 +138,7 @@ class _NotificationState extends State<NotificationScreen> {
                     padding:
                         EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
                     child: Text(
-                      "Enable notifications to get the latest updates on matches, messages, and app features. Never miss out on exciting opportunities!",
+                      "Allowing location access helps us tailor matches and recommendations just for you.",
                       style: TextStyle(
                         fontFamily: 'NoirPro',
                         fontSize: 14,
@@ -143,7 +162,7 @@ class _NotificationState extends State<NotificationScreen> {
                     widthFactor: 1,
                     child: ElevatedButton(
                       onPressed: () async {
-                        await _requestNotificationPermission();
+                        await _requestLocationPermission();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
@@ -161,21 +180,33 @@ class _NotificationState extends State<NotificationScreen> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                      child: const Text('Allow Notifications'),
+                      child: const Text('Allow Location'),
                     ),
                   ),
+                  //const SizedBox(height: 10),
                   FractionallySizedBox(
-                    widthFactor: 0.9,
+                    widthFactor: 1,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NotificationScreen(),
+                          ),
+                        );
+                      },
                       style: TextButton.styleFrom(
                         foregroundColor: const Color(0xFF1F1F1F),
+                        //backgroundColor: const Color(0xFF1F1F1F),
+                        //backgroundColor: Colors.white,
+                        //primary: Colors.black,
                         textStyle: const TextStyle(
                           fontFamily: 'NoirPro',
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           height: 22 / 14,
                           letterSpacing: 0.04,
+                          //textAlign: TextAlign.left,
                         ),
                       ),
                       child: const Align(

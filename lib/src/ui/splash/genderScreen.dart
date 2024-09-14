@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:testapp/src/ui/screens/splash/emailScreen.dart';
+import 'package:testapp/src/ui/splash/emailScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Genderscreen extends StatefulWidget {
