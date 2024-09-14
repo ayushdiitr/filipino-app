@@ -31,7 +31,7 @@ class SquareImageWithButton extends StatelessWidget {
             right: 8,
             child: IconButton(
               onPressed: () {
-                // Handle the button press
+                // TODO :
               },
               icon: Icon(Icons.favorite, color: Colors.white),
               color: Colors.red, // You can adjust the icon's color here
