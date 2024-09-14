@@ -13,7 +13,7 @@ import 'package:testapp/src/ui/screens/splash/notification.dart';
 import 'package:testapp/src/ui/screens/splash/screen2.dart';
 import 'package:testapp/src/ui/screens/splash/otpscreen.dart';
 import 'package:testapp/src/ui/screens/splash/height_selector.dart';
-import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
+//import 'package:testapp/src/ui/screens/splash/genderScreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: PhotoScreenBody(),
+      home: PhoneLogin(),
     );
   }
 }
