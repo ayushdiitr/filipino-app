@@ -83,57 +83,41 @@ class HomeScreen extends StatelessWidget {
             "About Me",
             style: TextStyle(
               fontFamily: 'NoirPro',
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                  
-                  letterSpacing: 0.12,
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              color: Colors.black,
+              letterSpacing: 0.12,
             ),
           ),
           const SizedBox(height: 16),
           Container(
-            
-            
-            
-        
-              child: const Text(
-                "Lorem ipsum dolor sit amet consectetur. Ullamcorper massa ut placerat nunc lacinia. Tortor vel ultrices elementum magna suscipit ipsum eget vel. Enim enim tempor at viverra ut leo quis egestas. Facilisis amet mattis facilisi consectetur ultrices dolor iaculis ac.",
-                style: TextStyle(
+            child: const Text(
+              "Lorem ipsum dolor sit amet consectetur. Ullamcorper massa ut placerat nunc lacinia. Tortor vel ultrices elementum magna suscipit ipsum eget vel. Enim enim tempor at viverra ut leo quis egestas. Facilisis amet mattis facilisi consectetur ultrices dolor iaculis ac.",
+              style: TextStyle(
+                  fontFamily: 'NoirPro',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
+                  height: 1.5,
+                  color: Colors.black),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          const SizedBox(height: 32),
+          Container(
+            child: const Text(
+              'INTERESTS',
+              style: TextStyle(
                 fontFamily: 'NoirPro',
-                fontSize: 14,
-                fontWeight: FontWeight.w300,
-                height: 1.5,
-                color: Colors.black
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+                letterSpacing: 0.12,
               ),
               textAlign: TextAlign.left,
-
-              ),
-
             ),
-            const SizedBox(height: 32),
-            Container(
-              
-              child: const Text(
-                'INTERESTS',
+          ),
 
-                style: TextStyle(
-
-                  fontFamily: 'NoirPro',
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                  
-                  letterSpacing: 0.12,
-
-                ),
-                textAlign: TextAlign.left,
-                 
-
-              ),
-            
-            ),
-            
-             const SizedBox(height: 16),
+          const SizedBox(height: 16),
           // Interests boxes
           Wrap(
             spacing: 10, // Gap between boxes
@@ -150,6 +134,7 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
   Widget interestBox(String text) {
     return Container(
       constraints: const BoxConstraints(
@@ -176,23 +161,9 @@ class HomeScreen extends StatelessWidget {
             letterSpacing: 0.12,
             color: Colors.black,
           ),
-          textAlign: TextAlign.center,  
+          textAlign: TextAlign.center,
         ),
       ),
-       
-            
-            
-
-            
-
-          
-          
-            
-
-          
-        
-      
-      
     );
-  }       
+  }
 }

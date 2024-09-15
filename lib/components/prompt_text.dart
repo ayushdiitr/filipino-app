@@ -1,58 +1,103 @@
 import 'package:flutter/material.dart';
 
 class PromptTextScreen extends StatelessWidget {
-  const PromptTextScreen({super.key});
+  final String promptTitle;
+  final String promptDesc;
+  final bool hasButton;
+
+  const PromptTextScreen({
+    Key? key,
+    required this.promptTitle,
+    this.promptDesc = '',
+    this.hasButton = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0), // Adjust padding around the whole screen
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Prompt Text
-              Container(
-                width: 64,
-                height: 19,
-                alignment: Alignment.centerLeft,
-                color: const Color(0xFF1F1F1F), // Background color
-                child: const Text(
-                  'Prompt 1',
-                  style: TextStyle(
-                    fontFamily: 'NoirPro',
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    height: 19.2 / 16, // Line height ratio
-                    color: Colors.white, // Text color (assuming white for contrast)
-                  ),
-                ),
+    return Padding(
+      padding:
+          const EdgeInsets.all(16.0), // Adjust padding around the whole screen
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Prompt Text
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              promptTitle,
+              style: const TextStyle(
+                fontFamily: 'NoirPro',
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: Colors.black, // Text color (assuming white for contrast)
               ),
-              const SizedBox(height: 16), // Space between texts
-              // Lorem Ipsum Text
-              Container(
-                width: 334,
-                height: 47,
-                color: const Color(0xFF3F4A61), // Background color
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0), // Adjust padding inside the container
-                  child: Text(
-                    'Lorem ipsum dolor sit amet consectetur. Vulputate molestie eget eget tellus ipsum adipiscing et congue vulputate.',
+            ),
+          ),
+          const SizedBox(height: 12), // Space between texts
+          // Lorem Ipsum Text
+          if (hasButton)
+            Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(250, 250, 250, 1),
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(
+                      color: Color.fromRGBO(235, 235, 235, 1),
+                    ),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 5,
+                  ),
+                  child: const Text(
+                    'Hindi',
                     style: TextStyle(
                       fontFamily: 'NoirPro',
                       fontSize: 14,
-                      fontWeight: FontWeight.w300,
-                      height: 47 / 14, // Line height ratio (estimated)
-                      letterSpacing: 0.02,
-                      color: Colors.white, // Text color (assuming white for contrast)
+                      letterSpacing: 0.12,
+                      color: Colors
+                          .black, // Text color (assuming white for contrast)
                     ),
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(width: 8),
+                Container(
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(250, 250, 250, 1),
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(
+                      color: Color.fromRGBO(235, 235, 235, 1),
+                    ),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 5,
+                  ),
+                  child: const Text(
+                    'English',
+                    style: TextStyle(
+                      fontFamily: 'NoirPro',
+                      fontSize: 14,
+                      letterSpacing: 0.02,
+                      color: Colors
+                          .black, // Text color (assuming white for contrast)
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          Text(
+            promptDesc,
+            style: const TextStyle(
+              fontFamily: 'NoirPro',
+              fontSize: 14,
+              fontWeight: FontWeight.w300,
+              letterSpacing: 0.02,
+              color: Colors.black, // Text color (assuming white for contrast)
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
