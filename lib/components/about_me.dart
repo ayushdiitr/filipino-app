@@ -1,133 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/components/details_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const SizedBox(
-          height: 50, // Set a fixed height for the row
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // First row with icon and text
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(Icons.man, size: 24),
-                    SizedBox(width: 8),
-                    Text("Female",
-                        style: TextStyle(fontSize: 14, fontFamily: 'NoirPro')),
-                  ],
-                ),
-              ),
-
-              // Vertical divider
-              VerticalDivider(
-                thickness: 1,
-                color: Color.fromRGBO(238, 238, 238, 1),
-              ),
-
-              // Second row with icon and text
-              Expanded(
-                child: Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center, // To wrap content only
-                  crossAxisAlignment:
-                      CrossAxisAlignment.center, // To wrap content only
-                  children: [
-                    Icon(Icons.pin_drop_outlined, size: 24),
-                    SizedBox(width: 8),
-                    Text("India",
-                        style: TextStyle(fontSize: 14, fontFamily: 'NoirPro')),
-                  ],
-                ),
-              ),
-
-              // Vertical divider
-              VerticalDivider(
-                thickness: 1,
-                color: Color.fromRGBO(238, 238, 238, 1),
-              ),
-
-              // Third row with icon and text
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(Icons.cake_outlined, size: 24),
-                    SizedBox(width: 8),
-                    Text("20",
-                        style: TextStyle(fontSize: 14, fontFamily: 'NoirPro')),
-                  ],
-                ),
-              ),
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.only(
+          left: 16,
+          right: 16,
+          bottom: 24,
         ),
-        const Divider(
-          thickness: 1,
-          color: Color.fromRGBO(238, 238, 238, 1),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(12),
+              bottomRight: Radius.circular(12)),
+          color: Color.fromRGBO(255, 255, 255, 1),
         ),
-        const SizedBox(height: 16),
-        const Text(
-          "ABOUT ME",
-          style: TextStyle(
-            fontFamily: 'NoirPro',
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: Colors.black,
-            letterSpacing: 0.12,
-          ),
-        ),
-        const SizedBox(height: 16),
-        Container(
-          child: const Text(
-            "Lorem ipsum dolor sit amet consectetur. Ullamcorper massa ut placerat nunc lacinia. Tortor vel ultrices elementum magna suscipit ipsum eget vel. Enim enim tempor at viverra ut leo quis egestas. Facilisis amet mattis facilisi consectetur ultrices dolor iaculis ac.",
-            style: TextStyle(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 16),
+            const Text(
+              "ABOUT ME",
+              style: TextStyle(
                 fontFamily: 'NoirPro',
                 fontSize: 14,
-                fontWeight: FontWeight.w300,
-                height: 1.5,
-                color: Colors.black),
-            textAlign: TextAlign.left,
-          ),
-        ),
-        const SizedBox(height: 32),
-        Container(
-          child: const Text(
-            'INTERESTS',
-            style: TextStyle(
-              fontFamily: 'NoirPro',
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-              letterSpacing: 0.12,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+                letterSpacing: 0.12,
+              ),
             ),
-            textAlign: TextAlign.left,
-          ),
-        ),
+            const SizedBox(height: 16),
+            Container(
+              child: const Text(
+                "Lorem ipsum dolor sit amet consectetur. Ullamcorper massa ut placerat nunc lacinia. Tortor vel ultrices elementum magna suscipit ipsum eget vel. Enim enim tempor at viverra ut leo quis egestas. Facilisis amet mattis facilisi consectetur ultrices dolor iaculis ac.",
+                style: TextStyle(
+                    fontFamily: 'NoirPro',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300,
+                    height: 1.5,
+                    color: Colors.black),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            const SizedBox(height: 32),
+            Container(
+              child: const Text(
+                'INTERESTS',
+                style: TextStyle(
+                  fontFamily: 'NoirPro',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                  letterSpacing: 0.12,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
 
-        const SizedBox(height: 16),
-        // Interests boxes
-        Wrap(
-          spacing: 10, // Gap between boxes
-          runSpacing: 10, // Gap between rows
-          children: [
-            interestBox('🚜 Machine'),
-            interestBox('🧦 Textile'),
-            interestBox('🧑‍🎨 Design'),
-            interestBox('🧑‍🎨 Design'),
-            interestBox('🎨 Arts'),
+            const SizedBox(height: 16),
+            // Interests boxes
+            Wrap(
+              spacing: 10, // Gap between boxes
+              runSpacing: 10, // Gap between rows
+              children: [
+                interestBox('🚜 Machine'),
+                interestBox('🧦 Textile'),
+                interestBox('🧑‍🎨 Design'),
+                interestBox('🧑‍🎨 Design'),
+                interestBox('🎨 Arts'),
+              ],
+            ),
           ],
         ),
-      ],
+      ),
     );
   }
 
