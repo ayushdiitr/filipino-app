@@ -6,6 +6,7 @@ import 'package:testapp/components/profile_header.dart';
 import 'package:testapp/src/ui/splash/screen2.dart';
 import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/prompt_text.dart';
+import 'package:testapp/components/button.dart.';
 //import 'package:sign_in_button/sign_in_button.dart';
 //import 'package:testapp/src/ui/screens/splash/screen2.dart';
 //import 'package:testapp/src/ui/screens/splash/interest.dart';
@@ -30,8 +31,8 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
-            
-           HomeScreen(),
+           ProfileHeader(name:'Anshika', bio: 'SWE'),
+           CloseButtonScreen(),
           ],
         ),
       ),
