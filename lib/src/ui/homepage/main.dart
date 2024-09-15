@@ -71,6 +71,7 @@ class _HomePageState extends State<HomePage> {
                 // promptDesc:
                 //     'Lorem ipsum dolor sit amet consectetur. Vulputate molestie eget eget tellus ipsum adipiscing et congue vulputate.',
               ),
+              CloseButtonScreen(),
             ],
           ),
         ),
