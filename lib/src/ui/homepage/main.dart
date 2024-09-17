@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/components/details_card.dart';
 import 'package:testapp/components/photo.dart';
-import 'package:testapp/components/post_list.dart';
 import 'package:testapp/components/profile_header.dart';
 import 'package:testapp/components/top_buttons.dart';
-import 'package:testapp/src/ui/splash/screen2.dart';
 import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/prompt_text.dart';
-import 'package:testapp/components/button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late ScrollController _scrollController;
-  late bool hasScrolled = true;
+  late bool hasScrolled = false;
   Color _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
 
   @override
@@ -26,24 +23,33 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _scrollController = ScrollController();
 
+    _scrollController.addListener(() {
+      if (_scrollController.hasClients) {
+        double offset = _scrollController.offset.clamp(0.0, 100.0);
+        double percentage = offset / 100.0;
+
+        setState(() {
+          _appBackgroundColor = Color.lerp(
+            const Color.fromRGBO(245, 245, 245, 1),
+            Colors.white,
+            percentage,
+          )!;
+        });
+      }
+    });
+
     // Listen to scroll changes
     _scrollController.addListener(() {
       if (_scrollController.hasClients) {
         // Change color when scrolled beyond 0.0 offset
         if (_scrollController.offset > 50.0) {
-          if (_appBackgroundColor != Colors.white) {
-            setState(() {
-              _appBackgroundColor = Colors.white;
-              hasScrolled = false;
-            });
-          }
+          setState(() {
+            hasScrolled = false;
+          });
         } else {
-          if (_appBackgroundColor != const Color.fromRGBO(245, 245, 245, 1)) {
-            setState(() {
-              hasScrolled = true;
-              _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
-            });
-          }
+          setState(() {
+            hasScrolled = true;
+          });
         }
       }
     });
@@ -67,7 +73,7 @@ class _HomePageState extends State<HomePage> {
               delegate:
                   SliverChildBuilderDelegate((BuildContext context, index) {
             return const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
               child: HeaderButtons(),
             );
           }, childCount: 1)),
@@ -76,13 +82,19 @@ class _HomePageState extends State<HomePage> {
             floating: true,
             backgroundColor: _appBackgroundColor,
             // stretchTriggerOffset: 50,
-            toolbarHeight: 72,
+            toolbarHeight: 60,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 color: _appBackgroundColor,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                  padding: !hasScrolled
+                      ? const EdgeInsets.only(
+                          left: 16,
+                          right: 16.0,
+                          top: 30,
+                        )
+                      : const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 0),
                   child: ProfileHeader(
                     name: 'Anshika',
                     bio: 'SWE',
@@ -97,9 +109,7 @@ class _HomePageState extends State<HomePage> {
               delegate:
                   SliverChildBuilderDelegate((BuildContext context, int index) {
             return const Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: 16.0,
-                  horizontal: 12.0), // Restores original padding
+              padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
               child: Column(
                 children: [
                   // SizedBox(height: 24),

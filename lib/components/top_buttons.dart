@@ -13,6 +13,7 @@ class HeaderButtons extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(height: 24), // Space between texts
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
