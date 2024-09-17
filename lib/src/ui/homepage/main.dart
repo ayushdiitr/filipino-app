@@ -119,7 +119,11 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 60),
 
                   PromptTextScreen(promptTitle: 'Laptop', hasButton: true,),
+
+                  
                   BottomMenu(),
+
+                  const SizedBox(height: 60),
                   
                 ],
               ),
