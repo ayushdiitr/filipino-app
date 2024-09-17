@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(245, 245, 245, 1),
+      backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverList(
@@ -47,8 +47,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          SliverList(delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
+          SliverList(
+              delegate:
+                  SliverChildBuilderDelegate((BuildContext context, int index) {
             return const Padding(
               padding: EdgeInsets.symmetric(
                   vertical: 16.0,
@@ -74,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             );
-          }))
+          }, childCount: 1)),
         ],
       ),
     );
