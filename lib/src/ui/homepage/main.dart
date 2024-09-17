@@ -8,6 +8,7 @@ import 'package:testapp/src/ui/splash/screen2.dart';
 import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/prompt_text.dart';
 import 'package:testapp/components/button.dart';
+import 'package:testapp/components/bottom_menu.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -96,7 +97,7 @@ class _HomePageState extends State<HomePage> {
           SliverList(
               delegate:
                   SliverChildBuilderDelegate((BuildContext context, int index) {
-            return const Padding(
+            return  Padding(
               padding: EdgeInsets.symmetric(
                   vertical: 16.0,
                   horizontal: 12.0), // Restores original padding
@@ -115,6 +116,11 @@ class _HomePageState extends State<HomePage> {
                     promptTitle: 'You have reached the end of the page',
                     promptDesc: 'Would you like to see more?',
                   ),
+                  SizedBox(height: 60),
+
+                  PromptTextScreen(promptTitle: 'Laptop', hasButton: true,),
+                  BottomMenu(),
+                  
                 ],
               ),
             );
