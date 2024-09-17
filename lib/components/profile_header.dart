@@ -4,11 +4,13 @@ class ProfileHeader extends StatelessWidget {
   final String name;
   final String bio;
   final bool isVerified;
+  final bool hasScrolled;
 
   const ProfileHeader({
     super.key,
     required this.name,
     required this.bio,
+    this.hasScrolled = false,
     this.isVerified = false, // Assuming verified is optional
   });
 
@@ -77,13 +79,14 @@ class ProfileHeader extends StatelessWidget {
         // Right side icon buttons
         Row(
           children: [
-            IconButton(
-              icon: Icon(Icons.keyboard_return),
-              color: Colors.black,
-              onPressed: () {
-                // Handle back action
-              },
-            ),
+            if (hasScrolled)
+              IconButton(
+                icon: const Icon(Icons.keyboard_return),
+                color: Colors.black,
+                onPressed: () {
+                  // Handle back action
+                },
+              ),
             IconButton(
               icon: Icon(Icons.more_horiz),
               color: Colors.black,

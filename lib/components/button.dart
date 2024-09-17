@@ -18,13 +18,15 @@ class CloseButtonScreen extends StatelessWidget {
               },
               child: Container(
                 constraints: const BoxConstraints(
-                  maxWidth: 60,  // Fixed width
+                  maxWidth: 60, // Fixed width
                   minHeight: 60, // Fixed height
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 5), // Padding
+                padding: const EdgeInsets.symmetric(
+                    vertical: 5, horizontal: 5), // Padding
                 decoration: BoxDecoration(
                   color: const Color(0xFF1F1F1F), // Background color
-                  borderRadius: BorderRadius.circular(12), // Circular border for all corners
+                  borderRadius: BorderRadius.circular(
+                      12), // Circular border for all corners
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.14), // Shadow color
@@ -53,7 +55,7 @@ class CloseButtonScreen extends StatelessWidget {
                     angle: -180 * 3.1416 / 180, // Rotate by -45 degrees
                     child: const Icon(
                       Icons.close, // Close (cross) icon
-                      size: 27.36,  // Width and height for the cross symbol
+                      size: 27.36, // Width and height for the cross symbol
                       color: Colors.white, // White color for the cross symbol
                     ),
                   ),
