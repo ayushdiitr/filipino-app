@@ -3,10 +3,9 @@ import 'package:testapp/components/details_card.dart';
 import 'package:testapp/components/photo.dart';
 import 'package:testapp/components/photo_popup.dart';
 import 'package:testapp/components/profile_header.dart';
+import 'package:testapp/components/prompt_text.dart';
 import 'package:testapp/components/top_buttons.dart';
 import 'package:testapp/components/about_me.dart';
-import 'package:testapp/components/prompt_text.dart';
-import 'package:testapp/components/button.dart';
 import 'package:testapp/components/bottom_menu.dart';
 
 class HomePage extends StatefulWidget {
@@ -47,10 +46,12 @@ class _HomePageState extends State<HomePage> {
         // Change color when scrolled beyond 0.0 offset
         if (_scrollController.offset > 50.0) {
           setState(() {
+            _appBackgroundColor = Color.fromRGBO(245, 245, 245, 1);
             hasScrolled = false;
           });
         } else {
           setState(() {
+            _appBackgroundColor = Colors.white;
             hasScrolled = true;
           });
         }
@@ -84,7 +85,7 @@ class _HomePageState extends State<HomePage> {
             pinned: true,
             floating: true,
             backgroundColor: _appBackgroundColor,
-            // stretchTriggerOffset: 50,
+            stretchTriggerOffset: 50,
             toolbarHeight: 60,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
@@ -98,12 +99,12 @@ class _HomePageState extends State<HomePage> {
                         )
                       : const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 0),
-                  // child: ProfileHeader(
-                  //   name: 'Anshika',
-                  //   bio: 'SWE',
-                  //   isVerified: true,
-                  //   hasScrolled: hasScrolled,
-                  // ),
+                  child: ProfileHeader(
+                    name: 'Anshika',
+                    bio: 'SWE',
+                    isVerified: true,
+                    hasScrolled: hasScrolled,
+                  ),
                 ),
               ),
             ),
@@ -115,46 +116,41 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
               child: Column(
                 children: [
-                  // SizedBox(height: 24),
-                  // SquareImageWithButton(
-                  //   imgUrl:
-                  //       "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  // ),
-                  // SizedBox(height: 16),
-                  // CardRow(),
-                  // HomeScreen(),
-                  // SizedBox(height: 16),
-                  // SquareImageWithButton(
-                  
-                  //   imgUrl:
-                  //       "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  // ),
-                  // SizedBox(height: 16),
-                  // PromptTextScreen(
-                  //   promptTitle: 'Prompt 1',
-                  //   promptDesc:
-                  //       'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                  // ),
-                  //SizedBox(height: 16),
-                  // SquareImageWithButton(
-                  //   imgUrl:
-                  //       "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  // ),
-                  // SizedBox(height: 16),
-
-                  SquareImagePopup(imgUrl: "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",),
-                  // PromptTextScreen(
-                  //   promptTitle: 'Prompt 1',
-                  //   promptDesc:
-                  //       'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                  // ),
-                  // SizedBox(height: 16),
-                  // PromptTextScreen(
-                  //   promptTitle: 'Laptop',
-                  //   hasButton: true,
-                  // ),
-                  // BottomMenu(),
-
+                  SizedBox(height: 24),
+                  SquareImageWithButton(
+                    imgUrl:
+                        "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  ),
+                  SizedBox(height: 16),
+                  CardRow(),
+                  HomeScreen(),
+                  SizedBox(height: 16),
+                  SquareImageWithButton(
+                    imgUrl:
+                        "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  ),
+                  SizedBox(height: 16),
+                  PromptTextScreen(
+                    promptTitle: 'Prompt 1',
+                    promptDesc:
+                        'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                  ),
+                  SizedBox(height: 16),
+                  SquareImageWithButton(
+                    imgUrl:
+                        "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  ),
+                  SizedBox(height: 16),
+                  PromptTextScreen(
+                    promptTitle: 'Prompt 1',
+                    promptDesc:
+                        'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                  ),
+                  SizedBox(height: 16),
+                  PromptTextScreen(
+                    promptTitle: 'Laptop',
+                    hasButton: true,
+                  ),
                   SizedBox(height: 100),
                 ],
               ),
@@ -162,7 +158,7 @@ class _HomePageState extends State<HomePage> {
           }, childCount: 1)),
         ],
       ),
-      bottomNavigationBar: BottomMenu(),
+      bottomNavigationBar: const BottomMenu(),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(left: 32),
         child: Row(
