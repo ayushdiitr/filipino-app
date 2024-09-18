@@ -114,45 +114,47 @@ class _HomePageState extends State<HomePage> {
               delegate:
                   SliverChildBuilderDelegate((BuildContext context, int index) {
             return Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
               child: Column(
                 children: [
-                  SizedBox(height: 24),
-                  SquareImageWithButton(
+                  const SizedBox(height: 24),
+                  const SquareImageWithButton(
                     imgUrl:
                         "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                   ),
-                  SizedBox(height: 16),
-                  CardRow(),
-                  HomeScreen(),
-                  SizedBox(height: 16),
-                  SquareImageWithButton(
+                  const SizedBox(height: 16),
+                  const CardRow(),
+                  const HomeScreen(),
+                  const SizedBox(height: 16),
+                  const SquareImageWithButton(
                     imgUrl:
                         "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                   ),
-                  SizedBox(height: 16),
-                  PromptTextScreen(
+                  const SizedBox(height: 16),
+                  const PromptTextScreen(
                     promptTitle: 'Prompt 1',
                     promptDesc:
                         'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
                   ),
-                  SizedBox(height: 16),
-                  SquareImageWithButton(
+                  const SizedBox(height: 16),
+                  const SquareImageWithButton(
                     imgUrl:
                         "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                   ),
-                  SizedBox(height: 16),
-                  PromptTextScreen(
+                  const SizedBox(height: 16),
+                  const PromptTextScreen(
                     promptTitle: 'Prompt 1',
                     promptDesc:
                         'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
                   ),
-                  SizedBox(height: 16),
-                  PromptTextScreen(
+                  const SizedBox(height: 16),
+                  Verification(),
+                  const PromptTextScreen(
                     promptTitle: 'Laptop',
                     hasButton: true,
                   ),
-                  SizedBox(height: 100),
+                  const SizedBox(height: 100),
                 ],
               ),
             );

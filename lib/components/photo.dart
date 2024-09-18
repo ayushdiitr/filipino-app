@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:testapp/src/ui/homepage/msg_popup.dart';
 
 class SquareImageWithButton extends StatelessWidget {
   final String imgUrl;
@@ -34,7 +37,7 @@ class SquareImageWithButton extends StatelessWidget {
                   vertical: 5, horizontal: 10), // Padding around the IconButton
               decoration: BoxDecoration(
                 color: Colors.white, // Background color for the button
-                border: Border.symmetric(
+                border: const Border.symmetric(
                   vertical: BorderSide(
                     color: Colors.white, // Border color
                     width: 1, // Border width
@@ -50,7 +53,17 @@ class SquareImageWithButton extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
                 child: InkWell(
                   onTap: () {
-                    Navigator.pop(context);
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                            child: const Dialog(
+                              backgroundColor: Colors.transparent,
+                              child: SendMessageScreen(),
+                            ),
+                          );
+                        });
                   },
                   child: SizedBox(
                     height: 16,
