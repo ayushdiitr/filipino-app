@@ -4,29 +4,70 @@ class BottomMenu extends StatelessWidget {
   const BottomMenu({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.only(
-          top: 10, // Padding: 10px at the top
-          bottom: 4, // Padding: 4px at the bottom
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: const Color.fromRGBO(255, 255, 255, 1), // White background
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              height: 60, // Hugged height: 60px
-              width: 390, // Fixed width: 390px
-              color: Colors.black, // Black background to make the box visible
+    return Container(
+      padding: const EdgeInsets.only(
+        top: 10,
+        bottom: 4,
+      ),
+      decoration: const BoxDecoration(
+        color: Colors.black,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _buildMenuItem(
+            imagePath: "images/account_circle.png",
+            label: "Profile",
+          ),
+          _buildMenuItem(
+            imagePath: "images/award_star.png",
+            label: "Explore",
+          ),
+          _buildMenuItem(
+            imagePath: "images/connecting_airports.png",
+            label: "Connect",
+          ),
+          _buildMenuItem(
+            imagePath: "images/favorite.png",
+            label: "Like",
+          ),
+          _buildMenuItem(
+            imagePath: "images/chat.png",
+            label: "Buddies",
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMenuItem({required String imagePath, required String label}) {
+    return Container(
+      height: 60,
+      width: 60,
+      padding: const EdgeInsets.all(5),
+      color: Colors.black,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            imagePath,
+            width: 20,
+            height: 20,
+          ),
+          const SizedBox(height: 2),
+          Text(
+            label,
+            style: const TextStyle(
+              fontFamily: 'NoirPro',
+              fontSize: 10,
+              fontWeight: FontWeight.w400,
+              height: 1.2,
+              letterSpacing: 0.02,
+              color: Color(0xFF8E8E8E),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
-
-// void main() => runApp(MaterialApp(home: Scaffold(body: BottomMenu())));

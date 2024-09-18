@@ -123,23 +123,42 @@ class _HomePageState extends State<HomePage> {
                   CardRow(),
                   HomeScreen(),
                   SizedBox(height: 16),
-                  PromptTextScreen(
-                    promptTitle: 'You have reached the end of the page',
-                    promptDesc: 'Would you like to see more?',
+                  SquareImageWithButton(
+                    imgUrl:
+                        "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                   ),
-                  SizedBox(height: 60),
-
+                  SizedBox(height: 16),
+                  PromptTextScreen(
+                    promptTitle: 'Prompt 1',
+                    promptDesc:
+                        'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                  ),
+                  SizedBox(height: 16),
+                  SquareImageWithButton(
+                    imgUrl:
+                        "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  ),
+                  SizedBox(height: 16),
+                  PromptTextScreen(
+                    promptTitle: 'Prompt 1',
+                    promptDesc:
+                        'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                  ),
+                  SizedBox(height: 16),
                   PromptTextScreen(
                     promptTitle: 'Laptop',
                     hasButton: true,
                   ),
-                  BottomMenu(),
+                  // BottomMenu(),
+
+                  SizedBox(height: 100),
                 ],
               ),
             );
           }, childCount: 1)),
         ],
       ),
+      bottomNavigationBar: BottomMenu(),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(left: 32),
         child: Row(
