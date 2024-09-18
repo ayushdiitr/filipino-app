@@ -7,6 +7,7 @@ import 'package:testapp/components/prompt_text.dart';
 import 'package:testapp/components/top_buttons.dart';
 import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/bottom_menu.dart';
+import 'package:testapp/components/verified.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -112,7 +113,7 @@ class _HomePageState extends State<HomePage> {
           SliverList(
               delegate:
                   SliverChildBuilderDelegate((BuildContext context, int index) {
-            return const Padding(
+            return Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
               child: Column(
                 children: [
