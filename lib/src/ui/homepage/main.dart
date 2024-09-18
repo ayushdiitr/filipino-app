@@ -5,6 +5,8 @@ import 'package:testapp/components/profile_header.dart';
 import 'package:testapp/components/top_buttons.dart';
 import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/prompt_text.dart';
+import 'package:testapp/components/button.dart';
+import 'package:testapp/components/bottom_menu.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -125,6 +127,13 @@ class _HomePageState extends State<HomePage> {
                     promptTitle: 'You have reached the end of the page',
                     promptDesc: 'Would you like to see more?',
                   ),
+                  SizedBox(height: 60),
+
+                  PromptTextScreen(
+                    promptTitle: 'Laptop',
+                    hasButton: true,
+                  ),
+                  BottomMenu(),
                 ],
               ),
             );
