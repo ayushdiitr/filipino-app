@@ -8,6 +8,7 @@ import 'package:testapp/components/top_buttons.dart';
 import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/bottom_menu.dart';
 import 'package:testapp/components/verified.dart';
+import 'package:flutter_sticky_widgets/flutter_sticky_widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -87,12 +88,12 @@ class _HomePageState extends State<HomePage> {
                           top: 30,
                         )
                       : const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 0),
+                          horizontal: 16.0, vertical: 10),
                   child: ProfileHeader(
                     name: 'Anshika',
                     bio: 'SWE',
                     isVerified: true,
-                    hasScrolled: false,
+                    hasScrolled: hasScrolled,
                   ),
                 ),
               ),
@@ -103,10 +104,10 @@ class _HomePageState extends State<HomePage> {
                   SliverChildBuilderDelegate((BuildContext context, int index) {
             return Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+                  const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
               child: Column(
                 children: [
-                  const SizedBox(height: 24),
+                  // const SizedBox(height: 24),
                   const SquareImageWithButton(
                     imgUrl:
                         "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",

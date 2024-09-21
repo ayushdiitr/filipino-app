@@ -17,14 +17,22 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment:
+          MainAxisAlignment.spaceBetween, // Space between text and icon buttons
+      crossAxisAlignment:
+          CrossAxisAlignment.center, // Ensure overall vertical centering
       children: [
         Row(
+          crossAxisAlignment:
+              CrossAxisAlignment.center, // Center text and icons vertically
           children: [
             Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment
+                  .start, // Align content of column to the start
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment
+                      .center, // Center name and verified icon vertically
                   children: [
                     Text(
                       name,
@@ -46,13 +54,16 @@ class ProfileHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 2), // Spacing between name and bio
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment
+                      .center, // Center bio, dot, and active text vertically
                   children: [
                     Text(
                       bio,
                       style: const TextStyle(
-                          fontSize: 14,
-                          color: Color.fromRGBO(108, 108, 108, 1),
-                          fontFamily: 'NoirPro'),
+                        fontSize: 14,
+                        color: Color.fromRGBO(108, 108, 108, 1),
+                        fontFamily: 'NoirPro',
+                      ),
                     ),
                     const SizedBox(width: 8),
                     const Icon(
@@ -76,8 +87,10 @@ class ProfileHeader extends StatelessWidget {
             ),
           ],
         ),
-        // Right side icon buttons
+        // Right side icon buttons, centered vertically
         Row(
+          crossAxisAlignment:
+              CrossAxisAlignment.center, // Center the icons vertically
           children: [
             if (hasScrolled)
               IconButton(
@@ -88,7 +101,7 @@ class ProfileHeader extends StatelessWidget {
                 },
               ),
             IconButton(
-              icon: Icon(Icons.more_horiz),
+              icon: const Icon(Icons.more_horiz),
               color: Colors.black,
               onPressed: () {
                 // Handle more options action
