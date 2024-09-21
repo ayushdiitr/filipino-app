@@ -28,33 +28,21 @@ class _HomePageState extends State<HomePage> {
 
     _scrollController.addListener(() {
       if (_scrollController.hasClients) {
-        double offset = _scrollController.offset.clamp(0.0, 100.0);
-        double percentage = offset / 100.0;
-
-        setState(() {
-          _appBackgroundColor = Color.lerp(
-            const Color.fromRGBO(245, 245, 245, 1),
-            Colors.white,
-            percentage,
-          )!;
-        });
-      }
-    });
-
-    // Listen to scroll changes
-    _scrollController.addListener(() {
-      if (_scrollController.hasClients) {
         // Change color when scrolled beyond 0.0 offset
         if (_scrollController.offset > 50.0) {
-          setState(() {
-            _appBackgroundColor = Color.fromRGBO(245, 245, 245, 1);
-            hasScrolled = false;
-          });
+          if (_appBackgroundColor != Colors.white) {
+            setState(() {
+              _appBackgroundColor = Colors.white;
+              hasScrolled = false;
+            });
+          }
         } else {
-          setState(() {
-            _appBackgroundColor = Colors.white;
-            hasScrolled = true;
-          });
+          if (_appBackgroundColor != const Color.fromRGBO(245, 245, 245, 1)) {
+            setState(() {
+              hasScrolled = true;
+              _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
+            });
+          }
         }
       }
     });
@@ -86,7 +74,7 @@ class _HomePageState extends State<HomePage> {
             pinned: true,
             floating: true,
             backgroundColor: _appBackgroundColor,
-            stretchTriggerOffset: 50,
+            // stretchTriggerOffset: 50,
             toolbarHeight: 60,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
@@ -104,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                     name: 'Anshika',
                     bio: 'SWE',
                     isVerified: true,
-                    hasScrolled: hasScrolled,
+                    hasScrolled: false,
                   ),
                 ),
               ),

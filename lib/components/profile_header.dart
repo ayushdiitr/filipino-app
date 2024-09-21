@@ -22,7 +22,7 @@ class ProfileHeader extends StatelessWidget {
         Row(
           children: [
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
                   children: [
