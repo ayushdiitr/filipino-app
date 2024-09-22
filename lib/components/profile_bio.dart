@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class HeadingSection extends StatelessWidget {
+class BioSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //width: 390, // Full width
-      //height: 129, // Hug (129px)
-      padding: const EdgeInsets.symmetric(
-          vertical: 16, horizontal: 12), // Padding for green box
+      //width: 390,
+      //height: 129,
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFE3FCEF), // var(--Status-Success-100, #E3FCEF)
+        color: Color(0xFFFFFFFF), // var(--Status-Success-100, #E3FCEF)
       ),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // "My Heading" text
-          const Text(
-            'My Heading',
+          Text(
+            'My Bio',
             style: TextStyle(
               fontFamily: 'Baskerville',
               fontSize: 20,
@@ -27,10 +26,9 @@ class HeadingSection extends StatelessWidget {
               color: Color(0xFF1F1F1F), // var(--Primary-700, #1F1F1F)
             ),
           ),
-          const SizedBox(height: 4), // Gap between "My Heading" and second text
-          // "Complete your profile" text
-          const Text(
-            'Complete your profile for better chance of matching',
+          SizedBox(height: 4),
+          Text(
+            'Write a fun and punchy intro',
             style: TextStyle(
               fontFamily: 'NoirPro',
               fontSize: 14,
@@ -40,21 +38,18 @@ class HeadingSection extends StatelessWidget {
               color: Color(0xFF3F4A61), // var(--Secondary-600, #3F4A61)
             ),
           ),
-          const SizedBox(height: 12), // Gap before the prompt box
+          SizedBox(height: 12),
 
           // Prompt box
           SizedBox(
-            width: double.infinity, // Fill width (358px in this case)
-            height: 52, // Hug height (47px)
+            width: double.infinity,
+            height: 83,
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 0), // Padding for text
+              padding: EdgeInsets.symmetric(horizontal: 0),
               child: TextField(
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(50), // Max 50 characters
-                ],
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   fillColor: Colors.white,
+                  isDense: true,
                   filled: true,
                   focusColor: Colors.black,
                   hintText: "Add a prompt",
@@ -73,7 +68,7 @@ class HeadingSection extends StatelessWidget {
                   contentPadding: EdgeInsets.symmetric(
                     vertical: 16.0,
                     horizontal: 16.0,
-                  ), // Padding to center the hint text
+                  ),
                   hintStyle: TextStyle(
                     fontFamily: 'NoirPro',
                     fontSize: 14,

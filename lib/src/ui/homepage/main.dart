@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:testapp/components/details_card.dart';
 import 'package:testapp/components/photo.dart';
 import 'package:testapp/components/photo_popup.dart';
+import 'package:testapp/components/profile_bio.dart';
 import 'package:testapp/components/profile_header.dart';
 import 'package:testapp/components/prompt_text.dart';
 import 'package:testapp/components/prompts.dart';
@@ -144,6 +145,7 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(height: 16),
                       Verification(),
                       const SizedBox(height: 16),
+                      ProfilePrompts(),
                       const PromptTextScreen(
                         promptTitle: 'Laptop',
                         hasButton: true,
@@ -152,6 +154,9 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 16),
+                BioSection(),
+                const SizedBox(height: 16),
                 HeadingSection(),
                 const SizedBox(height: 100),
               ],
