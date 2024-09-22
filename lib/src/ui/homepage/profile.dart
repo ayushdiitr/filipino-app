@@ -9,6 +9,7 @@ import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/bottom_menu.dart';
 import 'package:testapp/components/verified.dart';
 import 'package:testapp/components/heading.dart';
+import 'package:testapp/components/profile_heading.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({super.key});
@@ -147,7 +148,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   //   promptTitle: 'Laptop',
                   //   hasButton: true,
                   // ),
-                  HeadingSection(),
+                  //HeadingSection(),
+                  MyProfile(),
                   const SizedBox(height: 100),
                 ],
               ),

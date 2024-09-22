@@ -9,7 +9,7 @@ import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/bottom_menu.dart';
 import 'package:testapp/components/verified.dart';
 import 'package:testapp/components/heading.dart';
-import 'package:flutter_sticky_widgets/flutter_sticky_widgets.dart';
+//import 'package:flutter_sticky_widgets/flutter_sticky_widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
