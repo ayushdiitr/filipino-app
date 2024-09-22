@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/src/ui/homepage/main.dart';
 //import 'package:testapp/src/ui/screens/splash/talk_about.dart';
+import 'package:testapp/src/ui/homepage/profile.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: ProfilePage(),
     );
   }
 }
