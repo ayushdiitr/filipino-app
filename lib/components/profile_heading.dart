@@ -4,6 +4,8 @@ class MyProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           width: double.infinity,
@@ -17,7 +19,7 @@ class MyProfile extends StatelessWidget {
               ),
             ),
           ),
-          child: Column(
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
