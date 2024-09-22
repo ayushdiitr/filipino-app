@@ -4,6 +4,7 @@ import 'package:testapp/components/photo.dart';
 import 'package:testapp/components/photo_popup.dart';
 import 'package:testapp/components/profile_header.dart';
 import 'package:testapp/components/prompt_text.dart';
+import 'package:testapp/components/prompts.dart';
 import 'package:testapp/components/top_buttons.dart';
 import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/bottom_menu.dart';
