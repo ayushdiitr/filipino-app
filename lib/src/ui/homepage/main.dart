@@ -9,6 +9,7 @@ import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/bottom_menu.dart';
 import 'package:testapp/components/verified.dart';
 import 'package:testapp/components/heading.dart';
+import 'package:flutter_sticky_widgets/flutter_sticky_widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,33 +30,21 @@ class _HomePageState extends State<HomePage> {
 
     _scrollController.addListener(() {
       if (_scrollController.hasClients) {
-        double offset = _scrollController.offset.clamp(0.0, 100.0);
-        double percentage = offset / 100.0;
-
-        setState(() {
-          _appBackgroundColor = Color.lerp(
-            const Color.fromRGBO(245, 245, 245, 1),
-            Colors.white,
-            percentage,
-          )!;
-        });
-      }
-    });
-
-    // Listen to scroll changes
-    _scrollController.addListener(() {
-      if (_scrollController.hasClients) {
         // Change color when scrolled beyond 0.0 offset
         if (_scrollController.offset > 50.0) {
-          setState(() {
-            _appBackgroundColor = Color.fromRGBO(245, 245, 245, 1);
-            hasScrolled = false;
-          });
+          if (_appBackgroundColor != Colors.white) {
+            setState(() {
+              _appBackgroundColor = Colors.white;
+              hasScrolled = false;
+            });
+          }
         } else {
-          setState(() {
-            _appBackgroundColor = Colors.white;
-            hasScrolled = true;
-          });
+          if (_appBackgroundColor != const Color.fromRGBO(245, 245, 245, 1)) {
+            setState(() {
+              hasScrolled = true;
+              _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
+            });
+          }
         }
       }
     });
@@ -87,7 +76,7 @@ class _HomePageState extends State<HomePage> {
             pinned: true,
             floating: true,
             backgroundColor: _appBackgroundColor,
-            stretchTriggerOffset: 50,
+            // stretchTriggerOffset: 50,
             toolbarHeight: 60,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
@@ -100,13 +89,13 @@ class _HomePageState extends State<HomePage> {
                           top: 30,
                         )
                       : const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 0),
-                  // child: ProfileHeader(
-                  //   name: 'Anshika',
-                  //   bio: 'SWE',
-                  //   isVerified: true,
-                  //   hasScrolled: hasScrolled,
-                  // ),
+                          horizontal: 16.0, vertical: 10),
+                  child: ProfileHeader(
+                    name: 'Anshika',
+                    bio: 'SWE',
+                    isVerified: true,
+                    hasScrolled: hasScrolled,
+                  ),
                 ),
               ),
             ),
@@ -116,46 +105,47 @@ class _HomePageState extends State<HomePage> {
                   SliverChildBuilderDelegate((BuildContext context, int index) {
             return Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+                  const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
               child: Column(
                 children: [
                   // const SizedBox(height: 24),
-                  // const SquareImageWithButton(
-                  //   imgUrl:
-                  //       "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  // ),
-                  // const SizedBox(height: 16),
-                  // const CardRow(),
-                  // const HomeScreen(),
-                  // const SizedBox(height: 16),
-                  // const SquareImageWithButton(
-                  //   imgUrl:
-                  //       "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  // ),
-                  // const SizedBox(height: 16),
-                  // const PromptTextScreen(
-                  //   promptTitle: 'Prompt 1',
-                  //   promptDesc:
-                  //       'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                  // ),
-                  // const SizedBox(height: 16),
-                  // const SquareImageWithButton(
-                  //   imgUrl:
-                  //       "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  // ),
-                  // const SizedBox(height: 16),
-                  // const PromptTextScreen(
-                  //   promptTitle: 'Prompt 1',
-                  //   promptDesc:
-                  //       'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                  // ),
-                  // const SizedBox(height: 16),
-                  // Verification(),
-                  // const PromptTextScreen(
-                  //   promptTitle: 'Laptop',
-                  //   hasButton: true,
-                  // ),
+                  const SquareImageWithButton(
+                    imgUrl:
+                        "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  ),
+                  const SizedBox(height: 16),
+                  const CardRow(),
+                  const HomeScreen(),
+                  const SizedBox(height: 16),
+                  const SquareImageWithButton(
+                    imgUrl:
+                        "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  ),
+                  const SizedBox(height: 16),
+                  const PromptTextScreen(
+                    promptTitle: 'Prompt 1',
+                    promptDesc:
+                        'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                  ),
+                  const SizedBox(height: 16),
+                  const SquareImageWithButton(
+                    imgUrl:
+                        "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  ),
+                  const SizedBox(height: 16),
+                  const PromptTextScreen(
+                    promptTitle: 'Prompt 1',
+                    promptDesc:
+                        'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                  ),
+                  const SizedBox(height: 16),
+                  Verification(),
+                  const SizedBox(height: 16),
                   HeadingSection(),
+                  const PromptTextScreen(
+                    promptTitle: 'Laptop',
+                    hasButton: true,
+                  ),
                   const SizedBox(height: 100),
                 ],
               ),

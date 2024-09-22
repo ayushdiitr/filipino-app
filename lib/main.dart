@@ -1,20 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/src/ui/homepage/main.dart';
-import 'package:testapp/src/ui/splash/basicInfo.dart';
-import 'package:testapp/src/ui/splash/beliefsAndOpinions.dart';
-import 'package:testapp/src/ui/splash/emailScreen.dart';
-import 'package:testapp/src/ui/splash/faceTime.dart';
-import 'package:testapp/src/ui/splash/interest.dart';
-import 'package:testapp/src/ui/splash/main.dart';
-import 'package:testapp/src/ui/splash/lifestyle.dart';
 //import 'package:testapp/src/ui/screens/splash/talk_about.dart';
-import 'package:testapp/src/ui/splash/location.dart';
-import 'package:testapp/src/ui/splash/meetScreen.dart';
-import 'package:testapp/src/ui/splash/notification.dart';
-import 'package:testapp/src/ui/splash/screen2.dart';
-import 'package:testapp/src/ui/splash/otpscreen.dart';
-import 'package:testapp/src/ui/splash/height_selector.dart';
-import 'package:testapp/src/ui/splash/genderScreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
