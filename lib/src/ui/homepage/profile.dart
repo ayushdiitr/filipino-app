@@ -11,7 +11,7 @@ import 'package:testapp/components/verified.dart';
 import 'package:testapp/components/heading.dart';
 
 class ProfilePage extends StatefulWidget {
-   ProfilePage({super.key});
+  ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -75,14 +75,6 @@ class _ProfilePageState extends State<ProfilePage> {
       body: CustomScrollView(
         controller: _scrollController,
         slivers: <Widget>[
-          SliverList(
-              delegate:
-                  SliverChildBuilderDelegate((BuildContext context, index) {
-            return const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
-              child: HeaderButtons(),
-            );
-          }, childCount: 1)),
           SliverAppBar(
             pinned: true,
             floating: true,
