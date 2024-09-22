@@ -15,6 +15,8 @@ import 'package:testapp/src/ui/splash/screen2.dart';
 import 'package:testapp/src/ui/splash/otpscreen.dart';
 import 'package:testapp/src/ui/splash/height_selector.dart';
 import 'package:testapp/src/ui/splash/genderScreen.dart';
+import 'package:testapp/src/ui/homepage/profile.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: ProfilePage(),
     );
   }
 }
