@@ -71,6 +71,7 @@ class MyProfile extends StatelessWidget {
           decoration: InputDecoration(
             fillColor: Colors.white,
             hintText: "e.g. Photographer at Walter white",
+            filled: true,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Color(0xFFEEEEEE),
