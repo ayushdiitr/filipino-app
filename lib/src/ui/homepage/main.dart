@@ -103,52 +103,57 @@ class _HomePageState extends State<HomePage> {
           SliverList(
               delegate:
                   SliverChildBuilderDelegate((BuildContext context, int index) {
-            return Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
-              child: Column(
-                children: [
-                  // const SizedBox(height: 24),
-                  const SquareImageWithButton(
-                    imgUrl:
-                        "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 6.0, horizontal: 12.0),
+                  child: Column(
+                    children: [
+                      // const SizedBox(height: 24),
+                      const SquareImageWithButton(
+                        imgUrl:
+                            "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                      ),
+                      const SizedBox(height: 16),
+                      const CardRow(),
+                      const HomeScreen(),
+                      const SizedBox(height: 16),
+                      const SquareImageWithButton(
+                        imgUrl:
+                            "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                      ),
+                      const SizedBox(height: 16),
+                      const PromptTextScreen(
+                        promptTitle: 'Prompt 1',
+                        promptDesc:
+                            'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                      ),
+                      const SizedBox(height: 16),
+                      const SquareImageWithButton(
+                        imgUrl:
+                            "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                      ),
+                      const SizedBox(height: 16),
+                      const PromptTextScreen(
+                        promptTitle: 'Prompt 1',
+                        promptDesc:
+                            'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                      ),
+                      const SizedBox(height: 16),
+                      Verification(),
+                      const SizedBox(height: 16),
+                      const PromptTextScreen(
+                        promptTitle: 'Laptop',
+                        hasButton: true,
+                      ),
+                      const SizedBox(height: 16),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-                  const CardRow(),
-                  const HomeScreen(),
-                  const SizedBox(height: 16),
-                  const SquareImageWithButton(
-                    imgUrl:
-                        "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  ),
-                  const SizedBox(height: 16),
-                  const PromptTextScreen(
-                    promptTitle: 'Prompt 1',
-                    promptDesc:
-                        'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                  ),
-                  const SizedBox(height: 16),
-                  const SquareImageWithButton(
-                    imgUrl:
-                        "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  ),
-                  const SizedBox(height: 16),
-                  const PromptTextScreen(
-                    promptTitle: 'Prompt 1',
-                    promptDesc:
-                        'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                  ),
-                  const SizedBox(height: 16),
-                  Verification(),
-                  const SizedBox(height: 16),
-                  HeadingSection(),
-                  const PromptTextScreen(
-                    promptTitle: 'Laptop',
-                    hasButton: true,
-                  ),
-                  const SizedBox(height: 100),
-                ],
-              ),
+                ),
+                HeadingSection(),
+                const SizedBox(height: 100),
+              ],
             );
           }, childCount: 1)),
         ],

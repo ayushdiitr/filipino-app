@@ -6,7 +6,8 @@ class HeadingSection extends StatelessWidget {
     return Container(
       //width: 390, // Full width
       //height: 129, // Hug (129px)
-      padding: const EdgeInsets.symmetric(vertical: 16), // Padding for green box
+      padding: const EdgeInsets.symmetric(
+          vertical: 16, horizontal: 12), // Padding for green box
       decoration: const BoxDecoration(
         color: Color(0xFFE3FCEF), // var(--Status-Success-100, #E3FCEF)
       ),
@@ -44,7 +45,8 @@ class HeadingSection extends StatelessWidget {
           Container(
             width: double.infinity, // Fill width (358px in this case)
             height: 40, // Hug height (47px)
-            padding: const EdgeInsets.only(top: 16), // Padding 16px from the top
+            padding:
+                const EdgeInsets.only(top: 16), // Padding 16px from the top
             decoration: BoxDecoration(
               color: Colors.white, // var(--White, #FFFFFF)
               borderRadius: const BorderRadius.only(
