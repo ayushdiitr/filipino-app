@@ -157,7 +157,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 16),
                 HeadingSection(),
-                BioSection(),
+                BioSection(
+                  title: 'My Bio',
+                  subtitle: 'Write a fun and punchy intro',
+                ),
                 const BasicsSection(
                   title: 'Basics',
                   subtitle: 'Choose your basics',
@@ -165,6 +168,10 @@ class _HomePageState extends State<HomePage> {
                 const BasicsSection(
                   title: 'Interests',
                   subtitle: 'Choose your interests',
+                ),
+                BioSection(
+                  title: 'Languages I know',
+                  subtitle: 'Choose the languages you know',
                 ),
                 const SizedBox(height: 100),
               ],

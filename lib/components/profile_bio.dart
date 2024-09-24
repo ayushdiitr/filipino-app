@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class BioSection extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
+  const BioSection({super.key, required this.title, required this.subtitle});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,12 +16,12 @@ class BioSection extends StatelessWidget {
       decoration: const BoxDecoration(
         color: Color(0xFFFFFFFF), // var(--Status-Success-100, #E3FCEF)
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // "My Heading" text
           Text(
-            'My Bio',
+            title,
             style: TextStyle(
               fontFamily: 'Baskerville',
               fontSize: 20,
@@ -28,7 +33,7 @@ class BioSection extends StatelessWidget {
           ),
           SizedBox(height: 4),
           Text(
-            'Write a fun and punchy intro',
+            subtitle,
             style: TextStyle(
               fontFamily: 'NoirPro',
               fontSize: 14,
