@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/components/basics_section.dart';
 import 'package:testapp/components/details_card.dart';
 import 'package:testapp/components/photo.dart';
 import 'package:testapp/components/photo_popup.dart';
@@ -155,9 +156,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                BioSection(),
-                const SizedBox(height: 16),
                 HeadingSection(),
+                BioSection(),
+                const BasicsSection(
+                  title: 'Basics',
+                  subtitle: 'Choose your basics',
+                ),
+                const BasicsSection(
+                  title: 'Interests',
+                  subtitle: 'Choose your interests',
+                ),
                 const SizedBox(height: 100),
               ],
             );

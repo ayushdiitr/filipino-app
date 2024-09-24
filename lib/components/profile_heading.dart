@@ -38,18 +38,10 @@ class _MyProfileState extends State<MyProfile> {
             children: [
               const SizedBox(width: 8),
               Container(
-                padding:  const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromRGBO(202, 202, 202, 1),
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                
-                child: const Icon(
-                  Icons.arrow_back_ios_new,
-                  color: Color.fromRGBO(202, 202, 202, 1),
+                padding: const EdgeInsets.all(4),
+                child: SizedBox(
+                  height: 32,
+                  child: Image.asset("images/backicon.png"),
                 ),
               ),
               const SizedBox(width: 10),
