@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
 
-class MyProfile extends StatelessWidget {
+class MyProfile extends StatefulWidget {
+  @override
+  _MyProfileState createState() => _MyProfileState();
+}
+
+class _MyProfileState extends State<MyProfile> {
+  final TextEditingController _controller = TextEditingController();
+  int _currentLength = 0;
+
+  void _updateLength() {
+    setState(() {
+      _currentLength = _controller.text.length;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,22 +36,24 @@ class MyProfile extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              const SizedBox(width: 8),
               Container(
-                padding: const EdgeInsets.all(4),
+                padding:  const EdgeInsets.all(4),
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Color.fromRGBO(202, 202, 202, 1),
+                    color: const Color.fromRGBO(202, 202, 202, 1),
                     width: 1,
                   ),
                   borderRadius: BorderRadius.circular(4),
                 ),
+                
                 child: const Icon(
                   Icons.arrow_back_ios_new,
                   color: Color.fromRGBO(202, 202, 202, 1),
                 ),
               ),
               const SizedBox(width: 10),
-              Expanded(
+              const Expanded(
                 child: Text(
                   'My Heading',
                   textAlign: TextAlign.center,
@@ -67,35 +83,57 @@ class MyProfile extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        const TextField(
-          decoration: InputDecoration(
-            fillColor: Colors.white,
-            hintText: "e.g. Photographer at Walter white",
-            filled: true,
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color(0xFFEEEEEE),
-                width: 0.7,
+        Stack(
+          alignment: Alignment.bottomRight,
+          children: [
+            SizedBox(
+              height: 100,
+              child: TextField(
+                controller: _controller,
+                onChanged: (_) => _updateLength(), // Update length on change
+                decoration: const InputDecoration(
+                  fillColor: Colors.white,
+                  hintText: "e.g. Photographer at Walter White",
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xFFEEEEEE),
+                      width: 0.7,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromRGBO(75, 75, 75, 1),
+                      width: 0.7,
+                    ),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 50.0,
+                    horizontal: 10.0,
+                  ),
+                  hintStyle: TextStyle(
+                    fontFamily: 'NoirPro',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300,
+                    letterSpacing: 0.02,
+                    color: Color.fromRGBO(75, 75, 75, 1),
+                  ),
+                ),
               ),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromRGBO(75, 75, 75, 1),
-                width: 0.7,
+            Positioned(
+              right: 10, // Positioning for character count
+              bottom: 10, // Adjust bottom padding as needed
+              child: Text(
+                '$_currentLength/48',
+                style: const TextStyle(
+                  fontFamily: 'NoirPro',
+                  fontSize: 14,
+                  color: Color(0xFFCACACA), // Character count color
+                ),
               ),
             ),
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 15.0,
-              horizontal: 10.0,
-            ),
-            hintStyle: TextStyle(
-              fontFamily: 'NoirPro',
-              fontSize: 14,
-              fontWeight: FontWeight.w300,
-              letterSpacing: 0.02,
-              color: Color.fromRGBO(75, 75, 75, 1),
-            ),
-          ),
+          ],
         ),
       ],
     );
