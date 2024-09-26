@@ -14,7 +14,8 @@ class _EditProfileState extends State<EditProfile> {
 
   // Function to pick and crop an image
   Future<void> _pickImage(int index) async {
-    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       File? croppedFile = await ImageCropper().cropImage(
@@ -67,7 +68,8 @@ class _EditProfileState extends State<EditProfile> {
                 // print("Preview button clicked");
               },
               child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(4),
@@ -101,20 +103,21 @@ class _EditProfileState extends State<EditProfile> {
         ),
         const SizedBox(height: 12),
         // Progress bar container
-        // Row(
-        //   children: [
-            const Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
-                        child: Center(
-                          child: LinearProgressIndicator(
-                            value: 0.2,
-                            color: Colors.black,
-                            backgroundColor: Color(0xFFEEEEEE),
-                          ),
-                        ),
-                      ),
-                       const Text(
+
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 300, // Specify the width you need
+                child: LinearProgressIndicator(
+                  value: 0.2,
+                  color: Colors.black,
+                  backgroundColor: Color(0xFFEEEEEE),
+                ),
+              ),
+              Text(
                 '85% Complete',
                 style: TextStyle(
                   fontFamily: 'NoirPro',
@@ -122,11 +125,13 @@ class _EditProfileState extends State<EditProfile> {
                   fontWeight: FontWeight.w500,
                   letterSpacing: 0.02,
                   color: Color(0xFF1F1F1F),
-                  height: 14.4 / 12,
+                  height: 1.2,
                 ),
               ),
-          //],
-        //),
+            ],
+          ),
+        ),
+
         Container(
           width: double.infinity,
           height: 30,
@@ -141,10 +146,7 @@ class _EditProfileState extends State<EditProfile> {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              
-             
-            ],
+            children: [],
           ),
         ),
         const SizedBox(height: 20),
@@ -164,7 +166,7 @@ class _EditProfileState extends State<EditProfile> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    _pickImage(index);  // Call the cropper here
+                    _pickImage(index); // Call the cropper here
                   },
                   child: Container(
                     decoration: BoxDecoration(
