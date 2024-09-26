@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/components/details_card.dart';
+import 'package:testapp/components/edit_profile.dart';
 import 'package:testapp/components/photo.dart';
 import 'package:testapp/components/photo_popup.dart';
 import 'package:testapp/components/profile_header.dart';
@@ -10,6 +11,7 @@ import 'package:testapp/components/bottom_menu.dart';
 import 'package:testapp/components/verified.dart';
 import 'package:testapp/components/heading.dart';
 import 'package:testapp/components/profile_heading.dart';
+import 'package:testapp/components/edit_profile.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({super.key});
@@ -149,7 +151,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   //   hasButton: true,
                   // ),
                   //HeadingSection(),
-                  MyProfile(),
+                  //MyProfile(),
+                  EditProfile(),
                   const SizedBox(height: 100),
                 ],
               ),
