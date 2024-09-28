@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/route/routes.dart';
 import 'package:testapp/src/ui/homepage/main.dart';
 //import 'package:testapp/src/ui/screens/splash/talk_about.dart';
 import 'package:testapp/src/ui/homepage/profile.dart';
 
 void main() {
-  runApp(MaterialApp(
-    title: 'Filipino App',
-    initialRoute: '/',
-    routes: {
-      '/': (context) => const HomePage(),
-      '/second': (context) => ProfilePage(),
-    },
-    debugShowCheckedModeBanner: false,
-  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final RouteGenerator _router = RouteGenerator();
 
   // This widget is the root of your application.
   @override
@@ -30,7 +25,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      initialRoute: '/',
+      onGenerateRoute: _router.routeGenerate,
     );
   }
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/components/basics_section.dart';
 import 'package:testapp/components/details_card.dart';
 import 'package:testapp/components/edit_profile.dart';
 import 'package:testapp/components/photo.dart';
 import 'package:testapp/components/photo_popup.dart';
+import 'package:testapp/components/profile_bio.dart';
 import 'package:testapp/components/profile_header.dart';
 import 'package:testapp/components/prompt_text.dart';
+import 'package:testapp/components/prompts.dart';
 import 'package:testapp/components/top_buttons.dart';
 import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/bottom_menu.dart';
@@ -75,40 +78,37 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
-      body: CustomScrollView(
-        controller: _scrollController,
-        slivers: <Widget>[
-          SliverAppBar(
-            pinned: true,
-            floating: true,
-            backgroundColor: _appBackgroundColor,
-            stretchTriggerOffset: 50,
-            toolbarHeight: 60,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                color: _appBackgroundColor,
-                child: Padding(
-                  padding: !hasScrolled
-                      ? const EdgeInsets.only(
-                          left: 16,
-                          right: 16.0,
-                          top: 30,
-                        )
-                      : const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 0),
-                  // child: ProfileHeader(
-                  //   name: 'Anshika',
-                  //   bio: 'SWE',
-                  //   isVerified: true,
-                  //   hasScrolled: hasScrolled,
-                  // ),
-                ),
+      body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
+        SliverAppBar(
+          pinned: true,
+          floating: true,
+          backgroundColor: _appBackgroundColor,
+          stretchTriggerOffset: 50,
+          toolbarHeight: 60,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Container(
+              color: _appBackgroundColor,
+              child: Padding(
+                padding: !hasScrolled
+                    ? const EdgeInsets.only(
+                        left: 16,
+                        right: 16.0,
+                        top: 30,
+                      )
+                    : const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
+                // child: ProfileHeader(
+                //   name: 'Anshika',
+                //   bio: 'SWE',
+                //   isVerified: true,
+                //   hasScrolled: hasScrolled,
+                // ),
               ),
             ),
           ),
-          SliverList(
-              delegate:
-                  SliverChildBuilderDelegate((BuildContext context, int index) {
+        ),
+        SliverList(
+          delegate:
+              SliverChildBuilderDelegate((BuildContext context, int index) {
             return Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
@@ -150,54 +150,81 @@ class _ProfilePageState extends State<ProfilePage> {
                   //   promptTitle: 'Laptop',
                   //   hasButton: true,
                   // ),
-                  //HeadingSection(),
                   //MyProfile(),
                   EditProfile(),
-                  const SizedBox(height: 100),
+                  const SizedBox(height: 16),
+                  Verification(),
+                  const SizedBox(height: 16),
                 ],
               ),
             );
-          }, childCount: 1)),
-        ],
-      ),
-      bottomNavigationBar: const BottomMenu(),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(left: 32),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            FloatingActionButton(
-                heroTag: 'close',
-                onPressed: () {},
-                backgroundColor: Colors.black,
-                tooltip: 'Dislike',
-                child: Center(
-                  child: Transform.rotate(
-                    angle: -180 * 3.1416 / 180, // Rotate by -45 degrees
-                    child: const Icon(
-                      Icons.close, // Close (cross) icon
-                      size: 27.36, // Width and height for the cross symbol
-                      color: Colors.white, // White color for the cross symbol
-                    ),
-                  ),
-                )),
-            Expanded(child: Container()),
-            FloatingActionButton(
-              heroTag: 'like',
-              onPressed: () {},
-              backgroundColor: Colors.black,
-              tooltip: 'Send a like',
-              child: const Center(
-                child: Icon(
-                  Icons.favorite_outline,
-                  size: 27.36,
-                  color: Colors.green,
-                ),
-              ),
-            ),
-          ],
+          }, childCount: 1),
         ),
-      ),
+        SliverList(
+            delegate:
+                SliverChildBuilderDelegate((BuildContext context, int index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: .0),
+            child: Column(
+              children: [
+                HeadingSection(),
+                const SizedBox(height: 16),
+                const BioSection(
+                    title: 'My Bio', subtitle: 'Write a fun and punchy intro'),
+                const SizedBox(height: 100),
+                const SizedBox(height: 16),
+                ProfilePrompts(),
+                const BasicsSection(
+                    title: 'Basics', subtitle: 'Choose the interests'),
+                const BasicsSection(
+                    title: 'More about yourself',
+                    subtitle: 'Choose the interests'),
+                const BioSection(
+                    title: 'Languages I know',
+                    subtitle: 'Choose the languages you know'),
+              ],
+            ),
+          );
+        }, childCount: 1)),
+      ]),
+      bottomNavigationBar: const BottomMenu(),
+      // floatingActionButton: Padding(
+      //   padding: const EdgeInsets.only(left: 32),
+      //   child: Row(
+      //     crossAxisAlignment: CrossAxisAlignment.end,
+      //     children: [
+      //       FloatingActionButton(
+      //           heroTag: 'close',
+      //           onPressed: () {},
+      //           backgroundColor: Colors.black,
+      //           tooltip: 'Dislike',
+      //           child: Center(
+      //             child: Transform.rotate(
+      //               angle: -180 * 3.1416 / 180, // Rotate by -45 degrees
+      //               child: const Icon(
+      //                 Icons.close, // Close (cross) icon
+      //                 size: 27.36, // Width and height for the cross symbol
+      //                 color: Colors.white, // White color for the cross symbol
+      //               ),
+      //             ),
+      //           )),
+      //       Expanded(child: Container()),
+      //       FloatingActionButton(
+      //         heroTag: 'like',
+      //         onPressed: () {},
+      //         backgroundColor: Colors.black,
+      //         tooltip: 'Send a like',
+      //         child: const Center(
+      //           child: Icon(
+      //             Icons.favorite_outline,
+      //             size: 27.36,
+      //             color: Colors.green,
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
