@@ -91,7 +91,7 @@ class _EditProfileState extends State<EditProfile> {
         ),
         const SizedBox(height: 10),
         const Text(
-          'Complete your profile for better chance of matching',
+          'Complete your profile for a better chance of matching',
           style: TextStyle(
             fontFamily: 'NoirPro',
             fontSize: 14,
@@ -103,21 +103,25 @@ class _EditProfileState extends State<EditProfile> {
         ),
         const SizedBox(height: 12),
         // Progress bar container
-
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: const Color(0xFFEEEEEE)),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: 300, // Specify the width you need
+                width: 230, // Width for progress bar
                 child: LinearProgressIndicator(
-                  value: 0.2,
+                  value: 0.85,
                   color: Colors.black,
-                  backgroundColor: Color(0xFFEEEEEE),
+                  backgroundColor: const Color(0xFFEEEEEE),
                 ),
               ),
-              Text(
+              const Text(
                 '85% Complete',
                 style: TextStyle(
                   fontFamily: 'NoirPro',
@@ -129,24 +133,6 @@ class _EditProfileState extends State<EditProfile> {
                 ),
               ),
             ],
-          ),
-        ),
-
-        Container(
-          width: double.infinity,
-          height: 30,
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: const BorderRadius.all(Radius.circular(4)),
-            border: Border.all(
-              color: const Color(0xFFEEEEEE),
-              width: 1,
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [],
           ),
         ),
         const SizedBox(height: 20),
