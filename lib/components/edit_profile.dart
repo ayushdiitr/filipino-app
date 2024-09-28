@@ -104,6 +104,8 @@ class _EditProfileState extends State<EditProfile> {
         const SizedBox(height: 12),
         // Progress bar container
         Container(
+          
+          
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
           decoration: BoxDecoration(
             color: Colors.white,

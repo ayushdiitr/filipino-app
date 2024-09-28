@@ -15,6 +15,7 @@ import 'package:testapp/components/verified.dart';
 import 'package:testapp/components/heading.dart';
 import 'package:testapp/components/profile_heading.dart';
 import 'package:testapp/components/edit_profile.dart';
+import 'package:testapp/components/profile_bio.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({super.key});

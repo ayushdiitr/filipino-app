@@ -1,88 +1,122 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class BioSection extends StatelessWidget {
+class BioSection extends StatefulWidget {
   final String title;
   final String subtitle;
 
   const BioSection({super.key, required this.title, required this.subtitle});
 
   @override
+  _BioSectionState createState() => _BioSectionState();
+}
+
+class _BioSectionState extends State<BioSection> {
+  // List of languages
+  final List<String> languages = ['Hindi', 'English', 'French', 'German'];
+  
+  // To keep track of selected languages
+  final List<String> selectedLanguages = [];
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      //width: 390,
-      //height: 129,
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFFFFFFF), // var(--Status-Success-100, #E3FCEF)
+        color: Color(0xFFFFFFFF), // Background color
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // "My Heading" text
+          // Title
           Text(
-            title,
+            widget.title,
             style: TextStyle(
               fontFamily: 'Baskerville',
               fontSize: 20,
               fontWeight: FontWeight.w700,
-              height: 1.2, // Line-height: 17.28px
+              height: 1.2,
               letterSpacing: 0.02,
-              color: Color(0xFF1F1F1F), // var(--Primary-700, #1F1F1F)
+              color: Color(0xFF1F1F1F), // Text color
             ),
           ),
           SizedBox(height: 4),
+          // Subtitle
           Text(
-            subtitle,
+            widget.subtitle,
             style: TextStyle(
               fontFamily: 'NoirPro',
               fontSize: 14,
               fontWeight: FontWeight.w300,
-              height: 1.2, // Line-height: 16.8px
+              height: 1.2,
               letterSpacing: 0.02,
-              color: Color(0xFF3F4A61), // var(--Secondary-600, #3F4A61)
+              color: Color(0xFF3F4A61), // Secondary text color
             ),
           ),
           SizedBox(height: 12),
 
-          // Prompt box
-          SizedBox(
-            width: double.infinity,
-            height: 83,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 0),
-              child: TextField(
-                decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  isDense: true,
-                  filled: true,
-                  focusColor: Colors.black,
-                  hintText: "Add a prompt",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xFFEEEEEE),
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color.fromRGBO(75, 75, 75, 1),
-                      width: 0.7,
-                    ),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(
-                    vertical: 16.0,
-                    horizontal: 16.0,
-                  ),
-                  hintStyle: TextStyle(
-                    fontFamily: 'NoirPro',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w300,
-                    letterSpacing: 0.02,
-                    color: Color(0xFFADB7CC),
-                  ),
-                ),
+          // Box with multi-select buttons
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+            decoration: BoxDecoration(
+              color: Color(0xFFFAFAFA), // var(--Neutral-50, #FAFAFA)
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(
+                color: Color(0xFFF5F5F5), // var(--Neutral-100, #F5F5F5)
+                width: 1,
               ),
+            ),
+            child: Wrap(
+              spacing: 10, // Gap between buttons
+              children: languages.map((language) {
+                final isSelected = selectedLanguages.contains(language);
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (isSelected) {
+                        selectedLanguages.remove(language);
+                      } else {
+                        selectedLanguages.add(language);
+                      }
+                    });
+                  },
+                  child: Container(
+                    width: 62,
+                    height: 33,
+                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFAFAFA), // Button background
+                      border: Border.all(
+                        color: Color(0xFFF5F5F5), // Button border
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(4),
+                      ),
+                      boxShadow: [
+                        if (isSelected)
+                          BoxShadow(
+                            color: Color(0xFF1F1F1F).withOpacity(0.1), // Shadow when selected
+                            spreadRadius: 1,
+                            blurRadius: 3,
+                          ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        language,
+                        style: TextStyle(
+                          fontFamily: 'NoirPro',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          height: 1.2, // Line-height: 16.8px
+                          letterSpacing: 0.02,
+                          color: Color(0xFF1F1F1F), // Text color
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
           ),
         ],
