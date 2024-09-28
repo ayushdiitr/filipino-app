@@ -115,14 +115,17 @@ class _EditProfileState extends State<EditProfile> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 230, // Width for progress bar
-                child: LinearProgressIndicator(
-                  value: 0.85,
-                  color: Colors.black,
-                  backgroundColor: const Color(0xFFEEEEEE),
+              Expanded(
+                child: Container(
+                  height: 5,
+                  child: LinearProgressIndicator(
+                    value: 0.85,
+                    color: Colors.black,
+                    backgroundColor: const Color(0xFFEEEEEE),
+                  ),
                 ),
               ),
+              const SizedBox(width: 10), // Space between progress bar and text
               const Text(
                 '85% Complete',
                 style: TextStyle(

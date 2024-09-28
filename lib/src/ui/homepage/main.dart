@@ -193,9 +193,9 @@ class _HomePageState extends State<HomePage>
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 16),
+                    return const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
                       child: HeaderButtons(),
                     );
                   },
@@ -324,7 +324,7 @@ class _HomePageState extends State<HomePage>
                           child: Icon(
                             Icons.favorite,
                             size: 200,
-                            color: Colors.red,
+                            color: Colors.black,
                           ),
                         ),
                       ),

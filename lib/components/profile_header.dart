@@ -97,7 +97,7 @@ class ProfileHeader extends StatelessWidget {
                 icon: const Icon(Icons.keyboard_return),
                 color: Colors.black,
                 onPressed: () {
-                  // Handle back action
+                  Navigator.pushNamed(context, '/second');
                 },
               ),
             IconButton(
