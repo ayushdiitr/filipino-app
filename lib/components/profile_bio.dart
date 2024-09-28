@@ -30,7 +30,7 @@ class _BioSectionState extends State<BioSection> {
           // Title
           Text(
             widget.title,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Baskerville',
               fontSize: 20,
               fontWeight: FontWeight.w700,
@@ -39,11 +39,11 @@ class _BioSectionState extends State<BioSection> {
               color: Color(0xFF1F1F1F), // Text color
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           // Subtitle
           Text(
             widget.subtitle,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'NoirPro',
               fontSize: 14,
               fontWeight: FontWeight.w300,
@@ -58,10 +58,12 @@ class _BioSectionState extends State<BioSection> {
           Container(
             padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
             decoration: BoxDecoration(
-              color: Color(0xFFFAFAFA), // var(--Neutral-50, #FAFAFA)
-              borderRadius: BorderRadius.circular(4),
+              
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: Color(0xFFF5F5F5), // var(--Neutral-100, #F5F5F5)
+                color: Color(0xFFF5F5F5),
+               // var(--Neutral-100, #F5F5F5)
                 width: 1,
               ),
             ),
@@ -80,8 +82,8 @@ class _BioSectionState extends State<BioSection> {
                     });
                   },
                   child: Container(
-                    width: 62,
-                    height: 33,
+                    width: 85,
+                    //height: 33,
                     padding: EdgeInsets.symmetric(vertical: 8, horizontal: 14),
                     decoration: BoxDecoration(
                       color: Color(0xFFFAFAFA), // Button background
@@ -89,9 +91,8 @@ class _BioSectionState extends State<BioSection> {
                         color: Color(0xFFF5F5F5), // Button border
                         width: 1,
                       ),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(4),
-                      ),
+                      borderRadius: BorderRadius.circular(4),
+                      
                       boxShadow: [
                         if (isSelected)
                           BoxShadow(

@@ -17,6 +17,7 @@ import 'package:testapp/components/profile_heading.dart';
 import 'package:testapp/components/edit_profile.dart';
 import 'package:testapp/components/profile_bio.dart';
 
+
 class ProfilePage extends StatefulWidget {
   ProfilePage({super.key});
 
@@ -152,9 +153,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   //   hasButton: true,
                   // ),
                   //MyProfile(),
-                  EditProfile(),
+                  //EditProfile(),
                   const SizedBox(height: 16),
-                  Verification(),
+                  BioSection(title: 'Langauges I Know',subtitle: 'Choose the languages you know',),
+                  //Verification(),
                   const SizedBox(height: 16),
                 ],
               ),
@@ -168,21 +170,21 @@ class _ProfilePageState extends State<ProfilePage> {
             padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: .0),
             child: Column(
               children: [
-                HeadingSection(),
-                const SizedBox(height: 16),
-                const BioSection(
-                    title: 'My Bio', subtitle: 'Write a fun and punchy intro'),
-                const SizedBox(height: 100),
-                const SizedBox(height: 16),
-                ProfilePrompts(),
-                const BasicsSection(
-                    title: 'Basics', subtitle: 'Choose the interests'),
-                const BasicsSection(
-                    title: 'More about yourself',
-                    subtitle: 'Choose the interests'),
-                const BioSection(
-                    title: 'Languages I know',
-                    subtitle: 'Choose the languages you know'),
+                // HeadingSection(),
+                // const SizedBox(height: 16),
+                // const BioSection(
+                //     title: 'My Bio', subtitle: 'Write a fun and punchy intro'),
+                // const SizedBox(height: 100),
+                // const SizedBox(height: 16),
+                // ProfilePrompts(),
+                // const BasicsSection(
+                //     title: 'Basics', subtitle: 'Choose the interests'),
+                // const BasicsSection(
+                //     title: 'More about yourself',
+                //     subtitle: 'Choose the interests'),
+                // const BioSection(
+                //     title: 'Languages I know',
+                //     subtitle: 'Choose the languages you know'),
               ],
             ),
           );
