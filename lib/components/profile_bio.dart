@@ -11,10 +11,10 @@ class BioSection extends StatefulWidget {
 }
 
 class _BioSectionState extends State<BioSection> {
-  // List of languages
-  final List<String> languages = ['Hindi', 'English', 'French', 'German'];
   
-  // To keep track of selected languages
+  final List<String> languages = ['Hindi', 'English', 'French', 'German'];
+
+  
   final List<String> selectedLanguages = [];
 
   @override
@@ -22,12 +22,12 @@ class _BioSectionState extends State<BioSection> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFFFFFFF), // Background color
+        color: Color(0xFFFFFFFF), 
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Title
+          
           Text(
             widget.title,
             style: const TextStyle(
@@ -36,11 +36,11 @@ class _BioSectionState extends State<BioSection> {
               fontWeight: FontWeight.w700,
               height: 1.2,
               letterSpacing: 0.02,
-              color: Color(0xFF1F1F1F), // Text color
+              color: Color(0xFF1F1F1F), 
             ),
           ),
           const SizedBox(height: 4),
-          // Subtitle
+          
           Text(
             widget.subtitle,
             style: const TextStyle(
@@ -49,79 +49,144 @@ class _BioSectionState extends State<BioSection> {
               fontWeight: FontWeight.w300,
               height: 1.2,
               letterSpacing: 0.02,
-              color: Color(0xFF3F4A61), // Secondary text color
+              color: Color(0xFF3F4A61), 
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
 
-          // Box with multi-select buttons
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-            decoration: BoxDecoration(
-              
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: Color(0xFFF5F5F5),
-               // var(--Neutral-100, #F5F5F5)
-                width: 1,
+          
+          GestureDetector(
+            onTap: () {
+              _showLanguageSelectionDialog();
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: const Color(0xFFF5F5F5),
+                  width: 1,
+                ),
               ),
-            ),
-            child: Wrap(
-              spacing: 10, // Gap between buttons
-              children: languages.map((language) {
-                final isSelected = selectedLanguages.contains(language);
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      if (isSelected) {
-                        selectedLanguages.remove(language);
-                      } else {
-                        selectedLanguages.add(language);
-                      }
-                    });
-                  },
-                  child: Container(
-                    width: 85,
-                    //height: 33,
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 14),
-                    decoration: BoxDecoration(
-                      color: Color(0xFFFAFAFA), // Button background
-                      border: Border.all(
-                        color: Color(0xFFF5F5F5), // Button border
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(4),
-                      
-                      boxShadow: [
-                        if (isSelected)
-                          BoxShadow(
-                            color: Color(0xFF1F1F1F).withOpacity(0.1), // Shadow when selected
-                            spreadRadius: 1,
-                            blurRadius: 3,
+              child: selectedLanguages.isNotEmpty
+                  ? Wrap(
+                      spacing: 8,
+                      runSpacing: 4,
+                      children: selectedLanguages.map((language) {
+                        return Chip(
+                          label: Text(
+                            language,
+                            style: const TextStyle(
+                              fontFamily: 'NoirPro',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              height: 1.2,
+                              letterSpacing: 0.02,
+                              color: Color(0xFF1F1F1F), 
+                            ),
                           ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        language,
-                        style: TextStyle(
-                          fontFamily: 'NoirPro',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          height: 1.2, // Line-height: 16.8px
-                          letterSpacing: 0.02,
-                          color: Color(0xFF1F1F1F), // Text color
-                        ),
+                          backgroundColor: const Color(0xFFFAFAFA), 
+                          deleteIcon: const Icon(
+                            Icons.close,
+                            size: 18,
+                            color: Colors.red, 
+                          ),
+                          onDeleted: () {
+                            
+                            setState(() {
+                              selectedLanguages.remove(language);
+                            });
+                          },
+                        );
+                      }).toList(),
+                    )
+                  : const Text(
+                      'Choose the languages you know',
+                      style: TextStyle(
+                        fontFamily: 'NoirPro',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300,
+                        height: 1.2,
+                        letterSpacing: 0.02,
+                        color: Color(0xFF596580), 
                       ),
                     ),
-                  ),
-                );
-              }).toList(),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  
+  void _showLanguageSelectionDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            'Select Languages',
+            style: TextStyle(
+              fontFamily: 'NoirPro',
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          content: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: languages.map((language) {
+                    return CheckboxListTile(
+                      title: Text(
+                        language,
+                        style: const TextStyle(
+                          fontFamily: 'NoirPro',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          height: 1.2,
+                          letterSpacing: 0.02,
+                          color: Color(0xFF1F1F1F), 
+                        ),
+                      ),
+                      value: selectedLanguages.contains(language),
+                      onChanged: (bool? value) {
+                        setState(() {
+                          if (value == true) {
+                            selectedLanguages.add(language);
+                          } else {
+                            selectedLanguages.remove(language);
+                          }
+                        });
+                      },
+                      controlAffinity: ListTileControlAffinity.leading, 
+                    );
+                  }).toList(),
+                ),
+              );
+            },
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                'Close',
+                style: TextStyle(
+                  fontFamily: 'NoirPro',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF1F1F1F),
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+                setState(() {}); 
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
