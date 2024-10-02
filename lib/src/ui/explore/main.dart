@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:testapp/components/basics_section.dart';
 import 'package:testapp/components/details_card.dart';
 import 'package:testapp/components/edit_profile.dart';
+import 'package:testapp/components/explore/profile_tags.dart';
 import 'package:testapp/components/photo.dart';
 import 'package:testapp/components/photo_popup.dart';
 import 'package:testapp/components/profile_bio.dart';
@@ -150,6 +151,10 @@ class _ExplorePageState extends State<ExplorePage> {
                 // const BasicsSection(
                 //     title: 'More about yourself',
                 //     subtitle: 'Choose the interests'),
+                FilterTags(
+                    title: 'Ideal Connections',
+                    subtitle:
+                        'People filtered by shared interests, ready for connection'),
                 // const BioSection(
                 //     title: 'Languages I know',
                 //     subtitle: 'Choose the languages you know'),
