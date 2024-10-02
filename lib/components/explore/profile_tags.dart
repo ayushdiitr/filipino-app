@@ -61,7 +61,7 @@ class _FilterTagState extends State<FilterTags> {
             },
             child: Container(
               padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 0.0),
               // decoration: BoxDecoration(
               //   color: Colors.white,
               //   borderRadius: BorderRadius.circular(8),
