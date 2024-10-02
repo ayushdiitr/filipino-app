@@ -17,6 +17,7 @@ import 'package:testapp/components/heading.dart';
 import 'package:testapp/components/profile_heading.dart';
 import 'package:testapp/components/edit_profile.dart';
 import 'package:testapp/components/profile_bio.dart';
+import 'package:testapp/components/explore/title.dart';
 
 class ExplorePage extends StatefulWidget {
   ExplorePage({super.key});
@@ -140,7 +141,8 @@ class _ExplorePageState extends State<ExplorePage> {
             padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: .0),
             child: Column(
               children: [
-                HeadingSection(),
+                //HeadingSection(),
+                TitleScreen(),
                 // const SizedBox(height: 16),
                 // const BioSection(
                 //     title: 'My Bio', subtitle: 'Write a fun and punchy intro'),
