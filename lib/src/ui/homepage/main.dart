@@ -266,36 +266,34 @@ class _HomePageState extends State<HomePage>
                                 promptDesc:
                                     'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
                               ),
-                              const SizedBox(height: 16),
-                              Verification(),
-                              const SizedBox(height: 16),
-                              ProfilePrompts(),
-                              const PromptTextScreen(
-                                promptTitle: 'Laptop',
-                                hasButton: true,
-                              ),
+                              // const SizedBox(height: 16),
+                              // ProfilePrompts(),
+                              // const PromptTextScreen(
+                              //   promptTitle: 'Laptop',
+                              //   hasButton: true,
+                              // ),
                               const SizedBox(height: 16),
                             ],
                           ),
                         ),
                         const SizedBox(height: 16),
-                        HeadingSection(),
-                        BioSection(
-                          title: 'My Bio',
-                          subtitle: 'Write a fun and punchy intro',
-                        ),
-                        BasicsSection(
-                          title: 'Basics',
-                          subtitle: 'Choose your basics',
-                        ),
-                        BasicsSection(
-                          title: 'Interests',
-                          subtitle: 'Choose your interests',
-                        ),
-                        BioSection(
-                          title: 'Languages I know',
-                          subtitle: 'Choose the languages you know',
-                        ),
+                        // HeadingSection(),
+                        // BioSection(
+                        //   title: 'My Bio',
+                        //   subtitle: 'Write a fun and punchy intro',
+                        // ),
+                        // BasicsSection(
+                        //   title: 'Basics',
+                        //   subtitle: 'Choose your basics',
+                        // ),
+                        // BasicsSection(
+                        //   title: 'Interests',
+                        //   subtitle: 'Choose your interests',
+                        // ),
+                        // BioSection(
+                        //   title: 'Languages I know',
+                        //   subtitle: 'Choose the languages you know',
+                        // ),
                         const SizedBox(height: 100),
                       ],
                     ),

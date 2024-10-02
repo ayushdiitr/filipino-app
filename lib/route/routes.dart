@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:testapp/src/ui/explore/main.dart';
 import 'package:testapp/src/ui/homepage/main.dart';
 import 'package:testapp/src/ui/homepage/profile.dart';
 
@@ -12,6 +13,9 @@ class RouteGenerator {
 
       case '/profile':
         return CupertinoPageRoute(builder: (_) => ProfilePage());
+
+      case '/explore':
+        return CupertinoPageRoute(builder: (_) => ExplorePage());
     }
 
     return null;

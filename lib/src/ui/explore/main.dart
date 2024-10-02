@@ -17,14 +17,14 @@ import 'package:testapp/components/profile_heading.dart';
 import 'package:testapp/components/edit_profile.dart';
 import 'package:testapp/components/profile_bio.dart';
 
-class ProfilePage extends StatefulWidget {
-  ProfilePage({super.key});
+class ExplorePage extends StatefulWidget {
+  ExplorePage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<ExplorePage> createState() => _ExplorePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ExplorePageState extends State<ExplorePage> {
   late ScrollController _scrollController;
   late bool hasScrolled = false;
   Color _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
@@ -116,7 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 children: [
                   const SizedBox(height: 24),
-                  EditProfile(),
+                  // EditProfile(),
 
                   const SizedBox(height: 48),
                   // const SquareImageWithButton(
@@ -124,7 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   //       "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                   // ),
                   // const SizedBox(height: 16),
-                  Verification(),
+                  // Verification(),
 
                   const SizedBox(height: 16),
                 ],
@@ -141,18 +141,18 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 HeadingSection(),
                 // const SizedBox(height: 16),
-                const BioSection(
-                    title: 'My Bio', subtitle: 'Write a fun and punchy intro'),
+                // const BioSection(
+                //     title: 'My Bio', subtitle: 'Write a fun and punchy intro'),
                 // const SizedBox(height: 16),
-                ProfilePrompts(),
-                const BasicsSection(
-                    title: 'Basics', subtitle: 'Choose the interests'),
-                const BasicsSection(
-                    title: 'More about yourself',
-                    subtitle: 'Choose the interests'),
-                const BioSection(
-                    title: 'Languages I know',
-                    subtitle: 'Choose the languages you know'),
+                // ProfilePrompts(),
+                // const BasicsSection(
+                //     title: 'Basics', subtitle: 'Choose the interests'),
+                // const BasicsSection(
+                //     title: 'More about yourself',
+                //     subtitle: 'Choose the interests'),
+                // const BioSection(
+                //     title: 'Languages I know',
+                //     subtitle: 'Choose the languages you know'),
                 const SizedBox(height: 70),
               ],
             ),
