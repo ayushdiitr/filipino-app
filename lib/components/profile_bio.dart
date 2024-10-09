@@ -11,115 +11,137 @@ class BioSection extends StatefulWidget {
 }
 
 class _BioSectionState extends State<BioSection> {
-  
   final List<String> languages = ['Hindi', 'English', 'French', 'German'];
-
-  
   final List<String> selectedLanguages = [];
+  int currentCharCount = 0; // Initialize character count
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFFFFFFF), 
+        color: Color(0xFFFFFFFF),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          
-          Text(
-            widget.title,
-            style: const TextStyle(
-              fontFamily: 'Baskerville',
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              height: 1.2,
-              letterSpacing: 0.02,
-              color: Color(0xFF1F1F1F), 
-            ),
-          ),
-          const SizedBox(height: 4),
-          
-          Text(
-            widget.subtitle,
-            style: const TextStyle(
-              fontFamily: 'NoirPro',
-              fontSize: 14,
-              fontWeight: FontWeight.w300,
-              height: 1.2,
-              letterSpacing: 0.02,
-              color: Color(0xFF3F4A61), 
-            ),
-          ),
-          const SizedBox(height: 12),
-
-          
-          GestureDetector(
-            onTap: () {
-              _showLanguageSelectionDialog();
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: const Color(0xFFF5F5F5),
-                  width: 1,
-                ),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              widget.title,
+              style: const TextStyle(
+                fontFamily: 'Baskerville',
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                height: 1.2,
+                letterSpacing: 0.02,
+                color: Color(0xFF1F1F1F),
               ),
-              child: selectedLanguages.isNotEmpty
-                  ? Wrap(
-                      spacing: 8,
-                      runSpacing: 4,
-                      children: selectedLanguages.map((language) {
-                        return Chip(
-                          label: Text(
-                            language,
-                            style: const TextStyle(
+            ),
+            const SizedBox(height: 4),
+            Text(
+              widget.subtitle,
+              style: const TextStyle(
+                fontFamily: 'NoirPro',
+                fontSize: 14,
+                fontWeight: FontWeight.w300,
+                height: 1.2,
+                letterSpacing: 0.02,
+                color: Color(0xFF3F4A61),
+              ),
+            ),
+            const SizedBox(height: 12),
+            GestureDetector(
+              child: Container(
+                width: 358,
+                padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: const Color(0xFFF5F5F5),
+                    width: 1,
+                  ),
+                ),
+                child: selectedLanguages.isNotEmpty
+                    ? Wrap(
+                        spacing: 8,
+                        runSpacing: 4,
+                        children: selectedLanguages.map((language) {
+                          return Chip(
+                            label: Text(
+                              language,
+                              style: const TextStyle(
+                                fontFamily: 'NoirPro',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                height: 1.2,
+                                letterSpacing: 0.02,
+                                color: Color(0xFF1F1F1F),
+                              ),
+                            ),
+                            backgroundColor: const Color(0xFFFAFAFA),
+                            deleteIcon: const Icon(
+                              Icons.close,
+                              size: 18,
+                              color: Colors.red,
+                            ),
+                            onDeleted: () {
+                              setState(() {
+                                selectedLanguages.remove(language);
+                              });
+                            },
+                          );
+                        }).toList(),
+                      )
+                    : Column(
+                        children: [
+                          const Text(
+                            'Add any other travel plans, skills, talent or accomplishment that you would like to share',
+                            style: TextStyle(
                               fontFamily: 'NoirPro',
                               fontSize: 14,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w300,
                               height: 1.2,
                               letterSpacing: 0.02,
-                              color: Color(0xFF1F1F1F), 
+                              color: Color(0xFFADB7CC),
                             ),
                           ),
-                          backgroundColor: const Color(0xFFFAFAFA), 
-                          deleteIcon: const Icon(
-                            Icons.close,
-                            size: 18,
-                            color: Colors.red, 
-                          ),
-                          onDeleted: () {
+                          const SizedBox(height: 8),
+                          // Character count box
+                          Container(
+                            //width: 34, // Width of the box
+                            //height: 14, // Height of the box
+                            alignment: Alignment.centerRight,
+                            //decoration: BoxDecoration(
+                              //color:  const Color(0xFFEEEEEE), // Background color
+                              //borderRadius: BorderRadius.circular(4), // Rounded corners
+                              //opacity: 0.98, // Opacity
                             
-                            setState(() {
-                              selectedLanguages.remove(language);
-                            });
-                          },
-                        );
-                      }).toList(),
-                    )
-                  : const Text(
-                      'Choose the languages you know',
-                      style: TextStyle(
-                        fontFamily: 'NoirPro',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w300,
-                        height: 1.2,
-                        letterSpacing: 0.02,
-                        color: Color(0xFF596580), 
+                            child: Text(
+                              '$currentCharCount/160',
+                              style: const TextStyle(
+                                fontFamily: 'NoirPro',
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                height: 1.2,
+                                letterSpacing: 0.02,
+                                color: Color(0xFFEEEEEE), // Adjust color as needed
+                              ),
+                              textAlign: TextAlign.right,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 12),
+          ],
+        ),
       ),
     );
   }
 
-  
+  // Method to show language selection dialog
   void _showLanguageSelectionDialog() {
     showDialog(
       context: context,
@@ -148,7 +170,7 @@ class _BioSectionState extends State<BioSection> {
                           fontWeight: FontWeight.w400,
                           height: 1.2,
                           letterSpacing: 0.02,
-                          color: Color(0xFF1F1F1F), 
+                          color: Color(0xFF1F1F1F),
                         ),
                       ),
                       value: selectedLanguages.contains(language),
@@ -161,7 +183,7 @@ class _BioSectionState extends State<BioSection> {
                           }
                         });
                       },
-                      controlAffinity: ListTileControlAffinity.leading, 
+                      controlAffinity: ListTileControlAffinity.leading,
                     );
                   }).toList(),
                 ),
@@ -181,7 +203,7 @@ class _BioSectionState extends State<BioSection> {
               ),
               onPressed: () {
                 Navigator.of(context).pop();
-                setState(() {}); 
+                setState(() {});
               },
             ),
           ],

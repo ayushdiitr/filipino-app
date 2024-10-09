@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/explore',
+      initialRoute: '/profile',
       onGenerateRoute: _router.routeGenerate,
     );
   }
