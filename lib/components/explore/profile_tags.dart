@@ -48,7 +48,7 @@ class _FilterTagState extends State<FilterTags> {
             style: const TextStyle(
               fontFamily: 'NoirPro',
               fontSize: 14,
-              fontWeight: FontWeight.w300,
+              fontWeight: FontWeight.w400,
               height: 1.2,
               letterSpacing: 0.02,
               color: Color(0xFF3F4A61),

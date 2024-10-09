@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:testapp/components/basics_section.dart';
 import 'package:testapp/components/details_card.dart';
 import 'package:testapp/components/edit_profile.dart';
+import 'package:testapp/components/edit_profile_header.dart';
 import 'package:testapp/components/photo.dart';
 import 'package:testapp/components/photo_popup.dart';
 import 'package:testapp/components/profile_bio.dart';
@@ -55,12 +56,14 @@ class _ProfilePageState extends State<ProfilePage> {
         // Change color when scrolled beyond 0.0 offset
         if (_scrollController.offset > 50.0) {
           setState(() {
-            _appBackgroundColor = Color.fromRGBO(245, 245, 245, 1);
+            _appBackgroundColor = Colors.white;
+
             hasScrolled = false;
           });
         } else {
           setState(() {
-            _appBackgroundColor = Colors.white;
+            _appBackgroundColor = Color.fromRGBO(245, 245, 245, 1);
+
             hasScrolled = true;
           });
         }
@@ -81,31 +84,26 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
       body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
         SliverAppBar(
+          collapsedHeight: !hasScrolled ? 60 : 192,
+          automaticallyImplyLeading: false,
+          centerTitle: false,
           pinned: true,
-          floating: true,
-          backgroundColor: _appBackgroundColor,
-          stretchTriggerOffset: 50,
-          toolbarHeight: 60,
+          leading: null,
           flexibleSpace: FlexibleSpaceBar(
-              // background: Container(
-              //   color: _appBackgroundColor,
-              //   child: Padding(
-              //     padding: !hasScrolled
-              //         ? const EdgeInsets.only(
-              //             left: 16,
-              //             right: 16.0,
-              //             top: 30,
-              //           )
-              //         : const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
-              //     child: ProfileHeader(
-              //       name: 'Edit Profile',
-              //       bio: 'Complete your profile',
-              //       isVerified: true,
-              //       hasScrolled: hasScrolled,
-              //     ),
-              //   ),
-              // ),
-              ),
+            background: Container(
+              color: _appBackgroundColor,
+              child: Padding(
+                  padding: !hasScrolled
+                      ? const EdgeInsets.only(
+                          left: 16,
+                          right: 16.0,
+                          top: 40.0,
+                        )
+                      : const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 32.0),
+                  child: EditProfileHeader(hasScrolled: hasScrolled)),
+            ),
+          ),
         ),
         SliverList(
           delegate:
@@ -116,9 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 children: [
                   const SizedBox(height: 24),
-                  EditProfile(),
 
-                  const SizedBox(height: 48),
                   // const SquareImageWithButton(
                   //   imgUrl:
                   //       "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
