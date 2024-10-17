@@ -30,6 +30,7 @@ dependencies:
   permission_handler: ^11.3.1
   flutter_sticky_widgets: ^0.0.3
   dotted_border: ^2.1.0
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
