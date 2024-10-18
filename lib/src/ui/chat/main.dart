@@ -3,6 +3,8 @@ import 'package:testapp/components/bottom_menu.dart';
 import 'package:testapp/components/chat/chat_menu.dart';
 import 'package:testapp/components/chat/chat_profile_viewer.dart';
 import 'package:testapp/components/chat/chat_screen_title.dart';
+import 'package:testapp/components/chat/chat_header.dart';
+import 'package:testapp/components/chat/chatbox.dart';
 
 class ChatPage extends StatefulWidget {
   ChatPage({super.key});
