@@ -8,10 +8,8 @@ class ChatViewer extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          
           Stack(
             children: [
-              
               Container(
                 width: 56,
                 height: 56,
@@ -21,7 +19,6 @@ class ChatViewer extends StatelessWidget {
                     color: Colors.transparent,
                     width: 2,
                   ),
-                  
                   gradient: const LinearGradient(
                     colors: [Color(0xFF3AC482), Color(0xFF0FCBDF)],
                     begin: Alignment.centerLeft,
@@ -36,18 +33,17 @@ class ChatViewer extends StatelessWidget {
                   ),
                 ),
               ),
-              
               Positioned(
-                top: 42,
-                left: 42,
+                top: 40,
+                left: 40,
                 child: Container(
-                  width: 10,
-                  height: 10,
+                  width: 14,
+                  height: 14,
                   decoration: BoxDecoration(
-                    color: Color(0xFF3AC482), 
+                    color: Color(0xFF3AC482),
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: Colors.white, 
+                      color: Colors.white,
                       width: 2,
                     ),
                   ),
@@ -55,14 +51,11 @@ class ChatViewer extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(width: 16), 
-
-          
+          const SizedBox(width: 16),
           const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                
                 Text(
                   'Amit',
                   style: TextStyle(
@@ -74,9 +67,7 @@ class ChatViewer extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 4), 
-
-                
+                SizedBox(height: 4),
                 Text(
                   '13:20 - Hey Glad to connect with you',
                   style: TextStyle(
@@ -85,22 +76,19 @@ class ChatViewer extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                     height: 22 / 12,
                     letterSpacing: 0.02,
-                    color: Color(0xFF333333), 
+                    color: Color(0xFF333333),
                   ),
                 ),
               ],
             ),
           ),
-
-          
           const Icon(
             Icons.more_vert,
             size: 16,
-            color: Color(0xFF1C1B1F), 
+            color: Color(0xFF1C1B1F),
           ),
         ],
       ),
     );
   }
 }
-
