@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/components/explore/profile_tags.dart';
 import 'package:testapp/components/bottom_menu.dart';
-import 'package:testapp/components/explore/title.dart';
-import 'package:testapp/components/explore/exploreButton.dart';
 import 'package:testapp/components/chat/chat_menu.dart';
 import 'package:testapp/components/chat/chat_profile_viewer.dart';
+import 'package:testapp/components/chat/chat_screen_title.dart';
 
 class ChatPage extends StatefulWidget {
   ChatPage({super.key});
@@ -17,6 +15,7 @@ class _ChatPageState extends State<ChatPage> {
   late ScrollController _scrollController;
   late bool hasScrolled = false;
   Color _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
+  final List<String> languages = ['1', '2', '3', '4', '5', '6', '7', '8'];
 
   @override
   void initState() {
@@ -67,7 +66,8 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+      // backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
       body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
         SliverAppBar(
           pinned: true,
@@ -101,20 +101,13 @@ class _ChatPageState extends State<ChatPage> {
               SliverChildBuilderDelegate((BuildContext context, int index) {
             return Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
               child: Column(
                 children: [
-                  const SizedBox(height: 24),
-                  // EditProfile(),
-
-                  const SizedBox(height: 48),
-                  // const SquareImageWithButton(
-                  //   imgUrl:
-                  //       "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  // ),
-                  // const SizedBox(height: 16),
-                  // Verification(),
-
+                  ChatScreenTitle(
+                    title: 'Match Queue',
+                    subtitle: 'Start a conversation before connection expires',
+                  ),
                   const SizedBox(height: 16),
                 ],
               ),
@@ -129,13 +122,9 @@ class _ChatPageState extends State<ChatPage> {
             child: Column(
               children: [
                 ChatScreen(),
-                ChatViewer(),
+                ...languages.map((language) => const ChatViewer()).toList(),
                 //HeadingSection(),
                 //TitleScreen(),
-                
-                
-               
-              
               ],
             ),
           );

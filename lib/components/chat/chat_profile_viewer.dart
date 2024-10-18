@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ChatViewer extends StatelessWidget {
+  const ChatViewer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,7 +42,7 @@ class ChatViewer extends StatelessWidget {
                   width: 14,
                   height: 14,
                   decoration: BoxDecoration(
-                    color: Color(0xFF3AC482),
+                    color: const Color(0xFF3AC482),
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: Colors.white,
