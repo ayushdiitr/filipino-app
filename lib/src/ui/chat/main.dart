@@ -125,6 +125,8 @@ class _ChatPageState extends State<ChatPage> {
               children: [
                 ChatScreen(),
                 ...languages.map((language) => const ChatViewer()).toList(),
+                ChatHeader(),
+                ChatBox(),
                 //HeadingSection(),
                 //TitleScreen(),
               ],
