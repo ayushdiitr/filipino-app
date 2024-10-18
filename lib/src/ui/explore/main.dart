@@ -1,22 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/components/basics_section.dart';
-import 'package:testapp/components/details_card.dart';
-import 'package:testapp/components/edit_profile.dart';
+import 'package:testapp/components/explore/carousel.dart';
 import 'package:testapp/components/explore/profile_tags.dart';
-import 'package:testapp/components/photo.dart';
-import 'package:testapp/components/photo_popup.dart';
-import 'package:testapp/components/profile_bio.dart';
-import 'package:testapp/components/profile_header.dart';
-import 'package:testapp/components/prompt_text.dart';
-import 'package:testapp/components/prompts.dart';
-import 'package:testapp/components/top_buttons.dart';
-import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/bottom_menu.dart';
-import 'package:testapp/components/verified.dart';
-import 'package:testapp/components/heading.dart';
-import 'package:testapp/components/profile_heading.dart';
-import 'package:testapp/components/edit_profile.dart';
-import 'package:testapp/components/profile_bio.dart';
 import 'package:testapp/components/explore/title.dart';
 import 'package:testapp/components/explore/exploreButton.dart';
 
@@ -89,26 +74,7 @@ class _ExplorePageState extends State<ExplorePage> {
           backgroundColor: _appBackgroundColor,
           stretchTriggerOffset: 50,
           toolbarHeight: 60,
-          flexibleSpace: FlexibleSpaceBar(
-              // background: Container(
-              //   color: _appBackgroundColor,
-              //   child: Padding(
-              //     padding: !hasScrolled
-              //         ? const EdgeInsets.only(
-              //             left: 16,
-              //             right: 16.0,
-              //             top: 30,
-              //           )
-              //         : const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
-              //     child: ProfileHeader(
-              //       name: 'Edit Profile',
-              //       bio: 'Complete your profile',
-              //       isVerified: true,
-              //       hasScrolled: hasScrolled,
-              //     ),
-              //   ),
-              // ),
-              ),
+          flexibleSpace: FlexibleSpaceBar(),
         ),
         SliverList(
           delegate:
@@ -144,25 +110,17 @@ class _ExplorePageState extends State<ExplorePage> {
               children: [
                 //HeadingSection(),
                 TitleScreen(),
-                ExploreButton(),
-                // const SizedBox(height: 16),
-                // const BioSection(
-                //     title: 'My Bio', subtitle: 'Write a fun and punchy intro'),
-                // const SizedBox(height: 16),
-                // ProfilePrompts(),
-                // const BasicsSection(
-                //     title: 'Basics', subtitle: 'Choose the interests'),
-                // const BasicsSection(
-                //     title: 'More about yourself',
-                //     subtitle: 'Choose the interests'),
+                // SizedBox(
+                //   height: 440,
+                //   child:
+                // ),
+                // ExploreButton(),
                 FilterTags(
                     title: 'Ideal Connections',
                     subtitle:
                         'People filtered by shared interests, ready for connection'),
-                // const BioSection(
-                //     title: 'Languages I know',
-                //     subtitle: 'Choose the languages you know'),
-                const SizedBox(height: 70),
+                ProfileCarousel(),
+                const SizedBox(height: 20),
               ],
             ),
           );
