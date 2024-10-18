@@ -5,6 +5,8 @@ import 'package:testapp/components/explore/title.dart';
 import 'package:testapp/components/explore/exploreButton.dart';
 import 'package:testapp/components/chat/chat_menu.dart';
 import 'package:testapp/components/chat/chat_profile_viewer.dart';
+import 'package:testapp/components/chat/chat_header.dart';
+import 'package:testapp/components/chat/chatbox.dart';
 
 class ChatPage extends StatefulWidget {
   ChatPage({super.key});
@@ -67,7 +69,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
         SliverAppBar(
           pinned: true,
@@ -128,8 +130,10 @@ class _ChatPageState extends State<ChatPage> {
             padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: .0),
             child: Column(
               children: [
-                ChatScreen(),
-                ChatViewer(),
+                //ChatScreen(),
+                //ChatViewer(),
+                ChatHeader(),
+                ChatBox(),
                 //HeadingSection(),
                 //TitleScreen(),
                 
