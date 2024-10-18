@@ -3,6 +3,8 @@ import 'package:testapp/components/explore/profile_tags.dart';
 import 'package:testapp/components/bottom_menu.dart';
 import 'package:testapp/components/explore/title.dart';
 import 'package:testapp/components/explore/exploreButton.dart';
+import 'package:testapp/components/chat/chat_menu.dart';
+import 'package:testapp/components/chat/chat_profile_viewer.dart';
 
 class ChatPage extends StatefulWidget {
   ChatPage({super.key});
@@ -126,27 +128,14 @@ class _ChatPageState extends State<ChatPage> {
             padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: .0),
             child: Column(
               children: [
+                ChatScreen(),
+                ChatViewer(),
                 //HeadingSection(),
-                TitleScreen(),
-                ExploreButton(),
-                // const SizedBox(height: 16),
-                // const BioSection(
-                //     title: 'My Bio', subtitle: 'Write a fun and punchy intro'),
-                // const SizedBox(height: 16),
-                // ProfilePrompts(),
-                // const BasicsSection(
-                //     title: 'Basics', subtitle: 'Choose the interests'),
-                // const BasicsSection(
-                //     title: 'More about yourself',
-                //     subtitle: 'Choose the interests'),
-                FilterTags(
-                    title: 'Ideal Connections',
-                    subtitle:
-                        'People filtered by shared interests, ready for connection'),
-                // const BioSection(
-                //     title: 'Languages I know',
-                //     subtitle: 'Choose the languages you know'),
-                const SizedBox(height: 70),
+                //TitleScreen(),
+                
+                
+               
+              
               ],
             ),
           );
