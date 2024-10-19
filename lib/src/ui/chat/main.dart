@@ -7,6 +7,7 @@ import 'package:testapp/components/chat/chat_header.dart';
 import 'package:testapp/components/chat/chatbox.dart';
 import 'package:testapp/components/chat/message.dart';
 import 'package:testapp/components/chat/profile_queues.dart';
+import 'package:testapp/components/chat/profile_stack.dart';
 
 class ChatPage extends StatefulWidget {
   ChatPage({super.key});
@@ -112,6 +113,7 @@ class _ChatPageState extends State<ChatPage> {
                     title: 'Match Queue',
                     subtitle: 'Start a conversation before connection expires',
                   ),
+                  // ProfileStack(),
                   const SizedBox(height: 16),
                 ],
               ),
@@ -128,8 +130,8 @@ class _ChatPageState extends State<ChatPage> {
                 //ChatScreen(),
                 //...languages.map((language) => const ChatViewer()).toList(),
                 ChatHeader(),
-                ChatBox(),
-                MessageScreen(),
+                ProfileQueues(),
+                ProfileStack()
                 //HeadingSection(),
                 //TitleScreen(),
               ],

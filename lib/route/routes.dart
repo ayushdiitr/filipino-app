@@ -42,10 +42,10 @@ class RouteGenerator {
         );
 
       case '/chat':
-        return CupertinoPageRoute(builder: (_) => ChatScreen());
+        return CupertinoPageRoute(builder: (_) => ChatPage());
 
       case '/chat/message':
-        return CupertinoPageRoute(builder: (_) => ChatPage());
+        return CupertinoPageRoute(builder: (_) => ChatScreen());
     }
 
     return null;
