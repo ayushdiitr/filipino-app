@@ -18,55 +18,74 @@ class BottomMenu extends StatelessWidget {
           _buildMenuItem(
             imagePath: "images/account_circle.png",
             label: "Profile",
+            context: context,
+            path: '',
           ),
           _buildMenuItem(
             imagePath: "images/award_star.png",
             label: "Explore",
+            context: context,
+            path: '/explore',
           ),
           _buildMenuItem(
             imagePath: "images/connecting_airports.png",
             label: "Connect",
+            context: context,
+            path: '',
           ),
           _buildMenuItem(
             imagePath: "images/favorite.png",
             label: "Like",
+            context: context,
+            path: '',
           ),
           _buildMenuItem(
             imagePath: "images/chat.png",
             label: "Buddies",
+            context: context,
+            path: '/chat',
           ),
         ],
       ),
     );
   }
 
-  Widget _buildMenuItem({required String imagePath, required String label}) {
-    return Container(
-      height: 60,
-      width: 60,
-      padding: const EdgeInsets.all(5),
-      color: Colors.black,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            imagePath,
-            width: 20,
-            height: 20,
-          ),
-          const SizedBox(height: 2),
-          Text(
-            label,
-            style: const TextStyle(
-              fontFamily: 'NoirPro',
-              fontSize: 10,
-              fontWeight: FontWeight.w400,
-              height: 1.2,
-              letterSpacing: 0.02,
-              color: Color(0xFF8E8E8E),
+  Widget _buildMenuItem(
+      {required String imagePath,
+      required String label,
+      required String path,
+      required BuildContext context}) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, path);
+      },
+      child: Container(
+        height: 60,
+        width: 60,
+        padding: const EdgeInsets.all(5),
+        color: Colors.black,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              imagePath,
+              width: 20,
+              height: 20,
             ),
-          ),
-        ],
+            const SizedBox(height: 2),
+            Text(
+              label,
+              style: const TextStyle(
+                fontFamily: 'NoirPro',
+                fontSize: 10,
+                fontWeight: FontWeight.w400,
+                height: 1.2,
+                letterSpacing: 0.02,
+                color: Color(0xFF8E8E8E),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

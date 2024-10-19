@@ -43,6 +43,9 @@ class RouteGenerator {
 
       case '/chat':
         return CupertinoPageRoute(builder: (_) => ChatScreen());
+
+      case '/chat/message':
+        return CupertinoPageRoute(builder: (_) => ChatPage());
     }
 
     return null;
