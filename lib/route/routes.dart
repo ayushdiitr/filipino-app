@@ -4,6 +4,7 @@ import 'package:testapp/src/ui/explore/explore_profiles.dart';
 import 'package:testapp/src/ui/explore/main.dart';
 import 'package:testapp/src/ui/homepage/main.dart';
 import 'package:testapp/src/ui/homepage/profile.dart';
+import 'package:testapp/src/ui/chat/message.dart';
 
 class RouteGenerator {
   Route? routeGenerate(RouteSettings settings) {
@@ -41,7 +42,7 @@ class RouteGenerator {
         );
 
       case '/chat':
-        return CupertinoPageRoute(builder: (_) => ChatPage());
+        return CupertinoPageRoute(builder: (_) => ChatScreen());
     }
 
     return null;

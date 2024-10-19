@@ -126,11 +126,10 @@ class _ChatPageState extends State<ChatPage> {
             child: Column(
               children: [
                 //ChatScreen(),
-                ProfileQueues(),
-                ...languages.map((language) => const ChatViewer()),
+                //...languages.map((language) => const ChatViewer()).toList(),
                 ChatHeader(),
                 ChatBox(),
-                // MessageScreen(),
+                MessageScreen(),
                 //HeadingSection(),
                 //TitleScreen(),
               ],
