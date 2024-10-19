@@ -3,7 +3,6 @@ import 'package:testapp/components/explore/carousel.dart';
 import 'package:testapp/components/explore/profile_tags.dart';
 import 'package:testapp/components/bottom_menu.dart';
 import 'package:testapp/components/explore/title.dart';
-import 'package:testapp/components/explore/exploreButton.dart';
 
 class ExplorePage extends StatefulWidget {
   ExplorePage({super.key});
@@ -66,41 +65,37 @@ class _ExplorePageState extends State<ExplorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
         SliverAppBar(
+          leading: null,
+          automaticallyImplyLeading: false,
           pinned: true,
           floating: true,
           backgroundColor: _appBackgroundColor,
-          stretchTriggerOffset: 50,
-          toolbarHeight: 60,
-          flexibleSpace: FlexibleSpaceBar(),
+          // stretchTriggerOffset: 50,
+          toolbarHeight: 10,
+          // flexibleSpace: FlexibleSpaceBar(),
         ),
-        SliverList(
-          delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-            return Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
-              child: Column(
-                children: [
-                  const SizedBox(height: 24),
-                  // EditProfile(),
-
-                  const SizedBox(height: 48),
-                  // const SquareImageWithButton(
-                  //   imgUrl:
-                  //       "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  // ),
-                  // const SizedBox(height: 16),
-                  // Verification(),
-
-                  const SizedBox(height: 16),
-                ],
-              ),
-            );
-          }, childCount: 1),
-        ),
+        // SliverList(
+        //   delegate:
+        //       SliverChildBuilderDelegate((BuildContext context, int index) {
+        //     return Padding(
+        //       padding:
+        //           const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+        //       child: Column(
+        //         children: [
+        //           // const SquareImageWithButton(
+        //           //   imgUrl:
+        //           //       "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        //           // ),
+        //           // const SizedBox(height: 16),
+        //           // Verification(),
+        //         ],
+        //       ),
+        //     );
+        //   }, childCount: 1),
+        // ),
         SliverList(
             delegate:
                 SliverChildBuilderDelegate((BuildContext context, int index) {

@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/chat',
+      initialRoute: '/explore',
       onGenerateRoute: _router.routeGenerate,
     );
   }
