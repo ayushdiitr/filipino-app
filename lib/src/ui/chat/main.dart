@@ -6,6 +6,7 @@ import 'package:testapp/components/chat/chat_screen_title.dart';
 import 'package:testapp/components/chat/chat_header.dart';
 import 'package:testapp/components/chat/chatbox.dart';
 import 'package:testapp/components/chat/message.dart';
+import 'package:testapp/components/chat/profile_queues.dart';
 
 class ChatPage extends StatefulWidget {
   ChatPage({super.key});
@@ -125,10 +126,11 @@ class _ChatPageState extends State<ChatPage> {
             child: Column(
               children: [
                 //ChatScreen(),
-                //...languages.map((language) => const ChatViewer()).toList(),
-                //ChatHeader(),
-                //ChatBox(),
-                MessageScreen(),
+                ProfileQueues(),
+                ...languages.map((language) => const ChatViewer()),
+                ChatHeader(),
+                ChatBox(),
+                // MessageScreen(),
                 //HeadingSection(),
                 //TitleScreen(),
               ],

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/route/routes.dart';
-import 'package:testapp/src/ui/homepage/main.dart';
-//import 'package:testapp/src/ui/screens/splash/talk_about.dart';
-import 'package:testapp/src/ui/homepage/profile.dart';
 
 void main() {
   runApp(MyApp());
