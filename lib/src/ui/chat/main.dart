@@ -124,16 +124,26 @@ class _ChatPageState extends State<ChatPage> {
             delegate:
                 SliverChildBuilderDelegate((BuildContext context, int index) {
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: .0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
             child: Column(
               children: [
-                //ChatScreen(),
-                //...languages.map((language) => const ChatViewer()).toList(),
                 ChatHeader(),
-                ProfileQueues(),
-                ProfileStack()
-                //HeadingSection(),
-                //TitleScreen(),
+                Row(
+                  children: [
+                    SizedBox(
+                      width:
+                          70.0, // Set a fixed width, or use constraints as needed
+                      child: ProfileStack(),
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: ProfileQueues(),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           );
