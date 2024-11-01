@@ -25,7 +25,7 @@ class ProfileStack extends StatelessWidget {
           // Loop through limited profile images
           for (int i = 0; i < displayCount; i++)
             Positioned(
-              left: i * 10.0, // Adjust overlap
+              right: i * 10.0, // Adjust overlap
               child: Container(
                 width: 45,
                 height: 60,
@@ -40,7 +40,7 @@ class ProfileStack extends StatelessWidget {
             ),
           // Text for additional profiles, centered below the images
           Positioned(
-            left: displayCount * 25.0 -
+            right: displayCount * 25.0 -
                 65, // Position under the last displayed image
             bottom: 10, // Adjusted position for better alignment
             child: Container(
