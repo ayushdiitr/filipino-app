@@ -2,8 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class ProfileCarousel extends StatelessWidget {
-  final CarouselSliderController buttonCarouselController =
-      CarouselSliderController();
+  final CarouselSliderController buttonCarouselController = CarouselSliderController();
 
   final List<Map<String, String>> userProfiles = [
     {'name': 'John Doe', 'image': 'images/ravish.png', 'profession': 'SDE'},
@@ -19,65 +18,73 @@ class ProfileCarousel extends StatelessWidget {
           items: userProfiles.map((profile) {
             return Builder(
               builder: (BuildContext context) {
-                return SizedBox(
-                  height: 400, // Set minimum height for the card
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
 
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 5,
-                    child: Stack(
-                      children: <Widget>[
-                        // Background Image
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            image: DecorationImage(
+                
+                child: SizedBox(
+                  width: 348, // Set width for the card
+                  height: 487, // Set height for the card
+                  child: Opacity(
+                    opacity: 1.0, // Adjust opacity (1.0 for fully visible)
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 5,
+                      child: Stack(
+                        children: <Widget>[
+                          // Background Image
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                                
+                              
+                              image: DecorationImage(
                                 image: AssetImage(profile['image']!),
-                                fit: BoxFit.cover),
-                          ),
-                          height: 487, // Adjust height accordingly
-                        ),
-                        // Username and Profession
-                        Positioned(
-                          bottom: 10,
-                          left: 10,
-                          right: 10,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 5.0),
-                            color: Colors.transparent, // Transparent background
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  profile['name']!,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontFamily: 'NoirPro',
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                    height:
-                                        2), // Space between name and profession
-                                Text(
-                                  profile['profession']!,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: 'NoirPro',
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white70,
-                                  ),
-                                ),
-                              ],
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                          // Username and Profession
+                          Positioned(
+                            bottom: 10,
+                            left: 10,
+                            right: 10,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 5.0),
+                              color: Colors.transparent,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    profile['name']!,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontFamily: 'NoirPro',
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 2), // Space between name and profession
+                                  Text(
+                                    profile['profession']!,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontFamily: 'NoirPro',
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
+                ),
                 );
               },
             );
@@ -87,8 +94,8 @@ class ProfileCarousel extends StatelessWidget {
             autoPlay: false,
             enlargeCenterPage: true,
             viewportFraction: 0.8,
-            aspectRatio: 9 / 16, //this will be ignored due to height
-            height: 400,
+            aspectRatio: 9 / 16, // This will be ignored due to height
+            height: 487, // Set carousel height to match card height
             initialPage: 0,
           ),
         ),
