@@ -19,7 +19,7 @@ class ProfileCarousel extends StatelessWidget {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                  width: 348, // Set width for the card
+                  //width: 348, // Set width for the card
                   height: 487, // Set height for the card
                   margin: const EdgeInsets.symmetric(horizontal: 5.0), // Margin for the gap
                   child: Opacity(
