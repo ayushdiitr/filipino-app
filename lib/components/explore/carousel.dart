@@ -2,7 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class ProfileCarousel extends StatelessWidget {
-  final CarouselSliderController buttonCarouselController = CarouselSliderController();
+  final CarouselSliderController buttonCarouselController =
+      CarouselSliderController();
 
   final List<Map<String, String>> userProfiles = [
     {'name': 'John Doe', 'image': 'images/ravish.png', 'profession': 'SDE'},
@@ -21,7 +22,8 @@ class ProfileCarousel extends StatelessWidget {
                 return Container(
                   //width: 348, // Set width for the card
                   height: 487, // Set height for the card
-                  margin: const EdgeInsets.symmetric(horizontal: 5.0), // Margin for the gap
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 5.0), // Margin for the gap
                   child: Opacity(
                     opacity: 1.0, // Adjust opacity (1.0 for fully visible)
                     child: Card(
@@ -35,8 +37,6 @@ class ProfileCarousel extends StatelessWidget {
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
-                                
-                              
                               image: DecorationImage(
                                 image: AssetImage(profile['image']!),
                                 fit: BoxFit.cover,
@@ -63,7 +63,9 @@ class ProfileCarousel extends StatelessWidget {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  SizedBox(height: 2), // Space between name and profession
+                                  SizedBox(
+                                      height:
+                                          2), // Space between name and profession
                                   Text(
                                     profile['profession']!,
                                     style: TextStyle(
@@ -88,7 +90,7 @@ class ProfileCarousel extends StatelessWidget {
           carouselController: buttonCarouselController,
           options: CarouselOptions(
             autoPlay: false,
-            enlargeCenterPage: true,
+            enlargeCenterPage: false,
             viewportFraction: 0.75, // Adjust for the gap
             aspectRatio: 9 / 16, // This will be ignored due to height
             height: 487, // Set carousel height to match card height
