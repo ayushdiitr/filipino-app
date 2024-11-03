@@ -4,6 +4,8 @@ class BottomMenu extends StatelessWidget {
   const BottomMenu({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    //current route
+    final currentRoute = ModalRoute.of(context)?.settings.name;
     return Container(
       padding: const EdgeInsets.only(
         top: 10,
@@ -20,30 +22,35 @@ class BottomMenu extends StatelessWidget {
             label: "Profile",
             context: context,
             path: '',
+            isSelected: currentRoute == '/profile',
           ),
           _buildMenuItem(
             imagePath: "images/award_star.png",
             label: "Explore",
             context: context,
             path: '/explore',
+            isSelected: currentRoute!.startsWith('/explore'),
           ),
           _buildMenuItem(
             imagePath: "images/connecting_airports.png",
             label: "Connect",
             context: context,
-            path: '',
+            path: '/',
+            isSelected: currentRoute == '/',
           ),
           _buildMenuItem(
             imagePath: "images/favorite.png",
             label: "Like",
             context: context,
             path: '',
+            isSelected: currentRoute == '/like',
           ),
           _buildMenuItem(
             imagePath: "images/chat.png",
             label: "Buddies",
             context: context,
             path: '/chat',
+            isSelected: currentRoute == '/chat',
           ),
         ],
       ),
@@ -54,10 +61,15 @@ class BottomMenu extends StatelessWidget {
       {required String imagePath,
       required String label,
       required String path,
+      required bool isSelected,
       required BuildContext context}) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, path);
+        // Navigate to the specified path if it's not the current route
+        if (ModalRoute.of(context)?.settings.name != path && path.isNotEmpty) {
+          Navigator.pushNamed(context,
+              path); // This replaces the current route with the new one
+        }
       },
       child: Container(
         height: 60,
@@ -71,17 +83,18 @@ class BottomMenu extends StatelessWidget {
               imagePath,
               width: 20,
               height: 20,
+              color: isSelected ? Colors.white : Color(0xFF8E8E8E),
             ),
             const SizedBox(height: 2),
             Text(
               label,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'NoirPro',
                 fontSize: 10,
                 fontWeight: FontWeight.w400,
                 height: 1.2,
                 letterSpacing: 0.02,
-                color: Color(0xFF8E8E8E),
+                color: isSelected ? Colors.white : const Color(0xFF8E8E8E),
               ),
             ),
           ],

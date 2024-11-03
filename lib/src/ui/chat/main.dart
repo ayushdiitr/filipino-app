@@ -4,8 +4,6 @@ import 'package:testapp/components/chat/chat_menu.dart';
 import 'package:testapp/components/chat/chat_profile_viewer.dart';
 import 'package:testapp/components/chat/chat_screen_title.dart';
 import 'package:testapp/components/chat/chat_header.dart';
-import 'package:testapp/components/chat/chatbox.dart';
-import 'package:testapp/components/chat/message.dart';
 import 'package:testapp/components/chat/profile_queues.dart';
 import 'package:testapp/components/chat/profile_stack.dart';
 
@@ -71,85 +69,89 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-      backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
-      body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
-        SliverAppBar(
-          pinned: true,
-          floating: true,
-          backgroundColor: _appBackgroundColor,
-          stretchTriggerOffset: 50,
-          toolbarHeight: 60,
-          flexibleSpace: FlexibleSpaceBar(
-              // background: Container(
-              //   color: _appBackgroundColor,
-              //   child: Padding(
-              //     padding: !hasScrolled
-              //         ? const EdgeInsets.only(
-              //             left: 16,
-              //             right: 16.0,
-              //             top: 30,
-              //           )
-              //         : const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
-              //     child: ProfileHeader(
-              //       name: 'Edit Profile',
-              //       bio: 'Complete your profile',
-              //       isVerified: true,
-              //       hasScrolled: hasScrolled,
-              //     ),
-              //   ),
-              // ),
-              ),
-        ),
-        SliverList(
-          delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-            return Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-              child: Column(
-                children: [
-                  ChatScreenTitle(
-                    title: 'Match Queue',
-                    subtitle: 'Start a conversation before connection expires',
-                  ),
-                  // ProfileStack(),
-                  const SizedBox(height: 16),
-                ],
-              ),
-            );
-          }, childCount: 1),
-        ),
-        SliverList(
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+        // backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
+        body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
+          SliverAppBar(
+            pinned: true,
+            floating: true,
+            automaticallyImplyLeading: false,
+            backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+            // backgroundColor: _appBackgroundColor,
+            stretchTriggerOffset: 50,
+            toolbarHeight: 20,
+            flexibleSpace: FlexibleSpaceBar(
+                // background: Container(
+                //   color: _appBackgroundColor,
+                //   child: Padding(
+                //     padding: !hasScrolled
+                //         ? const EdgeInsets.only(
+                //             left: 16,
+                //             right: 16.0,
+                //             top: 30,
+                //           )
+                //         : const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
+                //     child: ProfileHeader(
+                //       name: 'Edit Profile',
+                //       bio: 'Complete your profile',
+                //       isVerified: true,
+                //       hasScrolled: hasScrolled,
+                //     ),
+                //   ),
+                // ),
+                ),
+          ),
+          SliverList(
             delegate:
                 SliverChildBuilderDelegate((BuildContext context, int index) {
-          return Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
-            child: Column(
-              children: [
-                ChatHeader(),
-                Row(
+              return Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                child: Column(
                   children: [
-                    SizedBox(
-                      width:
-                          70.0, // Set a fixed width, or use constraints as needed
-                      child: ProfileStack(),
+                    ChatScreenTitle(
+                      title: 'Match Queue',
+                      subtitle:
+                          'Start a conversation before connection expires',
                     ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: ProfileQueues(),
-                      ),
+                    // const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width:
+                              70.0, // Set a fixed width, or use constraints as needed
+                          child: ProfileStack(),
+                        ),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: ProfileQueues(),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-          );
-        }, childCount: 1)),
-      ]),
-      bottomNavigationBar: const BottomMenu(),
-    );
+              );
+            }, childCount: 1),
+          ),
+          SliverList(
+              delegate:
+                  SliverChildBuilderDelegate((BuildContext context, int index) {
+            return Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
+              child: Column(
+                children: [
+                  ChatScreen(),
+                  ChatViewer(),
+                ],
+              ),
+            );
+          }, childCount: 1)),
+        ]),
+        bottomNavigationBar: Builder(builder: (context) {
+          return BottomMenu();
+        }));
   }
 }

@@ -8,41 +8,46 @@ import 'package:testapp/src/ui/chat/message.dart';
 
 class RouteGenerator {
   Route? routeGenerate(RouteSettings settings) {
-    final args = settings.arguments;
-
     switch (settings.name) {
       case '/':
-        return CupertinoPageRoute(builder: (_) => HomePage());
+        return CupertinoPageRoute(
+          builder: (_) => HomePage(),
+          settings: const RouteSettings(name: '/'), // Explicitly set route name
+        );
 
       case '/profile':
-        return CupertinoPageRoute(builder: (_) => ProfilePage());
+        return CupertinoPageRoute(
+          builder: (_) => ProfilePage(),
+          settings: const RouteSettings(name: '/profile'),
+        );
 
       case '/explore':
-        return CupertinoPageRoute(builder: (_) => ExplorePage());
+        return CupertinoPageRoute(
+            builder: (_) => ExplorePage(),
+            settings: const RouteSettings(name: '/explore'));
 
       case '/explore/new':
         return CupertinoPageRoute(
-          builder: (_) => ExploreProfilePage(
-            currentPath: 'New',
-          ),
+          builder: (_) => ExploreProfilePage(currentPath: 'New'),
+          settings: const RouteSettings(name: '/explore/new'),
         );
 
       case '/explore/verified':
         return CupertinoPageRoute(
-          builder: (_) => ExploreProfilePage(
-            currentPath: 'Verified',
-          ),
+          builder: (_) => ExploreProfilePage(currentPath: 'Verified'),
+          settings: const RouteSettings(name: '/explore/verified'),
         );
 
       case '/explore/active':
         return CupertinoPageRoute(
-          builder: (_) => ExploreProfilePage(
-            currentPath: 'Active',
-          ),
+          builder: (_) => ExploreProfilePage(currentPath: 'Active'),
+          settings: const RouteSettings(name: '/explore/active'),
         );
 
       case '/chat':
-        return CupertinoPageRoute(builder: (_) => ChatPage());
+        return CupertinoPageRoute(
+            builder: (_) => ChatPage(),
+            settings: const RouteSettings(name: '/chat'));
 
       case '/chat/message':
         return CupertinoPageRoute(builder: (_) => ChatScreen());

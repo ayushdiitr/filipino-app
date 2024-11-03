@@ -1,19 +1,12 @@
-import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:testapp/components/basics_section.dart';
 import 'package:testapp/components/details_card.dart';
 import 'package:testapp/components/photo.dart';
-import 'package:testapp/components/photo_popup.dart';
-import 'package:testapp/components/profile_bio.dart';
 import 'package:testapp/components/profile_header.dart';
 import 'package:testapp/components/prompt_text.dart';
-import 'package:testapp/components/prompts.dart';
 import 'package:testapp/components/top_buttons.dart';
 import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/bottom_menu.dart';
-import 'package:testapp/components/verified.dart';
-import 'package:testapp/components/heading.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,15 +31,21 @@ class User {
   });
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late ScrollController _scrollController;
   bool hasScrolled = false;
   Color _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
   bool _showHeart = false;
+  bool _showDislike = false;
+
   late AnimationController _animationController;
+  late AnimationController _dislikeAnimationController;
+
   late Animation<double> _scaleAnimation;
   late Animation<double> _fadeAnimation;
+
+  late Animation<double> _dislikeScaleAnimation;
+  late Animation<double> _dislikeFadeAnimation;
 
   // List of users
   final List<User> _users = [
@@ -102,6 +101,11 @@ class _HomePageState extends State<HomePage>
       duration: const Duration(milliseconds: 700),
     );
 
+    _dislikeAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 700),
+    );
+
     // Scale animation from 0 to 1
     _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
@@ -117,6 +121,36 @@ class _HomePageState extends State<HomePage>
         curve: const Interval(0.5, 1.0, curve: Curves.easeOut),
       ),
     );
+
+    _dislikeScaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _dislikeAnimationController,
+        curve: Curves.easeOutBack,
+      ),
+    );
+
+    _dislikeFadeAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(
+        parent: _dislikeAnimationController,
+        curve: const Interval(0.5, 1.0, curve: Curves.easeOut),
+      ),
+    );
+
+    _dislikeAnimationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        setState(() {
+          _showDislike = false;
+          _currentUserIndex++;
+          if (_currentUserIndex >= _users.length) {
+            _currentUserIndex = 0;
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('No more profiles')),
+            );
+          }
+        });
+        _dislikeAnimationController.reset();
+      }
+    });
 
     // Add the listener once
     _animationController.addStatusListener((status) {
@@ -152,14 +186,10 @@ class _HomePageState extends State<HomePage>
     if (_users.isEmpty) return;
 
     setState(() {
-      _currentUserIndex++;
-      if (_currentUserIndex >= _users.length) {
-        _currentUserIndex = 0; // Loop back or handle accordingly
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No more profiles')),
-        );
-      }
+      _showDislike = true;
     });
+
+    _dislikeAnimationController.forward(from: 0);
   }
 
   @override
@@ -167,6 +197,7 @@ class _HomePageState extends State<HomePage>
     // Dispose the controllers when the widget is disposed
     _scrollController.dispose();
     _animationController.dispose(); // Dispose the animation controller
+    _dislikeAnimationController.dispose();
     super.dispose();
   }
 
@@ -204,6 +235,7 @@ class _HomePageState extends State<HomePage>
               ),
               SliverAppBar(
                 pinned: true,
+                automaticallyImplyLeading: false,
                 floating: true,
                 backgroundColor: _appBackgroundColor,
                 toolbarHeight: 60,
@@ -321,6 +353,35 @@ class _HomePageState extends State<HomePage>
                           scale: _scaleAnimation,
                           child: Icon(
                             Icons.favorite,
+                            size: 200,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          if (_showDislike)
+            Positioned.fill(
+              child: IgnorePointer(
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                      child: Container(
+                        color: Colors.black.withOpacity(0),
+                      ),
+                    ),
+                    Center(
+                      child: FadeTransition(
+                        opacity: _dislikeFadeAnimation,
+                        child: ScaleTransition(
+                          scale: _dislikeScaleAnimation,
+                          child: Icon(
+                            Icons.close,
                             size: 200,
                             color: Colors.black,
                           ),
