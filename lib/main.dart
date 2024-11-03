@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testapp/route/routes.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Ensures Flutter is fully initialized before running the app
+
+  final prefs = await SharedPreferences.getInstance();
+  // final isLoggedIn = false;
+  final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+  runApp(MyApp(isLoggedIn: isLoggedIn));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  final bool isLoggedIn;
+  MyApp({super.key, required this.isLoggedIn});
 
   final RouteGenerator _router = RouteGenerator();
 
@@ -22,7 +31,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/explore',
+      initialRoute: isLoggedIn ? '/explore' : '/login',
       onGenerateRoute: _router.routeGenerate,
     );
   }

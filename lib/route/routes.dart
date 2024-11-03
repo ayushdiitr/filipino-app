@@ -5,6 +5,8 @@ import 'package:testapp/src/ui/explore/main.dart';
 import 'package:testapp/src/ui/homepage/main.dart';
 import 'package:testapp/src/ui/homepage/profile.dart';
 import 'package:testapp/src/ui/chat/message.dart';
+import 'package:testapp/src/ui/splash/main.dart';
+import 'package:testapp/src/ui/splash/screen2.dart';
 
 class RouteGenerator {
   Route? routeGenerate(RouteSettings settings) {
@@ -13,6 +15,12 @@ class RouteGenerator {
         return CupertinoPageRoute(
           builder: (_) => HomePage(),
           settings: const RouteSettings(name: '/'), // Explicitly set route name
+        );
+
+      case '/login':
+        return CupertinoPageRoute(
+          builder: (_) => LoginScreen(),
+          settings: const RouteSettings(name: '/login'),
         );
 
       case '/profile':
