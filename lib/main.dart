@@ -7,8 +7,8 @@ void main() async {
       .ensureInitialized(); // Ensures Flutter is fully initialized before running the app
 
   final prefs = await SharedPreferences.getInstance();
-  // final isLoggedIn = false;
-  final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+  final isLoggedIn = true;
+  // final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
   runApp(MyApp(isLoggedIn: isLoggedIn));
 }
