@@ -21,7 +21,7 @@ class BottomMenu extends StatelessWidget {
             imagePath: "images/account_circle.png",
             label: "Profile",
             context: context,
-            path: '',
+            path: '/profile',
             isSelected: currentRoute == '/profile',
           ),
           _buildMenuItem(
