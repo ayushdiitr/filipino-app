@@ -11,21 +11,24 @@ class FilterTags extends StatefulWidget {
 }
 
 class _FilterTagState extends State<FilterTags> {
-  final List<String> languages = [
-    'Art',
-    'Gaming',
-    'Food',
-    'Travel',
-    'Photography'
-  ];
+  // Tags list
+  // final List<String> languages = [
+  //   'Art',
+  //   'Gaming',
+  //   'Food',        
+  //   'Travel',      
+  //   'Photography' 
+  // ];
 
+  // Initially selected tags
   final List<String> selectedLanguages = ['Travel', 'Food', 'Photography'];
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
         color: Color(0xFFFFFFFF),
       ),
       child: Column(
@@ -57,19 +60,13 @@ class _FilterTagState extends State<FilterTags> {
           const SizedBox(height: 12),
           GestureDetector(
             onTap: () {
-              _showLanguageSelectionDialog();
+              // Only show the popup if the user clicks on a tag that is not in the static list
+              if (selectedLanguages.contains('Art') || selectedLanguages.contains('Gaming')) {
+                _showLanguageSelectionDialog();
+              }
             },
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 0.0),
-              // decoration: BoxDecoration(
-              //   color: Colors.white,
-              //   borderRadius: BorderRadius.circular(8),
-              //   border: Border.all(
-              //     color: const Color(0xFFF5F5F5),
-              //     width: 1,
-              //   ),
-              // ),
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 0.0),
               child: selectedLanguages.isNotEmpty
                   ? Wrap(
                       spacing: 8,
@@ -96,7 +93,7 @@ class _FilterTagState extends State<FilterTags> {
                       }).toList(),
                     )
                   : const Text(
-                      'Choose the languages you know',
+                      'Choose the interests you know',
                       style: TextStyle(
                         fontFamily: 'NoirPro',
                         fontSize: 14,
@@ -131,32 +128,32 @@ class _FilterTagState extends State<FilterTags> {
               return SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: languages.map((language) {
-                    return CheckboxListTile(
-                      title: Text(
-                        language,
-                        style: const TextStyle(
-                          fontFamily: 'NoirPro',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          height: 1.2,
-                          letterSpacing: 0.02,
-                          color: Color(0xFF1F1F1F),
-                        ),
-                      ),
-                      value: selectedLanguages.contains(language),
-                      onChanged: (bool? value) {
-                        setState(() {
-                          if (value == true) {
-                            selectedLanguages.add(language);
-                          } else {
-                            selectedLanguages.remove(language);
-                          }
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity.leading,
-                    );
-                  }).toList(),
+                  // children: languages.map((language) {
+                  //   return CheckboxListTile(
+                  //     title: Text(
+                  //       language,
+                  //       style: const TextStyle(
+                  //         fontFamily: 'NoirPro',
+                  //         fontSize: 14,
+                  //         fontWeight: FontWeight.w400,
+                  //         height: 1.2,
+                  //         letterSpacing: 0.02,
+                  //         color: Color(0xFF1F1F1F),
+                  //       ),
+                  //     ),
+                  //     value: selectedLanguages.contains(language),
+                  //     onChanged: (bool? value) {
+                  //       setState(() {
+                  //         if (value == true) {
+                  //           selectedLanguages.add(language);
+                  //         } else {
+                  //           selectedLanguages.remove(language);
+                  //         }
+                  //       });
+                  //     },
+                  //     controlAffinity: ListTileControlAffinity.leading,
+                  //   );
+                  // }).toList(),
                 ),
               );
             },
