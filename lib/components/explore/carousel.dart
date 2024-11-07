@@ -91,10 +91,10 @@ class ProfileCarousel extends StatelessWidget {
           options: CarouselOptions(
             autoPlay: false,
             enlargeCenterPage: false,
-            viewportFraction: 0.8, // Adjust for the gap
+            viewportFraction: 0.9, // Adjust for the gap
             aspectRatio: 9 / 16, // This will be ignored due to height
             height: 487, // Set carousel height to match card height
-            
+
             initialPage: 0,
           ),
         ),

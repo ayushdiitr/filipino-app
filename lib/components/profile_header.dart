@@ -47,7 +47,7 @@ class ProfileHeader extends StatelessWidget {
                     if (isVerified)
                       const Icon(
                         Icons.verified,
-                        size: 16,
+                        size: 20,
                         color: Colors.black, // Verified icon color
                       ),
                   ],
