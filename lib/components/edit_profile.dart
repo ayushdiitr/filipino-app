@@ -53,7 +53,7 @@ class _EditProfileState extends State<EditProfile> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: SizedBox(
-            height: 110, // Fixed height for the grid
+            height: 250, // Fixed height for the grid
             child: GridView.builder(
               itemCount: 6, // Total 6 tiles
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -67,6 +67,8 @@ class _EditProfileState extends State<EditProfile> {
                     _pickImage(index); // Call the cropper here
                   },
                   child: Container(
+                    height: 230,
+                    width: 112,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(8.0),
