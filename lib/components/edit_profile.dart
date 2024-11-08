@@ -53,7 +53,7 @@ class _EditProfileState extends State<EditProfile> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: SizedBox(
-            height: 250, // Fixed height for the grid
+            height: 110, // Fixed height for the grid
             child: GridView.builder(
               itemCount: 6, // Total 6 tiles
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
