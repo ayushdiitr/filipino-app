@@ -30,7 +30,11 @@ class ProfileHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment
                   .start, // Align content of column to the start
               children: [
-                Row(
+                Padding(
+                  padding: EdgeInsets.only(top: 16),
+
+                
+                  child: Row(
                   crossAxisAlignment: CrossAxisAlignment
                       .center, // Center name and verified icon vertically
                   children: [
@@ -51,6 +55,7 @@ class ProfileHeader extends StatelessWidget {
                         color: Colors.black, // Verified icon color
                       ),
                   ],
+                ),
                 ),
                 const SizedBox(height: 2), // Spacing between name and bio
                 Row(
