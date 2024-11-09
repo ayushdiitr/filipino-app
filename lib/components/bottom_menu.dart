@@ -42,7 +42,7 @@ class BottomMenu extends StatelessWidget {
             imagePath: "images/favorite.png",
             label: "Like",
             context: context,
-            path: '',
+            path: '/like',
             isSelected: currentRoute == '/like',
           ),
           _buildMenuItem(
