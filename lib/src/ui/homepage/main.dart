@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:testapp/components/details_card.dart';
 import 'package:testapp/components/photo.dart';
@@ -107,7 +106,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
 
     // Scale animation from 0 to 1
-    _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _scaleAnimation = Tween<double>(begin: 0.0, end: 0.5).animate(
       CurvedAnimation(
         parent: _animationController,
         curve: Curves.easeOutBack,
@@ -122,7 +121,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       ),
     );
 
-    _dislikeScaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _dislikeScaleAnimation = Tween<double>(begin: 0.0, end: 0.5).animate(
       CurvedAnimation(
         parent: _dislikeAnimationController,
         curve: Curves.easeOutBack,
@@ -147,6 +146,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               const SnackBar(content: Text('No more profiles')),
             );
           }
+          // Reset background color after animation
+          _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
         });
         _dislikeAnimationController.reset();
       }
@@ -165,6 +166,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               const SnackBar(content: Text('No more profiles')),
             );
           }
+          // Reset background color after animation
+          _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
         });
         _animationController.reset();
       }
@@ -176,6 +179,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     setState(() {
       _showHeart = true; // Show heart
+      _appBackgroundColor = Colors.white; // Change background to white
     });
 
     // Start animation
@@ -187,8 +191,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     setState(() {
       _showDislike = true;
+      _appBackgroundColor = Colors.white; // Change background to white
     });
 
+    // Start animation
     _dislikeAnimationController.forward(from: 0);
   }
 
@@ -298,34 +304,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 promptDesc:
                                     'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
                               ),
-                              // const SizedBox(height: 16),
-                              // ProfilePrompts(),
-                              // const PromptTextScreen(
-                              //   promptTitle: 'Laptop',
-                              //   hasButton: true,
-                              // ),
                               const SizedBox(height: 16),
                             ],
                           ),
                         ),
                         const SizedBox(height: 16),
-                        // HeadingSection(),
-                        // BioSection(
-                        //   title: 'My Bio',
-                        //   subtitle: 'Write a fun and punchy intro',
-                        // ),
-                        // BasicsSection(
-                        //   title: 'Basics',
-                        //   subtitle: 'Choose your basics',
-                        // ),
-                        // BasicsSection(
-                        //   title: 'Interests',
-                        //   subtitle: 'Choose your interests',
-                        // ),
-                        // BioSection(
-                        //   title: 'Languages I know',
-                        //   subtitle: 'Choose the languages you know',
-                        // ),
                         const SizedBox(height: 100),
                       ],
                     ),
@@ -337,58 +320,36 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           if (_showHeart)
             Positioned.fill(
               child: IgnorePointer(
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                      child: Container(
-                        color: Colors.black.withOpacity(0),
+                child: Center(
+                  child: FadeTransition(
+                    opacity: _fadeAnimation,
+                    child: ScaleTransition(
+                      scale: _scaleAnimation,
+                      child: Icon(
+                        Icons.favorite,
+                        size: 100, // Smaller heart size
+                        color: Colors.black,
                       ),
                     ),
-                    Center(
-                      child: FadeTransition(
-                        opacity: _fadeAnimation,
-                        child: ScaleTransition(
-                          scale: _scaleAnimation,
-                          child: Icon(
-                            Icons.favorite,
-                            size: 200,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
           if (_showDislike)
             Positioned.fill(
               child: IgnorePointer(
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                      child: Container(
-                        color: Colors.black.withOpacity(0),
+                child: Center(
+                  child: FadeTransition(
+                    opacity: _dislikeFadeAnimation,
+                    child: ScaleTransition(
+                      scale: _dislikeScaleAnimation,
+                      child: Icon(
+                        Icons.close,
+                        size: 100, // Smaller dislike size
+                        color: Colors.black,
                       ),
                     ),
-                    Center(
-                      child: FadeTransition(
-                        opacity: _dislikeFadeAnimation,
-                        child: ScaleTransition(
-                          scale: _dislikeScaleAnimation,
-                          child: Icon(
-                            Icons.close,
-                            size: 200,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
