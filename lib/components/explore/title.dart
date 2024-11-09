@@ -14,7 +14,7 @@ class TitleScreen extends StatelessWidget {
         children: [
           // Title: Explore
           const Text(
-            'Like Screen',
+            'Explore',
             style: TextStyle(
               fontFamily: 'Baskerville',
               fontSize: 32,

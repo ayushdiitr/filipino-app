@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: isLoggedIn ? '/explore' : '/login',
+      initialRoute: isLoggedIn ? '/like' : '/login',
       onGenerateRoute: _router.routeGenerate,
     );
   }
