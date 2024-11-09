@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/components/chat/chat_screen_title.dart';
 import 'package:testapp/components/bottom_menu.dart';
+import 'package:testapp/components/like/TopSectionGrid.dart';
+import 'package:testapp/components/like/invites.dart';
+
 
 class LikePage extends StatefulWidget {
   LikePage({super.key});
@@ -63,28 +66,33 @@ class _LikePageState extends State<LikePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+      //backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+      backgroundColor: Colors.white,
       body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
         SliverAppBar(
           leading: null,
           automaticallyImplyLeading: false,
           pinned: true,
           floating: true,
-          backgroundColor: _appBackgroundColor,
-          // stretchTriggerOffset: 50,
-          toolbarHeight: 10,
+          //backgroundColor: _appBackgroundColor,
+          backgroundColor: Colors.white,
+          stretchTriggerOffset: 50,
+          toolbarHeight: 20,
           // flexibleSpace: FlexibleSpaceBar(),
         ),
         SliverList(
             delegate:
                 SliverChildBuilderDelegate((BuildContext context, int index) {
-          return const Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: .0),
+          return  Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
             child: Column(
               children: [
                 //-------------Like Screen---------------
                 ChatScreenTitle(
-                    title: 'Like', subtitle: 'like screen subtitle'),
+                    title: 'Likes Received', subtitle: 'Connection Invitation sent to you will be shown here'),
+                    BorderBox(),
+                    SizedBox(height: 10),
+                    InvitesBox(),
                 //------add components here
 
                 const SizedBox(height: 20),
