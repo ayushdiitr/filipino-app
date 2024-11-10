@@ -3,7 +3,9 @@ import 'package:testapp/components/chat/chat_screen_title.dart';
 import 'package:testapp/components/bottom_menu.dart';
 import 'package:testapp/components/like/TopSectionGrid.dart';
 import 'package:testapp/components/like/invites.dart';
-
+import 'package:testapp/components/like/togglebutton.dart';
+import 'package:testapp/components/like/like_image.dart';
+import 'package:testapp/components/like/like_header.dart';
 
 class LikePage extends StatefulWidget {
   LikePage({super.key});
@@ -90,9 +92,56 @@ class _LikePageState extends State<LikePage> {
                 //-------------Like Screen---------------
                 ChatScreenTitle(
                     title: 'Likes Received', subtitle: 'Connection Invitation sent to you will be shown here'),
-                    BorderBox(),
-                    SizedBox(height: 10),
-                    InvitesBox(),
+                    //BorderBox(),
+                    //SizedBox(height: 10),
+                    //InvitesBox(),
+                    //SizedBox(height: 20),
+                    ToggleButton(),
+                    SizedBox(height: 20),
+                    //LikeImage(),
+                    Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // First card
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4.0),
+                        child: LikeImage(),
+                      ),
+                    ),
+                    // Second card
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4.0),
+                        child: LikeImage(),
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 20),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // First card
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4.0),
+                        child: LikeImage(),
+                      ),
+                    ),
+                    // Second card
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4.0),
+                        child: LikeImage(),
+                      ),
+                    ),
+                  ],
+                ),
+
+                //LikeHeader(),
                 //------add components here
 
                 const SizedBox(height: 20),
