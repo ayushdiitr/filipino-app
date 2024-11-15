@@ -2,12 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:testapp/src/ui/chat/main.dart';
 import 'package:testapp/src/ui/explore/explore_profiles.dart';
 import 'package:testapp/src/ui/explore/main.dart';
-import 'package:testapp/src/ui/homepage/main.dart';
-import 'package:testapp/src/ui/homepage/profile.dart';
+import 'package:testapp/src/new/homepage/main.dart';
+import 'package:testapp/src/new/homepage/profile.dart';
 import 'package:testapp/src/ui/chat/message.dart';
 import 'package:testapp/src/ui/likes/main.dart';
 import 'package:testapp/src/ui/splash/main.dart';
-import 'package:testapp/src/ui/splash/screen2.dart';
 
 class RouteGenerator {
   Route? routeGenerate(RouteSettings settings) {
