@@ -9,6 +9,7 @@ import 'package:testapp/components/like/like_header.dart';
 import 'package:testapp/components/like/like_profile.dart';
 import 'package:testapp/components/like/Bottom_Button.dart';
 
+
 class LikePage extends StatefulWidget {
   LikePage({super.key});
 
@@ -146,6 +147,7 @@ class _LikePageState extends State<LikePage> {
                 LikeHeader(),
                 LikeProfile(),
                 BottomButton(),
+                
                 //------add components here
 
                 const SizedBox(height: 20),
