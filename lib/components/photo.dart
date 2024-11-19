@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:testapp/src/ui/homepage/msg_popup.dart';
 
@@ -19,8 +18,7 @@ class SquareImageWithButton extends StatelessWidget {
         children: [
           // The image
           ClipRRect(
-            borderRadius:
-                BorderRadius.circular(8), // Optional: For rounded corners
+            borderRadius: BorderRadius.circular(8), // Optional: For rounded corners
             child: Image.network(
               imgUrl,
               fit: BoxFit.cover, // Ensures the image covers the entire square
@@ -28,51 +26,166 @@ class SquareImageWithButton extends StatelessWidget {
               height: double.infinity,
             ),
           ),
-          // IconButton in the bottom right corner
+          
+          // Title and Subtitle at the bottom center just above the buttons
           Positioned(
-            bottom: 8,
-            right: 8,
+            //top: 488,
+            bottom: 110, // Position the text block above the buttons
+            left: 20,
+            right: 0, // Stretch it across the full width
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Title - "Riya Bhist"
+                Container(
+                  //width: 326, // Fixed width for the title container
+                  //height: 48, // Fixed height
+                  // decoration: BoxDecoration(
+                  //   color: Colors.transparent, // No background color
+                  // ),
+                  child: Center(
+                    child: Text(
+                      "koko_123",
+                      style: TextStyle(
+                        fontFamily: 'NoirPro',
+                        fontSize: 22,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: 0.02,
+                        height: 30.98 / 22,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height:5), // Space between title and subtitle
+
+                // Subtitle - "UX Designer"
+                Container(
+                  width: 326, // Fixed width for the subtitle container
+                  height: 17, // Fixed height
+                  // decoration: BoxDecoration(
+                  //   color: Colors.transparent, // No background color
+                  // ),
+                  child: Center(
+                    child: Text(
+                      "UX Designer",
+                      style: TextStyle(
+                        fontFamily: 'NoirPro',
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: 0.02,
+                        height: 16.9 / 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Button 
+          Positioned(
+            //top: 678,
+            bottom: 30,
+            right: 47, 
+            left: 47, 
             child: Container(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 5, horizontal: 10), // Padding around the IconButton
-              decoration: BoxDecoration(
-                color: Colors.white, // Background color for the button
-                border: const Border.symmetric(
-                  vertical: BorderSide(
-                    color: Colors.white, // Border color
-                    width: 1, // Border width
+              width: 296, 
+              height: 56, 
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween, // Spread buttons evenly
+                children: [
+                  // Button 1
+                  Container(
+                    width: 48,
+                    height: 48,
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF1F1F1F), // Primary dark color
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        print("Button 1 tapped");
+                      },
+                      child: Image.asset('images/return.png'),
+                    ),
                   ),
-                  horizontal: BorderSide(
-                    color: Colors.white, // Border color
-                    width: 1, // Border width
+                  SizedBox(width:10),
+                  // Button 2
+                  Container(
+                    width: 56,
+                    height: 56,
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF1F1F1F),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        print("Button 2 tapped");
+                      },
+                      child: Image.asset('images/dislike.png'),
+                    ),
                   ),
-                ),
-                borderRadius: BorderRadius.circular(21), // Rounded corners
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
-                child: InkWell(
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                            child: const Dialog(
-                              backgroundColor: Colors.transparent,
-                              child: SendMessageScreen(),
-                            ),
-                          );
-                        });
-                  },
-                  child: SizedBox(
-                    height: 16,
-                    child: Image.asset("images/chat_bubble.png"),
+                  SizedBox(width:10),
+                  // Button 3
+                  Container(
+                    width: 48,
+                    height: 48,
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF1F1F1F),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        print("Button 3 tapped");
+                      },
+                      child: Image.asset('images/verified.png'),
+                    ),
                   ),
-                ),
+                  SizedBox(width:10),
+                  // Button 4
+                  Container(
+                    width: 56,
+                    height: 56,
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF1F1F1F),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        print("Button 4 tapped");
+                      },
+                      child: Image.asset('images/fav.png'),
+                    ),
+                  ),
+                  SizedBox(width:10),
+                  // Button 5
+                  Container(
+                    width: 48,
+                    height: 48,
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF1F1F1F),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        print("Button 5 tapped");
+                      },
+                      child: Image.asset('images/msg.png'),
+                    ),
+                  ),
+                ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
