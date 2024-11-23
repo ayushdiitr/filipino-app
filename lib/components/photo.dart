@@ -26,7 +26,7 @@ class _SquareImageWithButtonState extends State<SquareImageWithButton> {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 9 / 16,
+      aspectRatio: 1,
       child: GestureDetector(
         onHorizontalDragUpdate: (details) {
           setState(() {

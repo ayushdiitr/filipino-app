@@ -74,8 +74,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       if (_currentUserIndex < _users.length - 1) {
         _currentUserIndex++;
       } else {
-        // Restart or do something when there are no more users
-        _currentUserIndex = 0; // Example: Restart from the first user
+        _currentUserIndex = 0;
       }
     });
   }
@@ -87,7 +86,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     _scrollController.addListener(() {
       if (_scrollController.hasClients) {
-        // Change color when scrolled beyond 50.0 offset
         if (_scrollController.offset > 50.0) {
           if (_appBackgroundColor != Colors.white) {
             setState(() {
@@ -116,7 +114,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       duration: const Duration(milliseconds: 700),
     );
 
-    // Scale animation from 0 to 1
     _scaleAnimation = Tween<double>(begin: 0.0, end: 0.5).animate(
       CurvedAnimation(
         parent: _animationController,
@@ -124,7 +121,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       ),
     );
 
-    // Fade animation from 1 to 0
     _fadeAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(
         parent: _animationController,
@@ -145,55 +141,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         curve: const Interval(0.5, 1.0, curve: Curves.easeOut),
       ),
     );
-
-    _dislikeAnimationController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        setState(() {
-          _showDislike = false;
-          _currentUserIndex++;
-          if (_currentUserIndex >= _users.length) {
-            _currentUserIndex = 0;
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('No more profiles')),
-            );
-          }
-          // Reset background color after animation
-          _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
-        });
-        _dislikeAnimationController.reset();
-      }
-    });
-
-    // Add the listener once
-    _animationController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        setState(() {
-          _showHeart = false; // Hide heart
-          _currentUserIndex++; // Move to the next user
-          if (_currentUserIndex >= _users.length) {
-            _currentUserIndex =
-                0; // Loop back to the first user or handle as needed
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('No more profiles')),
-            );
-          }
-          // Reset background color after animation
-          _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
-        });
-        _animationController.reset();
-      }
-    });
   }
 
   void _triggerHeartAnimation() {
     if (_users.isEmpty) return;
 
     setState(() {
-      _showHeart = true; // Show heart
-      _appBackgroundColor = Colors.white; // Change background to white
+      _showHeart = true;
+      _appBackgroundColor = Colors.white;
     });
 
-    // Start animation
     _animationController.forward(from: 0);
   }
 
@@ -202,32 +159,28 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     setState(() {
       _showDislike = true;
-      _appBackgroundColor = Colors.white; // Change background to white
+      _appBackgroundColor = Colors.white;
     });
 
-    // Start animation
     _dislikeAnimationController.forward(from: 0);
   }
 
   @override
   void dispose() {
-    // Dispose the controllers when the widget is disposed
     _scrollController.dispose();
-    _animationController.dispose(); // Dispose the animation controller
+    _animationController.dispose();
     _dislikeAnimationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Ensure there are users to display
     if (_users.isEmpty) {
       return Scaffold(
         body: Center(child: Text('No more profiles')),
       );
     }
 
-    // Get the current user
     final currentUser = _users[_currentUserIndex];
 
     return Scaffold(
@@ -299,17 +252,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               const CardRow(),
                               const HomeScreen(),
                               const SizedBox(height: 16),
-                              // SquareImageWithButton(
-                              //   imgUrl: currentUser.imgUrl,
-                              // ),
-                              const SizedBox(height: 16),
                               const PromptTextScreen(
                                 promptTitle: 'Prompt 1',
                                 promptDesc:
                                     'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
                               ),
-                              const SizedBox(height: 16),
-
                               const SizedBox(height: 16),
                               const PromptTextScreen(
                                 promptTitle: 'Prompt 1',
@@ -339,7 +286,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       scale: _scaleAnimation,
                       child: Icon(
                         Icons.favorite,
-                        size: 100, // Smaller heart size
+                        size: 100,
                         color: Colors.black,
                       ),
                     ),
@@ -356,8 +303,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     child: ScaleTransition(
                       scale: _dislikeScaleAnimation,
                       child: Icon(
-                        Icons.close,
-                        size: 100, // Smaller dislike size
+                        Icons.cancel,
+                        size: 100,
                         color: Colors.black,
                       ),
                     ),
@@ -365,39 +312,106 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ),
               ),
             ),
+          // Fixed Bottom Buttons
+          Positioned(
+            bottom: 30,
+            right: 47,
+            left: 47,
+            child: Container(
+              width: 296,
+              height: 56,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Button 1
+                  Container(
+                    width: 48,
+                    height: 48,
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF1F1F1F),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        print("Button 1 tapped");
+                      },
+                      child: Image.asset('images/return.png'),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  // Button 2
+                  Container(
+                    width: 56,
+                    height: 56,
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF1F1F1F),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        print("Button 2 tapped");
+                      },
+                      child: Image.asset('images/dislike.png'),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  // Button 3
+                  Container(
+                    width: 48,
+                    height: 48,
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF1F1F1F),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        print("Button 3 tapped");
+                      },
+                      child: Image.asset('images/verified.png'),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  // Button 4
+                  Container(
+                    width: 56,
+                    height: 56,
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF1F1F1F),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        print("Button 4 tapped");
+                      },
+                      child: Image.asset('images/fav.png'),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  // Button 5
+                  Container(
+                    width: 48,
+                    height: 48,
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF1F1F1F),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        print("Button 5 tapped");
+                      },
+                      child: Image.asset('images/msg.png'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
-      ),
-      bottomNavigationBar: const BottomMenu(),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(left: 32),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            FloatingActionButton(
-              heroTag: 'dislike',
-              onPressed: _triggerDislikeAction,
-              backgroundColor: Colors.black,
-              tooltip: 'Dislike',
-              child: const Icon(
-                Icons.close,
-                size: 27.36,
-                color: Colors.white,
-              ),
-            ),
-            const Spacer(),
-            FloatingActionButton(
-              heroTag: 'like',
-              onPressed: _triggerHeartAnimation,
-              backgroundColor: Colors.black,
-              tooltip: 'Send a like',
-              child: const Icon(
-                Icons.favorite_outline,
-                size: 27.36,
-                color: Colors.green,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
