@@ -15,7 +15,7 @@ class SquareImageWithButton extends StatefulWidget {
 }
 
 class _SquareImageWithButtonState extends State<SquareImageWithButton> {
-  double _dragOffset = 0; 
+  double _dragOffset = 0; // Tracks the horizontal drag offset
 
   @override
   Widget build(BuildContext context) {
@@ -24,47 +24,43 @@ class _SquareImageWithButtonState extends State<SquareImageWithButton> {
       child: GestureDetector(
         onHorizontalDragUpdate: (details) {
           setState(() {
-            _dragOffset += details.primaryDelta!; 
+            _dragOffset += details.primaryDelta!; // Update the horizontal drag position
           });
         },
         onHorizontalDragEnd: (details) {
           if (_dragOffset > 100) {
-            
+            // Swipe Right (like)
             print("Liked!");
           } else if (_dragOffset < -100) {
-            
+            // Swipe Left (dislike)
             print("Disliked!");
           }
           setState(() {
-            _dragOffset = 0; 
+            _dragOffset = 0; // Reset the position after the swipe ends
           });
         },
         child: Stack(
           children: [
-            
+            // The image
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Transform.translate(
-                offset: Offset(_dragOffset, 0), 
-                child: Image.network(
-                  widget.imgUrl,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: double.infinity,
-                ),
+              child: Image.network(
+                widget.imgUrl,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
               ),
             ),
 
-            
+            // Title and Subtitle at the bottom center just above the buttons
             Positioned(
-              bottom: 110, 
+              bottom: 110,
               left: 20,
-              right: 20,
+              right: 0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  
                   Container(
                     child: Center(
                       child: Text(
@@ -80,8 +76,7 @@ class _SquareImageWithButtonState extends State<SquareImageWithButton> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 5), 
-                  
+                  SizedBox(height: 5),
                   Container(
                     width: 326,
                     height: 17,
@@ -103,7 +98,21 @@ class _SquareImageWithButtonState extends State<SquareImageWithButton> {
               ),
             ),
 
-            
+            // Image swipe animation (drag effect)
+            Transform.translate(
+              offset: Offset(_dragOffset, 0), // Apply horizontal drag effect
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  widget.imgUrl,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
+              ),
+            ),
+
+            // Button positioned at the bottom, make sure it stays on top
             Positioned(
               bottom: 30,
               right: 47,
