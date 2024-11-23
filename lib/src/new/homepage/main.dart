@@ -69,6 +69,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   int _currentUserIndex = 0;
 
+  void _onSwipeComplete(bool isLiked) {
+    setState(() {
+      if (_currentUserIndex < _users.length - 1) {
+        _currentUserIndex++;
+      } else {
+        // Restart or do something when there are no more users
+        _currentUserIndex = 0; // Example: Restart from the first user
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -280,14 +291,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             children: [
                               SquareImageWithButton(
                                 imgUrl: currentUser.imgUrl,
+                                name: currentUser.name,
+                                bio: currentUser.bio,
+                                onSwipeComplete: _onSwipeComplete,
                               ),
                               const SizedBox(height: 16),
                               const CardRow(),
                               const HomeScreen(),
                               const SizedBox(height: 16),
-                              SquareImageWithButton(
-                                imgUrl: currentUser.imgUrl,
-                              ),
+                              // SquareImageWithButton(
+                              //   imgUrl: currentUser.imgUrl,
+                              // ),
                               const SizedBox(height: 16),
                               const PromptTextScreen(
                                 promptTitle: 'Prompt 1',
@@ -295,9 +309,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
                               ),
                               const SizedBox(height: 16),
-                              SquareImageWithButton(
-                                imgUrl: currentUser.imgUrl,
-                              ),
+
                               const SizedBox(height: 16),
                               const PromptTextScreen(
                                 promptTitle: 'Prompt 1',

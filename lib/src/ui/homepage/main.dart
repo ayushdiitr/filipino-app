@@ -278,16 +278,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               vertical: 6.0, horizontal: 12.0),
                           child: Column(
                             children: [
-                              SquareImageWithButton(
-                                imgUrl: currentUser.imgUrl,
-                              ),
+                              // SquareImageWithButton(
+                              //   imgUrl: currentUser.imgUrl,
+                              // ),
                               const SizedBox(height: 16),
                               const CardRow(),
                               const HomeScreen(),
                               const SizedBox(height: 16),
-                              SquareImageWithButton(
-                                imgUrl: currentUser.imgUrl,
-                              ),
+
                               const SizedBox(height: 16),
                               const PromptTextScreen(
                                 promptTitle: 'Prompt 1',
@@ -295,9 +293,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
                               ),
                               const SizedBox(height: 16),
-                              SquareImageWithButton(
-                                imgUrl: currentUser.imgUrl,
-                              ),
+                              // SquareImageWithButton(
+                              //   imgUrl: currentUser.imgUrl,
+                              // ),
                               const SizedBox(height: 16),
                               const PromptTextScreen(
                                 promptTitle: 'Prompt 1',
