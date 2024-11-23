@@ -318,10 +318,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             right: 47,
             left: 47,
             child: Container(
-              width: 296,
               height: 56,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Button 1
                   Container(
@@ -339,7 +339,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       child: Image.asset('images/return.png'),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  // SizedBox(width: 10),
                   // Button 2
                   Container(
                     width: 56,
@@ -356,7 +356,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       child: Image.asset('images/dislike.png'),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  // SizedBox(width: 10),
                   // Button 3
                   Container(
                     width: 48,
@@ -373,7 +373,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       child: Image.asset('images/verified.png'),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  // SizedBox(width: 10),
                   // Button 4
                   Container(
                     width: 56,
@@ -390,7 +390,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       child: Image.asset('images/fav.png'),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  // SizedBox(width: 10),
                   // Button 5
                   Container(
                     width: 48,
