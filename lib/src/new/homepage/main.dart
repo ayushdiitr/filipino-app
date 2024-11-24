@@ -322,6 +322,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //onPressed: _triggerHeartAnimation,
                 children: [
                   // Button 1
                   Container(
@@ -334,9 +335,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ),
                     child: InkWell(
                       onTap: () {
-                        print("Button 1 tapped");
+                        //print("Button 1 tapped");
+                        _triggerHeartAnimation();
                       },
                       child: Image.asset('images/return.png'),
+                      
                     ),
                   ),
                   // SizedBox(width: 10),
@@ -351,7 +354,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ),
                     child: InkWell(
                       onTap: () {
-                        print("Button 2 tapped");
+                        //print("Button 2 tapped");
+                        _triggerHeartAnimation();
                       },
                       child: Image.asset('images/dislike.png'),
                     ),
@@ -368,7 +372,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ),
                     child: InkWell(
                       onTap: () {
-                        print("Button 3 tapped");
+                        //print("Button 3 tapped");
+                        _triggerHeartAnimation();
                       },
                       child: Image.asset('images/verified.png'),
                     ),
@@ -385,7 +390,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ),
                     child: InkWell(
                       onTap: () {
-                        print("Button 4 tapped");
+                        //print("Button 4 tapped");
+                        _triggerHeartAnimation();
                       },
                       child: Image.asset('images/fav.png'),
                     ),
@@ -402,7 +408,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ),
                     child: InkWell(
                       onTap: () {
-                        print("Button 5 tapped");
+                        //print("Button 5 tapped");
+                        _triggerHeartAnimation();
                       },
                       child: Image.asset('images/msg.png'),
                     ),
