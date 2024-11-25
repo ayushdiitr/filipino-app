@@ -40,8 +40,8 @@ class _SquareImageWithButtonState extends State<SquareImageWithButton> {
             print("Liked!");
           } else if (_dragOffset < -100) {
             // Swipe Left (dislike)
-            print("Disliked!");
             widget.onSwipeComplete(false);
+            print("Disliked!");
           }
           setState(() {
             _dragOffset = 0; // Reset the position after the swipe ends
@@ -49,7 +49,7 @@ class _SquareImageWithButtonState extends State<SquareImageWithButton> {
         },
         child: Stack(
           children: [
-            // Card with rotation and drag effect
+            // Image swipe animation (moves with drag)
             Transform.translate(
               offset: Offset(_dragOffset, 0),
               child: Transform.rotate(
@@ -66,39 +66,28 @@ class _SquareImageWithButtonState extends State<SquareImageWithButton> {
               ),
             ),
 
-            // Like icon when swiped right
-            if (_dragOffset > 0)
-              Positioned(
-                top: MediaQuery.of(context).size.height * 0.3,
-                left: MediaQuery.of(context).size.width * 0.3,
-                child: Opacity(
-                  opacity: (_dragOffset / 100).clamp(0.0, 1.0), // Fade as swipe gets further
+            // Icon (like/dislike) when swiped (appears in the center and grows in size)
+            Positioned(
+              top: MediaQuery.of(context).size.height * 0.3,
+              left: MediaQuery.of(context).size.width * 0.5 - 30,
+              child: AnimatedOpacity(
+                opacity: (_dragOffset.abs() / 100).clamp(0.0, 1.0), // Fade in as swipe progresses
+                duration: Duration(milliseconds: 200),
+                child: AnimatedScale(
+                  scale: (_dragOffset.abs() / 100).clamp(1.0, 1.5), // Grow the icon as you swipe
+                  duration: Duration(milliseconds: 200),
                   child: CircleAvatar(
-                    radius: 40, // Circular background size
+                    radius: 40, // Adjust the size of the icon here
                     backgroundColor: Colors.black,
-                    child: Image.asset('images/fav.png'),
-                
+                    child: Image.asset(
+                      _dragOffset > 0
+                          ? 'images/fav.png' // "Like" icon for right swipe
+                          : 'images/dislike.png', // "Dislike" icon for left swipe
+                    ),
                   ),
                 ),
               ),
-
-            // Dislike icon when swiped left
-            if (_dragOffset < 0)
-              Positioned(
-                top: MediaQuery.of(context).size.height * 0.3,
-                right: MediaQuery.of(context).size.width * 0.3,
-                child: Opacity(
-                  opacity: (-_dragOffset / 100).clamp(0.0, 1.0), // Fade as swipe gets further
-                  child: CircleAvatar(
-                    radius: 40, 
-                    backgroundColor: Colors.black,
-                    child:
-                      Image.asset('images/dislike.png'),
-                      
-                    
-                  ),
-                ),
-              ),
+            ),
 
             // Title and bio at the bottom of the card
             Positioned(
