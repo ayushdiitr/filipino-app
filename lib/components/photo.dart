@@ -66,6 +66,40 @@ class _SquareImageWithButtonState extends State<SquareImageWithButton> {
               ),
             ),
 
+            // Like icon when swiped right
+            if (_dragOffset > 0)
+              Positioned(
+                top: MediaQuery.of(context).size.height * 0.3,
+                left: MediaQuery.of(context).size.width * 0.3,
+                child: Opacity(
+                  opacity: (_dragOffset / 100).clamp(0.0, 1.0), // Fade as swipe gets further
+                  child: CircleAvatar(
+                    radius: 40, // Circular background size
+                    backgroundColor: Colors.black,
+                    child: Image.asset('images/fav.png'),
+                
+                  ),
+                ),
+              ),
+
+            // Dislike icon when swiped left
+            if (_dragOffset < 0)
+              Positioned(
+                top: MediaQuery.of(context).size.height * 0.3,
+                right: MediaQuery.of(context).size.width * 0.3,
+                child: Opacity(
+                  opacity: (-_dragOffset / 100).clamp(0.0, 1.0), // Fade as swipe gets further
+                  child: CircleAvatar(
+                    radius: 40, 
+                    backgroundColor: Colors.black,
+                    child:
+                      Image.asset('images/dislike.png'),
+                      
+                    
+                  ),
+                ),
+              ),
+
             // Title and bio at the bottom of the card
             Positioned(
               bottom: 20,
