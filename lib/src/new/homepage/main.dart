@@ -189,47 +189,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          IconScreen(),
           CustomScrollView(
             controller: _scrollController,
             slivers: <Widget>[
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, index) {
-                    return const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
-                      // child: HeaderButtons(),
-                    );
-                  },
-                  childCount: 1,
-                ),
-              ),
               SliverAppBar(
                 pinned: true,
                 automaticallyImplyLeading: false,
                 floating: true,
                 backgroundColor: _appBackgroundColor,
-                toolbarHeight: 60,
+                toolbarHeight: 40,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
                     color: _appBackgroundColor,
                     child: Padding(
-                      padding: !hasScrolled
-                          ? const EdgeInsets.only(
-                              left: 16,
-                              right: 16.0,
-                              top: 30,
-                            )
-                          : const EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 10),
-                      // child: ProfileHeader(
-                      //   name: currentUser.name,
-                      //   bio: currentUser.bio,
-                      //   isVerified: currentUser.isVerified,
-                      //   hasScrolled: hasScrolled,
-                      // ),
-                    ),
+                        padding: !hasScrolled
+                            ? const EdgeInsets.only(
+                                left: 16,
+                                top: 30,
+                              )
+                            : const EdgeInsets.only(left: 16.0, top: 36),
+                        child: IconScreen()),
                   ),
                 ),
               ),
