@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     return const Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
-                      child: HeaderButtons(),
+                      // child: HeaderButtons(),
                     );
                   },
                   childCount: 1,
@@ -221,12 +221,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             )
                           : const EdgeInsets.symmetric(
                               horizontal: 16.0, vertical: 10),
-                      child: ProfileHeader(
-                        name: currentUser.name,
-                        bio: currentUser.bio,
-                        isVerified: currentUser.isVerified,
-                        hasScrolled: hasScrolled,
-                      ),
+                      // child: ProfileHeader(
+                      //   name: currentUser.name,
+                      //   bio: currentUser.bio,
+                      //   isVerified: currentUser.isVerified,
+                      //   hasScrolled: hasScrolled,
+                      // ),
                     ),
                   ),
                 ),
@@ -339,7 +339,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         _triggerHeartAnimation();
                       },
                       child: Image.asset('images/return.png'),
-                      
                     ),
                   ),
                   // SizedBox(width: 10),

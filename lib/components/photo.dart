@@ -30,7 +30,9 @@ class _SquareImageWithButtonState extends State<SquareImageWithButton> {
       child: GestureDetector(
         onHorizontalDragUpdate: (details) {
           setState(() {
-            _dragOffset += details.primaryDelta!;
+            final screenWidth = MediaQuery.of(context).size.width;
+            _dragOffset += details.primaryDelta! *
+                (300 / screenWidth); // Adjust for screen width
           });
         },
         onHorizontalDragEnd: (details) {
@@ -61,28 +63,35 @@ class _SquareImageWithButtonState extends State<SquareImageWithButton> {
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: double.infinity,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes!
+                              : null,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
             ),
 
             // Icon (like/dislike) when swiped (appears in the center and grows in size)
-            Positioned(
-              top: MediaQuery.of(context).size.height * 0.3,
-              left: MediaQuery.of(context).size.width * 0.5 - 30,
-              child: AnimatedOpacity(
-                opacity: (_dragOffset.abs() / 100).clamp(0.0, 1.0), // Fade in as swipe progresses
-                duration: Duration(milliseconds: 200),
-                child: AnimatedScale(
-                  scale: (_dragOffset.abs() / 100).clamp(1.0, 1.5), // Grow the icon as you swipe
+            Positioned.fill(
+              child: Center(
+                child: AnimatedOpacity(
+                  opacity: (_dragOffset.abs() / 100).clamp(0.0, 1.0),
                   duration: Duration(milliseconds: 200),
                   child: CircleAvatar(
-                    radius: 40, // Adjust the size of the icon here
-                    backgroundColor: Colors.black,
-                    child: Image.asset(
-                      _dragOffset > 0
-                          ? 'images/fav.png' // "Like" icon for right swipe
-                          : 'images/dislike.png', // "Dislike" icon for left swipe
+                    radius: 40,
+                    backgroundColor: Colors.black.withOpacity(0.7),
+                    child: Icon(
+                      _dragOffset > 0 ? Icons.favorite : Icons.close,
+                      size: 40,
+                      color: _dragOffset > 0 ? Colors.green : Colors.red,
                     ),
                   ),
                 ),
