@@ -6,6 +6,7 @@ import 'package:testapp/components/prompt_text.dart';
 import 'package:testapp/components/top_buttons.dart';
 import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/bottom_menu.dart';
+import 'package:testapp/src/new/homepage/icons.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -188,6 +189,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       body: Stack(
         alignment: Alignment.center,
         children: [
+          IconScreen(),
           CustomScrollView(
             controller: _scrollController,
             slivers: <Widget>[
