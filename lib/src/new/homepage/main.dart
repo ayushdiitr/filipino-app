@@ -242,11 +242,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               vertical: 6.0, horizontal: 12.0),
                           child: Column(
                             children: [
-                              SquareImageWithButton(
-                                imgUrl: currentUser.imgUrl,
-                                name: currentUser.name,
-                                bio: currentUser.bio,
-                                onSwipeComplete: _onSwipeComplete,
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height *
+                                    0.8, // 60% of the screen height
+                                child: SquareImageWithButton(
+                                  imgUrl: currentUser.imgUrl,
+                                  name: currentUser.name,
+                                  bio: currentUser.bio,
+                                  onSwipeComplete: _onSwipeComplete,
+                                ),
                               ),
                               const SizedBox(height: 16),
                               const CardRow(),
