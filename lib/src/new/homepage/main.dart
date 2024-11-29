@@ -37,9 +37,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Color _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
   bool _showHeart = false;
   bool _showDislike = false;
+  double _dragOffset = 0.0;
 
   late AnimationController _animationController;
   late AnimationController _dislikeAnimationController;
+
+  late AnimationController _fadeController;
+  late AnimationController _dislikeFadeController;
+  late AnimationController _scaleController;
+  late AnimationController _dislikeScaleController;
 
   late Animation<double> _scaleAnimation;
   late Animation<double> _fadeAnimation;
@@ -104,6 +110,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         }
       }
     });
+
+    // Animation Controllers for the heart/dislike feedback
+    _fadeController = AnimationController(
+      duration: Duration(milliseconds: 300),
+      vsync: this,
+    );
+
+    _dislikeFadeController = AnimationController(
+      duration: Duration(milliseconds: 300),
+      vsync: this,
+    );
+
+    _scaleController = AnimationController(
+      duration: Duration(milliseconds: 300),
+      vsync: this,
+    );
 
     _animationController = AnimationController(
       vsync: this,
@@ -202,62 +224,87 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   background: Container(
                     color: _appBackgroundColor,
                     child: Padding(
-                        padding: !hasScrolled
-                            ? const EdgeInsets.only(
-                                left: 16,
-                                top: 30,
-                              )
-                            : const EdgeInsets.only(left: 16.0, top: 36),
-                        child: IconScreen()),
+                      padding: !hasScrolled
+                          ? const EdgeInsets.only(left: 16, top: 30)
+                          : const EdgeInsets.only(left: 16.0, top: 36),
+                      child: IconScreen(), // Replace with actual widget
+                    ),
                   ),
                 ),
               ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 6.0, horizontal: 12.0),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: MediaQuery.of(context).size.height *
-                                    0.8, // 60% of the screen height
-                                child: SquareImageWithButton(
-                                  imgUrl: currentUser.imgUrl,
-                                  name: currentUser.name,
-                                  bio: currentUser.bio,
-                                  onSwipeComplete: _onSwipeComplete,
-                                ),
+                  (BuildContext context, int index) {
+                    return GestureDetector(
+                      onHorizontalDragUpdate: (details) {
+                        // Update the drag offset based on the horizontal drag movement
+                        setState(() {
+                          // This calculates how far the user has dragged horizontally
+                          _dragOffset += details.primaryDelta! *
+                              (300 / MediaQuery.of(context).size.width);
+                        });
+                      },
+                      onHorizontalDragEnd: (details) {
+                        // Handle the swipe logic once the user finishes the drag
+                        if (_dragOffset > 100) {
+                          // Call the onSwipeComplete callback with 'true' for like
+                          _onSwipeComplete(true);
+                        } else if (_dragOffset < -100) {
+                          // Call the onSwipeComplete callback with 'false' for dislike
+                          _onSwipeComplete(false);
+                        }
+
+                        // Reset the drag offset after the swipe is completed
+                        setState(() {
+                          _dragOffset = 0;
+                        });
+                      },
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 6.0, horizontal: 12.0),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.8, // 60% of the screen height
+                                    child: SquareImageWithButton(
+                                      imgUrl: currentUser.imgUrl,
+                                      name: currentUser.name,
+                                      bio: currentUser.bio,
+                                      onSwipeComplete: _onSwipeComplete,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  const CardRow(),
+                                  const HomeScreen(),
+                                  const SizedBox(height: 16),
+                                  const PromptTextScreen(
+                                    promptTitle: 'Prompt 1',
+                                    promptDesc:
+                                        'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                                  ),
+                                  const SizedBox(height: 16),
+                                  const PromptTextScreen(
+                                    promptTitle: 'Prompt 1',
+                                    promptDesc:
+                                        'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                                  ),
+                                  const SizedBox(height: 16),
+                                ],
                               ),
-                              const SizedBox(height: 16),
-                              const CardRow(),
-                              const HomeScreen(),
-                              const SizedBox(height: 16),
-                              const PromptTextScreen(
-                                promptTitle: 'Prompt 1',
-                                promptDesc:
-                                    'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                              ),
-                              const SizedBox(height: 16),
-                              const PromptTextScreen(
-                                promptTitle: 'Prompt 1',
-                                promptDesc:
-                                    'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                              ),
-                              const SizedBox(height: 16),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(height: 16),
+                            const SizedBox(height: 100),
+                          ],
                         ),
-                        const SizedBox(height: 16),
-                        const SizedBox(height: 100),
-                      ],
-                    ),
-                  );
-                }, childCount: 1),
+                      ),
+                    );
+                  },
+                  childCount: 1,
+                ),
               ),
             ],
           ),
@@ -266,13 +313,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               child: IgnorePointer(
                 child: Center(
                   child: FadeTransition(
-                    opacity: _fadeAnimation,
+                    opacity: _fadeController,
                     child: ScaleTransition(
-                      scale: _scaleAnimation,
+                      scale: _scaleController,
                       child: Icon(
                         Icons.favorite,
                         size: 100,
-                        color: Colors.black,
+                        color: Colors.green,
                       ),
                     ),
                   ),
@@ -284,13 +331,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               child: IgnorePointer(
                 child: Center(
                   child: FadeTransition(
-                    opacity: _dislikeFadeAnimation,
+                    opacity: _dislikeFadeController,
                     child: ScaleTransition(
-                      scale: _dislikeScaleAnimation,
+                      scale: _dislikeScaleController,
                       child: Icon(
                         Icons.cancel,
                         size: 100,
-                        color: Colors.black,
+                        color: Colors.red,
                       ),
                     ),
                   ),
