@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:testapp/components/details_card.dart';
 
 class SquareImageWithButton extends StatefulWidget {
   final String imgUrl;

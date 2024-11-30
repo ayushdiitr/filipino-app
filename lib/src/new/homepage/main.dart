@@ -3,6 +3,7 @@ import 'package:testapp/components/details_card.dart';
 import 'package:testapp/components/photo.dart';
 import 'package:testapp/components/profile_header.dart';
 import 'package:testapp/components/prompt_text.dart';
+import 'package:testapp/components/swipe_card.dart';
 import 'package:testapp/components/top_buttons.dart';
 import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/bottom_menu.dart';
@@ -270,28 +271,24 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   SizedBox(
                                     height: MediaQuery.of(context).size.height *
                                         0.8, // 60% of the screen height
-                                    child: SquareImageWithButton(
+                                    child: SwipeCard(
                                       imgUrl: currentUser.imgUrl,
                                       name: currentUser.name,
                                       bio: currentUser.bio,
                                       onSwipeComplete: _onSwipeComplete,
                                     ),
+                                    // child: SquareImageWithButton(
+                                    //   imgUrl: currentUser.imgUrl,
+                                    //   name: currentUser.name,
+                                    //   bio: currentUser.bio,
+                                    //   onSwipeComplete: _onSwipeComplete,
+                                    // ),
                                   ),
-                                  const SizedBox(height: 16),
-                                  const CardRow(),
-                                  const HomeScreen(),
-                                  const SizedBox(height: 16),
-                                  const PromptTextScreen(
-                                    promptTitle: 'Prompt 1',
-                                    promptDesc:
-                                        'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                                  ),
-                                  const SizedBox(height: 16),
-                                  const PromptTextScreen(
-                                    promptTitle: 'Prompt 1',
-                                    promptDesc:
-                                        'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                                  ),
+                                  // const SizedBox(height: 16),
+                                  // const CardRow(),
+                                  // const HomeScreen(),
+                                  // const SizedBox(height: 16),
+
                                   const SizedBox(height: 16),
                                 ],
                               ),
