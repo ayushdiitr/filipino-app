@@ -66,7 +66,7 @@ class _SwipeCardState extends State<SwipeCard> {
                       borderRadius: BorderRadius.circular(16),
                       child: Container(
                         width: screenWidth,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           boxShadow: [
                             BoxShadow(
                               color: Colors.white,
@@ -96,59 +96,77 @@ class _SwipeCardState extends State<SwipeCard> {
 
                                 // Text over the image at the bottom
                                 Positioned(
-                                    bottom: 16, // Adjust this value as needed
-                                    left: 16,
-                                    right: 16,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          widget.name,
-                                          style: TextStyle(
-                                            fontFamily: 'NoirPro',
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.w400,
-                                            letterSpacing: 0.02,
-                                            height: 30.98 / 22,
-                                            color: Colors.white,
-                                            shadows: [
-                                              Shadow(
-                                                blurRadius: 4,
-                                                color: Colors.black,
-                                                offset: Offset(0, 1),
-                                              ),
-                                            ],
-                                          ),
+                                  bottom: 16, // Adjust this value as needed
+                                  left: 16,
+                                  right: 16,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        widget.name,
+                                        style: const TextStyle(
+                                          fontFamily: 'NoirPro',
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w400,
+                                          letterSpacing: 0.02,
+                                          height: 30.98 / 22,
+                                          color: Colors.white,
+                                          shadows: [
+                                            Shadow(
+                                              blurRadius: 4,
+                                              color: Colors.black,
+                                              offset: Offset(0, 1),
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          widget.bio,
-                                          style: TextStyle(
-                                            fontFamily: 'NoirPro',
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
-                                            letterSpacing: 0.02,
-                                            height: 17 / 12,
-                                            color: Colors.white,
-                                            shadows: [
-                                              Shadow(
-                                                blurRadius: 4,
-                                                color: Colors.black,
-                                                offset: Offset(0, 1),
-                                              ),
-                                            ],
-                                          ),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        widget.bio,
+                                        style: const TextStyle(
+                                          fontFamily: 'NoirPro',
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                          letterSpacing: 0.02,
+                                          height: 17 / 12,
+                                          color: Colors.white,
+                                          shadows: [
+                                            Shadow(
+                                              blurRadius: 4,
+                                              color: Colors.black,
+                                              offset: Offset(0, 1),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    )),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                
+                                Positioned.fill(
+                  child: Center(
+                    child: AnimatedOpacity(
+                      opacity: (_dragOffset.abs() / 100).clamp(0.0, 1.0),
+                      duration: Duration(milliseconds: 200),
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundColor: Colors.black.withOpacity(0.7),
+                        child: Icon(
+                          _dragOffset > 0 ? Icons.favorite : Icons.close,
+                          size: 50,
+                          color: _dragOffset > 0 ? Colors.green : Colors.red,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+
                               ],
                             ),
-
                             // Text content below the image
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0, vertical: 20),
+                            const Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -174,25 +192,6 @@ class _SwipeCardState extends State<SwipeCard> {
                     ),
                   ),
                 ),
-
-                // Like/Dislike feedback icon
-                Positioned.fill(
-                  child: Center(
-                    child: AnimatedOpacity(
-                      opacity: (_dragOffset.abs() / 100).clamp(0.0, 1.0),
-                      duration: Duration(milliseconds: 200),
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundColor: Colors.black.withOpacity(0.7),
-                        child: Icon(
-                          _dragOffset > 0 ? Icons.favorite : Icons.close,
-                          size: 50,
-                          color: _dragOffset > 0 ? Colors.green : Colors.red,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
               ],
             ),
           ),
