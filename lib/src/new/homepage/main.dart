@@ -448,6 +448,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
         ],
       ),
+      bottomNavigationBar: const BottomMenu(),
     );
   }
 }
