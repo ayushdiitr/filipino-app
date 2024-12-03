@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 class MyProfile extends StatefulWidget {
   @override
@@ -18,56 +18,56 @@ class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(56),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(width: 8),
+            Container(
+              padding: const EdgeInsets.all(4),
+              child: SizedBox(
+                height: 32,
+                child: Image.asset("images/backicon.png"),
+              ),
+            ),
+            // const SizedBox(width: 10),
+            const Expanded(
+              child: Text(
+                'My Heading',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Baskerville',
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  height: 1.25,
+                  letterSpacing: 0.02,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: double.infinity,
-              height: 56,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                border: Border(
-                  bottom: BorderSide(
-                    color: Color(0xFFF5F5F5),
-                    width: 1,
-                  ),
-                ),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(width: 8),
-                  Container(
-                    padding: const EdgeInsets.all(4),
-                    child: SizedBox(
-                      height: 32,
-                      child: Image.asset("images/backicon.png"),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  const Expanded(
-                    child: Text(
-                      'My Heading',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Baskerville',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        height: 1.25,
-                        letterSpacing: 0.02,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Container(
+            //   width: double.infinity,
+            //   height: 56,
+            //   decoration: const BoxDecoration(
+            //     color: Colors.white,
+            //     border: Border(
+            //       bottom: BorderSide(
+            //         color: Color(0xFFF5F5F5),
+            //         width: 1,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             const SizedBox(height: 20),
             const Text(
               'Complete your profile for better chance of matching',
@@ -88,7 +88,8 @@ class _MyProfileState extends State<MyProfile> {
                   height: 100,
                   child: TextField(
                     controller: _controller,
-                    onChanged: (_) => _updateLength(), // Update length on change
+                    onChanged: (_) =>
+                        _updateLength(), // Update length on change
                     decoration: const InputDecoration(
                       fillColor: Colors.white,
                       hintText: "e.g. Photographer at Walter White",
