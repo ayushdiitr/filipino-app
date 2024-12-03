@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:testapp/components/swipe_card.dart';
 
 class EditProfileHeader extends StatefulWidget {
   final bool hasScrolled;
@@ -34,10 +35,15 @@ class _EditProfileState extends State<EditProfileHeader> {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                // Add your navigation or animation logic here
-                // print("Preview button clicked");
-              },
+              // onTap: () {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(builder: (context)=> SwipeCard(
+              //       imgUrl: '/profile/name', name: 'Anshika', bio: 'SWE',
+              //     )),
+              //   );
+                
+              // },
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
