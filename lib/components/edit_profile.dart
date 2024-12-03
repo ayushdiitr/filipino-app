@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:http/http.dart' as http;
 
 class EditProfile extends StatefulWidget {
   @override
@@ -39,6 +40,39 @@ class _EditProfileState extends State<EditProfile> {
           images[index] = croppedFile;
         });
       }
+    }
+  }
+
+  // Function to upload images to the API
+  Future<void> _uploadImages() async {
+    const String apiUrl =
+        'http://localhost:8000/uploadProfilePicture/9b885766-be84-460a-a22a-b0602773e39c/';
+    var request = http.MultipartRequest('POST', Uri.parse(apiUrl));
+
+    for (int i = 0; i < images.length; i++) {
+      if (images[i] != null) {
+        var file = await http.MultipartFile.fromPath(
+          'image$i', // Field name on your API endpoint
+          images[i]!.path,
+          filename: 'image$i.jpg', // Optional: specify filename
+        );
+        request.files.add(file);
+      }
+    }
+
+    // Send the request
+    try {
+      final response = await request.send();
+      if (response.statusCode == 200) {
+        print('Images uploaded successfully');
+        // Handle success, maybe show a success message
+      } else {
+        print('Failed to upload images. Status code: ${response.statusCode}');
+        // Handle failure
+      }
+    } catch (e) {
+      print('Error uploading images: $e');
+      // Handle error
     }
   }
 

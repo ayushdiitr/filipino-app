@@ -1,7 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:testapp/components/profile_heading.dart';
-import 'package:flutter/cupertino.dart';
+
 class BasicsSection extends StatefulWidget {
   final String title;
   final String subtitle;
@@ -148,14 +148,9 @@ class _BasicsSectionState extends State<BasicsSection> {
                           SizedBox(width: 12),
                           InkWell(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                CupertinoPageRoute(builder: (context) => MyProfile()),
-
-                              );
+                              Navigator.pushNamed(context, '/profile/bio');
                             },
-                          
-                          child: Icon(Icons.arrow_forward_ios),
+                            child: Icon(Icons.arrow_forward_ios),
                           ),
                         ],
                       ),

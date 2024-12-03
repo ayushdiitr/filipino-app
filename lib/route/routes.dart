@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:testapp/components/profile_heading.dart';
 import 'package:testapp/src/ui/chat/main.dart';
 import 'package:testapp/src/ui/explore/explore_profiles.dart';
 import 'package:testapp/src/ui/explore/main.dart';
@@ -27,6 +28,12 @@ class RouteGenerator {
         return CupertinoPageRoute(
           builder: (_) => ProfilePage(),
           settings: const RouteSettings(name: '/profile'),
+        );
+
+      case '/profile/bio':
+        return CupertinoPageRoute(
+          builder: (_) => MyProfile(),
+          settings: const RouteSettings(name: '/profile/bio'),
         );
 
       case '/like':
