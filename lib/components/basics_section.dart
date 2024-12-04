@@ -148,7 +148,8 @@ class _BasicsSectionState extends State<BasicsSection> {
                           SizedBox(width: 12),
                           InkWell(
                             onTap: () {
-                              Navigator.pushNamed(context, '/profile/bio');
+                              Navigator.pushNamed(
+                                  context, '/profile/' + i['title']);
                             },
                             child: Icon(Icons.arrow_forward_ios),
                           ),

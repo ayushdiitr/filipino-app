@@ -35,15 +35,12 @@ class _EditProfileState extends State<EditProfileHeader> {
               ),
             ),
             GestureDetector(
-              // onTap: () {
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(builder: (context)=> SwipeCard(
-              //       imgUrl: '/profile/name', name: 'Anshika', bio: 'SWE',
-              //     )),
-              //   );
-                
-              // },
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  '/profile/name',
+                );
+              },
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

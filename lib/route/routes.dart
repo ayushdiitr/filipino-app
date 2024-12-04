@@ -12,6 +12,8 @@ import 'package:testapp/src/ui/splash/main.dart';
 
 class RouteGenerator {
   Route? routeGenerate(RouteSettings settings) {
+    final Uri uri = Uri.parse(settings.name!);
+
     switch (settings.name) {
       case '/':
         return CupertinoPageRoute(
@@ -31,19 +33,24 @@ class RouteGenerator {
           settings: const RouteSettings(name: '/profile'),
         );
 
-      case '/profile/bio':
-        return CupertinoPageRoute(
-          builder: (_) => MyProfile(),
-          settings: const RouteSettings(name: '/profile/bio'),
-        );
-
-      // case '/profile/name':
+      // case '/profile/bio':
       //   return CupertinoPageRoute(
-      //     builder: (_) => SwipeCard(),
-      //     settings: const RouteSettings(name: '/profile/name'),
+      //     builder: (_) => MyProfile(),
+      //     settings: const RouteSettings(name: '/profile/bio'),
       //   );
 
-
+      case '/profile/name':
+        return CupertinoPageRoute(
+          builder: (_) => SwipeCard(
+            imgUrl: 'https://placehold.co/400x600',
+            name: 'Anshika',
+            bio: 'SWE',
+            onSwipeComplete: (param) {
+              print('swipe completed');
+            },
+          ),
+          settings: const RouteSettings(name: '/profile/name'),
+        );
 
       case '/like':
         return CupertinoPageRoute(
@@ -82,7 +89,16 @@ class RouteGenerator {
       case '/chat/message':
         return CupertinoPageRoute(builder: (_) => ChatScreen());
     }
-
+    // Handle dynamic routes like /profile/...
+    if (uri.pathSegments.isNotEmpty && uri.pathSegments[0] == 'profile') {
+      if (uri.pathSegments.length > 1) {
+        final String dynamicSegment = uri.pathSegments[1];
+        return CupertinoPageRoute(
+          builder: (_) => MyProfile(currentPath: dynamicSegment),
+          settings: RouteSettings(name: settings.name),
+        );
+      }
+    }
     return null;
   }
 }

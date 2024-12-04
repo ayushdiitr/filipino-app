@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyProfile extends StatefulWidget {
+  final String currentPath;
+
+  const MyProfile({super.key, required this.currentPath});
   @override
   _MyProfileState createState() => _MyProfileState();
 }
@@ -22,19 +25,25 @@ class _MyProfileState extends State<MyProfile> {
         preferredSize: Size.fromHeight(56),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(width: 8),
-            Container(
-              padding: const EdgeInsets.all(4),
-              child: SizedBox(
-                height: 32,
-                child: Image.asset("images/backicon.png"),
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(4),
+                child: SizedBox(
+                  height: 32,
+                  child: Image.asset("images/backicon.png"),
+                ),
               ),
             ),
             // const SizedBox(width: 10),
-            const Expanded(
+            Expanded(
               child: Text(
-                'My Heading',
+                widget.currentPath,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Baskerville',
