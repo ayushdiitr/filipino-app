@@ -95,28 +95,29 @@ class _BioSectionState extends State<BioSection> {
                       )
                     : Column(
                         children: [
-                          const Text(
-                            'Add any other travel plans, skills, talent or accomplishment that you would like to share',
-                            style: TextStyle(
-                              fontFamily: 'NoirPro',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w300,
-                              height: 1.2,
-                              letterSpacing: 0.02,
-                              color: Color(0xFFADB7CC),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                '/profile/bio',
+                              );
+                            },
+                            child: const Text(
+                              'Add any other travel plans, skills, talent or accomplishment that you would like to share',
+                              style: TextStyle(
+                                fontFamily: 'NoirPro',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w300,
+                                height: 1.2,
+                                letterSpacing: 0.02,
+                                color: Color(0xFFADB7CC),
+                              ),
                             ),
                           ),
                           const SizedBox(height: 8),
                           // Character count box
                           Container(
-                            //width: 34, // Width of the box
-                            //height: 14, // Height of the box
                             alignment: Alignment.centerRight,
-                            //decoration: BoxDecoration(
-                              //color:  const Color(0xFFEEEEEE), // Background color
-                              //borderRadius: BorderRadius.circular(4), // Rounded corners
-                              //opacity: 0.98, // Opacity
-                            
                             child: Text(
                               '$currentCharCount/160',
                               style: const TextStyle(

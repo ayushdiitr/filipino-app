@@ -62,64 +62,72 @@ class _HeadingSectionState extends State<HeadingSection> {
           ),
           const SizedBox(height: 12), // Gap before the prompt box
 
-          // Prompt box with character count
-          SizedBox(
-            width: double.infinity,
-            height: 52,
-            child: Stack(
-              children: [
-                TextField(
-                  controller: _controller,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(50), // Max 50 characters
-                  ],
-                  decoration: const InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    focusColor: Colors.black,
-                    hintText: "Add a prompt",
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xFFEEEEEE),
-                        width: 1,
+          // Gesture to navigate on tap
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/profile/bio',
+              );
+            },
+            child: SizedBox(
+              width: double.infinity,
+              height: 52,
+              child: Stack(
+                children: [
+                  TextField(
+                    controller: _controller,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(50), // Max 50 characters
+                    ],
+                    decoration: const InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      focusColor: Colors.black,
+                      hintText: "Add a prompt",
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFEEEEEE),
+                          width: 1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromRGBO(75, 75, 75, 1),
+                          width: 0.7,
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 16.0,
+                        horizontal: 16.0,
+                      ),
+                      hintStyle: TextStyle(
+                        fontFamily: 'NoirPro',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300,
+                        letterSpacing: 0.02,
+                        color: Color(0xFFADB7CC),
                       ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromRGBO(75, 75, 75, 1),
-                        width: 0.7,
+                  ),
+                  // Character count overlay
+                  Positioned(
+                    right: 10, // Adjust as needed
+                    bottom: 12, // Adjust to position it properly
+                    child: Text(
+                      '$currentCharCount/50', // Display character count
+                      style: const TextStyle(
+                        fontFamily: 'NoirPro',
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        height: 1.2,
+                        letterSpacing: 0.02,
+                        color: Color(0xFFCACACA),
                       ),
                     ),
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 16.0,
-                      horizontal: 16.0,
-                    ),
-                    hintStyle: TextStyle(
-                      fontFamily: 'NoirPro',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w300,
-                      letterSpacing: 0.02,
-                      color: Color(0xFFADB7CC),
-                    ),
                   ),
-                ),
-                // Character count overlay
-                Positioned(
-                  right: 10, // Adjust as needed
-                  bottom: 12, // Adjust to position it properly
-                  child: Text(
-                    '$currentCharCount/50', // Display character count
-                    style: const TextStyle(
-                      fontFamily: 'NoirPro',
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      height: 1.2,
-                      letterSpacing: 0.02,
-                      color: Color(0xFFCACACA),
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
