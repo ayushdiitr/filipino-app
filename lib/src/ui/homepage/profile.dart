@@ -7,6 +7,7 @@ import 'package:testapp/components/prompts.dart';
 import 'package:testapp/components/bottom_menu.dart';
 import 'package:testapp/components/verified.dart';
 import 'package:testapp/components/heading.dart';
+import 'package:testapp/components/interest.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({super.key});
@@ -127,6 +128,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 const BioSection(
                     title: 'My Bio', subtitle: 'Write a fun and punchy intro'),
                 // const SizedBox(height: 16),
+                const InterestScreen(),
                 ProfilePrompts(),
                 const BasicsSection(
                     title: 'Basics', subtitle: 'Choose the interests'),
