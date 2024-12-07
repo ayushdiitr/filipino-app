@@ -57,7 +57,17 @@ class _ProfilePromptsState extends State<ProfilePrompts> {
                 .map((i) => Column(
                       children: [
                         const SizedBox(height: 8),
-                        DottedBorder(
+                        GestureDetector(
+                                onTap: () {
+                                  
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => NextScreen(), 
+                                    ),
+                                  );
+                                },
+                        child: DottedBorder(
                           color: const Color(0xFFE1E1E1), // Border color
                           strokeWidth: 1,
                           dashPattern: [5, 5],
@@ -85,6 +95,7 @@ class _ProfilePromptsState extends State<ProfilePrompts> {
                             ),
                           ),
                         ),
+                        ),
                       ],
                     ))
                 .toList()
@@ -92,3 +103,16 @@ class _ProfilePromptsState extends State<ProfilePrompts> {
         ));
   }
 }
+
+//next screen
+class NextScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text('You are now on the next screen!'),
+      ),
+    );
+  }
+}
+
