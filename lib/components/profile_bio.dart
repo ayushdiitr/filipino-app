@@ -99,7 +99,7 @@ class _BioSectionState extends State<BioSection> {
                             onTap: () {
                               Navigator.pushNamed(
                                 context,
-                                '/profile/bio',
+                                '/profile/language',
                               );
                             },
                             child: const Text(

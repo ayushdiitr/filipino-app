@@ -5,35 +5,43 @@ class InterestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const SizedBox(height: 32),
-          const Text(
-            'INTERESTS',
-            style: TextStyle(
-              fontFamily: 'NoirPro',
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-              letterSpacing: 0.12,
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+      decoration: const BoxDecoration(
+        color: Color(0xFFFFFFFF),
+      ),
+      // constraints: const BoxConstraints(minHeight: 200),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // const SizedBox(height: 32),
+            const Text(
+              'INTERESTS',
+              style: TextStyle(
+                fontFamily: 'NoirPro',
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+                letterSpacing: 0.12,
+              ),
+              textAlign: TextAlign.left,
             ),
-            textAlign: TextAlign.left,
-          ),
-          const SizedBox(height: 16),
-          // Interests boxes
-          Wrap(
-            spacing: 10, // Gap between boxes
-            runSpacing: 10, // Gap between rows
-            children: [
-              interestBox('🚜 Machine'),
-              interestBox('🧦 Textile'),
-              interestBox('🧑‍🎨 Design'),
-              interestBox('🧑‍🎨 Design'),
-              interestBox('🎨 Arts'),
-            ],
-          ),
-        ],
+            const SizedBox(height: 16),
+            // Interests boxes
+            Wrap(
+              spacing: 10, // Gap between boxes
+              runSpacing: 10, // Gap between rows
+              children: [
+                interestBox('🚜 Machine'),
+                interestBox('🧦 Textile'),
+                interestBox('🧑‍🎨 Design'),
+                interestBox('🧑‍🎨 Design'),
+                interestBox('🎨 Arts'),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -125,20 +125,20 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 HeadingSection(),
                 // const SizedBox(height: 16),
-                const BioSection(
-                    title: 'My Bio', subtitle: 'Write a fun and punchy intro'),
+                // const BioSection(
+                //     title: 'My Bio', subtitle: 'Write a fun and punchy intro'),
                 // const SizedBox(height: 16),
                 const InterestScreen(),
-                ProfilePrompts(),
-                const BasicsSection(
-                    title: 'Basics', subtitle: 'Choose the interests'),
-                const BasicsSection(
-                    title: 'More about yourself',
-                    subtitle: 'Choose the interests'),
-                const BioSection(
-                    title: 'Languages I know',
-                    subtitle: 'Choose the languages you know'),
-                const SizedBox(height: 70),
+                // ProfilePrompts(),
+                // const BasicsSection(
+                //     title: 'Basics', subtitle: 'Choose the interests'),
+                // const BasicsSection(
+                //     title: 'More about yourself',
+                //     subtitle: 'Choose the interests'),
+                // const BioSection(
+                //     title: 'Languages I know',
+                //     subtitle: 'Choose the languages you know'),
+                // const SizedBox(height: 70),
               ],
             ),
           );

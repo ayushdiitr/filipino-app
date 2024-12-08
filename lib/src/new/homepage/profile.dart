@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:testapp/components/basics_section.dart';
 import 'package:testapp/components/edit_profile.dart';
 import 'package:testapp/components/edit_profile_header.dart';
+import 'package:testapp/components/interest.dart';
 import 'package:testapp/components/profile_bio.dart';
 import 'package:testapp/components/prompts.dart';
 import 'package:testapp/components/bottom_menu.dart';
@@ -128,6 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     title: 'My Bio', subtitle: 'Write a fun and punchy intro'),
                 // const SizedBox(height: 16),
                 ProfilePrompts(),
+                const InterestScreen(),
                 const BasicsSection(
                     title: 'Basics', subtitle: 'Choose the interests'),
                 const BasicsSection(
