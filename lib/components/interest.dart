@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/src/ui/splash/interest.dart';
 
 class InterestScreen extends StatelessWidget {
   const InterestScreen({super.key});
@@ -10,12 +11,10 @@ class InterestScreen extends StatelessWidget {
       decoration: const BoxDecoration(
         color: Color(0xFFFFFFFF),
       ),
-      // constraints: const BoxConstraints(minHeight: 200),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // const SizedBox(height: 32),
             const Text(
               'INTERESTS',
               style: TextStyle(
@@ -33,11 +32,11 @@ class InterestScreen extends StatelessWidget {
               spacing: 10, // Gap between boxes
               runSpacing: 10, // Gap between rows
               children: [
-                interestBox('🚜 Machine'),
-                interestBox('🧦 Textile'),
-                interestBox('🧑‍🎨 Design'),
-                interestBox('🧑‍🎨 Design'),
-                interestBox('🎨 Arts'),
+                interestBox('🚜 Machine', context),
+                interestBox('🧦 Textile', context),
+                interestBox('🧑‍🎨 Design', context),
+                interestBox('🧑‍🎨 Design', context),
+                interestBox('🎨 Arts', context),
               ],
             ),
           ],
@@ -46,33 +45,43 @@ class InterestScreen extends StatelessWidget {
     );
   }
 
-  Widget interestBox(String text) {
-    return Container(
-      constraints: const BoxConstraints(
-        maxWidth: 102,
-        minHeight: 37,
-      ),
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFAFAFA), // Background color
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(4),
-        ),
-        border: Border.all(
-          color: const Color(0xFFF5F5F5), // Border color
-        ),
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontFamily: 'NoirPro',
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            letterSpacing: 0.12,
-            color: Colors.black,
+  Widget interestBox(String text, BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const InterestSelectionScreen(),
           ),
-          textAlign: TextAlign.center,
+        );
+      },
+      child: Container(
+        constraints: const BoxConstraints(
+          maxWidth: 102,
+          minHeight: 37,
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+          color: const Color(0xFFFAFAFA), // Background color
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(4),
+          ),
+          border: Border.all(
+            color: const Color(0xFFF5F5F5), // Border color
+          ),
+        ),
+        child: Center(
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontFamily: 'NoirPro',
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0.12,
+              color: Colors.black,
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );
