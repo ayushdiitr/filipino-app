@@ -15,48 +15,48 @@ class BasicsSection extends StatefulWidget {
 class _BasicsSectionState extends State<BasicsSection> {
   List<Map> basics = [
     {
-      'title': 'Work',
+      'title': 'work',
       'icon': Icons.work_outline,
       'data': 'Add workplace',
     },
     {
-      'title': 'Education',
+      'title': 'education',
       'icon': Icons.school_outlined,
     },
     {
-      'title': 'Gender',
+      'title': 'gender',
       'icon': Icons.person_outline,
     },
     {
-      'title': 'Location',
+      'title': 'location',
       'icon': Icons.location_on_outlined,
     },
     {
-      'title': 'Hometown',
+      'title': 'hometown',
       'icon': Icons.home_outlined,
     },
   ];
 
   List<Map> interest = [
     {
-      'title': 'Looking for',
+      'title': 'looking for',
       'icon': Icons.person_search_outlined,
       'data': 'Add workplace',
     },
     {
-      'title': 'Education',
+      'title': 'education',
       'icon': Icons.business_center,
     },
     {
-      'title': 'Drinking',
+      'title': 'drinking',
       'icon': Icons.wine_bar,
     },
     {
-      'title': 'Smoking',
+      'title': 'smoking',
       'icon': Icons.smoking_rooms_outlined,
     },
     {
-      'title': 'Politics',
+      'title': 'politics',
       'icon': Icons.gavel,
     },
     {
@@ -118,13 +118,14 @@ class _BasicsSectionState extends State<BasicsSection> {
                           Icon(i['icon']),
                           SizedBox(width: 8),
                           Text(
-                            i.values.first.toString(),
-                            style: TextStyle(
+                            i.values.first.toString().toUpperCase(),
+                            style: const TextStyle(
                               fontFamily: 'NoirPro',
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
                               height: 1.2, // line-height: 16.8px
                               letterSpacing: 0.02,
+
                               color: Color(
                                   0xFF4B4B4B), // var(--Secondary-600, #3F4A61)
                             ),

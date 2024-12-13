@@ -8,28 +8,14 @@ import 'package:testapp/components/top_buttons.dart';
 import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/bottom_menu.dart';
 import 'package:testapp/src/new/homepage/icons.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
-}
-
-class User {
-  final String name;
-  final String bio;
-  final String imgUrl;
-  final bool isVerified;
-  final String? description;
-
-  User({
-    required this.name,
-    required this.bio,
-    required this.imgUrl,
-    this.isVerified = false,
-    required this.description,
-  });
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
@@ -54,32 +40,67 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late Animation<double> _dislikeScaleAnimation;
   late Animation<double> _dislikeFadeAnimation;
 
-  // List of users
-  final List<User> _users = [
-    User(
-      name: 'Anshika',
-      bio: 'SWE',
-      imgUrl:
-          "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isVerified: true,
-      description: 'I am a software engineer',
-    ),
-    User(
-      name: 'John Doe',
-      bio: 'Graphic Designer',
-      imgUrl:
-          "https://images.unsplash.com/photo-1556740772-1a741367b93e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isVerified: false,
-      description: 'I am a graphic designer',
-    ),
-    // Add more users as needed
-  ];
+  List<dynamic> users = []; // Store fetched user data
+  bool isLoading = true; // Show a loading indicator while fetching data
+
+  // Fetch data from the API
+  Future<void> fetchUserData() async {
+    final String apiUrl =
+        'http://35.154.234.237/getAllUsers/'; // Replace with your API URL
+
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = jsonDecode(response.body);
+
+        setState(() {
+          users =
+              responseData['data']; // Store the fetched data in the users list
+          print(users[1]['profile_picture']);
+          isLoading = false; // Stop the loading indicator once data is fetched
+        });
+      } else {
+        // Handle error response
+        setState(() {
+          isLoading = false;
+        });
+        print('Failed to load data: ${response.statusCode}');
+      }
+    } catch (error) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error: $error');
+    }
+  }
+
+  // // List of users
+  // final List<User> users = [
+  //   User(
+  //     name: 'Anshika',
+  //     bio: 'SWE',
+  //     imgUrl:
+  //         "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     isVerified: true,
+  //     description: 'I am a software engineer',
+  //   ),
+  //   User(
+  //     name: 'John Doe',
+  //     bio: 'Graphic Designer',
+  //     imgUrl:
+  //         "https://images.unsplash.com/photo-1556740772-1a741367b93e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     isVerified: false,
+  //     description: 'I am a graphic designer',
+  //   ),
+  //   // Add more users as needed
+  // ];
 
   int _currentUserIndex = 0;
 
   void _onSwipeComplete(bool isLiked) {
     setState(() {
-      if (_currentUserIndex < _users.length - 1) {
+      if (_currentUserIndex < users.length - 1) {
         _currentUserIndex++;
       } else {
         _currentUserIndex = 0;
@@ -90,6 +111,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    fetchUserData();
     _scrollController = ScrollController();
 
     _scrollController.addListener(() {
@@ -168,7 +190,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   void _triggerHeartAnimation() {
-    if (_users.isEmpty) return;
+    if (users.isEmpty) return;
 
     setState(() {
       _showHeart = true;
@@ -179,7 +201,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   void _triggerDislikeAction() {
-    if (_users.isEmpty) return;
+    if (users.isEmpty) return;
 
     setState(() {
       _showDislike = true;
@@ -199,13 +221,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (_users.isEmpty) {
+    if (users.isEmpty) {
       return Scaffold(
         body: Center(child: Text('No more profiles')),
       );
     }
 
-    final currentUser = _users[_currentUserIndex];
+    final currentUser = users[_currentUserIndex];
 
     return Scaffold(
       backgroundColor: _appBackgroundColor,
@@ -272,9 +294,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     height: MediaQuery.of(context).size.height *
                                         0.8, // 60% of the screen height
                                     child: SwipeCard(
-                                      imgUrl: currentUser.imgUrl,
-                                      name: currentUser.name,
-                                      bio: currentUser.bio,
+                                      imgUrl: currentUser['profile_picture'],
+                                      // 'https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Fallback if null
+                                      name: currentUser['name'],
+                                      bio: currentUser['bio'],
                                       onSwipeComplete: _onSwipeComplete,
                                     ),
                                     // child: SquareImageWithButton(

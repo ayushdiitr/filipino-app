@@ -88,7 +88,10 @@ class _SwipeCardState extends State<SwipeCard> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16),
                                     image: DecorationImage(
-                                      image: NetworkImage(widget.imgUrl),
+                                      image: NetworkImage(widget
+                                              .imgUrl.isNotEmpty
+                                          ? 'http://35.154.234.237${widget.imgUrl}'
+                                          : 'https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -100,7 +103,8 @@ class _SwipeCardState extends State<SwipeCard> {
                                   left: 16,
                                   right: 16,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         widget.name,
@@ -143,30 +147,35 @@ class _SwipeCardState extends State<SwipeCard> {
                                   ),
                                 ),
 
-                                
                                 Positioned.fill(
-                  child: Center(
-                    child: AnimatedOpacity(
-                      opacity: (_dragOffset.abs() / 100).clamp(0.0, 1.0),
-                      duration: Duration(milliseconds: 200),
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundColor: Colors.black.withOpacity(0.7),
-                        child: Icon(
-                          _dragOffset > 0 ? Icons.favorite : Icons.close,
-                          size: 50,
-                          color: _dragOffset > 0 ? Colors.green : Colors.red,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-
+                                  child: Center(
+                                    child: AnimatedOpacity(
+                                      opacity: (_dragOffset.abs() / 100)
+                                          .clamp(0.0, 1.0),
+                                      duration: Duration(milliseconds: 200),
+                                      child: CircleAvatar(
+                                        radius: 50,
+                                        backgroundColor:
+                                            Colors.black.withOpacity(0.7),
+                                        child: Icon(
+                                          _dragOffset > 0
+                                              ? Icons.favorite
+                                              : Icons.close,
+                                          size: 50,
+                                          color: _dragOffset > 0
+                                              ? Colors.green
+                                              : Colors.red,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
                               ],
                             ),
                             // Text content below the image
                             const Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 20),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

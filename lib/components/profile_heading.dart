@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MyProfile extends StatefulWidget {
   final String currentPath;
@@ -11,11 +13,55 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   final TextEditingController _controller = TextEditingController();
   int _currentLength = 0;
+  final TextEditingController locationController = TextEditingController();
 
   void _updateLength() {
     setState(() {
       _currentLength = _controller.text.length;
     });
+  }
+
+  late String text = widget.currentPath.toString()[0].toUpperCase() +
+      widget.currentPath.toString().substring(1);
+
+  // Function to send data to the API
+  Future<void> updateProfile() async {
+    const String baseUrl =
+        "http://35.154.234.237"; // Replace with your base URL
+    const String endpoint =
+        "/updateProfile/9b885766-be84-460a-a22a-b0602773e39c/";
+
+    // Prepare the payload
+    Map<String, String> data = {
+      widget.currentPath: _controller.text,
+    };
+    // Send POST request
+    try {
+      final response = await http.post(
+        Uri.parse(
+            '$baseUrl/updateProfile/9b885766-be84-460a-a22a-b0602773e39c/'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 200) {
+        // Handle successful response
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Profile updated successfully'),
+        ));
+        Navigator.pop(context);
+      } else {
+        // Handle failure response
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Failed to update profile'),
+        ));
+      }
+    } catch (error) {
+      // Handle error
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Error: $error'),
+      ));
+    }
   }
 
   @override
@@ -43,7 +89,7 @@ class _MyProfileState extends State<MyProfile> {
             // const SizedBox(width: 10),
             Expanded(
               child: Text(
-                widget.currentPath,
+                text,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Baskerville',
@@ -144,6 +190,25 @@ class _MyProfileState extends State<MyProfile> {
               ],
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ElevatedButton(
+          onPressed: updateProfile,
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size(double.infinity, 50), // Full-width button
+            backgroundColor: const Color(0xFF4CAF50), // Custom button color
+          ),
+          child: const Text(
+            'Save Profile',
+            style: TextStyle(
+              fontFamily: 'NoirPro',
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
     );

@@ -46,13 +46,14 @@ class _EditProfileState extends State<EditProfile> {
   // Function to upload images to the API
   Future<void> _uploadImages() async {
     const String apiUrl =
-        'http://localhost:8000/uploadProfilePicture/9b885766-be84-460a-a22a-b0602773e39c/';
+        'http://10.0.2.2:8000/uploadPictures/3ab787ad-9a9a-4a52-a0c2-fd06fbd6745c/';
     var request = http.MultipartRequest('POST', Uri.parse(apiUrl));
 
     for (int i = 0; i < images.length; i++) {
       if (images[i] != null) {
         var file = await http.MultipartFile.fromPath(
-          'image$i', // Field name on your API endpoint
+          // 'image$i', // Field name on your API endpoint
+          'profile_picture', // Field name on your API endpoint
           images[i]!.path,
           filename: 'image$i.jpg', // Optional: specify filename
         );
@@ -127,6 +128,15 @@ class _EditProfileState extends State<EditProfile> {
               },
             ),
           ),
+        ),
+        ButtonBar(
+          alignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: _uploadImages,
+              child: const Text('Upload Images'),
+            ),
+          ],
         ),
       ],
     );
