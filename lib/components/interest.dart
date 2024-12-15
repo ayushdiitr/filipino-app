@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/src/ui/splash/interest.dart';
+import 'package:testapp/src/ui/splash/interest_copy.dart';
 
 class InterestScreen extends StatelessWidget {
   const InterestScreen({super.key});
