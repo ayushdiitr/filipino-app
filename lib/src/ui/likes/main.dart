@@ -8,7 +8,8 @@ import 'package:testapp/components/like/like_image.dart';
 import 'package:testapp/components/like/like_header.dart';
 import 'package:testapp/components/like/like_profile.dart';
 import 'package:testapp/components/like/Bottom_Button.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LikePage extends StatefulWidget {
   LikePage({super.key});
@@ -17,14 +18,52 @@ class LikePage extends StatefulWidget {
   State<LikePage> createState() => _LikePageState();
 }
 
+bool isLoading = true;
+Map<String, dynamic> profileData = {};
+List<dynamic> likedUsers = [];
+
 class _LikePageState extends State<LikePage> {
   late ScrollController _scrollController;
   late bool hasScrolled = false;
   Color _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
 
+  // Fetch data from the API
+  Future<void> fetchUserData() async {
+    final String apiUrl =
+        'http://35.154.234.237/profile/profileDetails/9b885766-be84-460a-a22a-b0602773e39c/'; // Replace with your API URL
+
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = jsonDecode(response.body);
+
+        setState(() {
+          profileData =
+              responseData['data']; // Store the fetched data in the users list
+          likedUsers = profileData['liked_users'];
+          isLoading = false; // Stop the loading indicator once data is fetched
+          print(likedUsers);
+        });
+      } else {
+        // Handle error response
+        setState(() {
+          isLoading = false;
+        });
+        print('Failed to load data: ${response.statusCode}');
+      }
+    } catch (error) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error: $error');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    fetchUserData();
     _scrollController = ScrollController();
 
     _scrollController.addListener(() {
@@ -88,35 +127,42 @@ class _LikePageState extends State<LikePage> {
         SliverList(
             delegate:
                 SliverChildBuilderDelegate((BuildContext context, int index) {
-          return  Padding(
+          return Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
             child: Column(
               children: [
                 //-------------Like Screen---------------
                 ChatScreenTitle(
-                    title: 'Likes Received', subtitle: 'Connection Invitation sent to you will be shown here'),
-                    //BorderBox(),
-                    //SizedBox(height: 10),
-                    //InvitesBox(),
-                    //SizedBox(height: 20),
-                    ToggleButton(),
-                    SizedBox(height: 20),
-                    //LikeImage(),
-                    Row(
+                    title: 'Likes Received',
+                    subtitle:
+                        'Connection Invitation sent to you will be shown here'),
+                //BorderBox(),
+                //SizedBox(height: 10),
+                //InvitesBox(),
+                //SizedBox(height: 20),
+                ToggleButton(),
+                SizedBox(height: 20),
+                //LikeImage(),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // First card
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4.0),
-                        child: LikeImage(),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/like/details');
+                      },
+                      child: Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 4.0),
+                          child: LikeImage(user: likedUsers[0]),
+                        ),
                       ),
                     ),
                     // Second card
                     Expanded(
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 4.0),
-                        child: LikeImage(),
+                        child: LikeImage(user: likedUsers[0]),
                       ),
                     ),
                   ],
@@ -131,23 +177,23 @@ class _LikePageState extends State<LikePage> {
                     Expanded(
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 4.0),
-                        child: LikeImage(),
+                        child: LikeImage(user: likedUsers[0]),
                       ),
                     ),
                     // Second card
                     Expanded(
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 4.0),
-                        child: LikeImage(),
+                        child: LikeImage(user: likedUsers[0]),
                       ),
                     ),
                   ],
                 ),
 
-                LikeHeader(),
-                LikeProfile(),
-                BottomButton(),
-                
+                // LikeHeader(),
+                // LikeProfile(),
+                // BottomButton(),
+
                 //------add components here
 
                 const SizedBox(height: 20),

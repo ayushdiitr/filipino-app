@@ -4,16 +4,18 @@ class LikeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 56.0,  // Set the height of the header
-      color: Colors.white,  // Set the background color
-      padding: EdgeInsets.symmetric(horizontal: 16.0),  // Optional: Add horizontal padding
+      height: 56.0, // Set the height of the header
+      color: Colors.white, // Set the background color
+      padding: EdgeInsets.symmetric(
+        horizontal: 16.0,
+      ), // Optional: Add horizontal padding
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Back Button
           GestureDetector(
             onTap: () {
-              // Define your back action here
+              Navigator.pop(context); // Navigate back to the previous screen
             },
             child: Container(
               width: 32.0,
@@ -23,7 +25,7 @@ class LikeHeader extends StatelessWidget {
                 borderRadius: BorderRadius.circular(2),
               ),
               child: Image.asset(
-                'images/back.png',  // Your custom back button image
+                'images/back.png', // Your custom back button image
                 width: 24.0,
                 height: 24.0,
               ),

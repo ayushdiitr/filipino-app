@@ -8,6 +8,7 @@ class SwipeCard extends StatefulWidget {
   final String imgUrl;
   final String name;
   final String bio;
+  final bool isGestureEnabled;
   final Function(bool) onSwipeComplete;
 
   const SwipeCard({
@@ -16,6 +17,7 @@ class SwipeCard extends StatefulWidget {
     required this.name,
     required this.bio,
     required this.onSwipeComplete,
+    this.isGestureEnabled = true,
   }) : super(key: key);
 
   @override
@@ -31,26 +33,32 @@ class _SwipeCardState extends State<SwipeCard> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     // Adjust height for the image
-    final imageHeight = screenHeight * 0.8; // 80% height for image
+    final imageHeight = widget.isGestureEnabled
+        ? screenHeight * 0.8
+        : screenHeight * 0.6; // 80% height for image
 
     return GestureDetector(
-      onHorizontalDragUpdate: (details) {
-        setState(() {
-          _dragOffset += details.primaryDelta! * (300 / screenWidth);
-        });
-      },
-      onHorizontalDragEnd: (details) {
-        if (_dragOffset > 100) {
-          widget.onSwipeComplete(true);
-          print("Liked!");
-        } else if (_dragOffset < -100) {
-          widget.onSwipeComplete(false);
-          print("Disliked!");
-        }
-        setState(() {
-          _dragOffset = 0;
-        });
-      },
+      onHorizontalDragUpdate: widget.isGestureEnabled
+          ? (details) {
+              setState(() {
+                _dragOffset += details.primaryDelta! * (300 / screenWidth);
+              });
+            }
+          : null,
+      onHorizontalDragEnd: widget.isGestureEnabled
+          ? (details) {
+              if (_dragOffset > 100) {
+                widget.onSwipeComplete(true);
+                print("Liked!");
+              } else if (_dragOffset < -100) {
+                widget.onSwipeComplete(false);
+                print("Disliked!");
+              }
+              setState(() {
+                _dragOffset = 0;
+              });
+            }
+          : null,
       child: Center(
         child: Container(
           width: screenWidth,

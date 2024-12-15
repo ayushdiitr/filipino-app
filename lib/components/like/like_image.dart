@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
 class LikeImage extends StatelessWidget {
+  final Map<String, dynamic> user;
+
+  late String imgUrl = user['profile_picture'];
+
+  LikeImage({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -10,7 +19,7 @@ class LikeImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         color: Colors.transparent,
         image: DecorationImage(
-          image: AssetImage('images/Rectangle 1.png'), // Image path
+          image: NetworkImage('http://35.154.234.237' + imgUrl), // Image path
           fit: BoxFit.cover,
         ),
         gradient: LinearGradient(
@@ -53,7 +62,7 @@ class LikeImage extends StatelessWidget {
             bottom: 45,
             left: 16,
             child: Text(
-              'Riya Bisht',
+              user['name'],
               style: TextStyle(
                 fontFamily: 'NoirPro',
                 fontSize: 14.0,
@@ -70,7 +79,8 @@ class LikeImage extends StatelessWidget {
             bottom: 25,
             left: 16,
             child: Text(
-              'UX Designer at Google',
+              user['bio'],
+              // 'UX Designer at Google',
               style: TextStyle(
                 fontFamily: 'NoirPro',
                 fontSize: 10.0,
@@ -97,5 +107,3 @@ class LikeImage extends StatelessWidget {
     );
   }
 }
-
-

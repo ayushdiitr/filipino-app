@@ -8,6 +8,7 @@ import 'package:testapp/src/new/homepage/main.dart';
 import 'package:testapp/src/new/homepage/profile.dart';
 import 'package:testapp/src/ui/chat/message.dart';
 import 'package:testapp/src/ui/likes/main.dart';
+import 'package:testapp/src/ui/likes/userDetailed.dart';
 import 'package:testapp/src/ui/splash/main.dart';
 
 class RouteGenerator {
@@ -55,6 +56,11 @@ class RouteGenerator {
       case '/like':
         return CupertinoPageRoute(
           builder: (_) => LikePage(),
+          settings: const RouteSettings(name: '/like'),
+        );
+      case '/like/details':
+        return CupertinoPageRoute(
+          builder: (_) => LikedUserDetailed(),
           settings: const RouteSettings(name: '/like'),
         );
 
