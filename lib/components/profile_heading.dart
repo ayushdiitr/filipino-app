@@ -15,6 +15,8 @@ class _MyProfileState extends State<MyProfile> {
   int _currentLength = 0;
   final TextEditingController locationController = TextEditingController();
 
+  bool get isProfileValid => _controller.text.isNotEmpty; // Example validation
+
   void _updateLength() {
     setState(() {
       _currentLength = _controller.text.length;
@@ -35,6 +37,7 @@ class _MyProfileState extends State<MyProfile> {
     Map<String, String> data = {
       widget.currentPath: _controller.text,
     };
+
     // Send POST request
     try {
       final response = await http.post(
@@ -194,19 +197,29 @@ class _MyProfileState extends State<MyProfile> {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ElevatedButton(
-          onPressed: updateProfile,
-          style: ElevatedButton.styleFrom(
-            minimumSize: const Size(double.infinity, 50), // Full-width button
-            backgroundColor: const Color(0xFF4CAF50), // Custom button color
-          ),
-          child: const Text(
-            'Save Profile',
-            style: TextStyle(
-              fontFamily: 'NoirPro',
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
+        child: FractionallySizedBox(
+          widthFactor: 1, // Full-width button
+          child: ElevatedButton(
+            onPressed: isProfileValid ? updateProfile : null, // Enable only when valid
+            style: ElevatedButton.styleFrom(
+              backgroundColor:
+                  isProfileValid ? Colors.black : Colors.grey, // Button color change based on validity
+              foregroundColor: Colors.white,
+              minimumSize: const Size(double.infinity, 50),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4)
+              ), // Full-width button
+              textStyle: const TextStyle(
+                fontFamily: 'NoirPro',
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            child: const Text(
+              'Save Profile',
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
         ),
