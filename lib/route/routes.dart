@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:testapp/components/profile_heading.dart';
 import 'package:testapp/components/swipe_card.dart';
+import 'package:testapp/src/ui/animation/onboarding.dart';
 import 'package:testapp/src/ui/chat/main.dart';
 import 'package:testapp/src/ui/explore/explore_profiles.dart';
 import 'package:testapp/src/ui/explore/main.dart';
@@ -19,6 +20,7 @@ class RouteGenerator {
     // Define static routes
     switch (settings.name) {
       case '/':
+        return _cupertinoRoute(Onboarding(), '/');
         return _cupertinoRoute(const HomePage(), '/');
 
       case '/login':
