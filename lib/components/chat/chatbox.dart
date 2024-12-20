@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ChatBox extends StatelessWidget {
+  final TextEditingController messageController;
+  final VoidCallback sendMessage;
+
+  ChatBox({
+    required this.messageController,
+    required this.sendMessage,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -25,6 +33,7 @@ class ChatBox extends StatelessWidget {
               // Expanded widget allows the TextField to take up the remaining space
               Expanded(
                 child: TextField(
+                  controller: messageController,
                   textAlign: TextAlign.left,
                   textAlignVertical:
                       TextAlignVertical.center, // Centers the text vertically
@@ -49,16 +58,23 @@ class ChatBox extends StatelessWidget {
                     letterSpacing: 0.02,
                     color: Colors.black,
                   ),
+                  onSubmitted: (value) {
+                    sendMessage(); // Trigger sendMessage when Enter is pressed
+                  },
                 ),
               ),
               // Icon aligned to the center vertically
               Padding(
                 padding: const EdgeInsets.only(
                     right: 11), // Adds right padding to the icon
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 19,
-                  color: Color(0xFF808080),
+                child: GestureDetector(
+                  onTap:
+                      sendMessage, // Trigger sendMessage when the icon is tapped
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 19,
+                    color: Color(0xFF808080),
+                  ),
                 ),
               ),
             ],

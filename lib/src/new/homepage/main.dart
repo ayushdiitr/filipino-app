@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   // Fetch data from the API
   Future<void> fetchUserData() async {
     final String apiUrl =
-        'http://35.154.234.237/getAllUsers/'; // Replace with your API URL
+        'http://10.0.2.2:8000/getAllUsers/'; // Replace with your API URL
 
     try {
       final response = await http.get(Uri.parse(apiUrl));

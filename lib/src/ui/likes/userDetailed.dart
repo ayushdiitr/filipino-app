@@ -317,7 +317,9 @@ class _LikedUserDetailedState extends State<LikedUserDetailed>
             bottom: 24,
             right: 47,
             left: 47,
-            child: BottomButton(),
+            child: BottomButton(
+              id: currentUser['id'],
+            ),
           ),
           if (_showHeart)
             Positioned.fill(

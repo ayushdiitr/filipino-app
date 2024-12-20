@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:testapp/components/profile_heading.dart';
 import 'package:testapp/components/swipe_card.dart';
 import 'package:testapp/src/ui/chat/main.dart';
@@ -15,96 +16,105 @@ class RouteGenerator {
   Route? routeGenerate(RouteSettings settings) {
     final Uri uri = Uri.parse(settings.name!);
 
+    // Define static routes
     switch (settings.name) {
       case '/':
-        return CupertinoPageRoute(
-          builder: (_) => HomePage(),
-          settings: const RouteSettings(name: '/'), // Explicitly set route name
-        );
+        return _cupertinoRoute(const HomePage(), '/');
 
       case '/login':
-        return CupertinoPageRoute(
-          builder: (_) => LoginScreen(),
-          settings: const RouteSettings(name: '/login'),
-        );
+        return _cupertinoRoute(const LoginScreen(), '/login');
 
       case '/profile':
-        return CupertinoPageRoute(
-          builder: (_) => ProfilePage(),
-          settings: const RouteSettings(name: '/profile'),
-        );
-
-      // case '/profile/bio':
-      //   return CupertinoPageRoute(
-      //     builder: (_) => MyProfile(),
-      //     settings: const RouteSettings(name: '/profile/bio'),
-      //   );
+        return _cupertinoRoute(ProfilePage(), '/profile');
 
       case '/profile/name':
-        return CupertinoPageRoute(
-          builder: (_) => SwipeCard(
+        return _cupertinoRoute(
+          SwipeCard(
             imgUrl: 'https://placehold.co/400x600',
             name: 'Anshika',
             bio: 'SWE',
             onSwipeComplete: (param) {
-              print('swipe completed');
+              print('Swipe completed');
             },
           ),
-          settings: const RouteSettings(name: '/profile/name'),
+          '/profile/name',
         );
 
       case '/like':
-        return CupertinoPageRoute(
-          builder: (_) => LikePage(),
-          settings: const RouteSettings(name: '/like'),
-        );
+        return _cupertinoRoute(LikePage(), '/like');
+
       case '/like/details':
-        return CupertinoPageRoute(
-          builder: (_) => LikedUserDetailed(),
-          settings: const RouteSettings(name: '/like'),
-        );
+        return _cupertinoRoute(const LikedUserDetailed(), '/like/details');
 
       case '/explore':
-        return CupertinoPageRoute(
-            builder: (_) => ExplorePage(),
-            settings: const RouteSettings(name: '/explore'));
+        return _cupertinoRoute(ExplorePage(), '/explore');
 
       case '/explore/new':
-        return CupertinoPageRoute(
-          builder: (_) => ExploreProfilePage(currentPath: 'New'),
-          settings: const RouteSettings(name: '/explore/new'),
-        );
+        return _cupertinoRoute(
+            const ExploreProfilePage(currentPath: 'New'), '/explore/new');
 
       case '/explore/verified':
-        return CupertinoPageRoute(
-          builder: (_) => ExploreProfilePage(currentPath: 'Verified'),
-          settings: const RouteSettings(name: '/explore/verified'),
-        );
+        return _cupertinoRoute(
+            const ExploreProfilePage(currentPath: 'Verified'),
+            '/explore/verified');
 
       case '/explore/active':
-        return CupertinoPageRoute(
-          builder: (_) => ExploreProfilePage(currentPath: 'Active'),
-          settings: const RouteSettings(name: '/explore/active'),
-        );
+        return _cupertinoRoute(
+            const ExploreProfilePage(currentPath: 'Active'), '/explore/active');
 
       case '/chat':
-        return CupertinoPageRoute(
-            builder: (_) => ChatPage(),
-            settings: const RouteSettings(name: '/chat'));
-
-      case '/chat/message':
-        return CupertinoPageRoute(builder: (_) => ChatScreen());
+        return _cupertinoRoute(ChatPage(), '/chat');
     }
-    // Handle dynamic routes like /profile/...
-    if (uri.pathSegments.isNotEmpty && uri.pathSegments[0] == 'profile') {
-      if (uri.pathSegments.length > 1) {
+
+    // Handle dynamic routes like `/chat/message/:userId`
+    if (uri.pathSegments.isNotEmpty) {
+      // `/chat/message/:userId` route
+      if (uri.pathSegments[0] == 'chat' &&
+          uri.pathSegments.length > 1 &&
+          uri.pathSegments[1] == 'message' &&
+          uri.pathSegments.length > 2) {
+        final String userId = uri.pathSegments[2];
+        return _cupertinoRoute(
+            ChatScreen(
+              conversationId: userId,
+              currentUserId: '3ab787ad-9a9a-4a52-a0c2-fd06fbd6745c',
+              recipientUserId: '9b885766-be84-460a-a22a-b0602773e39c',
+            ),
+            '/chat/message/$userId');
+      }
+
+      // `/profile/:dynamicSegment` route
+      if (uri.pathSegments[0] == 'profile' && uri.pathSegments.length > 1) {
         final String dynamicSegment = uri.pathSegments[1];
-        return CupertinoPageRoute(
-          builder: (_) => MyProfile(currentPath: dynamicSegment),
-          settings: RouteSettings(name: settings.name),
-        );
+        return _cupertinoRoute(
+            MyProfile(currentPath: dynamicSegment), '/profile/$dynamicSegment');
       }
     }
-    return null;
+
+    // Fallback for unmatched routes
+    return _cupertinoRoute(const NotFoundScreen(), '/404');
+  }
+
+  // Helper method to create a CupertinoPageRoute
+  CupertinoPageRoute _cupertinoRoute(Widget widget, String routeName) {
+    return CupertinoPageRoute(
+      builder: (_) => widget,
+      settings: RouteSettings(name: routeName),
+    );
+  }
+}
+
+// Example NotFoundScreen
+class NotFoundScreen extends StatelessWidget {
+  const NotFoundScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('404 - Page Not Found')),
+      body: const Center(
+        child: Text('The page you are looking for does not exist.'),
+      ),
+    );
   }
 }
