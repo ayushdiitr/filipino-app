@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:testapp/src/ui/animation/iphone.dart';
 import 'package:testapp/src/ui/animation/next_skip.dart';
+import 'package:testapp/src/ui/animation/meetups.dart';
+import 'package:testapp/src/ui/animation/match.dart';
+
 
 
 class OnboardingScreen extends StatelessWidget {
@@ -70,7 +73,10 @@ class OnboardingScreen extends StatelessWidget {
                 
                 Column(
                   children: [
-                    //iPhonePhoto(),
+                    iPhonePhoto(),
+                    
+                    MeetupScreen(),
+                    MatchScreen(),
                     NextSkipButtons(), 
                   ],
                 ),
