@@ -36,7 +36,7 @@ class MeetupScreen extends StatelessWidget {
               child: Opacity(
                 opacity: 1.0, // Set the opacity to 0 as per your request
                 child: Image.asset(
-                  'images/Screen.png', // Path for the center image
+                  'images/meet.png', // Path for the center image
                   fit: BoxFit.cover,
                 ),
               ),
