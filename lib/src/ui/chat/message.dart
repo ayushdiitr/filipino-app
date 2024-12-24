@@ -180,34 +180,43 @@ class MessageScreen extends StatelessWidget {
                 ? CrossAxisAlignment.end
                 : CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 311,
-                padding: const EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color:
-                      isSentByCurrentUser ? Colors.blue[100] : Colors.grey[200],
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(24),
-                    topRight: Radius.circular(16),
-                    bottomRight: isSentByCurrentUser
-                        ? Radius.circular(4)
-                        : Radius.circular(16),
-                    bottomLeft: isSentByCurrentUser
-                        ? Radius.circular(16)
-                        : Radius.circular(4),
+              Row(
+                mainAxisAlignment: isSentByCurrentUser
+                    ? MainAxisAlignment.end
+                    : MainAxisAlignment.start,
+                children: [
+                  Container(
+                    // width: 311,
+                    constraints: BoxConstraints(maxWidth: 311),
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      color: isSentByCurrentUser
+                          ? Colors.blue[100]
+                          : Colors.grey[200],
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24),
+                        topRight: Radius.circular(16),
+                        bottomRight: isSentByCurrentUser
+                            ? Radius.circular(4)
+                            : Radius.circular(16),
+                        bottomLeft: isSentByCurrentUser
+                            ? Radius.circular(16)
+                            : Radius.circular(4),
+                      ),
+                    ),
+                    child: Text(
+                      message['content'] ?? '',
+                      style: TextStyle(
+                        fontFamily: 'NoirPro',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: 0.02,
+                        color: Colors.black.withOpacity(0.6),
+                        height: 1.5,
+                      ),
+                    ),
                   ),
-                ),
-                child: Text(
-                  message['content'] ?? '',
-                  style: TextStyle(
-                    fontFamily: 'NoirPro',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: 0.02,
-                    color: Colors.black.withOpacity(0.6),
-                    height: 1.5,
-                  ),
-                ),
+                ],
               ),
               // Timestamp placeholder (for now)
               Padding(

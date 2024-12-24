@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
 
 class CardRow extends StatelessWidget {
-  const CardRow({super.key});
+  final String gender;
+  final String birthDate;
+
+  const CardRow({super.key, required this.gender, required this.birthDate});
+
+  int calculateAge(String birthDate) {
+    // Parse the input birthDate string to a DateTime object
+    DateTime birthDateTime = DateTime.parse(birthDate);
+
+    // Get the current date
+    DateTime currentDate = DateTime.now();
+
+    // Calculate the difference in years
+    int age = currentDate.year - birthDateTime.year;
+
+    // Adjust age if the current date is before the birthday in the current year
+    if (currentDate.month < birthDateTime.month ||
+        (currentDate.month == birthDateTime.month &&
+            currentDate.day < birthDateTime.day)) {
+      age--;
+    }
+
+    return age;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final int age = calculateAge(birthDate);
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.only(
@@ -17,7 +41,7 @@ class CardRow extends StatelessWidget {
               topLeft: Radius.circular(12), topRight: Radius.circular(12)),
           color: Color.fromRGBO(255, 255, 255, 1),
         ),
-        child: const Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(
@@ -35,7 +59,7 @@ class CardRow extends StatelessWidget {
                       children: [
                         Icon(Icons.man, size: 24),
                         SizedBox(width: 8),
-                        Text("Female",
+                        Text(gender,
                             style:
                                 TextStyle(fontSize: 14, fontFamily: 'NoirPro')),
                       ],
@@ -75,7 +99,7 @@ class CardRow extends StatelessWidget {
                       children: [
                         Icon(Icons.cake_outlined, size: 24),
                         SizedBox(width: 8),
-                        Text("20",
+                        Text(age.toString(),
                             style:
                                 TextStyle(fontSize: 14, fontFamily: 'NoirPro')),
                       ],

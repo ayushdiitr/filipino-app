@@ -4,8 +4,6 @@ import 'package:testapp/src/ui/animation/next_skip.dart';
 import 'package:testapp/src/ui/animation/meetups.dart';
 import 'package:testapp/src/ui/animation/match.dart';
 
-
-
 class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,8 @@ class OnboardingScreen extends StatelessWidget {
               children: [
                 // Title and Count Row with 1/3 on the right corner
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between to push elements apart
+                  mainAxisAlignment: MainAxisAlignment
+                      .spaceBetween, // Space between to push elements apart
                   children: [
                     Text(
                       "Welcome to Filipino Flare!",
@@ -70,14 +69,10 @@ class OnboardingScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
 
-                
                 Column(
                   children: [
                     iPhonePhoto(),
-                    
-                    MeetupScreen(),
-                    MatchScreen(),
-                    NextSkipButtons(), 
+                    NextSkipButtons(),
                   ],
                 ),
               ],

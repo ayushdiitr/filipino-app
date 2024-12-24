@@ -9,6 +9,7 @@ class SwipeCard extends StatefulWidget {
   final String name;
   final String bio;
   final bool isGestureEnabled;
+  final Map details;
   final Function(bool) onSwipeComplete;
 
   const SwipeCard({
@@ -17,6 +18,7 @@ class SwipeCard extends StatefulWidget {
     required this.name,
     required this.bio,
     required this.onSwipeComplete,
+    required this.details,
     this.isGestureEnabled = true,
   }) : super(key: key);
 
@@ -181,16 +183,19 @@ class _SwipeCardState extends State<SwipeCard> {
                               ],
                             ),
                             // Text content below the image
-                            const Padding(
+                            Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 16.0, vertical: 20),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  CardRow(),
-                                  HomeScreen(),
-                                  const PromptTextScreen(
-                                    promptTitle: 'Prompt 1',
+                                  CardRow(
+                                    gender: widget.details['gender']!,
+                                    birthDate: widget.details['birth_date']!,
+                                  ),
+                                  const HomeScreen(),
+                                  PromptTextScreen(
+                                    promptTitle: widget.details['name'],
                                     promptDesc:
                                         'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
                                   ),

@@ -8,36 +8,29 @@ class ChatHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          
           IconButton(
             icon: const Icon(Icons.arrow_back),
-            color: Colors.black, 
+            color: Colors.black,
             onPressed: () {
-              
+              Navigator.pop(context);
             },
           ),
           const SizedBox(width: 8),
-          
           Stack(
             children: [
-              
               Container(
                 width: 56,
                 height: 56,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(73),
-                  
-                  
                 ),
                 child: ClipRRect(
-                  
                   child: Image.asset(
-                    'images/viewer.png', 
+                    'images/viewer.png',
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              
               Positioned(
                 top: 40,
                 left: 40,
@@ -45,10 +38,10 @@ class ChatHeader extends StatelessWidget {
                   width: 12,
                   height: 12,
                   decoration: BoxDecoration(
-                    color: Color(0xFF3AC482), 
+                    color: Color(0xFF3AC482),
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: Colors.white, 
+                      color: Colors.white,
                       width: 2,
                     ),
                   ),
@@ -56,15 +49,11 @@ class ChatHeader extends StatelessWidget {
               ),
             ],
           ),
-
-          
-          const SizedBox(width: 18), 
-          
+          const SizedBox(width: 18),
           const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                
                 Text(
                   'Ajay Nagar',
                   style: TextStyle(
@@ -76,9 +65,7 @@ class ChatHeader extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 4), 
-                
-                
+                SizedBox(height: 4),
                 Text(
                   '@ajngr2002',
                   style: TextStyle(
@@ -87,23 +74,19 @@ class ChatHeader extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                     height: 18.02 / 12,
                     letterSpacing: 0.02,
-                    color: Color(0xFF7E919A), 
+                    color: Color(0xFF7E919A),
                   ),
                 ),
               ],
             ),
           ),
-
-          
           const Icon(
             Icons.more_vert,
             size: 24,
-            color: Color(0xFF1C1B1F), 
+            color: Color(0xFF1C1B1F),
           ),
         ],
       ),
     );
   }
 }
-
-

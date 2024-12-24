@@ -243,7 +243,10 @@ class _HomePageState extends State<ExploreProfilePage>
                               //   imgUrl: currentUser.imgUrl,
                               // ),
                               const SizedBox(height: 16),
-                              const CardRow(),
+                              const CardRow(
+                                gender: 'male',
+                                birthDate: '1990-12-12',
+                              ),
                               const HomeScreen(),
                               const SizedBox(height: 16),
                               // SquareImageWithButton(

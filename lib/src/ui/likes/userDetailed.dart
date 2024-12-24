@@ -285,6 +285,7 @@ class _LikedUserDetailedState extends State<LikedUserDetailed>
                                       name: currentUser['name'],
                                       bio: currentUser['bio'],
                                       isGestureEnabled: false,
+                                      details: currentUser,
                                       onSwipeComplete: _onSwipeComplete,
                                     ),
                                     // child: SquareImageWithButton(

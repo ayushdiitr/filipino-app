@@ -282,7 +282,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               //   imgUrl: currentUser.imgUrl,
                               // ),
                               const SizedBox(height: 16),
-                              const CardRow(),
+                              const CardRow(
+                                gender: 'male',
+                                birthDate: '1990-01-01',
+                              ),
                               const HomeScreen(),
                               const SizedBox(height: 16),
 
