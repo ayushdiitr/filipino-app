@@ -107,55 +107,62 @@ class _SwipeCardState extends State<SwipeCard> {
                                   ),
                                 ),
 
-                                // Text over the image at the bottom
-                                Positioned(
-                                  bottom: 16, // Adjust this value as needed
-                                  left: 16,
-                                  right: 16,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        widget.name,
-                                        style: const TextStyle(
-                                          fontFamily: 'NoirPro',
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w400,
-                                          letterSpacing: 0.02,
-                                          height: 30.98 / 22,
-                                          color: Colors.white,
-                                          shadows: [
-                                            Shadow(
-                                              blurRadius: 4,
-                                              color: Colors.black,
-                                              offset: Offset(0, 1),
-                                            ),
-                                          ],
+                                // Text over the image, centered
+                                Positioned.fill(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 150),
+
+                                    
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          widget.name,
+                                          style: const TextStyle(
+                                            fontFamily: 'NoirPro',
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.w400,
+                                            letterSpacing: 0.02,
+                                            height: 30.98 / 22,
+                                            color: Colors.white,
+                                            shadows: [
+                                              Shadow(
+                                                blurRadius: 4,
+                                                color: Colors.black,
+                                                offset: Offset(0, 1),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(height: 10),
-                                      Text(
-                                        widget.bio,
-                                        style: const TextStyle(
-                                          fontFamily: 'NoirPro',
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                          letterSpacing: 0.02,
-                                          height: 17 / 12,
-                                          color: Colors.white,
-                                          shadows: [
-                                            Shadow(
-                                              blurRadius: 4,
-                                              color: Colors.black,
-                                              offset: Offset(0, 1),
-                                            ),
-                                          ],
+                                        SizedBox(height: 10),
+                                        Text(
+                                          widget.bio,
+                                          style: const TextStyle(
+                                            fontFamily: 'NoirPro',
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            letterSpacing: 0.02,
+                                            height: 17 / 12,
+                                            color: Colors.white,
+                                            shadows: [
+                                              Shadow(
+                                                blurRadius: 4,
+                                                color: Colors.black,
+                                                offset: Offset(0, 1),
+                                              ),
+                                            ],
+                                          ),
+                                          textAlign: TextAlign.center,
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
+                                ),
+                            
 
                                 Positioned.fill(
                                   child: Center(
@@ -179,7 +186,7 @@ class _SwipeCardState extends State<SwipeCard> {
                                       ),
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                             // Text content below the image

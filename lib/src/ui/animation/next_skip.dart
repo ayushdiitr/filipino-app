@@ -51,7 +51,7 @@ class NextSkipButtons extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   // Add your onPressed code here
-                  Navigator.pushNamed(context, '/welcome');
+                  Navigator.pushNamed(context, '/match');
                 },
                 child: Text(
                   'Next',

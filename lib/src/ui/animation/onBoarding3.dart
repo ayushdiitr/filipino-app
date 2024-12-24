@@ -4,7 +4,7 @@ import 'package:testapp/src/ui/animation/next_skip.dart';
 import 'package:testapp/src/ui/animation/meetups.dart';
 import 'package:testapp/src/ui/animation/match.dart';
 
-class OnboardingScreen2 extends StatelessWidget {
+class OnboardingScreen3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -21,7 +21,7 @@ class OnboardingScreen2 extends StatelessWidget {
                       .spaceBetween, // Space between to push elements apart
                   children: [
                     Text(
-                      "2. Send Connection Requests and Plan Meet-Ups",
+                      "3. Elevate Your Journey with SkyBuddy",
                       style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 18,
@@ -45,7 +45,7 @@ class OnboardingScreen2 extends StatelessWidget {
                           fontFamily: 'NoirPro',
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
-                          //height: 26 / 14,
+                          height: 22 / 14,
                           letterSpacing: 0.04,
                           color: Color(0xFF4D4D4D),
                           // textAlign: TextAlign.center,
@@ -57,7 +57,7 @@ class OnboardingScreen2 extends StatelessWidget {
                 SizedBox(height: 16),
                 // Subtitle
                 Text(
-                  "Send Buddy Requests. Once Accepted, plan meet-ups, seek advice, and make the most of your travel experience",
+                  "SkyBuddy is your platform for building connections, sharing experiences, and making your journey more meaningful and enjoyable.",
                   style: TextStyle(
                     fontFamily: 'NoirPro',
                     fontSize: 14,
@@ -71,8 +71,7 @@ class OnboardingScreen2 extends StatelessWidget {
 
                 Column(
                   children: [
-                    
-                    MeetupScreen(),
+                    MatchScreen(),
                     NextSkipButtons(),
                   ],
                 ),
