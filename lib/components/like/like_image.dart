@@ -34,28 +34,28 @@ class LikeImage extends StatelessWidget {
       child: Stack(
         children: [
           // Top-left frame with "20m"
-          Positioned(
-            top: 10,
-            left: 10,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.black,
-                border: Border.all(color: Colors.white, width: 1),
-              ),
-              child: Text(
-                '20m',
-                style: TextStyle(
-                  fontFamily: 'NoirPro',
-                  fontSize: 8.0,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
-                  letterSpacing: 0.02,
-                ),
-              ),
-            ),
-          ),
+          // Positioned(
+          //   top: 10,
+          //   left: 10,
+          //   child: Container(
+          //     padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(12),
+          //       color: Colors.black,
+          //       border: Border.all(color: Colors.white, width: 1),
+          //     ),
+          //     child: Text(
+          //       '20m',
+          //       style: TextStyle(
+          //         fontFamily: 'NoirPro',
+          //         fontSize: 8.0,
+          //         fontWeight: FontWeight.w400,
+          //         color: Colors.white,
+          //         letterSpacing: 0.02,
+          //       ),
+          //     ),
+          //   ),
+          // ),
 
           // Name Text: "Anshika Rathour"
           Positioned(
