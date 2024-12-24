@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:testapp/components/profile_heading.dart';
 import 'package:testapp/components/swipe_card.dart';
+import 'package:testapp/src/ui/animation/onBoarding2.dart';
 import 'package:testapp/src/ui/animation/onboarding.dart';
 import 'package:testapp/src/ui/chat/main.dart';
 import 'package:testapp/src/ui/explore/explore_profiles.dart';
@@ -21,7 +22,10 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return _cupertinoRoute(OnboardingScreen(), '/');
-        return _cupertinoRoute(const HomePage(), '/');
+      // return _cupertinoRoute(const HomePage(), '/');
+
+      case '/welcome':
+        return _cupertinoRoute(OnboardingScreen2(), '/welcome');
 
       case '/login':
         return _cupertinoRoute(const LoginScreen(), '/login');
@@ -35,6 +39,12 @@ class RouteGenerator {
             imgUrl: 'https://placehold.co/400x600',
             name: 'Anshika',
             bio: 'SWE',
+            details: {
+              'age': 24,
+              'location': 'India',
+              'education': 'B.Tech',
+              'job': 'Software Engineer',
+            },
             onSwipeComplete: (param) {
               print('Swipe completed');
             },

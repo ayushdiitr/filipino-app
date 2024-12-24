@@ -48,15 +48,22 @@ class NextSkipButtons extends StatelessWidget {
             ),
             child: Align(
               alignment: Alignment.center, // Center the text within the button
-              child: Text(
-                'Next',
-                style: TextStyle(
-                  fontFamily: 'NoirPro',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  height: 1.57, // Line height equivalent to 22px
-                  letterSpacing: 0.04,
-                  color: Color(0xFFFFFFFF), // White text color for Next button
+              child: TextButton(
+                onPressed: () {
+                  // Add your onPressed code here
+                  Navigator.pushNamed(context, '/welcome');
+                },
+                child: Text(
+                  'Next',
+                  style: TextStyle(
+                    fontFamily: 'NoirPro',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    height: 1.57, // Line height equivalent to 22px
+                    letterSpacing: 0.04,
+                    color:
+                        Color(0xFFFFFFFF), // White text color for Next button
+                  ),
                 ),
               ),
             ),
