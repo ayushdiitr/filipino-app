@@ -20,7 +20,7 @@ class OnboardingScreen2 extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: Text(
                       "2. Send Connection Requests and Plan Meet-Ups",
                       style: TextStyle(
@@ -35,13 +35,13 @@ class OnboardingScreen2 extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Container(
                     alignment: Alignment.center,
-                    width: 22,
+                    // width: 29,
                     height: 22,
-                    child: Text(
-                      '1/3',
+                    child: const Text(
+                      "2/3",
                       style: TextStyle(
                         fontFamily: 'NoirPro',
                         fontSize: 14,
@@ -53,9 +53,9 @@ class OnboardingScreen2 extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               // Subtitle
-              Text(
+              const Text(
                 "Send Buddy Requests. Once Accepted, plan meet-ups, seek advice, and make the most of your travel experience.",
                 style: TextStyle(
                   fontFamily: 'NoirPro',
