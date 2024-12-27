@@ -72,7 +72,7 @@ class OnboardingScreen3 extends StatelessWidget {
                 Column(
                   children: [
                     MatchScreen(),
-                    NextSkipButtons(),
+                    NextSkipButtons(currentPath: '/'),
                   ],
                 ),
               ],

@@ -5,6 +5,11 @@ import 'package:testapp/src/ui/animation/meetups.dart';
 import 'package:testapp/src/ui/animation/match.dart';
 
 class OnboardingScreen2 extends StatelessWidget {
+  final String currentPath;
+
+  const OnboardingScreen2({Key? key, required this.currentPath})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -71,9 +76,8 @@ class OnboardingScreen2 extends StatelessWidget {
 
                 Column(
                   children: [
-                    
                     MeetupScreen(),
-                    NextSkipButtons(),
+                    NextSkipButtons(currentPath: currentPath),
                   ],
                 ),
               ],

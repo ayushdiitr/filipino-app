@@ -23,18 +23,18 @@ class RouteGenerator {
     // Define static routes
     switch (settings.name) {
       case '/':
-        return _cupertinoRoute(OnboardingScreen(), '/');
-       return _cupertinoRoute(const HomePage(), '/');
+        return _cupertinoRoute(OnboardingScreen(currentPath: '/welcome'), '/');
+        return _cupertinoRoute(const HomePage(), '/');
 
       case '/welcome':
-        return _cupertinoRoute(OnboardingScreen2(), '/welcome');
+        return _cupertinoRoute(
+            OnboardingScreen2(currentPath: '/match'), '/welcome');
 
       case '/match':
         return _cupertinoRoute(OnboardingScreen3(), '/match');
 
-
       case '/login':
-        //return _cupertinoRoute(const LoginScreen(), '/login');
+      //return _cupertinoRoute(const LoginScreen(), '/login');
 
       case '/profile':
         return _cupertinoRoute(ProfilePage(), '/profile');

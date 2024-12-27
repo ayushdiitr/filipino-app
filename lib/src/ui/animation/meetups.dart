@@ -12,7 +12,7 @@ class MeetupScreen extends StatelessWidget {
           Expanded(
             child: Container(
               width: 128,
-              height: 208,  // Add height for the left image
+              height: 208, // Add height for the left image
               child: Opacity(
                 opacity: 1.0, // Set the opacity to 0 as per your request
                 child: ClipRRect(
@@ -30,14 +30,17 @@ class MeetupScreen extends StatelessWidget {
           SizedBox(width: 10), // You can adjust the gap between the images
           // Center image
           Expanded(
-            child: Container(
-              width: 204,
-              height: 398.58,  // Add height for the center image
-              child: Opacity(
-                opacity: 1.0, // Set the opacity to 0 as per your request
-                child: Image.asset(
-                  'images/meet.png', // Path for the center image
-                  fit: BoxFit.cover,
+            child: Hero(
+              tag: 'iPhone',
+              child: Container(
+                width: 204,
+                height: 398.58, // Add height for the center image
+                child: Opacity(
+                  opacity: 1.0, // Set the opacity to 0 as per your request
+                  child: Image.asset(
+                    'images/meet.png', // Path for the center image
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -47,7 +50,7 @@ class MeetupScreen extends StatelessWidget {
           Expanded(
             child: Container(
               width: 128,
-              height: 208,  // Add height for the right image
+              height: 208, // Add height for the right image
               child: Opacity(
                 opacity: 1.0, // Set the opacity to 0 as per your request
                 child: ClipRRect(

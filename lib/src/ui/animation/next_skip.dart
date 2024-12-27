@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class NextSkipButtons extends StatelessWidget {
+  final String currentPath;
+
+  const NextSkipButtons({Key? key, required this.currentPath})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -51,7 +56,7 @@ class NextSkipButtons extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   // Add your onPressed code here
-                  Navigator.pushNamed(context, '/match');
+                  Navigator.pushNamed(context, currentPath);
                 },
                 child: Text(
                   'Next',
