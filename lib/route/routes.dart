@@ -4,7 +4,7 @@ import 'package:testapp/components/profile_heading.dart';
 import 'package:testapp/components/swipe_card.dart';
 import 'package:testapp/src/ui/animation/onBoarding2.dart';
 import 'package:testapp/src/ui/animation/onBoarding3.dart';
-
+import 'package:testapp/src/ui/animation/matching.dart';
 import 'package:testapp/src/ui/animation/onboarding.dart';
 import 'package:testapp/src/ui/chat/main.dart';
 import 'package:testapp/src/ui/explore/explore_profiles.dart';
@@ -23,7 +23,7 @@ class RouteGenerator {
     // Define static routes
     switch (settings.name) {
       case '/':
-        return _cupertinoRoute(const HomePage(), '/');
+        return _cupertinoRoute( MatchingScreen(), '/');
         return _cupertinoRoute(OnboardingScreen(currentPath: '/welcome'), '/');
 
       case '/welcome':
