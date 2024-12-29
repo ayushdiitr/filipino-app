@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/components/details_card.dart';
 import 'package:testapp/components/like/Bottom_Button.dart';
 import 'package:testapp/components/like/like_header.dart';
-import 'package:testapp/components/like/like_profile.dart';
-import 'package:testapp/components/photo.dart';
-import 'package:testapp/components/profile_header.dart';
-import 'package:testapp/components/prompt_text.dart';
 import 'package:testapp/components/swipe_card.dart';
-import 'package:testapp/components/top_buttons.dart';
-import 'package:testapp/components/about_me.dart';
 import 'package:testapp/components/bottom_menu.dart';
-import 'package:testapp/src/new/homepage/icons.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -82,13 +74,7 @@ class _LikedUserDetailedState extends State<LikedUserDetailed>
   int _currentUserIndex = 0;
 
   void _onSwipeComplete(bool isLiked) {
-    setState(() {
-      if (_currentUserIndex < users.length - 1) {
-        _currentUserIndex++;
-      } else {
-        _currentUserIndex = 0;
-      }
-    });
+    return null;
   }
 
   @override

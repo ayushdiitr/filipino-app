@@ -1,207 +1,100 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 import 'package:testapp/components/chat/chat_screen_title.dart';
 import 'package:testapp/components/bottom_menu.dart';
-import 'package:testapp/components/like/TopSectionGrid.dart';
-import 'package:testapp/components/like/invites.dart';
 import 'package:testapp/components/like/togglebutton.dart';
 import 'package:testapp/components/like/like_image.dart';
-import 'package:testapp/components/like/like_header.dart';
-import 'package:testapp/components/like/like_profile.dart';
-import 'package:testapp/components/like/Bottom_Button.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
-class LikePage extends StatefulWidget {
+final profileProvider = FutureProvider<Map<String, dynamic>>((ref) async {
+  const String apiUrl =
+      'http://35.154.234.237/profile/profileDetails/9b885766-be84-460a-a22a-b0602773e39c/'; // Replace with your API URL
+
+  final response = await http.get(Uri.parse(apiUrl));
+
+  if (response.statusCode == 200) {
+    final responseData = jsonDecode(response.body);
+    return responseData['data'];
+  } else {
+    throw Exception('Failed to load data: ${response.statusCode}');
+  }
+});
+
+class LikePage extends ConsumerWidget {
   LikePage({super.key});
 
   @override
-  State<LikePage> createState() => _LikePageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final profileAsyncValue = ref.watch(profileProvider);
 
-bool isLoading = true;
-Map<String, dynamic> profileData = {};
-List<dynamic> likedUsers = [];
-
-class _LikePageState extends State<LikePage> {
-  late ScrollController _scrollController;
-  late bool hasScrolled = false;
-  Color _appBackgroundColor = const Color.fromRGBO(245, 245, 245, 1);
-
-  // Fetch data from the API
-  Future<void> fetchUserData() async {
-    final String apiUrl =
-        'http://35.154.234.237/profile/profileDetails/9b885766-be84-460a-a22a-b0602773e39c/'; // Replace with your API URL
-
-    try {
-      final response = await http.get(Uri.parse(apiUrl));
-
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> responseData = jsonDecode(response.body);
-
-        setState(() {
-          profileData =
-              responseData['data']; // Store the fetched data in the users list
-          likedUsers = profileData['liked_users'];
-          isLoading = false; // Stop the loading indicator once data is fetched
-          print(likedUsers);
-        });
-      } else {
-        // Handle error response
-        setState(() {
-          isLoading = false;
-        });
-        print('Failed to load data: ${response.statusCode}');
-      }
-    } catch (error) {
-      setState(() {
-        isLoading = false;
-      });
-      print('Error: $error');
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchUserData();
-    _scrollController = ScrollController();
-
-    _scrollController.addListener(() {
-      if (_scrollController.hasClients) {
-        double offset = _scrollController.offset.clamp(0.0, 100.0);
-        double percentage = offset / 100.0;
-
-        setState(() {
-          _appBackgroundColor = Color.lerp(
-            const Color.fromRGBO(245, 245, 245, 1),
-            Colors.white,
-            percentage,
-          )!;
-        });
-      }
-    });
-
-    // Listen to scroll changes
-    _scrollController.addListener(() {
-      if (_scrollController.hasClients) {
-        // Change color when scrolled beyond 0.0 offset
-        if (_scrollController.offset > 50.0) {
-          setState(() {
-            _appBackgroundColor = Color.fromRGBO(245, 245, 245, 1);
-            hasScrolled = false;
-          });
-        } else {
-          setState(() {
-            _appBackgroundColor = Colors.white;
-            hasScrolled = true;
-          });
-        }
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    // Dispose the controller when the widget is disposed
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       backgroundColor: Colors.white,
-      body: CustomScrollView(controller: _scrollController, slivers: <Widget>[
-        SliverAppBar(
-          leading: null,
-          automaticallyImplyLeading: false,
-          pinned: true,
-          floating: true,
-          //backgroundColor: _appBackgroundColor,
-          backgroundColor: Colors.white,
-          stretchTriggerOffset: 50,
-          toolbarHeight: 20,
-          // flexibleSpace: FlexibleSpaceBar(),
-        ),
-        SliverList(
-            delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-            child: Column(
-              children: [
-                //-------------Like Screen---------------
-                ChatScreenTitle(
-                    title: 'Likes Received',
-                    subtitle:
-                        'Connection Invitation sent to you will be shown here'),
-                //BorderBox(),
-                //SizedBox(height: 10),
-                //InvitesBox(),
-                //SizedBox(height: 20),
-                ToggleButton(),
-                SizedBox(height: 20),
-                //LikeImage(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // First card
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/like/details');
-                      },
-                      child: Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 4.0),
-                          child: LikeImage(user: likedUsers[0]),
-                        ),
+      body: profileAsyncValue.when(
+        data: (profileData) {
+          final likedUsers = profileData['liked_users'] as List<dynamic>;
+
+          return CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                leading: null,
+                automaticallyImplyLeading: false,
+                pinned: true,
+                floating: true,
+                backgroundColor: Colors.white,
+                stretchTriggerOffset: 50,
+                toolbarHeight: 20,
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 12.0),
+                      child: Column(
+                        children: [
+                          ChatScreenTitle(
+                            title: 'Likes Received',
+                            subtitle:
+                                'Connection Invitation sent to you will be shown here',
+                          ),
+                          ToggleButton(),
+                          const SizedBox(height: 20),
+
+                          // Display liked users dynamically
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: likedUsers.map((user) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/like/details');
+                                },
+                                child: Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    child: LikeImage(user: user),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+
+                          const SizedBox(height: 20),
+                        ],
                       ),
-                    ),
-                    // Second card
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4.0),
-                        child: LikeImage(user: likedUsers[0]),
-                      ),
-                    ),
-                  ],
+                    );
+                  },
+                  childCount: 1,
                 ),
-
-                SizedBox(height: 20),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // First card
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4.0),
-                        child: LikeImage(user: likedUsers[0]),
-                      ),
-                    ),
-                    // Second card
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4.0),
-                        child: LikeImage(user: likedUsers[0]),
-                      ),
-                    ),
-                  ],
-                ),
-
-                // LikeHeader(),
-                // LikeProfile(),
-                // BottomButton(),
-
-                //------add components here
-
-                const SizedBox(height: 20),
-              ],
-            ),
+              ),
+            ],
           );
-        }, childCount: 1)),
-      ]),
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stackTrace) =>
+            Center(child: Text('Error: ${error.toString()}')),
+      ),
       bottomNavigationBar: const BottomMenu(),
     );
   }

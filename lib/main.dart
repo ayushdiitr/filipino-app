@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testapp/route/routes.dart';
 
@@ -10,7 +11,7 @@ void main() async {
   final isLoggedIn = true;
   // final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
-  runApp(MyApp(isLoggedIn: isLoggedIn));
+  runApp(ProviderScope(child: MyApp(isLoggedIn: isLoggedIn)));
 }
 
 class MyApp extends StatelessWidget {

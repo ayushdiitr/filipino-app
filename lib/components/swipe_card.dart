@@ -108,61 +108,56 @@ class _SwipeCardState extends State<SwipeCard> {
                                 ),
 
                                 // Text over the image, centered
-                                Positioned.fill(
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(top: 150),
-
-                                    
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          widget.name,
-                                          style: const TextStyle(
-                                            fontFamily: 'NoirPro',
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.w400,
-                                            letterSpacing: 0.02,
-                                            height: 30.98 / 22,
-                                            color: Colors.white,
-                                            shadows: [
-                                              Shadow(
-                                                blurRadius: 4,
-                                                color: Colors.black,
-                                                offset: Offset(0, 1),
-                                              ),
-                                            ],
-                                          ),
+                                Positioned(
+                                  bottom: 50,
+                                  left: 0,
+                                  right: 0,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        widget.name,
+                                        style: const TextStyle(
+                                          fontFamily: 'NoirPro',
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w400,
+                                          letterSpacing: 0.02,
+                                          height: 30.98 / 22,
+                                          color: Colors.white,
+                                          shadows: [
+                                            Shadow(
+                                              blurRadius: 4,
+                                              color: Colors.black,
+                                              offset: Offset(0, 1),
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          widget.bio,
-                                          style: const TextStyle(
-                                            fontFamily: 'NoirPro',
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
-                                            letterSpacing: 0.02,
-                                            height: 17 / 12,
-                                            color: Colors.white,
-                                            shadows: [
-                                              Shadow(
-                                                blurRadius: 4,
-                                                color: Colors.black,
-                                                offset: Offset(0, 1),
-                                              ),
-                                            ],
-                                          ),
-                                          textAlign: TextAlign.center,
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        widget.bio,
+                                        style: const TextStyle(
+                                          fontFamily: 'NoirPro',
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                          letterSpacing: 0.02,
+                                          height: 17 / 12,
+                                          color: Colors.white,
+                                          shadows: [
+                                            Shadow(
+                                              blurRadius: 4,
+                                              color: Colors.black,
+                                              offset: Offset(0, 1),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                ),
-                            
 
                                 Positioned.fill(
                                   child: Center(
