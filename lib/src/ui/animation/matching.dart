@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 class MatchingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Screen width
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -10,83 +13,78 @@ class MatchingScreen extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('images/BuddyFound.png'), 
+                image: AssetImage('images/BuddyFound.png'),
                 fit: BoxFit.cover,
               ),
             ),
           ),
-          
-          // Centered 
+
+          // Centered
           Center(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    // Card 1
-                    Positioned(
-                      //top: 50.51,
-                       //left: 5.42,
-                      child: Transform.rotate(
-                        angle: 4 * 3.14159 / 180, 
+                SizedBox(
+                  width: screenWidth * 0.8, // Constrain the Stack width
+                  height: 220, // Constrain the Stack height
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      // Card 1
+                      Positioned(
+                        left: -4, // Align to the left edge of the stack
                         child: Container(
-                          // width: 150,
                           height: 220,
                           child: ClipRRect(
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(12),
                             ),
                             child: Image.asset(
-                              'images/matching.png', 
+                              'images/matching.png',
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    
-                    // Card 2
-                    Positioned(
-                      // top: 143.63,
-                      left: 150.04, 
-                      child: Transform.rotate(
-                        angle: -4 * 3.14159 / 180, 
+
+                      // Card 2
+                      Positioned(
+                        left: 160, // Offset for the second card
                         child: Container(
-                          // width: 150,
                           height: 220,
                           child: ClipRRect(
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(12),
                             ),
                             child: Image.asset(
-                              'images/matching2.png', 
+                              'images/matching2.png',
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    
-                    // Star Badge 
-                    Positioned(
-                      top: 185, 
-                      left: 137,  
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20), 
-                          child: Image.asset(
-                            'images/star.png', 
-                            fit: BoxFit.cover,
+
+                      // Star Badge
+                      Positioned(
+                        top: 185,
+                        left: 144,
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              'images/star.png',
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                
+
                 // Title
                 Padding(
                   padding: const EdgeInsets.only(top: 30),
@@ -101,7 +99,7 @@ class MatchingScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                
+
                 // Subtitle
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
@@ -116,7 +114,7 @@ class MatchingScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                
+
                 // Say Hello Button
                 Padding(
                   padding: const EdgeInsets.only(top: 40),
@@ -124,7 +122,6 @@ class MatchingScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        // width: double.infinity,
                         height: 48,
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -142,16 +139,15 @@ class MatchingScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      
+
                       SizedBox(height: 10),
-                      
+
                       // Not Now Button
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: Container(
                           width: 358,
                           height: 50,
-                          //padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Center(
                             child: Text(
                               "Not Now",
